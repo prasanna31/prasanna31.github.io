@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>System design High level Design</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #2b6cb0;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #2b6cb0;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5rem;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background-color: white;
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+    }
+    li:hover {
+      transform: scale(1.02);
+    }
+    a {
+      text-decoration: none;
+      color: #2b6cb0;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Data structures and algorithms</h1>
+    <p>Master Data Structures and Algorithms one step at a time</p>
+  </header>
+
+  <main>
+  <h1>🧠 System Design: High-Level Design (HLD) Contents</h1>
+
+  <section>
+    <h2>1. Requirements</h2>
+    <h3>Functional Requirements</h3>
+    <ul>
+      <li>User registration and login</li>
+      <li>Search functionality</li>
+      <li>Real-time messaging</li>
+      <li>File upload/download</li>
+      <li>Analytics dashboard</li>
+      <li>Notification system</li>
+    </ul>
+
+    <h3>Non-Functional Requirements</h3>
+    <ul>
+      <li><strong>Reliability</strong>: Fault-tolerant, self-recovering services</li>
+      <li><strong>Availability</strong>: Uptime % (e.g., 99.99%)</li>
+      <li><strong>Latency</strong>: e.g., &lt; 200ms for user-facing actions</li>
+      <li><strong>Consistency</strong>: Strong or eventual consistency</li>
+      <li><strong>Scalability</strong>: Horizontal or vertical, multi-region</li>
+      <li><strong>Durability</strong>: Persistent and safe data storage</li>
+      <li><strong>Maintainability</strong>: Logging, debugging ease</li>
+      <li><strong>Security</strong>: Auth, encryption, rate-limiting</li>
+      <li><strong>Cost-efficiency</strong>: Optimize infra and storage</li>
+      <li><strong>Observability</strong>: Monitoring, logging, tracing</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>2. Estimations</h2>
+    <ul>
+      <li>Daily Active Users (DAU): e.g., 1 million</li>
+      <li>Peak QPS: e.g., 10K writes/sec</li>
+      <li>Storage per user: estimate in MB</li>
+      <li>Network bandwidth: based on asset size</li>
+      <li>Read vs Write ratio: choose strategy accordingly</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. Database Design</h2>
+    <h3>Relational DB (SQL)</h3>
+    <ul>
+      <li>MySQL / PostgreSQL – Good for structured data and transactions</li>
+    </ul>
+    <h3>NoSQL Options</h3>
+    <ul>
+      <li>MongoDB – Flexible schema</li>
+      <li>Cassandra – High write throughput</li>
+      <li>DynamoDB – Scalable key-value</li>
+      <li>Redis – In-memory cache</li>
+      <li>Elasticsearch – Full-text search</li>
+      <li>Neo4j – Graph relationships</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. Data Modeling</h2>
+    <p>Design data models based on:</p>
+    <ul>
+      <li>Access patterns: how data is queried</li>
+      <li>Read/write frequency</li>
+      <li>Joins (for SQL) or embedded docs (for NoSQL)</li>
+      <li>Indexing strategy</li>
+    </ul>
+    <p><strong>Example:</strong> Social Graph → Graph DB (Neo4j), Chat App → Cassandra, Product Catalog → MongoDB</p>
+  </section>
+
+  <section>
+    <h2>5. API Design</h2>
+    <ul>
+      <li>REST or GraphQL depending on use case</li>
+      <li>Endpoints:
+        <ul>
+          <li>POST /signup</li>
+          <li>POST /login</li>
+          <li>GET /users/:id</li>
+          <li>POST /messages</li>
+        </ul>
+      </li>
+      <li>Include: Pagination, error handling, versioning, rate limits, auth (JWT)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>6. System Architecture</h2>
+    <h3>Core Components</h3>
+    <ul>
+      <li>API Gateway (Kong, Nginx)</li>
+      <li>Load Balancer (AWS ALB)</li>
+      <li>Microservices</li>
+      <li>SQL / NoSQL DB</li>
+      <li>Cache (Redis)</li>
+      <li>Blob Storage (S3)</li>
+      <li>Search (Elasticsearch)</li>
+      <li>CDN (Cloudflare)</li>
+    </ul>
+
+    <h3>Extended Components</h3>
+    <ul>
+      <li>Rate Limiter</li>
+      <li>Auth Service</li>
+      <li>Analytics Pipeline (Kafka + Spark)</li>
+      <li>Monitoring (Prometheus + Grafana)</li>
+      <li>CI/CD (GitHub Actions)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>7. Caching Strategy</h2>
+    <ul>
+      <li>Redis/Memcached for hot data</li>
+      <li>CDN for static assets</li>
+      <li>Local cache in frontend when needed</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>8. Security Considerations</h2>
+    <ul>
+      <li>HTTPS everywhere</li>
+      <li>Input validation</li>
+      <li>Auth tokens (JWT)</li>
+      <li>RBAC / Access Control</li>
+      <li>Rate limiting & abuse prevention</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>9. Tradeoffs & Design Decisions</h2>
+    <ul>
+      <li>SQL vs NoSQL</li>
+      <li>Monolith vs Microservices</li>
+      <li>Strong vs Eventual consistency</li>
+      <li>Performance vs Cost</li>
+    </ul>
+  </section>
+
+
+  </main>
+
+</body>
+</html>
