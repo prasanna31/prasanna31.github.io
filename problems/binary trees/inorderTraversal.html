@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DSA Course by Jayaprasanna</title>
+  <title>Inorder Traversal</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -88,41 +88,40 @@
 <body>
 
     <header>
-        <h1>Dynamic Programming Problems</h1>
-        <p>Master Dynamic Programming one step at a time</p>
+        <h1>Binary Tree</h1>
+        <p>Master binary trees one step at a time</p>
     </header>
     
     <main>
-        <h2>Climbing stairs</h2>
-        <p>Given a staircase with n steps, you can climb 1 or 2 steps at a time.<br>
-             Find the number of distinct ways to reach the top.
+        <h2>Inorder Traversal</h2>
+        <p>Inorder traversal of a binary tree is a depth-first traversal method 
+            where the nodes are recursively visited in this order: 
+            left subtree, root node, and then right subtree. 
+            This results in the nodes being visited
+            in non-decreasing order for binary search trees.</p>
         </p>
 
         <p>Approach:
-
-            I want to take the steps and at a time I can take either 1 step or 2 steps.
-            So, If I take one step at first, I have to count how many ways I can reach the top from the remaining n-1 steps.
-            If I take two steps at first, I have to count how many ways I can reach the top from the remaining n-2 steps.
-            So, the total number of ways to reach the top is the sum of the ways to reach from n-1 and n-2 steps.
-            This gives us the recurrence relation:
-            f(n) = f(n-1) + f(n-2)
-
+            From root, go to left first, until you hit a nil.
+            Then append the node to the result.
+            Then go to right, and repeat the process.
+            
         </p>
 
         <pre><code>
-                func climbStairs(n int) int {
-                    if n <= 0 {
-                        return 0
+                func inorderTraversal(root *TreeNode) []int {
+                    var res []int
+                    var inorder func(*TreeNode)
+                    inorder = func(node *TreeNode) {
+                        if node == nil {
+                            return
+                        }
+                        inorder(node.Left)
+                        res = append(res, node.Val)
+                        inorder(node.Right)
                     }
-                    if n == 1{
-                        return 1
-                    }
-                    dp := make([]int, n+1)
-                    dp[1], dp[2] = 1, 2
-                    for i := 3; i <= n; i+=1 {
-                        dp[i] = dp[i-1] + dp[i-2]
-                    }
-                    return dp[n]   
+                    inorder(root)
+                    return res
                 }
         </code></pre>
 
