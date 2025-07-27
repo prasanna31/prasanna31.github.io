@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mastering Temporal - Table of Contents</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #2c3e50;
+        text-align: center;
+    }
+    h2 {
+        color: #34495e;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 5px;
+        margin-top: 20px;
+    }
+    h3 {
+        color: #16a085;
+        margin-top: 15px;
+    }
+    ul {
+        list-style-type: none;
+        padding-left: 20px;
+    }
+    li {
+        margin: 6px 0;
+    }
+</style>
+</head>
+<body>
+<h1>Mastering Temporal: Durable, Scalable, and Reliable Workflows</h1>
+
+<h2>PART I: Foundations of Temporal</h2>
+<h3>Chapter 1: Introduction to Temporal</h3>
+<ul>
+    <li>What is Temporal?</li>
+    <li>Why Temporal? (Problems with traditional approaches)</li>
+    <li>Temporal vs Workflow Engines vs Message Queues</li>
+    <li>Core Benefits: Reliability, Durability, Scalability</li>
+    <li>Use Cases & Real-world Applications</li>
+</ul>
+
+<h3>Chapter 2: Temporal Architecture</h3>
+<ul>
+    <li>Temporal Service Components</li>
+    <li>Role of Temporal Server vs Client SDK</li>
+    <li>Namespaces, Task Queues, and Tasks</li>
+    <li>Temporal Database and Persistence Model</li>
+    <li><strong>Temporal Clusters Overview</strong></li>
+    <li><strong>Single vs Multi-Cluster Deployment</strong></li>
+    <li>How Temporal Handles Reliability (Event Sourcing + History)</li>
+</ul>
+
+<h3>Chapter 3: Core Concepts</h3>
+<ul>
+    <li>Workflows: Characteristics and Determinism</li>
+    <li>Activities: The Building Blocks</li>
+    <li>Workers: Role and Lifecycle</li>
+    <li>Task Queues: How They Work</li>
+    <li>Workflow History and Replay</li>
+    <li>Deterministic Execution: Why It Matters</li>
+</ul>
+
+<h2>PART II: Developing with Temporal</h2>
+<h3>Chapter 4: Setting Up Temporal</h3>
+<ul>
+    <li>Installing Temporal (Docker, Kubernetes, Self-Managed)</li>
+    <li>Temporal CLI (tctl): Basic Commands</li>
+    <li>Temporal Web UI Overview</li>
+    <li>Setting Up Go SDK Project</li>
+    <li>Running Your First Workflow</li>
+</ul>
+
+<h3>Chapter 5: Writing Workflows</h3>
+<ul>
+    <li>Workflow Definition and Registration</li>
+    <li>Workflow Execution Semantics</li>
+    <li>Signals and Queries in Workflows</li>
+    <li>Workflow Timeouts and Retry Policies</li>
+    <li>Workflow Versioning (Safe Code Upgrades)</li>
+</ul>
+
+<h3>Chapter 6: Writing Activities</h3>
+<ul>
+    <li>Activity Definition and Registration</li>
+    <li>Activity Context and Heartbeats</li>
+    <li>Activity Idempotency and Retries</li>
+    <li>Handling Failures and Cancellations</li>
+    <li>Activity Timeouts: Schedule, Start, Heartbeat</li>
+</ul>
+
+<h3>Chapter 7: Workers and Task Queues</h3>
+<ul>
+    <li>What is a Worker?</li>
+    <li>How Task Queues Work</li>
+    <li>Scaling Workers for High Throughput</li>
+    <li>Worker Lifecycle and Deployment Patterns</li>
+</ul>
+
+<h2>PART III: Advanced Temporal Features</h2>
+<h3>Chapter 8: Signals and Queries</h3>
+<ul>
+    <li>Sending Signals to Workflows</li>
+    <li>Real-time Workflow Interaction</li>
+    <li>Using Queries for Workflow State</li>
+</ul>
+
+<h3>Chapter 9: Child Workflows and Workflow Composition</h3>
+<ul>
+    <li>Parent-Child Workflow Pattern</li>
+    <li>Continue-As-New for Long-Running Workflows</li>
+    <li>Saga Pattern with Temporal</li>
+    <li>Fan-Out and Fan-In Workflow Design</li>
+</ul>
+
+<h3>Chapter 10: Temporal Error Handling and Retries</h3>
+<ul>
+    <li>Retry Policies: Workflow vs Activity</li>
+    <li>Error Propagation and Compensation</li>
+    <li>Handling Non-Deterministic Failures</li>
+</ul>
+
+<h3>Chapter 11: Time and Timers</h3>
+<ul>
+    <li>Temporal Virtual Time vs Real Time</li>
+    <li>Using Timers and Sleep in Workflows</li>
+    <li>Cron Workflows</li>
+</ul>
+
+<h3>Chapter 12: Temporal at Scale</h3>
+<ul>
+    <li>Horizontal Scaling of Workers</li>
+    <li>Managing Large Workflow Histories</li>
+    <li><strong>Temporal Cluster Management</strong></li>
+    <li><strong>Multi-Cluster Architecture and Global Namespaces</strong></li>
+    <li><strong>High Availability and Disaster Recovery</strong></li>
+    <li><strong>Cluster Failover Strategies</strong></li>
+    <li>Temporal Cluster Scaling (Kubernetes Best Practices)</li>
+</ul>
+
+<h2>PART IV: Observability, Security & Maintenance</h2>
+<h3>Chapter 13: Observability in Temporal</h3>
+<ul>
+    <li>Logging Best Practices</li>
+    <li>Metrics and Monitoring with Prometheus & Grafana</li>
+    <li>Debugging Workflows via Temporal Web UI</li>
+    <li>Handling Large Payloads & Payload Codecs (Gzip, Encryption)</li>
+</ul>
+
+<h3>Chapter 14: Security</h3>
+<ul>
+    <li>Authentication and Authorization</li>
+    <li>TLS and mTLS for Temporal</li>
+    <li>Securing Sensitive Payloads (Codec Server)</li>
+</ul>
+
+<h3>Chapter 15: Maintenance and Upgrades</h3>
+<ul>
+    <li>Temporal Server Upgrades</li>
+    <li>Workflow Versioning Strategies</li>
+    <li>Managing Breaking Changes Safely</li>
+</ul>
+
+<h2>PART V: Real-World Use Cases and Patterns</h2>
+<h3>Chapter 16: Common Workflow Patterns</h3>
+<ul>
+    <li>Human-in-the-Loop Workflows</li>
+    <li>Batch Processing</li>
+    <li>File Processing Pipeline</li>
+    <li>Long-Running Approvals and Escalations</li>
+    <li>Event-Driven Systems with Temporal</li>
+</ul>
+
+<h3>Chapter 17: Integrating Temporal with External Systems</h3>
+<ul>
+    <li>Using Temporal with Databases</li>
+    <li>Message Brokers (Kafka, RabbitMQ)</li>
+    <li>Cloud Services Integration (AWS, GCP)</li>
+</ul>
+
+<h3>Chapter 18: Case Studies</h3>
+<ul>
+    <li>E-commerce Order Processing</li>
+    <li>Payment Systems</li>
+    <li>Machine Learning Pipeline Orchestration</li>
+    <li>DevOps & CI/CD Automation</li>
+</ul>
+
+<h2>PART VI: Appendix</h2>
+<ul>
+    <li>Appendix A: Temporal CLI (tctl) Commands Cheat Sheet</li>
+    <li>Appendix B: Go SDK Reference</li>
+    <li>Appendix C: Debugging Non-Determinism</li>
+    <li>Appendix D: Best Practices for Temporal Workflows</li>
+    <li>Appendix E: Migration from Other Workflow Systems</li>
+</ul>
+</body>
+</html>
