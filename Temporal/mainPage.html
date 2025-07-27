@@ -23,62 +23,50 @@
       background-repeat: no-repeat;
     }
 
-    header {
-      width: 100%;
-      max-width: 900px;
-      margin-bottom: 30px;
-      padding: 15px;
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 1rem;
-      color: #555;
-    }
-
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-    }
-
-    .buttons-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    a.button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 180px;
-      height: 180px;
-      background-color: #1e90ff;
+     header {
+      background-color: #2b6cb0;
       color: white;
-      text-decoration: none;
-      border-radius: 12px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      transition: transform 0.2s, background-color 0.3s;
+      text-align: center;
+      padding: 2rem 1rem;
     }
-
-    a.button:hover {
-      background-color: #0f70d4;
-      transform: scale(1.05);
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #2b6cb0;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5rem;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background-color: white;
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+    }
+    li:hover {
+      transform: scale(1.02);
+    }
+    a {
+      text-decoration: none;
+      color: #2b6cb0;
+      font-weight: bold;
+      font-size: 1.1rem;
     }
   </style>
 </head>
