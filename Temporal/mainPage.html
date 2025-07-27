@@ -5,111 +5,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mastering Temporal - Table of Contents</title>
  <style>
-    body {
-  background-color: #f8f9fa;
-  color: #333;
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-  font-family: "Segoe UI", Tahoma, sans-serif;
-  background-image: url('./temporal/pngtree-aesthetic-backdrop-featuring-a-delicate-light-blue-watercolor-texture-image_13897547.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-}
+   body {
+      background-color: #f8f9fa;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      font-size: medium;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      background-image: url('.temporal/pngtree-aesthetic-backdrop-featuring-a-delicate-light-blue-watercolor-texture-image_13897547.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
-header {
-  background-color: #2b6cb0;
-  color: white;
-  text-align: center;
-  padding: 2rem 1rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-}
-
-header p {
-  margin-top: 0.5rem;
-  font-size: 1.2rem;
-  color: #e2e8f0;
-}
-
-main {
-  max-width: 1400px;
-  margin: 2rem auto;
-  padding: 20px;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.column {
-  flex: 1 1 calc(33% - 20px);
-  min-width: 320px;
-  background: rgba(255,255,255,0.9);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.column:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
-}
-
-.column h2 {
-  color: #2b6cb0;
-  border-bottom: 3px solid #e2e8f0;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 1.6rem;
-}
-
-.column h3 {
-  color: #333;
-  font-size: 1.1rem;
-  margin-top: 15px;
-  margin-bottom: 8px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  background-color: white;
-  margin-bottom: 0.6rem;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  font-size: 0.95rem;
-}
-
-li:hover {
-  background-color: #f1f5f9;
-}
-
-@media (max-width: 992px) {
-  .column {
-    flex: 1 1 calc(50% - 20px);
-  }
-}
-
-@media (max-width: 600px) {
-  .column {
-    flex: 1 1 100%;
-  }
-}
+     header {
+      background-color: #2b6cb0;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #2b6cb0;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5rem;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background-color: white;
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+    }
+    li:hover {
+      transform: scale(1.02);
+    }
+    a {
+      text-decoration: none;
+      color: #2b6cb0;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
 
   </style>
 </head>
