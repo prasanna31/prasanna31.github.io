@@ -11,51 +11,102 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      justify-content: flex-start;
+      min-height: 100vh;
       font-size: medium;
       text-align: center;
       margin: 0;
+      padding: 20px;
+      background-image: url('./pngtree-aesthetic-backdrop-featuring-a-delicate-light-blue-watercolor-texture-image_13897547.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
-    h1 {
-      font-size: 3rem;
+
+    header {
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 30px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .buttons-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
     a.button {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 180px;
+      height: 180px;
       background-color: #1e90ff;
       color: white;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 1.2rem;
-      transition: background-color 0.3s;
+      font-weight: bold;
+      transition: transform 0.2s, background-color 0.3s;
     }
+
     a.button:hover {
       background-color: #0f70d4;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
 
-  <h1>Welcome to Aarna!</h1>
-  <p class="cursive">If you ever started practicing coding and failed brutally, Like me, don't worry!<br>
-    Aarna is here to help you. Follow the plan, have a jar of XP points and win them as<br>
-    you solve each problem..! Have a streak! Make this a game and enjoy the process.<br>
-  </p>
-  <h3><strong style="text-align: center;" class="cursive" >Happy Coding!</strong></h3>
-  <a class="button" href="DSA-HomePage.html">Data Structures and Algorithms</a>
-  <a class="button" href="SystemDesign-HomePage.html">System Design</a>
-  <a class="button" href="Temporal/mainPage.html">System Design</a>
+  <!-- About Me Section -->
+  <header>
+    <h1>About Me</h1>
+    <p>Hello! I’m passionate about coding and learning new technologies.  
+    This space is my journey to master Data Structures, System Design, and Temporal workflows.  
+    Join me in making coding fun like a game with streaks, XP points, and challenges!</p>
+  </header>
+
+  <!-- Main Section -->
+  <main>
+    <h2>Welcome to Aarna!</h2>
+    <p>If you ever started practicing coding and failed brutally, like me, don’t worry!  
+      Aarna is here to help you. Follow the plan, win XP points, and make coding fun again!  
+    </p>
+    <h3><strong>Happy Coding!</strong></h3>
+
+    <!-- Square Buttons -->
+    <div class="buttons-container">
+      <a class="button" href="DSA-HomePage.html">Data Structures & Algorithms</a>
+      <a class="button" href="SystemDesign-HomePage.html">System Design</a>
+      <a class="button" href="Temporal/mainPage.html">Temporal</a>
+    </div>
+  </main>
 
 </body>
 </html>
-
-<style>
-    body {
-     background-image: url('./pngtree-aesthetic-backdrop-featuring-a-delicate-light-blue-watercolor-texture-image_13897547.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-</style>
