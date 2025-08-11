@@ -64,8 +64,8 @@
 
   <script>
     const data = [
-      {title:"Chapter 1: Introduction to High-Level Design", items:[
-        '<a href="./chapter1/DefinitionOfHLD.html">Chapter - I</a>',
+      {title:'<a href="./chapter1/chapter1.html">Chapter 1: Introduction to High-Level Design</a>', items:[
+
         "Definition of High-Level Design",
         "HLD vs. Low-Level Design",
         "Role of HLD in Software Development Lifecycle (SDLC)",
@@ -207,7 +207,7 @@
         const id = 'ch' + (idx+1);
         const link = document.createElement('a');
         link.href = '#'+id;
-        link.textContent = ch.title;
+        link.innerHTML = ch.title;
         sideNav.appendChild(link);
 
         const sec = document.createElement('section');
