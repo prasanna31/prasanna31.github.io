@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>High-Level Design — A Keen, Friendly Guide</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#6ee7b7;--glass:rgba(255,255,255,0.03)}
+    body{font-family:Inter,Segoe UI,Roboto,Arial;line-height:1.6;margin:0;background:linear-gradient(180deg,#071024 0%, #0b1220 60%);color:#e6eef6;padding:36px}
+    .container{max-width:980px;margin:0 auto}
+    header{display:flex;gap:16px;align-items:center;margin-bottom:20px}
+    header h1{margin:0;font-size:28px}
+    header p{margin:0;color:var(--muted)}
+    .card{background:var(--card);border-radius:14px;padding:20px;box-shadow:0 6px 18px rgba(2,6,23,0.6);margin-bottom:18px}
+    h2{margin-top:0}
+    .row{display:flex;gap:16px}
+    .col{flex:1}
+    pre{background:var(--glass);padding:12px;border-radius:8px;color:var(--muted);overflow:auto}
+    ul{margin:8px 0 8px 20px}
+    .badge{display:inline-block;background:linear-gradient(90deg,#062230,#07323c);color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:600}
+    .example-box{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .diagram{display:block;margin:10px auto;max-width:100%}
+    footer{color:var(--muted);text-align:center;margin-top:22px;font-size:13px}
+    .callout{border-left:4px solid var(--accent);padding:10px 12px;background:rgba(110,231,183,0.03);border-radius:8px;color:var(--muted)}
+    code{background:rgba(255,255,255,0.03);padding:2px 6px;border-radius:6px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">High-Level Design</div>
+      <div>
+        <h1>High-Level Design — A Keen, Friendly Guide</h1>
+        <p>What it is, why it matters, how to write one — explained clearly so a 10th grader can follow.</p>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>1. Short definition (one clear sentence)</h2>
+      <p>High-Level Design (HLD) describes the system's major parts and how they interact — like a map showing buildings and roads, not the furniture inside each room.</p>
+    </section>
+
+    <section class="card">
+      <h2>2. The idea using a real-world analogy</h2>
+      <div class="row">
+        <div class="col">
+          <p class="callout">Imagine you're planning a school. HLD decides: how many classrooms, where the library goes, how students move between rooms. It does not decide what each classroom's blackboard looks like — that's later (Low-Level Design).</p>
+        </div>
+        <div class="col">
+          <p><strong>Key points of the analogy:</strong></p>
+          <ul>
+            <li>Rooms = modules/services.</li>
+            <li>Corridors = APIs or communication channels.</li>
+            <li>Rules (e.g., opening hours) = non-functional requirements (performance, availability).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3. What HLD contains (practical checklist)</h2>
+      <ul>
+        <li>System overview / purpose — short and simple.</li>
+        <li>Major components or modules (diagrams help a lot).</li>
+        <li>How components communicate (APIs, message buses, events).</li>
+        <li>Data flow and storage choices (databases, caches).</li>
+        <li>Key interfaces — what each component exposes.</li>
+        <li>Deployment model — where pieces will run (cloud, on-prem, hybrid).</li>
+        <li>High-level security considerations.</li>
+        <li>Non-functional requirements: performance, reliability, scalability.</li>
+        <li>Known risks and trade-offs.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>4. Visual diagram (simple)</h2>
+      <svg class="diagram" viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg">
+        <rect x="12" y="12" width="776" height="196" rx="12" fill="#07182a" stroke="#0b2a3a" />
+        <rect x="32" y="26" width="160" height="80" rx="8" fill="#062233" stroke="#07323c" />
+        <text x="112" y="70" font-size="14" text-anchor="middle" fill="#9fbfcf">Client / Browser</text>
+
+        <rect x="220" y="26" width="180" height="80" rx="8" fill="#062233" stroke="#07323c" />
+        <text x="310" y="52" font-size="13" text-anchor="middle" fill="#9fbfcf">API Gateway</text>
+        <text x="310" y="70" font-size="12" text-anchor="middle" fill="#9fbfcf">(auth, routing)</text>
+
+        <rect x="420" y="18" width="140" height="110" rx="8" fill="#062233" stroke="#07323c" />
+        <text x="490" y="48" font-size="13" text-anchor="middle" fill="#9fbfcf">Service A</text>
+        <text x="490" y="68" font-size="12" text-anchor="middle" fill="#9fbfcf">(business logic)</text>
+
+        <rect x="420" y="140" width="140" height="56" rx="8" fill="#062233" stroke="#07323c" />
+        <text x="490" y="173" font-size="12" text-anchor="middle" fill="#9fbfcf">Database</text>
+
+        <path d="M192 66 L220 66" stroke="#6ee7b7" stroke-width="2" marker-end="url(#arrow)" />
+        <path d="M400 66 L420 66" stroke="#6ee7b7" stroke-width="2" marker-end="url(#arrow)" />
+        <path d="M490 128 L490 140" stroke="#6ee7b7" stroke-width="2" marker-end="url(#arrow)" />
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="#6ee7b7" />
+          </marker>
+        </defs>
+      </svg>
+
+      <p style="color:var(--muted);font-size:14px">A tiny HLD: Client &rarr; API Gateway &rarr; Services &rarr; Database. Notice we didn’t draw internal code or method names — that’s LLD territory.</p>
+    </section>
+
+    <section class="card">
+      <h2>5. HLD vs LLD — quick comparison</h2>
+      <div class="row">
+        <div class="col example-box">
+          <h3>High-Level Design</h3>
+          <ul>
+            <li>Focus: architecture, components, interfaces.</li>
+            <li>Audience: architects, product managers, senior engineers.</li>
+            <li>Artifacts: diagrams, module descriptions, deployment model.</li>
+            <li>Abstraction: coarse-grained.</li>
+          </ul>
+        </div>
+        <div class="col example-box">
+          <h3>Low-Level Design</h3>
+          <ul>
+            <li>Focus: classes, methods, data structures, algorithms.</li>
+            <li>Audience: developers implementing the system.</li>
+            <li>Artifacts: class diagrams, pseudo-code, database schema details.</li>
+            <li>Abstraction: fine-grained.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>6. Simple HLD template you can reuse</h2>
+      <pre>&lt;Project Name&gt;
+Purpose: Short one-liner
+Scope: What is in scope, what is out of scope
+Components:
+  - Component A: responsibility
+  - Component B: responsibility
+Interactions: high-level sequence (e.g., Client &rarr; Gateway &rarr; Service)
+Data store choices: DB1 (OLTP), Cache (Redis), Blob (S3)
+Non-functional requirements: latency, uptime, concurrency expectations
+Security: auth, encryption, network boundaries
+Deployment: cloud region, containers, scaling approach
+Risks & trade-offs: known limitations and why we chose this design
+
+Notes: attach diagrams and API examples
+</pre>
+    </section>
+
+    <section class="card">
+      <h2>7. Short example — HLD for a simple chat app</h2>
+      <div>
+        <p><strong>Purpose:</strong> enable real-time text chat between users.</p>
+        <p><strong>Major components:</strong></p>
+        <ul>
+          <li>Client (web/mobile)</li>
+          <li>API Gateway (auth + routing)</li>
+          <li>Chat Service (handles messages, rooms)</li>
+          <li>Real-time Bus (WebSocket / PubSub)</li>
+          <li>Database (messages, users) + Cache (presence)</li>
+        </ul>
+        <p><strong>Data flow:</strong> Client &rarr; Gateway &rarr; Chat Service &rarr; PubSub &rarr; Other Clients</p>
+        <p><strong>Non-functional:</strong> target 200ms message delivery for 95% of messages; support 100k concurrent users per region.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>8. How to write HLD — step-by-step (practical)</h2>
+      <ol>
+        <li>Start with one-sentence purpose.</li>
+        <li>List major components and their responsibilities.</li>
+        <li>Draw a simple diagram showing data flow.</li>
+        <li>Choose storage & communication primitives (DB, cache, queue).</li>
+        <li>Note non-functional requirements (NFRs) early.</li>
+        <li>Identify security boundaries and key risks.</li>
+        <li>Make trade-offs explicit (cost vs performance vs simplicity).</li>
+        <li>Keep it readable — aim for 1–3 pages.</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>9. Common mistakes to avoid</h2>
+      <ul>
+        <li>Too much detail (writing LLD inside the HLD).</li>
+        <li>Missing non-functional requirements.</li>
+        <li>Over-optimizing for rare scenarios (yagni — you ain’t gonna need it).</li>
+        <li>Not documenting trade-offs and assumptions.</li>
+        <li>No diagrams — visuals make decisions clear and fast.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>10. Quick checklist before you finish your HLD</h2>
+      <ul>
+        <li>Is the purpose stated clearly?</li>
+        <li>Are the major components named and responsibilities listed?</li>
+        <li>Is there a diagram showing data flow?</li>
+        <li>Did you include NFRs and security notes?</li>
+        <li>Have you listed risks and open questions?</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>11. Final tip (one-sentence)</h2>
+      <p>Make the HLD useful for decision-making: clear components, clear interactions, and clear trade-offs — so the team can move confidently to detailed design.</p>
+    </section>
+
+    <footer>
+      Created for you — concise, visual, and ready to be adapted to any small or large system.
+    </footer>
+  </div>
+</body>
+</html>
