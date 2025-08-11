@@ -1,154 +1,229 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Probability — Full Syllabus</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Probability for Kids — 100 Fun Topics</title>
   <style>
-    body{font-family:Inter,Segoe UI,Roboto,Arial;line-height:1.6;margin:0;background:#f7fafc;color:#0f1724;padding:28px}
-    .container{max-width:1000px;margin:0 auto}
-    header{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
-    h1{margin:0;font-size:28px}
-    p.lead{margin:0;color:#334155}
-    nav{background:#fff;border-radius:10px;padding:12px;margin-bottom:18px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
-    nav a{display:inline-block;margin-right:10px;color:#0f1724;text-decoration:none;padding:6px 8px;border-radius:6px}
-    nav a:hover{background:#eef2ff}
-    section.card{background:#fff;padding:18px;border-radius:10px;margin-bottom:14px;box-shadow:0 6px 18px rgba(2,6,23,0.04)}
-    h2{margin-top:0}
-    ul{margin:8px 0 8px 20px}
-    code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
-    footer{color:#64748b;text-align:center;margin-top:18px}
-    .small{font-size:14px;color:#475569}
+    :root{--bg:#fff7ed;--card:#fff;--muted:#475569;--accent:#f59e0b}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:#0f1724}
+    .wrap{max-width:900px;margin:28px auto;padding:20px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    h1{margin:0;font-size:24px}
+    p.lead{margin:6px 0 18px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:18px}
+    main{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,36,0.06)}
+    aside{padding:10px}
+    nav a{display:block;padding:6px 8px;border-radius:8px;text-decoration:none;color:#0f1724}
+    section.chapter{margin-bottom:12px}
+    .topic{padding:8px;border-radius:8px;background:linear-gradient(180deg,#fff,#fffef8);margin:6px 0;border:1px solid #fff1da}
+    .number{font-weight:700;color:var(--accent);margin-right:8px}
+    footer{color:var(--muted);margin-top:16px;text-align:center}
+    input.search{width:100%;padding:8px;border-radius:8px;border:1px solid #f3e7d4;margin-bottom:8px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrap">
     <header>
-      <h1>Probability — Full Syllabus</h1>
-      <p class="lead">A structured, learnable syllabus suitable for undergraduate courses, competitive prep, and foundations for statistics & machine learning.</p>
+      <div>
+        <h1>Probability for Kids — 100 Fun Topics</h1>
+        <p class="lead">Short, playful explanations — learn by imagining coins, dice, games, and tiny adventures.</p>
+      </div>
+      <div class="badge">Easy • Playful • 100 Topics</div>
     </header>
 
-    <nav>
-      <a href="#module1">Module 1</a>
-      <a href="#module2">Module 2</a>
-      <a href="#module3">Module 3</a>
-      <a href="#module4">Module 4</a>
-      <a href="#module5">Module 5</a>
-      <a href="#module6">Module 6</a>
-      <a href="#module7">Module 7</a>
-      <a href="#module8">Module 8</a>
-      <a href="#resources">Resources</a>
-    </nav>
+    <div class="grid">
+      <main id="main">
 
-    <section id="module1" class="card">
-      <h2>Module 1 — Fundamentals of Probability</h2>
-      <ul>
-        <li>Motivation & applications: statistics, ML, engineering, finance, reliability.</li>
-        <li>Experiment, sample space, events. Set operations and Venn diagrams.</li>
-        <li>Kolmogorov axioms and basic consequences (monotonicity, subadditivity).</li>
-        <li>Probability rules: addition rule, complement rule, inclusion–exclusion.</li>
-        <li>Counting techniques: permutations, combinations, binomial coefficients, stars-and-bars.</li>
-        <li>Discrete sample spaces: equally likely models and examples.</li>
-      </ul>
-    </section>
+        <!-- Chapter 1 -->
+        <section class="chapter" id="chapter1">
+          <h2>Chapter 1 — Everyday Probability (1–10)</h2>
+          <div class="topic"><span class="number">1.</span><strong>What is probability?</strong> — It's a way to say how likely something will happen, like a friendly guess with math.</div>
+          <div class="topic"><span class="number">2.</span><strong>Certain & Impossible</strong> — "Certain" means it will happen for sure; "impossible" means it won't happen at all.</div>
+          <div class="topic"><span class="number">3.</span><strong>Maybe Events</strong> — Some things are in-between: they might or might not happen.</div>
+          <div class="topic"><span class="number">4.</span><strong>Coins</strong> — A coin has two sides; heads or tails each have an equal chance if the coin is fair.</div>
+          <div class="topic"><span class="number">5.</span><strong>Dice</strong> — A six-sided die has numbers 1–6; each face is an equally likely result (if the die is fair).</div>
+          <div class="topic"><span class="number">6.</span><strong>Spinners & Wheels</strong> — If a wheel has equal slices, each slice has the same chance to stop under the pointer.</div>
+          <div class="topic"><span class="number">7.</span><strong>Weather Words</strong> — Saying "70% chance of rain" means out of 100 similar days, 70 might rain.</div>
+          <div class="topic"><span class="number">8.</span><strong>Card Guessing</strong> — When you pick a card from a deck, some cards are more common than others depending on the deck.</div>
+          <div class="topic"><span class="number">9.</span><strong>Simple Odds</strong> — Odds tell how many ways something can happen vs how many ways it can’t.</div>
+          <div class="topic"><span class="number">10.</span><strong>Making Predictions</strong> — Use probability to make better guesses in games and real life.</div>
+        </section>
 
-    <section id="module2" class="card">
-      <h2>Module 2 — Conditional Probability & Independence</h2>
-      <ul>
-        <li>Conditional probability: definition, properties, examples.</li>
-        <li>Multiplication rule; chains of conditioning.</li>
-        <li>Independence: pairwise vs mutual independence; examples and pitfalls.</li>
-        <li>Law of total probability and Bayes' theorem with applications.</li>
-        <li>Random experiments: diagnostic testing, reliability, urn problems.</li>
-      </ul>
-    </section>
+        <!-- Chapter 2 -->
+        <section class="chapter" id="chapter2">
+          <h2>Chapter 2 — Counting & Fairness (11–20)</h2>
+          <div class="topic"><span class="number">11.</span><strong>Counting Outcomes</strong> — List the things that can happen so you know how many choices exist.</div>
+          <div class="topic"><span class="number">12.</span><strong>Permutations</strong> — Ways to order things — like arranging toys on a shelf.</div>
+          <div class="topic"><span class="number">13.</span><strong>Combinations</strong> — Choosing a group when order doesn't matter, like selecting friends for a team.</div>
+          <div class="topic"><span class="number">14.</span><strong>Fair vs Unfair</strong> — A fair game treats all players the same; an unfair one gives someone extra advantage.</div>
+          <div class="topic"><span class="number">15.</span><strong>Equally Likely</strong> — When every outcome has the same chance, it's easy to calculate probabilities.</div>
+          <div class="topic"><span class="number">16.</span><strong>Sample Space</strong> — The full list of all possible outcomes, like all faces of a die.</div>
+          <div class="topic"><span class="number">17.</span><strong>Event</strong> — A group of outcomes we care about, like rolling an even number.</div>
+          <div class="topic"><span class="number">18.</span><strong>Complement</strong> — The opposite of an event — if event is "rain", complement is "no rain".</div>
+          <div class="topic"><span class="number">19.</span><strong>Simple Fractions</strong> — Probability often looks like a fraction: favorable outcomes over total outcomes.</div>
+          <div class="topic"><span class="number">20.</span><strong>Practice Counting</strong> — Try counting outcomes for coins, dice, and small card sets.</div>
+        </section>
 
-    <section id="module3" class="card">
-      <h2>Module 3 — Discrete & Continuous Random Variables</h2>
-      <ul>
-        <li>Random variable concept and types (discrete, continuous, mixed).</li>
-        <li>PMF, PDF, CDF: definitions, properties, relationships.</li>
-        <li>Common discrete distributions: Bernoulli, Binomial, Geometric, Negative Binomial, Poisson, Hypergeometric.</li>
-        <li>Common continuous distributions: Uniform, Exponential, Normal, Gamma, Beta, Weibull, Cauchy.</li>
-        <li>Change of variable techniques and distribution transformations.</li>
-      </ul>
-    </section>
+        <!-- Chapter 3 -->
+        <section class="chapter" id="chapter3">
+          <h2>Chapter 3 — Playing with Coins & Dice (21–30)</h2>
+          <div class="topic"><span class="number">21.</span><strong>One Coin Toss</strong> — Heads or tails, 1 out of 2 chance each.</div>
+          <div class="topic"><span class="number">22.</span><strong>Two Coins</strong> — Learn outcomes: HH, HT, TH, TT — four equally likely cases.</div>
+          <div class="topic"><span class="number">23.</span><strong>At Least One Head</strong> — Using outcomes to check how likely you get at least one head.</div>
+          <div class="topic"><span class="number">24.</span><strong>Two Dice Sum</strong> — Adding two dice gives sums 2–12; some sums are more likely than others.</div>
+          <div class="topic"><span class="number">25.</span><strong>Matching Numbers</strong> — Probability that both dice show the same number.</div>
+          <div class="topic"><span class="number">26.</span><strong>Rolling a Six</strong> — One die has one face of six, so 1 in 6 chance.</div>
+          <div class="topic"><span class="number">27.</span><strong>Games of Chance</strong> — See how dice and coins decide winners in board games.</div>
+          <div class="topic"><span class="number">28.</span><strong>Lucky vs Random</strong> — Luck is a story we tell; randomness follows math rules.</div>
+          <div class="topic"><span class="number">29.</span><strong>Simulate with Toys</strong> — Use coins and dice to simulate and check predictions.</div>
+          <div class="topic"><span class="number">30.</span><strong>Fun Experiments</strong> — Try 50 coin tosses and count heads to learn by doing.</div>
+        </section>
 
-    <section id="module4" class="card">
-      <h2>Module 4 — Expectation, Moments & Inequalities</h2>
-      <ul>
-        <li>Expectation: linearity, properties, interpretation.</li>
-        <li>Moments: mean, variance, covariance, correlation, central moments.</li>
-        <li>Moment generating function (MGF) and characteristic function: uses and uniqueness.</li>
-        <li>Inequalities: Markov, Chebyshev, Jensen (introduction), and applications.</li>
-      </ul>
-    </section>
+        <!-- Chapter 4 -->
+        <section class="chapter" id="chapter4">
+          <h2>Chapter 4 — Probability Rules (31–40)</h2>
+          <div class="topic"><span class="number">31.</span><strong>Addition Rule</strong> — If two events can't both happen, add their chances.</div>
+          <div class="topic"><span class="number">32.</span><strong>Multiplication Rule</strong> — For things happening in a row, multiply chances when they're independent.</div>
+          <div class="topic"><span class="number">33.</span><strong>Independent Events</strong> — One event doesn't change the chance of the other, like separate coin tosses.</div>
+          <div class="topic"><span class="number">34.</span><strong>Dependent Events</strong> — One event affects the other, like drawing cards without replacement.</div>
+          <div class="topic"><span class="number">35.</span><strong>Conditional Probability</strong> — Chance of something given that something else already happened.</div>
+          <div class="topic"><span class="number">36.</span><strong>Law of Total Probability</strong> — Break big problems into smaller, easier cases.</div>
+          <div class="topic"><span class="number">37.</span><strong>Bayes' Idea</strong> — A smart way to update guesses when you get new clues.</div>
+          <div class="topic"><span class="number">38.</span><strong>Complement Rule (again)</strong> — Often it's easier to find the chance something *doesn't* happen.</div>
+          <div class="topic"><span class="number">39.</span><strong>Counting with Rules</strong> — Use addition and multiplication together to count complex outcomes.</div>
+          <div class="topic"><span class="number">40.</span><strong>Practice Word Problems</strong> — Try easy stories and apply the rules step by step.</div>
+        </section>
 
-    <section id="module5" class="card">
-      <h2>Module 5 — Joint Distributions & Multivariate Concepts</h2>
-      <ul>
-        <li>Joint PMF/PDF, marginal and conditional distributions.</li>
-        <li>Independence of random variables; conditional expectation.</li>
-        <li>Covariance matrix, correlation matrix, properties and interpretation.</li>
-        <li>Multivariate normal distribution and its properties.</li>
-        <li>Order statistics and basic results.</li>
-      </ul>
-    </section>
+        <!-- Chapter 5 -->
+        <section class="chapter" id="chapter5">
+          <h2>Chapter 5 — Common Distributions (41–50)</h2>
+          <div class="topic"><span class="number">41.</span><strong>Bernoulli Trials</strong> — Simple yes/no experiments, like a single coin toss.</div>
+          <div class="topic"><span class="number">42.</span><strong>Binomial Fun</strong> — Count how many successes in many coin tosses.</div>
+          <div class="topic"><span class="number">43.</span><strong>Geometric Waiting</strong> — How many tries until the first success?</div>
+          <div class="topic"><span class="number">44.</span><strong>Poisson Surprise</strong> — How many times something happens in a fixed time (like cars passing).</div>
+          <div class="topic"><span class="number">45.</span><strong>Uniform Pick</strong> — Every choice is equally likely, like picking a random number between 1 and 10.</div>
+          <div class="topic"><span class="number">46.</span><strong>Normal (Bell Curve)</strong> — Many natural things cluster around an average, making a bell-shaped curve.</div>
+          <div class="topic"><span class="number">47.</span><strong>Exponential Wait</strong> — Time between random events, like waiting for the next bus.</div>
+          <div class="topic"><span class="number">48.</span><strong>Why Distributions Help</strong> — They tell us the full story of possible outcomes.</div>
+          <div class="topic"><span class="number">49.</span><strong>Practice with Data</strong> — Make lists of results and see which distribution fits best.</div>
+          <div class="topic"><span class="number">50.</span><strong>Draw a Bell Curve</strong> — Sketch the normal curve and learn mean and spread by eye.</div>
+        </section>
 
-    <section id="module6" class="card">
-      <h2>Module 6 — Limit Theorems & Convergence</h2>
-      <ul>
-        <li>Modes of convergence: almost sure, in probability, in L^p, in distribution — intuition and relationships.</li>
-        <li>Law of Large Numbers (weak and strong) with examples.</li>
-        <li>Central Limit Theorem: statement, Lindeberg–Lévy special case, and consequences.</li>
-        <li>Delta method and simple applications (confidence intervals, sampling distributions).</li>
-      </ul>
-    </section>
+        <!-- Chapter 6 -->
+        <section class="chapter" id="chapter6">
+          <h2>Chapter 6 — Expectation & Variability (51–60)</h2>
+          <div class="topic"><span class="number">51.</span><strong>Expectation (Average)</strong> — The average outcome you'd expect after many tries.</div>
+          <div class="topic"><span class="number">52.</span><strong>Mean of Dice</strong> — Average of 1–6 on a fair die is 3.5 — not a real face, but an average.</div>
+          <div class="topic"><span class="number">53.</span><strong>Variance</strong> — How spread out outcomes are from the average.</div>
+          <div class="topic"><span class="number">54.</span><strong>Standard Deviation</strong> — A friendly number that tells typical distance from the mean.</div>
+          <div class="topic"><span class="number">55.</span><strong>Linearity of Expectation</strong> — A neat trick: averages add up even if events aren't independent.</div>
+          <div class="topic"><span class="number">56.</span><strong>Moments (Simple)</strong> — Numbers that describe shape: center, spread, and more wiggles.</div>
+          <div class="topic"><span class="number">57.</span><strong>Chebyshev's Tip</strong> — A rule that says most results are not too far from the mean.</div>
+          <div class="topic"><span class="number">58.</span><strong>Practice Averages</strong> — Compute averages from lists of numbers to get the feel.</div>
+          <div class="topic"><span class="number">59.</span><strong>Why Variability Matters</strong> — Two games can have the same average but feel very different.</div>
+          <div class="topic"><span class="number">60.</span><strong>Simple Experiments</strong> — Roll dice many times, compute mean and spread, and compare.</div>
+        </section>
 
-    <section id="module7" class="card">
-      <h2>Module 7 — Stochastic Processes (Introductory)</h2>
-      <ul>
-        <li>Definition of stochastic process; examples: random walk, Poisson process, Markov chains.</li>
-        <li>Poisson process: interarrival times, thinning, superposition.</li>
-        <li>Discrete-time Markov chains: transition matrix, classification of states, steady-state behavior.</li>
-        <li>Birth–death processes (basic intuition).</li>
-      </ul>
-    </section>
+        <!-- Chapter 7 -->
+        <section class="chapter" id="chapter7">
+          <h2>Chapter 7 — Two Things at Once (61–70)</h2>
+          <div class="topic"><span class="number">61.</span><strong>Joint Outcomes</strong> — When two things happen together, list pairs like (coin, die).</div>
+          <div class="topic"><span class="number">62.</span><strong>Marginal Chance</strong> — The chance of one thing ignoring the other.</div>
+          <div class="topic"><span class="number">63.</span><strong>Conditional Again</strong> — Chance of A given B — like "what's the chance it rains if the sky is dark?"</div>
+          <div class="topic"><span class="number">64.</span><strong>Independence Revisited</strong> — Check if knowing one thing changes the other.</div>
+          <div class="topic"><span class="number">65.</span><strong>Correlation (Easy)</strong> — Do two things move together? Like tall kids often weigh more.</div>
+          <div class="topic"><span class="number">66.</span><strong>Covariance (Simple)</strong> — A number that shows how two things vary together.</div>
+          <div class="topic"><span class="number">67.</span><strong>Conditional Expectation</strong> — Average of B when A has happened.</div>
+          <div class="topic"><span class="number">68.</span><strong>Discrete Joint Tables</strong> — Make tables of paired outcomes like multiplication table.</div>
+          <div class="topic"><span class="number">69.</span><strong>Practice Pair Problems</strong> — Try problems with two dice or coin+die together.</div>
+          <div class="topic"><span class="number">70.</span><strong>Visualize Pairs</strong> — Draw grids to see joint possibilities.</div>
+        </section>
 
-    <section id="module8" class="card">
-      <h2>Module 8 — Measure-Theoretic Foundations (Optional / Advanced)</h2>
-      <ul>
-        <li>Sigma-algebras, measures, measurable functions, and integration basics.</li>
-        <li>Probability measures, almost-sure events, and formal construction of expectation.</li>
-        <li>Monotone Convergence Theorem, Dominated Convergence Theorem, Fatou's Lemma (statements and intuition).</li>
-        <li>Radon–Nikodym theorem and conditional expectation as an L^2 projection (overview).</li>
-      </ul>
-    </section>
+        <!-- Chapter 8 -->
+        <section class="chapter" id="chapter8">
+          <h2>Chapter 8 — Patterns Over Time (71–80)</h2>
+          <div class="topic"><span class="number">71.</span><strong>Random Walks (Tiny)</strong> — Imagine a kid taking steps left or right by coin tosses.</div>
+          <div class="topic"><span class="number">72.</span><strong>Poisson Process (Kids' Version)</strong> — Count random events that happen slowly over time, like shooting stars.</div>
+          <div class="topic"><span class="number">73.</span><strong>Waiting Times</strong> — How long until the next event, like the next bus.</div>
+          <div class="topic"><span class="number">74.</span><strong>Markov Idea</strong> — The future depends only on the present, not the far past (like board game positions).</div>
+          <div class="topic"><span class="number">75.</span><strong>Simple Chains</strong> — Small systems that jump between states, like weather switching sunny/cloudy.</div>
+          <div class="topic"><span class="number">76.</span><strong>Stationary Idea</strong> — When things settle into a steady pattern over time.</div>
+          <div class="topic"><span class="number">77.</span><strong>Birthday Paradox (Fun)</strong> — Surprisingly few people needed before two share a birthday.</div>
+          <div class="topic"><span class="number">78.</span><strong>Simulations with Time</strong> — Use repeated experiments to see patterns emerge over time.</div>
+          <div class="topic"><span class="number">79.</span><strong>Queues (Simple)</strong> — Lines at a shop: arrival rate vs service rate — who waits?</div>
+          <div class="topic"><span class="number">80.</span><strong>Little Experiments</strong> — Time small events and record how often they happen.</div>
+        </section>
 
-    <section id="exercises" class="card">
-      <h2>Exercises & Projects</h2>
-      <ul>
-        <li>Weekly problem sets covering calculations, proofs, and simulations.</li>
-        <li>Simulation projects: Monte Carlo estimation, sampling from custom distributions.</li>
-        <li>Applied mini-projects: A/B testing simulation, queueing model simulation, or simple epidemic model (SIR) using random events.</li>
-      </ul>
-    </section>
+        <!-- Chapter 9 -->
+        <section class="chapter" id="chapter9">
+          <h2>Chapter 9 — Big Ideas Made Small (81–90)</h2>
+          <div class="topic"><span class="number">81.</span><strong>Law of Large Numbers</strong> — Averages get closer to the true value after many tries.</div>
+          <div class="topic"><span class="number">82.</span><strong>Central Limit (Kid Version)</strong> — Many small random things add up to a bell-shaped curve.</div>
+          <div class="topic"><span class="number">83.</span><strong>Why Averages Work</strong> — Random ups and downs tend to cancel when you take many samples.</div>
+          <div class="topic"><span class="number">84.</span><strong>Binning Data</strong> — Group results into boxes to see patterns easier.</div>
+          <div class="topic"><span class="number">85.</span><strong>Sampling Ideas</strong> — Take small pieces from a big jar to guess the whole jar.</div>
+          <div class="topic"><span class="number">86.</span><strong>Confidence (Easy)</strong> — How sure are we about our average after checking many times?</div>
+          <div class="topic"><span class="number">87.</span><strong>Law of Small Numbers (Warning)</strong> — Small samples can mislead — play more and be patient.</div>
+          <div class="topic"><span class="number">88.</span><strong>Why Some Averages Lie</strong> — Outliers (weird big values) can pull averages away from the usual.</div>
+          <div class="topic"><span class="number">89.</span><strong>Practice with Many Trials</strong> — Repeat experiments and plot results to see the law in action.</div>
+          <div class="topic"><span class="number">90.</span><strong>Fun Charts</strong> — Draw bar charts and histograms for your experiment results.</div>
+        </section>
 
-    <section id="resources" class="card">
-      <h2>Recommended Books & Resources</h2>
-      <ul>
-        <li>Sheldon Ross — <em>A First Course in Probability</em> (good for applied and theory mix).</li>
-        <li>Grimmett & Stirzaker — <em>Probability and Random Processes</em> (deeper, rigorous).</li>
-        <li>Billingsley — <em>Probability and Measure</em> (measure-theoretic standard).</li>
-        <li>Feller — <em>An Introduction to Probability Theory and Its Applications</em> (classic).</li>
-        <li>Online: Khan Academy probability, MIT OpenCourseWare, and statlect.com for lecture notes.</li>
-      </ul>
-      <p class="small">Tip: combine pen-and-paper problem solving with code (Python + NumPy/SciPy) for simulation and intuition.</p>
-    </section>
+        <!-- Chapter 10 -->
+        <section class="chapter" id="chapter10">
+          <h2>Chapter 10 — Playing, Projects & Next Steps (91–100)</h2>
+          <div class="topic"><span class="number">91.</span><strong>Monte Carlo (Kid)</strong> — Use many random tries to guess answers when math is hard.</div>
+          <div class="topic"><span class="number">92.</span><strong>Games to Build</strong> — Make simple games that use randomness and record results.</div>
+          <div class="topic"><span class="number">93.</span><strong>Treasure Hunt Project</strong> — Hide prizes and estimate where they're likely to be found using probability clues.</div>
+          <div class="topic"><span class="number">94.</span><strong>Weather Predictor Project</strong> — Use past days to guess tomorrow's weather with simple rules.</div>
+          <div class="topic"><span class="number">95.</span><strong>Sports Stats</strong> — Track goals or scores and learn chance patterns in games.</div>
+          <div class="topic"><span class="number">96.</span><strong>Simple Surveys</strong> — Ask friends and use samples to estimate what all kids like.</div>
+          <div class="topic"><span class="number">97.</span><strong>Probability & Fairness</strong> — Use math to make games fair for everyone.</div>
+          <div class="topic"><span class="number">98.</span><strong>Math + Code</strong> — Try simple simulations in Scratch or Python to see probabilities work.</div>
+          <div class="topic"><span class="number">99.</span><strong>Keep a Probability Notebook</strong> — Record experiments, guesses, and what you learned each day.</div>
+          <div class="topic"><span class="number">100.</span><strong>Next Steps</strong> — Explore deeper ideas later: statistics, data science, and real-world modeling.</div>
+        </section>
+
+      </main>
+
+      <aside>
+        <input class="search" id="search" placeholder="Search topic or number..." />
+        <nav>
+          <a href="#chapter1">Chapter 1: Everyday Probability</a>
+          <a href="#chapter2">Chapter 2: Counting & Fairness</a>
+          <a href="#chapter3">Chapter 3: Coins & Dice</a>
+          <a href="#chapter4">Chapter 4: Rules</a>
+          <a href="#chapter5">Chapter 5: Distributions</a>
+          <a href="#chapter6">Chapter 6: Expectation</a>
+          <a href="#chapter7">Chapter 7: Two Things</a>
+          <a href="#chapter8">Chapter 8: Time Patterns</a>
+          <a href="#chapter9">Chapter 9: Big Ideas</a>
+          <a href="#chapter10">Chapter 10: Projects</a>
+        </nav>
+      </aside>
+    </div>
 
     <footer>
-      <p class="small">Created for structured learning — feel free to ask for a printable PDF, slides, or an expanded course plan (week-by-week).</p>
+      Made simple and playful — want this as a printable PDF or slides? Ask and I'll make it.
     </footer>
   </div>
+
+  <script>
+    const search = document.getElementById('search');
+    const main = document.getElementById('main');
+    search.addEventListener('input', (e)=>{
+      const q = e.target.value.trim().toLowerCase();
+      const topics = Array.from(main.querySelectorAll('.topic'));
+      topics.forEach(t => {
+        const text = t.textContent.toLowerCase();
+        t.style.display = text.includes(q) ? 'block' : 'none';
+      });
+    });
+
+    // focus shortcut '/'
+    window.addEventListener('keydown',(e)=>{if(e.key==='/' && document.activeElement.tagName !== 'INPUT'){e.preventDefault();search.focus();}})
+  </script>
 </body>
 </html>
