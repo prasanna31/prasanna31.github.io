@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Probability — Full Syllabus</title>
+  <style>
+    body{font-family:Inter,Segoe UI,Roboto,Arial;line-height:1.6;margin:0;background:#f7fafc;color:#0f1724;padding:28px}
+    .container{max-width:1000px;margin:0 auto}
+    header{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+    h1{margin:0;font-size:28px}
+    p.lead{margin:0;color:#334155}
+    nav{background:#fff;border-radius:10px;padding:12px;margin-bottom:18px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    nav a{display:inline-block;margin-right:10px;color:#0f1724;text-decoration:none;padding:6px 8px;border-radius:6px}
+    nav a:hover{background:#eef2ff}
+    section.card{background:#fff;padding:18px;border-radius:10px;margin-bottom:14px;box-shadow:0 6px 18px rgba(2,6,23,0.04)}
+    h2{margin-top:0}
+    ul{margin:8px 0 8px 20px}
+    code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+    footer{color:#64748b;text-align:center;margin-top:18px}
+    .small{font-size:14px;color:#475569}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Probability — Full Syllabus</h1>
+      <p class="lead">A structured, learnable syllabus suitable for undergraduate courses, competitive prep, and foundations for statistics & machine learning.</p>
+    </header>
+
+    <nav>
+      <a href="#module1">Module 1</a>
+      <a href="#module2">Module 2</a>
+      <a href="#module3">Module 3</a>
+      <a href="#module4">Module 4</a>
+      <a href="#module5">Module 5</a>
+      <a href="#module6">Module 6</a>
+      <a href="#module7">Module 7</a>
+      <a href="#module8">Module 8</a>
+      <a href="#resources">Resources</a>
+    </nav>
+
+    <section id="module1" class="card">
+      <h2>Module 1 — Fundamentals of Probability</h2>
+      <ul>
+        <li>Motivation & applications: statistics, ML, engineering, finance, reliability.</li>
+        <li>Experiment, sample space, events. Set operations and Venn diagrams.</li>
+        <li>Kolmogorov axioms and basic consequences (monotonicity, subadditivity).</li>
+        <li>Probability rules: addition rule, complement rule, inclusion–exclusion.</li>
+        <li>Counting techniques: permutations, combinations, binomial coefficients, stars-and-bars.</li>
+        <li>Discrete sample spaces: equally likely models and examples.</li>
+      </ul>
+    </section>
+
+    <section id="module2" class="card">
+      <h2>Module 2 — Conditional Probability & Independence</h2>
+      <ul>
+        <li>Conditional probability: definition, properties, examples.</li>
+        <li>Multiplication rule; chains of conditioning.</li>
+        <li>Independence: pairwise vs mutual independence; examples and pitfalls.</li>
+        <li>Law of total probability and Bayes' theorem with applications.</li>
+        <li>Random experiments: diagnostic testing, reliability, urn problems.</li>
+      </ul>
+    </section>
+
+    <section id="module3" class="card">
+      <h2>Module 3 — Discrete & Continuous Random Variables</h2>
+      <ul>
+        <li>Random variable concept and types (discrete, continuous, mixed).</li>
+        <li>PMF, PDF, CDF: definitions, properties, relationships.</li>
+        <li>Common discrete distributions: Bernoulli, Binomial, Geometric, Negative Binomial, Poisson, Hypergeometric.</li>
+        <li>Common continuous distributions: Uniform, Exponential, Normal, Gamma, Beta, Weibull, Cauchy.</li>
+        <li>Change of variable techniques and distribution transformations.</li>
+      </ul>
+    </section>
+
+    <section id="module4" class="card">
+      <h2>Module 4 — Expectation, Moments & Inequalities</h2>
+      <ul>
+        <li>Expectation: linearity, properties, interpretation.</li>
+        <li>Moments: mean, variance, covariance, correlation, central moments.</li>
+        <li>Moment generating function (MGF) and characteristic function: uses and uniqueness.</li>
+        <li>Inequalities: Markov, Chebyshev, Jensen (introduction), and applications.</li>
+      </ul>
+    </section>
+
+    <section id="module5" class="card">
+      <h2>Module 5 — Joint Distributions & Multivariate Concepts</h2>
+      <ul>
+        <li>Joint PMF/PDF, marginal and conditional distributions.</li>
+        <li>Independence of random variables; conditional expectation.</li>
+        <li>Covariance matrix, correlation matrix, properties and interpretation.</li>
+        <li>Multivariate normal distribution and its properties.</li>
+        <li>Order statistics and basic results.</li>
+      </ul>
+    </section>
+
+    <section id="module6" class="card">
+      <h2>Module 6 — Limit Theorems & Convergence</h2>
+      <ul>
+        <li>Modes of convergence: almost sure, in probability, in L^p, in distribution — intuition and relationships.</li>
+        <li>Law of Large Numbers (weak and strong) with examples.</li>
+        <li>Central Limit Theorem: statement, Lindeberg–Lévy special case, and consequences.</li>
+        <li>Delta method and simple applications (confidence intervals, sampling distributions).</li>
+      </ul>
+    </section>
+
+    <section id="module7" class="card">
+      <h2>Module 7 — Stochastic Processes (Introductory)</h2>
+      <ul>
+        <li>Definition of stochastic process; examples: random walk, Poisson process, Markov chains.</li>
+        <li>Poisson process: interarrival times, thinning, superposition.</li>
+        <li>Discrete-time Markov chains: transition matrix, classification of states, steady-state behavior.</li>
+        <li>Birth–death processes (basic intuition).</li>
+      </ul>
+    </section>
+
+    <section id="module8" class="card">
+      <h2>Module 8 — Measure-Theoretic Foundations (Optional / Advanced)</h2>
+      <ul>
+        <li>Sigma-algebras, measures, measurable functions, and integration basics.</li>
+        <li>Probability measures, almost-sure events, and formal construction of expectation.</li>
+        <li>Monotone Convergence Theorem, Dominated Convergence Theorem, Fatou's Lemma (statements and intuition).</li>
+        <li>Radon–Nikodym theorem and conditional expectation as an L^2 projection (overview).</li>
+      </ul>
+    </section>
+
+    <section id="exercises" class="card">
+      <h2>Exercises & Projects</h2>
+      <ul>
+        <li>Weekly problem sets covering calculations, proofs, and simulations.</li>
+        <li>Simulation projects: Monte Carlo estimation, sampling from custom distributions.</li>
+        <li>Applied mini-projects: A/B testing simulation, queueing model simulation, or simple epidemic model (SIR) using random events.</li>
+      </ul>
+    </section>
+
+    <section id="resources" class="card">
+      <h2>Recommended Books & Resources</h2>
+      <ul>
+        <li>Sheldon Ross — <em>A First Course in Probability</em> (good for applied and theory mix).</li>
+        <li>Grimmett & Stirzaker — <em>Probability and Random Processes</em> (deeper, rigorous).</li>
+        <li>Billingsley — <em>Probability and Measure</em> (measure-theoretic standard).</li>
+        <li>Feller — <em>An Introduction to Probability Theory and Its Applications</em> (classic).</li>
+        <li>Online: Khan Academy probability, MIT OpenCourseWare, and statlect.com for lecture notes.</li>
+      </ul>
+      <p class="small">Tip: combine pen-and-paper problem solving with code (Python + NumPy/SciPy) for simulation and intuition.</p>
+    </section>
+
+    <footer>
+      <p class="small">Created for structured learning — feel free to ask for a printable PDF, slides, or an expanded course plan (week-by-week).</p>
+    </footer>
+  </div>
+</body>
+</html>

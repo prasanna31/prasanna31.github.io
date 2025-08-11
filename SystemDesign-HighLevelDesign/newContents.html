@@ -228,7 +228,7 @@
         ol.className = 'sub';
         ch.items.forEach(it => {
           const li = document.createElement('li');
-          li.textContent = it;
+          li.innerHTML = it;
           ol.appendChild(li);
         });
         sec.appendChild(ol);
