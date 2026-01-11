@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Causal Inference Blog Series</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h2 {
+      margin-top: 30px;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 5px;
+    }
+    h3 {
+      margin-top: 15px;
+      color: #2980b9;
+    }
+    ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    .part {
+      background-color: #ecf0f1;
+      padding: 10px;
+      border-left: 5px solid #3498db;
+      margin-bottom: 20px;
+    }
+    .blog-description {
+      font-style: italic;
+      color: #7f8c8d;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Causal Inference Blog Series – 20 Blogs</h1>
+
+  <!-- Part 1 -->
+  <div class="part">
+    <h2>Part 1: Foundations & Intuition</h2>
+    <p class="blog-description">Goal: Build mental models for causality, counterfactual thinking, and why correlation ≠ causation.</p>
+    <ul>
+      <li>
+        <h3><a href="blogs/part_1/blog1.html">Blog 1: Introduction to Causal Inference</a></h3>
+        <ul>
+          <li>Why correlation ≠ causation</li>
+          <li>Motivation: health, policy, ML decisions</li>
+          <li>Examples from everyday life</li>
+          <li>Counterfactual thinking</li>
+        </ul>
+      </li>
+      <li>
+        <h3><a href="blogs/part_1/blog2.html">Blog 2: The Language of Causality</a></h3>
+        <ul>
+          <li>Treatment, outcome, confounder, mediator</li>
+          <li>Potential outcomes / counterfactual notation</li>
+          <li>Real-world examples (medical treatment, ads)</li>
+        </ul>
+      </li>
+      <li>
+        <h3><a href="blogs/part_1/blog3.html">Blog 3: Causal vs Predictive Modeling</a></h3>
+        <ul>
+          <li>Differences between ML and causal objectives</li>
+          <li>Pitfalls of predictive models for decision-making</li>
+          <li>Case study: predictive vs causal effect</li>
+        </ul>
+      </li>
+      <li>
+        <h3><a href="blogs/part_1/blog4.html">Blog 4: Introduction to Directed Acyclic Graphs (DAGs)</a></h3>
+        <ul>
+          <li>DAG terminology: nodes, edges, parents, ancestors</li>
+          <li>Confounding, collider, mediator</li>
+          <li>Visual intuition and examples</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Part 2 -->
+  <div class="part">
+    <h2>Part 2: Confounding, Bias, and Identification</h2>
+    <p class="blog-description">Goal: Explain challenges in causal inference and identification strategies.</p>
+    <ul>
+      <li>
+        <h3>Blog 5: Confounding and Bias</h3>
+        <ul>
+          <li>What is confounding</li>
+          <li>Types of bias: selection, measurement</li>
+          <li>Examples in health and tech</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Blog 6: Backdoor Criterion and Adjustment</h3>
+        <ul>
+          <li>How DAGs guide adjustment</li>
+          <li>Identifying confounders</li>
+          <li>Examples using simple DAGs</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Blog 7: Front-door Criterion</h3>
+        <ul>
+          <li>Concept of mediators for causal identification</li>
+          <li>Example: ad → clicks → purchase</li>
+          <li>Difference from backdoor adjustment</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Blog 8: Collider Bias and M-Bias</h3>
+        <ul>
+          <li>Colliders and why conditioning can introduce bias</li>
+          <li>Graphical examples</li>
+          <li>Practical pitfalls</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Part 3 -->
+  <div class="part">
+    <h2>Part 3: Estimation Techniques</h2>
+    <p class="blog-description">Goal: Move from theory to estimation: regression, propensity scores, matching.</p>
+    <ul>
+      <li>
+        <h3>Blog 9: Potential Outcomes Framework</h3>
+        <ul>
+          <li>Rubin Causal Model</li>
+          <li>Average Treatment Effect (ATE)</li>
+          <li>Treatment Effect on Treated (ATT)</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Blog 10: Randomized Experiments</h3>
+        <ul>
+          <li>Gold standard for causality</li>
+          <li>Design, implementation, examples</li>
+          <li>Intuition behind randomization</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Blog 11: Observational Data Methods – Regression</h3>
+        <ul>
+          <li>Controlling for confounders</li>
+          <li>Linear & logistic regression</li>
+          <li>Assumptions and limitations</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Blog 12: Propensity Score Methods</h3>
+        <ul>
+          <li>Matching, weighting, stratification</li>
+          <li>Practical examples</li>
+          <li>When PS works & when it fails</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Blog 13: Instrumental Variables</h3>
+        <ul>
+          <li>Using instruments to remove confounding</li>
+          <li>Examples: encouragement designs, policy shifts</li>
+          <li>Assumptions and interpretation</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Part 4 -->
+  <div class="part">
+    <h2>Part 4: Advanced Causal Methods</h2>
+    <p class="blog-description">Goal: Introduce modern techniques, machine learning for causal inference, and counterfactual reasoning.</p>
+    <ul>
+      <li>
+        <h3>Blog 14: Difference-in-Differences (DiD)</h3>
+        <ul>
+          <li>Pre-post design with treatment & control</li>
+          <li>Parallel trends assumption</li>
+          <li>Examples: policy evaluation, A/B testing</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Blog 15: Regression Discontinuity Design</h3>
+        <ul>
+          <li>Sharp & fuzzy RD</li>
+          <li>Intuition: local randomization at cutoff</li>
+          <li>Practical examples</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Blog 16: Synthetic Control Methods</h3>
+        <ul>
+          <li>Combining multiple control units</li>
+          <li>Examples: economic policy, epidemics</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Blog 17: Causal Inference with Machine Learning</h3>
+        <ul>
+          <li>Targeted learning (TMLE)</li>
+          <li>Double ML / orthogonalization</li>
+          <li>Causal forests, uplift modeling</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Blog 18: Mediation Analysis and Path Effects</h3>
+        <ul>
+          <li>Decomposing total effect into direct & indirect</li>
+          <li>DAG-based intuition</li>
+          <li>Examples in biology, marketing</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Part 5 -->
+  <div class="part">
+    <h2>Part 5: Practical Applications & Challenges</h2>
+    <p class="blog-description">Goal: Show real-world use, pitfalls, and integration into data science.</p>
+    <ul>
+      <li>
+        <h3>Blog 19: Real-world Case Studies in Causal Inference</h3>
+        <ul>
+          <li>Health, economics, tech examples</li>
+          <li>Lessons from failures and successes</li>
+          <li>Ethical implications</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Blog 20: Common Pitfalls, Limitations, and the Future</h3>
+        <ul>
+          <li>Violations of assumptions</li>
+          <li>Unmeasured confounding</li>
+          <li>AI + causal inference</li>
+          <li>Quantum causal inference (optional advanced teaser)</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+</body>
+</html>

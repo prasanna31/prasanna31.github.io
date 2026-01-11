@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog 3: Causal vs Predictive Modeling</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      margin: 40px;
+      max-width: 900px;
+      color: #333;
+      background-color: #fdfdfd;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 18px;
+      text-align: justify;
+    }
+    ul {
+      margin-left: 20px;
+      margin-bottom: 18px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    blockquote {
+      border-left: 4px solid #3498db;
+      padding-left: 15px;
+      margin: 20px 0;
+      font-style: italic;
+      color: #555;
+      background-color: #f0f8ff;
+    }
+    code {
+      background-color: #eaeaea;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Blog 3: Causal vs Predictive Modeling</h1>
+
+  <h2>Introduction</h2>
+  <p>
+    In the world of data science and machine learning, predictive modeling has become the dominant paradigm. Predictive models focus on finding patterns in data to forecast future outcomes or classify instances accurately. However, predictive accuracy alone does not guarantee that the model captures causal relationships. Understanding the distinction between predictive and causal modeling is essential for making reliable decisions, designing interventions, and avoiding costly mistakes.
+  </p>
+  <p>
+    While machine learning excels at prediction, decision-making often requires understanding <em>why</em> things happen. Predictive models may exploit correlations that exist in historical data but fail when used to evaluate the effect of an intervention. Causal modeling, on the other hand, seeks to estimate the effect of changing a variable on the outcome while accounting for confounders and mediators. This blog explores the key differences between predictive and causal modeling, the pitfalls of relying on predictive models for decision-making, and a concrete case study demonstrating predictive versus causal effects.
+  </p>
+
+  <h2>1. Differences Between ML and Causal Objectives</h2>
+  <p>
+    Predictive modeling in machine learning is concerned with accuracy. The objective is to minimize errors in predicting an outcome given a set of features. This can include regression models, decision trees, random forests, or deep neural networks. In predictive modeling:
+  </p>
+  <ul>
+    <li>The focus is on <strong>associations</strong> between features and target variables.</li>
+    <li>Confounders or mediators are often ignored as long as predictions remain accurate.</li>
+    <li>The model may exploit spurious correlations present in the historical data.</li>
+  </ul>
+  <p>
+    Causal modeling, in contrast, focuses on understanding the mechanisms by which variables affect outcomes. The objective is to estimate the <strong>effect of an intervention</strong>. Key characteristics include:
+  </p>
+  <ul>
+    <li>Explicitly modeling the causal relationships between variables.</li>
+    <li>Accounting for confounders to avoid biased estimates.</li>
+    <li>Considering counterfactuals: "What would happen if we changed X?"</li>
+  </ul>
+  <p>
+    To summarize:
+  </p>
+  <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; margin-bottom: 20px; width: 100%;">
+    <tr>
+      <th>Aspect</th>
+      <th>Predictive Modeling</th>
+      <th>Causal Modeling</th>
+    </tr>
+    <tr>
+      <td>Goal</td>
+      <td>Predict outcomes accurately</td>
+      <td>Estimate effects of interventions</td>
+    </tr>
+    <tr>
+      <td>Focus</td>
+      <td>Patterns & correlations in data</td>
+      <td>Mechanisms & causal relationships</td>
+    </tr>
+    <tr>
+      <td>Assumptions</td>
+      <td>No assumptions about causality required</td>
+      <td>Requires assumptions about causal structure</td>
+    </tr>
+    <tr>
+      <td>Use Case</td>
+      <td>Forecasting, classification, recommendation</td>
+      <td>Policy evaluation, treatment effects, decision-making</td>
+    </tr>
+  </table>
+
+  <h2>2. Pitfalls of Predictive Models for Decision-Making</h2>
+  <p>
+    Relying on predictive models for decision-making can lead to serious pitfalls. While predictions may be highly accurate on historical data, interventions based on these models may fail or backfire. This is because predictive models do not distinguish correlation from causation. Common pitfalls include:
+  </p>
+  <ul>
+    <li><strong>Spurious correlations:</strong> Predictive models may leverage patterns that exist in the data but do not hold under interventions. For example, a model predicting employee performance might incorrectly suggest that higher caffeine consumption leads to productivity if most high-performing employees drink coffee.</li>
+    <li><strong>Confounding variables:</strong> Ignoring confounders can result in misleading recommendations. For instance, a model predicting health outcomes based on lifestyle data may fail if it ignores age or pre-existing conditions.</li>
+    <li><strong>Policy misalignment:</strong> Decisions made using predictive models may have unintended consequences. For example, a loan approval model predicting defaults may inadvertently discriminate against certain demographic groups if historical biases exist in the data.</li>
+    <li><strong>Lack of counterfactual reasoning:</strong> Predictive models cannot answer questions like "What would happen if we implemented this change?" without causal adjustments.</li>
+  </ul>
+  <p>
+    These pitfalls highlight the importance of combining predictive modeling with causal reasoning when the goal is to make interventions or decisions rather than merely predicting outcomes.
+  </p>
+
+  <h2>3. Case Study: Predictive vs Causal Effect</h2>
+  <p>
+    Let’s consider a concrete example from healthcare to illustrate the difference between predictive and causal modeling.
+  </p>
+  
+  <h3>Scenario</h3>
+  <p>
+    Suppose a hospital wants to reduce patient readmissions. They have historical data on thousands of patients, including age, comorbidities, prior admissions, medications, and lifestyle factors. Their goal is to decide whether prescribing a new medication will reduce readmissions.
+  </p>
+  
+  <h3>Predictive Approach</h3>
+  <p>
+    A data scientist builds a predictive model to forecast readmissions. Using regression or machine learning algorithms, the model finds that patients taking the new medication have lower readmission rates. Based on this, the hospital might conclude that prescribing the medication will reduce readmissions for all patients.
+  </p>
+  <p>
+    Problem: The observed correlation may not be causal. Patients prescribed the new medication might already be healthier, more compliant with treatment, or monitored more closely by healthcare staff. Without controlling for these confounders, the model overestimates the medication’s effect. Prescribing it broadly could lead to unnecessary costs or side effects without achieving the intended outcome.
+  </p>
+
+  <h3>Causal Approach</h3>
+  <p>
+    Using causal inference methods, we account for confounders like age, baseline health, and prior hospital visits. By applying techniques such as propensity score matching, randomized trials, or instrumental variables, we estimate the actual causal effect of the medication. The causal analysis might reveal that the medication reduces readmissions only in specific patient groups, and for others, the effect is negligible or even adverse.
+  </p>
+  <p>
+    This approach ensures that decisions are based on mechanisms rather than associations, reducing the risk of unintended consequences.
+  </p>
+
+  <h3>Lessons from the Case Study</h3>
+  <ul>
+    <li>Predictive models identify patterns in historical data but may mislead if used for interventions.</li>
+    <li>Causal models aim to estimate the effect of actions, guiding decisions that actually change outcomes.</li>
+    <li>Combining predictive accuracy with causal reasoning is often the best approach: predictions guide where interventions may be most effective, while causal analysis ensures the interventions have the desired effect.</li>
+  </ul>
+
+  <h2>4. Conclusion</h2>
+  <p>
+    Understanding the distinction between predictive and causal modeling is critical for effective decision-making. Predictive models are powerful tools for forecasting and classification, but without causal understanding, decisions based on predictions may fail, exploit spurious correlations, or reinforce biases. Causal models provide the framework to answer intervention-focused questions, quantify treatment effects, and evaluate policy or strategy effectiveness.
+  </p>
+  <p>
+    The key takeaway is that accurate predictions do not imply that acting on the predictors will achieve the desired outcome. For interventions, we must integrate causal reasoning into data-driven decision-making, combining the strengths of machine learning and causal inference to produce actionable insights that truly change outcomes.
+  </p>
+  <p>
+    In the next blogs, we will explore graphical models for causal reasoning, identification strategies, and estimation methods, further bridging the gap between predictive analytics and causal understanding.
+  </p>
+
+</body>
+</html>

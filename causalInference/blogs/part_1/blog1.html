@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog 1: Introduction to Causal Inference</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      margin: 40px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h2 {
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    code {
+      background-color: #eaeaea;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Introduction to Causal Inference</h1>
+
+  <h2>Introduction</h2>
+  <p>
+    Causal inference is a field of statistics and machine learning that seeks to answer one of the most fundamental questions in science and daily life: <strong>"What causes what?"</strong>. While traditional statistical analyses often focus on identifying patterns, associations, or correlations between variables, causal inference goes a step further by trying to uncover the underlying mechanisms that produce observed effects. Understanding causality is crucial for making effective decisions, predicting the outcomes of interventions, and designing policies that lead to desired changes.
+  </p>
+  <p>
+    In our everyday lives, we constantly make causal assumptions. When we take medicine for a headache, we expect the pain to go away because we assume the medicine is causing relief. When governments implement policies like tax cuts or vaccination programs, they aim to create specific outcomes, assuming that their actions directly influence behavior or health. However, making these assumptions correctly requires careful reasoning, because naive interpretations of data can easily mislead us. This is where causal inference comes in: it provides rigorous tools and frameworks to distinguish true causal relationships from mere correlations.
+  </p>
+  <p>
+    In this blog, we will explore the core ideas of causal inference, explain why correlation does not imply causation, discuss its motivations across different domains, examine examples from everyday life, and introduce the concept of counterfactual thinking. By the end, you should have a solid understanding of why causal reasoning is both powerful and essential.
+  </p>
+
+  <h2>Why Correlation ≠ Causation</h2>
+  <p>
+    One of the most fundamental concepts in causal inference is understanding that correlation does not imply causation. Correlation is a statistical measure that describes the degree to which two variables move together. If two variables are positively correlated, when one increases, the other tends to increase as well. If they are negatively correlated, one increases while the other decreases. While correlation can suggest a relationship between variables, it does not indicate that one variable is causing the other.
+  </p>
+  <p>
+    Consider the example of ice cream sales and drowning incidents. Studies might show that these two variables are positively correlated: as ice cream sales increase, the number of drowning incidents also increases. Does this mean that eating ice cream causes drowning? Of course not. The hidden factor here is temperature or season—summer increases both ice cream consumption and swimming activities. This third variable, often called a confounder, explains the apparent correlation without implying a causal link.
+  </p>
+  <p>
+    Misinterpreting correlation as causation can lead to poor decisions in policy-making, healthcare, and business. For instance, if a company observes that higher advertising spending correlates with higher sales, it might assume that increasing the ad budget will automatically boost revenue. However, if the correlation is driven by seasonal trends, market demand, or other external factors, blindly increasing the ad spend might not have the expected causal effect.
+  </p>
+  <p>
+    In short, correlation is a useful descriptive tool, but causal inference requires understanding the mechanisms that generate the data. This distinction is at the heart of causal reasoning and is what allows researchers and decision-makers to move from observing patterns to making predictions and interventions with confidence.
+  </p>
+
+  <h2>Motivation: Health, Policy, and Machine Learning Decisions</h2>
+  <p>
+    The importance of causal inference extends across many domains, from healthcare to policy-making to artificial intelligence. In healthcare, causal reasoning is critical for determining the effectiveness of treatments. Clinical trials are designed not merely to observe correlations but to infer causation: does a new drug reduce the risk of disease? Without causal inference, we risk implementing treatments that are ineffective or even harmful.
+  </p>
+  <p>
+    In public policy, governments must rely on causal understanding to design interventions that achieve desired social outcomes. For example, suppose research shows a correlation between school attendance and academic performance. While encouraging attendance is likely beneficial, policymakers must ensure that interventions targeting attendance genuinely improve learning outcomes, rather than simply addressing correlated factors like family income or community support.
+  </p>
+  <p>
+    In machine learning and artificial intelligence, causal reasoning is becoming increasingly important. Traditional ML models often rely on correlations in historical data to make predictions. However, when deployed in real-world settings, these models may fail if underlying causal mechanisms change. For instance, a model predicting credit risk might correlate late payments with certain demographic features. Without causal understanding, using such correlations for decision-making could perpetuate bias and result in unfair treatment of certain groups. Causal inference allows AI systems to reason about interventions and counterfactuals, leading to more robust, ethical, and generalizable models.
+  </p>
+
+  <h2>Examples from Everyday Life</h2>
+  <p>
+    Causal reasoning is not limited to research or professional domains; we constantly use it in our daily lives. For example, consider why you might carry an umbrella. You observe dark clouds and rain forecasts, and you infer that carrying an umbrella will prevent you from getting wet. This is a causal inference: the action (carrying an umbrella) causes the outcome (staying dry) under certain conditions.
+  </p>
+  <p>
+    Another example is exercise and health. People often notice that individuals who exercise regularly tend to be healthier. While there is likely a causal link between physical activity and well-being, other correlated factors like diet, sleep habits, or socio-economic status might also play a role. Distinguishing the direct causal effect of exercise from these confounders is the essence of causal inference.
+  </p>
+  <p>
+    In marketing, companies use causal reasoning when testing new strategies. If introducing a discount campaign increases sales, the company must determine whether the increase is truly caused by the discount or if other factors, such as seasonal demand or competitor activity, influenced the result. Controlled experiments, such as A/B testing, are practical tools to isolate causal effects in such scenarios.
+  </p>
+
+  <h2>Counterfactual Thinking</h2>
+  <p>
+    A central concept in causal inference is counterfactual thinking: considering "what would have happened if…?" Counterfactuals allow us to reason about alternate realities and measure causal effects by comparing observed outcomes with hypothetical scenarios where a particular intervention did not occur. For example, a doctor might ask, "If the patient had not taken the medication, would they have recovered?" By constructing these counterfactual scenarios, researchers can quantify the true causal effect of an action.
+  </p>
+  <p>
+    Counterfactual reasoning is the foundation of many causal inference frameworks, including the potential outcomes framework and structural causal models. These frameworks formalize how to compare factual and counterfactual outcomes, account for confounding variables, and estimate causal effects reliably. In machine learning, counterfactual thinking is also applied to generate explanations for model predictions, test fairness, and simulate the impact of policy interventions.
+  </p>
+  <p>
+    While counterfactuals are inherently hypothetical and cannot be observed directly, careful study design, such as randomized controlled trials, natural experiments, and advanced statistical techniques, allows researchers to approximate these scenarios and draw robust causal conclusions.
+  </p>
+
+  <h2>Conclusion</h2>
+  <p>
+    Causal inference is a powerful and essential framework for understanding how actions and events shape outcomes. Unlike simple correlations, which only describe patterns, causal reasoning allows us to answer the deeper question of "what causes what?" This capability is vital across healthcare, policy-making, and machine learning, enabling informed decision-making, effective interventions, and ethical outcomes.
+  </p>
+  <p>
+    By distinguishing correlation from causation, considering motivations and real-world implications, analyzing everyday examples, and applying counterfactual thinking, we can approach problems with greater clarity and confidence. As we advance in data science and AI, developing a robust understanding of causal inference will become increasingly important, helping us design systems, policies, and experiments that not only describe the world but also change it in meaningful ways.
+  </p>
+  <p>
+    In the next blogs, we will explore the formal frameworks of causal inference, such as directed acyclic graphs (DAGs), potential outcomes, and methods for estimating causal effects, along with practical applications in machine learning and policy evaluation.
+  </p>
+</body>
+</html>

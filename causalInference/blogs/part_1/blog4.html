@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 4: Introduction to Directed Acyclic Graphs (DAGs)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h3 {
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        ul {
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .example {
+            background-color: #dfefff;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #2980b9;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog 4: Introduction to Directed Acyclic Graphs (DAGs)</h1>
+
+    <p>
+        Directed Acyclic Graphs (DAGs) are an essential tool in causal inference, providing a structured, visual framework to reason about the relationships between variables. Unlike traditional statistical methods that focus only on correlations, DAGs allow us to explicitly encode assumptions about causality, helping to clarify which variables might confound a relationship, which might mediate it, and which might block or create spurious associations. This blog provides a deep dive into DAGs, covering key terminology, types of causal structures, and practical examples.
+    </p>
+
+    <h3>DAG Terminology: Nodes, Edges, Parents, Ancestors</h3>
+    
+    <p>
+        A Directed Acyclic Graph is composed of <strong>nodes</strong> and <strong>edges</strong>. Each node represents a variable or concept, and each edge (directed arrow) represents a causal influence from one variable to another. The term "acyclic" means that following the direction of edges will never lead you back to the same node, i.e., the graph contains no cycles.
+    </p>
+
+    <ul>
+        <li><strong>Nodes:</strong> Variables or entities in the system. Examples could be <em>smoking</em>, <em>lung cancer</em>, or <em>exercise</em>.</li>
+        <li><strong>Edges:</strong> Directed arrows that represent causal influence. An arrow from <code>A → B</code> indicates that changes in A can cause changes in B.</li>
+        <li><strong>Parents:</strong> The set of nodes with edges pointing directly into a node. If <code>A → B</code>, then A is a parent of B.</li>
+        <li><strong>Ancestors:</strong> All nodes that can reach a given node through directed paths. If <code>C → B → A</code>, then both B and C are ancestors of A.</li>
+        <li><strong>Descendants:</strong> All nodes that can be reached from a given node. In <code>A → B → C</code>, B and C are descendants of A.</li>
+    </ul>
+
+    <p>
+        Understanding these concepts is crucial because they determine how we adjust for variables to correctly estimate causal effects. For example, adjusting for a parent of a treatment variable is usually appropriate, while adjusting for a descendant may introduce bias.
+    </p>
+
+    <h3>Confounding, Collider, Mediator</h3>
+    <p>
+        The main power of DAGs is their ability to visually depict causal relationships that affect the estimation of causal effects. Three key structures often arise in causal inference: <strong>confounders</strong>, <strong>colliders</strong>, and <strong>mediators</strong>. Understanding these is essential for correct model adjustment.
+    </p>
+
+    <h4>Confounders</h4>
+    <p>
+        A confounder is a variable that influences both the treatment/exposure and the outcome. If not controlled, confounders create spurious associations that can bias causal effect estimates. Graphically, a confounder is a node that points into both the treatment and the outcome:
+    </p>
+    <div class="diagram">
+        <img src="https://i.imgur.com/3LvC0Lb.png" alt="Confounder example: C → X and C → Y">
+        <p><em>Example: C → X and C → Y</em></p>
+    </div>
+    <p>
+        <strong>Example:</strong> Suppose <em>age</em> influences both exercise habits (<em>treatment</em>) and heart disease risk (<em>outcome</em>). Here, age is a confounder. Failing to adjust for age could overestimate or underestimate the causal effect of exercise on heart disease.
+    </p>
+
+    <h4>Colliders</h4>
+    <p>
+        A collider is a variable influenced by two (or more) variables. Adjusting for colliders can induce bias, a phenomenon known as <em>collider bias</em> or <em>selection bias</em>. In a DAG, a collider is represented as:
+    </p>
+    <div class="diagram">
+        <img src="https://i.imgur.com/5xQYd17.png" alt="Collider example: X → C ← Y">
+        <p><em>Example: X → C ← Y</em></p>
+    </div>
+    <p>
+        <strong>Example:</strong> Suppose <em>genetic predisposition</em> (X) and <em>lifestyle</em> (Y) both influence hospitalization (C). If we only study hospitalized individuals, we are conditioning on a collider, which can create a false association between genetics and lifestyle even if they are independent in the population.
+    </p>
+
+    <h4>Mediators</h4>
+    <p>
+        A mediator is a variable that lies on the causal path between a treatment and an outcome. Adjusting for mediators depends on the research question. Controlling for mediators can block the indirect causal effect, while leaving them in allows estimation of the total effect.
+    </p>
+    <div class="diagram">
+        <img src="https://i.imgur.com/6syDKnE.png" alt="Mediator example: X → M → Y">
+        <p><em>Example: X → M → Y</em></p>
+    </div>
+    <p>
+        <strong>Example:</strong> Exercise (<em>X</em>) may reduce stress (<em>M</em>), which in turn lowers blood pressure (<em>Y</em>). Stress is a mediator. If we adjust for stress, we only estimate the direct effect of exercise on blood pressure, not the total effect.
+    </p>
+
+    <h3>Visual Intuition and Examples</h3>
+    <p>
+        DAGs are a graphical language for causality. They help identify which variables to adjust for and which to leave alone. The structure of a DAG visually encodes dependencies and independencies, which statistical methods alone cannot reveal.
+    </p>
+
+    <p>
+        Consider the following practical example:
+    </p>
+    <div class="example">
+        <strong>Scenario:</strong> A researcher wants to study whether smoking causes lung cancer.
+        <ul>
+            <li>Variable <em>Smoking</em> (X)</li>
+            <li>Variable <em>Lung Cancer</em> (Y)</li>
+            <li>Variable <em>Genetic Risk</em> (C) – influences both smoking and lung cancer</li>
+        </ul>
+        <p>DAG Representation:</p>
+        <div class="diagram">
+            <img src="https://i.imgur.com/3LvC0Lb.png" alt="Smoking DAG with confounder">
+            <p><em>Smoking (X) → Lung Cancer (Y); Genetic Risk (C) → X and C → Y</em></p>
+        </div>
+        <p>
+            <strong>Interpretation:</strong> Genetic risk is a confounder. To estimate the causal effect of smoking on lung cancer, we must adjust for genetic risk.
+        </p>
+    </div>
+
+    <p>
+        Another example illustrates a collider:
+    </p>
+    <div class="example">
+        <strong>Scenario:</strong> Study the effect of exercise (X) and diet (Y) on obesity-related hospitalization (C).
+        <div class="diagram">
+            <img src="https://i.imgur.com/5xQYd17.png" alt="Collider example: Exercise and Diet leading to hospitalization">
+            <p><em>X → C ← Y</em></p>
+        </div>
+        <p>
+            <strong>Interpretation:</strong> Hospitalization is a collider. If we only look at hospitalized patients, we might incorrectly conclude that exercise and diet are related, even if they are independent in the general population.
+        </p>
+    </div>
+
+    <p>
+        DAGs can also help conceptualize mediation:
+    </p>
+    <div class="example">
+        <strong>Scenario:</strong> Investigate how education (X) affects income (Y) through skills acquired (M).
+        <div class="diagram">
+            <img src="https://i.imgur.com/6syDKnE.png" alt="Mediator example: Education → Skills → Income">
+            <p><em>X → M → Y</em></p>
+        </div>
+        <p>
+            <strong>Interpretation:</strong> Skills is a mediator. Adjusting for skills estimates the direct effect of education on income. Not adjusting gives the total effect (direct + indirect through skills).
+        </p>
+    </div>
+
+    <h3>Practical Considerations When Using DAGs</h3>
+    <ul>
+        <li><strong>Building DAGs:</strong> Start with subject-matter knowledge. No statistical method can fully determine causality without assumptions.</li>
+        <li><strong>Adjustment Sets:</strong> Identify a set of variables to control for to block all backdoor paths from treatment to outcome without opening new paths through colliders.</li>
+        <li><strong>Backdoor Criterion:</strong> A formal rule for choosing variables to adjust. If all backdoor paths are blocked, the causal effect can be estimated.</li>
+        <li><strong>Frontdoor Criterion:</strong> Used when mediators can help identify causal effects when confounders cannot be fully observed.</li>
+        <li><strong>Software Tools:</strong> DAGitty, Python's networkx, or R's dagR package can help visualize DAGs and compute adjustment sets.</li>
+    </ul>
+
+    <p>
+        DAGs are not just a theoretical tool—they are highly practical. By representing assumptions visually, they prevent common mistakes like conditioning on colliders or forgetting confounders. They also provide a roadmap for designing observational studies, running regressions, or interpreting experimental data.
+    </p>
+
+    <h3>Summary</h3>
+    <p>
+        Directed Acyclic Graphs (DAGs) are a cornerstone of modern causal inference. They allow researchers to:
+    </p>
+    <ul>
+        <li>Explicitly encode assumptions about causal relationships.</li>
+        <li>Identify confounders, colliders, and mediators.</li>
+        <li>Determine which variables to adjust for accurate causal estimation.</li>
+        <li>Visualize complex causal structures to guide analysis.</li>
+    </ul>
+    <p>
+        By mastering DAGs, researchers gain a powerful mental model for reasoning about causality. Instead of relying purely on correlations, DAGs help clarify why a relationship exists, how interventions might work, and how to avoid common biases in observational data.
+    </p>
+
+    <p>
+        As you dive deeper into causal inference, you will encounter more advanced topics such as:
+    </p>
+    <ul>
+        <li>Instrumental variables</li>
+        <li>Structural Equation Modeling (SEM)</li>
+        <li>Counterfactual frameworks</li>
+        <li>Dynamic and longitudinal DAGs</li>
+        <li>Applications in machine learning and policy analysis</li>
+    </ul>
+
+    <p>
+        For now, mastering the basics of DAGs—their nodes, edges, confounders, colliders, and mediators—is the critical first step to becoming proficient in causal thinking.
+    </p>
+
+</body>
+</html>
