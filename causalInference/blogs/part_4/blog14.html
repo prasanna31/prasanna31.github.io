@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog 14: Difference-in-Differences (DiD) – Comprehensive Guide</title>
+<style>
+    body { font-family: Arial, sans-serif; line-height: 1.8; margin: 20px; background-color: #f9f9f9; color: #333; }
+    h1, h2, h3 { color: #2c3e50; }
+    h3 { margin-top: 30px; }
+    p { margin-bottom: 16px; }
+    ul, ol { margin-bottom: 16px; }
+    li { margin-bottom: 8px; }
+    code { background-color: #eaeaea; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+    .example { background-color: #f0f7e6; padding: 10px; margin: 10px 0; border-left: 5px solid #2ecc71; }
+    .diagram { text-align: center; margin: 20px 0; }
+    img { max-width: 100%; }
+</style>
+</head>
+<body>
+
+<h1>Blog 14: Difference-in-Differences (DiD) – Comprehensive Guide</h1>
+
+<p>
+Difference-in-Differences (DiD) is one of the most widely used methods for causal inference in economics, policy evaluation, social sciences, and tech analytics. Unlike randomized experiments, DiD works with observational data where treatment is not randomly assigned, but a comparison group exists that can serve as a counterfactual. In this blog, we’ll cover DiD in depth: intuition, formal definitions, regression implementation, assumptions, extensions, practical examples, diagnostics, and implementation tips.
+</p>
+
+<h3>1. Intuition Behind Difference-in-Differences</h3>
+
+<p>
+The intuition of DiD is straightforward yet powerful. Consider a scenario where a policy or treatment affects a group at a specific time. To estimate its effect, we compare the outcome before and after the treatment in the treated group. However, pre-existing trends or time shocks can confound this estimate. To correct for this, we use a control group that did not receive the treatment but experiences similar trends. The difference-in-differences—i.e., the change in the treated group minus the change in the control group—isolates the causal effect.
+</p>
+
+<p>
+Mathematically, the DiD estimate is given by:
+</p>
+
+<p style="text-align:center;">
+<code>DiD = (Ȳ_T,post - Ȳ_T,pre) - (Ȳ_C,post - Ȳ_C,pre)</code>
+</p>
+
+<p>
+Where: <code>Ȳ_T,post</code> is the treated group’s average outcome after treatment, <code>Ȳ_T,pre</code> before treatment, and similarly for the control group. This simple formula captures the essence of controlling for both baseline differences between groups and common temporal shocks.
+</p>
+
+<div class="diagram">
+<img src="https://i.imgur.com/dzK5rS0.png" alt="Difference-in-Differences illustration">
+<p><em>DiD compares pre-post changes in treated vs control to isolate treatment effect</em></p>
+</div>
+
+<h3>2. Parallel Trends Assumption</h3>
+
+<p>
+The central assumption for DiD is the <strong>parallel trends assumption</strong>. It states that, in the absence of treatment, the treated and control groups would have followed the same trajectory over time:
+</p>
+
+<ul>
+<li>The pre-treatment trends for both groups should be parallel. Graphical inspection can help validate this.</li>
+<li>Time-varying shocks should affect both groups similarly.</li>
+<li>If violated, DiD estimates may be biased.</li>
+</ul>
+
+<div class="diagram">
+<img src="https://i.imgur.com/xr6O0Et.png" alt="Parallel trends illustration">
+<p><em>Parallel trends assumption: pre-treatment slopes are the same → treatment effect identified</em></p>
+</div>
+
+<h3>3. Regression Formulation of DiD</h3>
+
+<p>
+While the basic formula is intuitive, DiD is commonly implemented using regression. The canonical regression is:
+</p>
+
+<p style="text-align:center;">
+<code>Y_it = α + β*Treatment_i + γ*Post_t + δ*(Treatment_i × Post_t) + ε_it</code>
+</p>
+
+<ul>
+<li><code>Treatment_i</code> = 1 for treated units, 0 for control</li>
+<li><code>Post_t</code> = 1 for post-treatment period, 0 for pre-treatment</li>
+<li><code>δ</code> = DiD estimate (causal effect)</li>
+<li>Additional covariates can be added to increase precision and control for observed differences:</li>
+<code>Y_it = α + β*Treatment_i + γ*Post_t + δ*(Treatment_i × Post_t) + θ*X_it + ε_it</code>
+</ul>
+
+<p>
+This framework extends naturally to multiple time periods and continuous treatments.
+</p>
+
+<h3>4. Extensions of DiD</h3>
+
+<ul>
+<li><strong>Multiple time periods:</strong> Panel data allows for dynamic effects and treatment timing variation.</li>
+<li><strong>Staggered adoption:</strong> Different units adopt treatment at different times. Recent methods adjust DiD estimates to account for this heterogeneity.</li>
+<li><strong>Covariate adjustment:</strong> Including covariates can improve precision and reduce bias.</li>
+<li><strong>Event studies:</strong> Examine treatment effects at different time leads and lags relative to treatment.</li>
+</ul>
+
+<h3>5. Implementation in Practice</h3>
+
+<p>
+Let’s consider an example. Suppose a city introduces a congestion charge to reduce traffic. We want to estimate its effect on traffic volume using nearby cities as a control group.
+</p>
+
+<ol>
+<li>Compute pre- and post-treatment traffic averages for treated and control cities.</li>
+<li>Calculate DiD estimate: difference in changes.</li>
+<li>Alternatively, run a regression including city and time fixed effects for robustness.</li>
+<li>Check parallel trends by plotting pre-treatment traffic trends.</li>
+</ol>
+
+<div class="example">
+<strong>Python Implementation:</strong>
+<pre>
+import pandas as pd
+import statsmodels.formula.api as smf
+
+# Example panel data
+data = pd.read_csv('traffic_data.csv')
+
+# DiD regression
+model = smf.ols('traffic ~ treated + post + treated:post', data=data).fit()
+print(model.summary())
+</pre>
+</div>
+
+<h3>6. Diagnostics and Assumption Checks</h3>
+
+<ul>
+<li>Visual inspection of pre-treatment trends is critical.</li>
+<li>Placebo tests: apply DiD to pre-treatment periods where no treatment occurred; estimate should be near zero.</li>
+<li>Check for compositional changes: ensure treated/control groups remain comparable over time.</li>
+<li>Cluster standard errors at the group level to account for within-group correlation.</li>
+</ul>
+
+<h3>7. Real-World Applications</h3>
+
+<h4>7.1 Policy Evaluation</h4>
+<div class="example">
+<ul>
+<li>Treated group: states implementing minimum wage increases.</li>
+<li>Control group: neighboring states without changes.</li>
+<li>Outcome: employment rate pre- and post-policy.</li>
+<li>DiD isolates the causal effect of policy on employment.</li>
+</ul>
+</div>
+
+<h4>7.2 Education Programs</h4>
+<div class="example">
+<ul>
+<li>Treated group: schools implementing a new learning program.</li>
+<li>Control group: schools without program.</li>
+<li>Outcome: test scores before and after program.</li>
+<li>DiD provides the effect of program controlling for baseline trends.</li>
+</ul>
+</div>
+
+<h4>7.3 Tech A/B Testing</h4>
+<div class="example">
+<ul>
+<li>Treated group: users receiving a new feature.</li>
+<li>Control group: users not receiving the feature.</li>
+<li>Outcome: engagement metrics pre- and post-launch.</li>
+<li>DiD captures the effect of the feature beyond general trends or seasonal effects.</li>
+</ul>
+</div>
+
+<h3>8. Limitations and Challenges</h3>
+
+<ul>
+<li>Violations of parallel trends bias estimates.</li>
+<li>Simultaneous interventions affecting treated or control groups can distort effects.</li>
+<li>Heterogeneous effects may complicate interpretation.</li>
+<li>Measurement error in timing or outcome can reduce accuracy.</li>
+<li>Attrition or migration between groups over time can bias estimates.</li>
+</ul>
+
+<h3>9. Advanced Topics</h3>
+
+<ul>
+<li>Generalized DiD: allows for continuous treatments or non-linear outcomes.</li>
+<li>Interactive fixed effects models: handle unobserved heterogeneity across units and time.</li>
+<li>Event-study designs: analyze anticipation effects and dynamic treatment responses.</li>
+<li>Machine learning-based DiD: estimate heterogeneous treatment effects using causal forests or other methods.</li>
+</ul>
+
+<h3>10. Summary</h3>
+
+<ul>
+<li>DiD compares changes over time between treated and control groups to estimate causal effects.</li>
+<li>Parallel trends assumption is key; visual checks and placebo tests help validate.</li>
+<li>Regression frameworks extend DiD to multiple periods, covariates, and fixed effects.</li>
+<li>Applications include policy evaluation, education, healthcare, marketing, and tech A/B testing.</li>
+<li>Limitations: assumption violations, simultaneous interventions, heterogeneous effects.</li>
+<li>Advanced methods expand DiD to handle staggered adoption, multiple time periods, and machine learning-based heterogeneous effects.</li>
+</

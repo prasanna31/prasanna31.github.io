@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog 18: Mediation Analysis and Path Effects</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      margin: 20px;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h2 {
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    h3 {
+      margin-top: 25px;
+      margin-bottom: 15px;
+    }
+    ul, ol {
+      margin-left: 20px;
+    }
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    .example {
+      background-color: #e8f0fe;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 5px solid #3498db;
+    }
+    .note {
+      background-color: #fff3cd;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 5px solid #ffcc00;
+    }
+    code {
+      background-color: #eee;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    img {
+      max-width: 100%;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Blog 18: Mediation Analysis and Path Effects</h1>
+
+  <p>
+    In causal inference, understanding <strong>how</strong> a treatment or exposure affects an outcome is often as important as estimating the total effect. Mediation analysis provides tools to decompose the total effect into components, identifying <em>direct effects</em> that occur independently of intermediates, and <em>indirect effects</em> that operate through mediators. This enables researchers to uncover the pathways through which treatments exert their influence and to inform interventions targeting key mechanisms. DAGs (Directed Acyclic Graphs) are particularly useful in visualizing and reasoning about these causal pathways.
+  </p>
+
+  <h2>1. Motivation</h2>
+  <p>
+    Suppose a company wants to understand how a marketing campaign (treatment <code>T</code>) influences sales (outcome <code>Y</code>). Part of the effect may be direct—customers see the ad and immediately purchase. Part may be indirect—ads improve brand awareness (mediator <code>M</code>), which in turn increases purchases. Mediation analysis allows decomposition of the total effect of <code>T</code> on <code>Y</code> into:
+  </p>
+  <ul>
+    <li><strong>Direct effect:</strong> Effect of <code>T</code> on <code>Y</code> not mediated by <code>M</code>.</li>
+    <li><strong>Indirect effect:</strong> Effect of <code>T</code> on <code>Y</code> through mediator <code>M</code>.</li>
+  </ul>
+  <p>
+    Understanding these components is crucial in biology, medicine, policy, marketing, and other domains where interventions can operate via multiple mechanisms.
+  </p>
+
+  <h2>2. Causal Pathways and DAGs</h2>
+  <p>
+    Directed Acyclic Graphs (DAGs) are a graphical tool to represent causal structures. In mediation analysis, DAGs help identify direct and indirect paths and clarify assumptions.
+  </p>
+  <div class="example">
+    Consider a simple DAG for mediation:
+    <pre>
+      T ---> M ---> Y
+      |            ^
+      |------------|
+    </pre>
+    Here, <code>T</code> is the treatment, <code>M</code> is a mediator, and <code>Y</code> is the outcome. The arrow from <code>T</code> to <code>Y</code> represents the direct effect. The path <code>T → M → Y</code> represents the indirect effect mediated by <code>M</code>.
+  </div>
+
+  <p>
+    DAGs also help identify confounders. For valid mediation analysis, we must adjust for variables that confound <code>T → M</code>, <code>M → Y</code>, or <code>T → Y</code> paths. Failure to adjust for confounders can bias both direct and indirect effect estimates.
+  </p>
+
+  <h2>3. Decomposition of Effects</h2>
+  <p>
+    Let <code>Y(t, m)</code> denote the potential outcome if treatment is set to <code>t</code> and mediator to <code>m</code>. Then:
+  </p>
+  <ul>
+    <li><strong>Total Effect (TE):</strong> Difference in outcome if treatment changes, holding all else equal:
+      <code>TE = E[Y(1, M(1)) - Y(0, M(0))]</code></li>
+    <li><strong>Natural Direct Effect (NDE):</strong> Effect of <code>T</code> on <code>Y</code> keeping mediator fixed at its counterfactual under control:
+      <code>NDE = E[Y(1, M(0)) - Y(0, M(0))]</code></li>
+    <li><strong>Natural Indirect Effect (NIE):</strong> Effect of changing mediator from <code>M(0)</code> to <code>M(1)</code> while holding treatment fixed:
+      <code>NIE = E[Y(0, M(1)) - Y(0, M(0))]</code></li>
+  </ul>
+  <p>
+    These effects satisfy the additive decomposition: <code>TE = NDE + NIE</code>.
+  </p>
+
+  <h3>3.1 Assumptions for Identification</h3>
+  <ul>
+    <li><strong>No unmeasured confounding:</strong> There should be no unobserved confounders of <code>T → Y</code>, <code>T → M</code>, or <code>M → Y</code>.</li>
+    <li><strong>No treatment-mediator interaction (optional):</strong> Some methods assume the direct effect does not depend on the mediator; this can be relaxed in modern approaches.</li>
+    <li><strong>Consistency:</strong> Observed outcomes match potential outcomes under actual treatment and mediator.</li>
+    <li><strong>Positivity:</strong> All treatment and mediator levels have positive probability for all covariate strata.</li>
+  </ul>
+
+  <h2>4. Methods for Mediation Analysis</h2>
+  <p>
+    There are several approaches depending on the nature of variables:
+  </p>
+  <ul>
+    <li><strong>Linear Structural Equation Models (SEM):</strong> For continuous outcomes and mediators, linear regression allows decomposition into direct and indirect effects using coefficients.</li>
+    <li><strong>Counterfactual-based mediation:</strong> Nonparametric or semi-parametric estimation using potential outcomes.</li>
+    <li><strong>Regression-based approach:</strong> Estimate mediator as a function of treatment and covariates, then outcome as a function of treatment, mediator, and covariates.</li>
+    <li><strong>Inverse probability weighting:</strong> Weights account for mediator assignment to recover indirect effects.</li>
+  </ul>
+
+  <div class="example">
+    Example (Marketing): A company wants to measure how an online ad campaign affects sales. The ad may directly increase purchases (direct effect) or improve brand awareness (mediator), which in turn increases purchases (indirect effect). Regression-based mediation allows quantifying each path.
+  </div>
+
+  <h2>5. DAG-Based Intuition</h2>
+  <p>
+    DAGs clarify assumptions for mediation:
+  </p>
+  <ul>
+    <li>Direct path: <code>T → Y</code></li>
+    <li>Indirect path: <code>T → M → Y</code></li>
+    <li>Confounding paths: Variables affecting both <code>M</code> and <code>Y</code> must be adjusted for.</li>
+  </ul>
+  <p class="note">
+    Without adjusting for confounders of the mediator-outcome relationship, indirect effect estimates will be biased.
+  </p>
+
+  <h2>6. Examples in Biology</h2>
+  <p>
+    In biology, mediation analysis is used to uncover molecular or physiological pathways:
+  </p>
+  <ul>
+    <li>Drug treatment (<code>T</code>) affects gene expression (<code>M</code>), which in turn influences disease outcome (<code>Y</code>).</li>
+    <li>Exposure to toxins (<code>T</code>) influences biomarkers (<code>M</code>) that mediate organ damage (<code>Y</code>).</li>
+  </ul>
+  <div class="example">
+    Example: Estimating how a cancer drug reduces tumor growth. Some effect may be direct, while part operates through activation of immune response (mediator). Mediation analysis quantifies each component.
+  </div>
+
+  <h2>7. Examples in Marketing</h2>
+  <p>
+    Businesses frequently use mediation to optimize marketing strategies:
+  </p>
+  <ul>
+    <li>Email campaigns (<code>T</code>) increase engagement (<code>M</code>) which drives purchases (<code>Y</code>).</li>
+    <li>Social media ads (<code>T</code>) influence brand sentiment (<code>M</code>) leading to higher conversions (<code>Y</code>).</li>
+  </ul>
+  <div class="example">
+    By understanding the indirect path, marketers can invest in the mediator (e.g., brand awareness) to maximize sales, rather than only focusing on direct ad effects.
+  </div>
+
+  <h2>8. Estimation Approaches in Practice</h2>
+  <ol>
+    <li>Fit a model for the mediator as a function of treatment and covariates.</li>
+    <li>Fit a model for the outcome as a function of treatment, mediator, and covariates.</li>
+    <li>Use estimated coefficients to compute natural direct and indirect effects.</li>
+    <li>Bootstrap for standard errors and confidence intervals.</li>
+    <li>For non-linear outcomes (binary, count), use counterfactual-based methods or generalized SEM.</li>
+  </ol>
+
+  <h2>9. Software Tools</h2>
+  <ul>
+    <li><strong>R:</strong> <code>mediation</code>, <code>lavaan</code> for SEM-based mediation.</li>
+    <li><strong>Python:</strong> <code>DoWhy</code>, <code>causalmed</code>, <code>semopy</code>.</li>
+    <li>Bootstrap and DAG visualization packages assist with robust estimation and illustration.</li>
+  </ul>
+
+  <h2>10. Challenges and Pitfalls</h2>
+  <ul>
+    <li>Unmeasured confounding of mediator-outcome path biases indirect effect.</li>
+    <li>Interactions between treatment and mediator complicate decomposition.</li>
+    <li>Time-varying mediators require longitudinal models or marginal structural models.</li>
+    <li>Interpretation requires care: NDE and NIE are counterfactual constructs and may differ from naive regression coefficients.</li>
+  </ul>
+
+  <h2>11. Summary</h2>
+  <p>
+    Mediation analysis and path effect decomposition enable researchers to understand not just <em>if</em> a treatment works, but <em>how</em> it works. By leveraging DAGs, regression models, counterfactual reasoning, and weighting methods, analysts can separate direct and indirect effects and identify key mechanisms. Applications span biology, marketing, policy evaluation, and social science. Careful adjustment for confounders, attention to assumptions, and robust estimation techniques are essential to obtain valid and actionable insights.
+  </p>
+
+  <h2>References</h2>
+  <ul>
+    <li>VanderWeele, T. J. (2015). Explanation in Causal Inference: Methods for Mediation and Interaction. Oxford University Press.</li>
+    <li>Imai, K., Keele, L., & Tingley, D. (2010). A general approach to causal mediation analysis. <em>Psychological Methods</em>, 15(4), 309–334.</li>
+    <li>MacKinnon, D. P. (2008). Introduction to Statistical Mediation Analysis. Routledge.</li>
+    <li>Pearl, J. (2001). Direct and indirect effects. In <em>Proceedings of the Seventeenth Conference on Uncertainty in Artificial Intelligence</em>, 411–420.</li>
+    <li>Robins, J. M., & Greenland, S. (1992). Identifiability and exchangeability for direct and indirect effects. <em>Epidemiology</em>, 3(2), 143–155.</li>
+  </ul>
+
+</body>
+</html>

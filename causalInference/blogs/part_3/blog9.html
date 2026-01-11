@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 9: Potential Outcomes Framework</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h3 {
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        ul {
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .example {
+            background-color: #e6f7ff;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #3498db;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog 9: Potential Outcomes Framework</h1>
+
+    <p>
+        The potential outcomes framework, also known as the Rubin Causal Model (RCM), is one of the most widely used approaches in causal inference. It provides a rigorous mathematical formalism to define and estimate causal effects. By conceptualizing what would happen under alternative treatment scenarios, this framework allows researchers to reason about causality even in observational studies. In this blog, we cover the Rubin Causal Model, the notions of Average Treatment Effect (ATE), and Treatment Effect on the Treated (ATT), along with intuitive examples and practical applications.
+    </p>
+
+    <h3>The Rubin Causal Model</h3>
+    <p>
+        The Rubin Causal Model was proposed by Donald Rubin to formalize the concept of causality. The fundamental idea is to define causal effects in terms of <strong>potential outcomes</strong>. For each unit (e.g., a person, patient, or individual observation), we imagine two potential outcomes:
+    </p>
+    <ul>
+        <li><code>Y(1)</code>: The outcome if the unit receives the treatment.</li>
+        <li><code>Y(0)</code>: The outcome if the unit does not receive the treatment (control condition).</li>
+    </ul>
+
+    <p>
+        The causal effect for an individual is defined as:
+    </p>
+    <p style="text-align:center;">
+        <code>τ_i = Y_i(1) - Y_i(0)</code>
+    </p>
+
+    <p>
+        However, a fundamental challenge arises: we can never observe both <code>Y(1)</code> and <code>Y(0)</code> for the same individual. This is known as the <strong>fundamental problem of causal inference</strong>. Observational data or randomized experiments allow us to estimate average effects across populations, but individual causal effects remain unobservable.
+    </p>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/YuU4tgi.png" alt="Potential outcomes diagram">
+        <p><em>Illustration of potential outcomes: only one is observed per unit</em></p>
+    </div>
+
+    <h3>Average Treatment Effect (ATE)</h3>
+    <p>
+        While individual causal effects are unobservable, we can define the <strong>Average Treatment Effect (ATE)</strong> for a population. ATE measures the expected difference in outcomes if everyone in the population were treated versus if everyone were untreated:
+    </p>
+    <p style="text-align:center;">
+        <code>ATE = E[Y(1) - Y(0)]</code>
+    </p>
+
+    <p>
+        In practice, estimating ATE requires comparing outcomes of treated and untreated groups, ideally after adjusting for confounding factors. Randomized controlled trials naturally facilitate ATE estimation because randomization ensures that the treatment assignment is independent of potential outcomes.
+    </p>
+
+    <div class="example">
+        <strong>Example:</strong> Consider a clinical trial for a new drug:
+        <ul>
+            <li>Treated group: receives the drug</li>
+            <li>Control group: receives a placebo</li>
+            <li>Outcome: reduction in blood pressure</li>
+        </ul>
+        <p>
+            The average reduction in blood pressure in the treated group minus that in the control group estimates the ATE. This represents the expected effect of treatment across the entire population.
+        </p>
+    </div>
+
+    <h3>Treatment Effect on the Treated (ATT)</h3>
+    <p>
+        Often, researchers are interested not in the effect for the entire population but specifically for those who actually received the treatment. This is captured by the <strong>Treatment Effect on the Treated (ATT)</strong>:
+    </p>
+    <p style="text-align:center;">
+        <code>ATT = E[Y(1) - Y(0) | X = 1]</code>
+    </p>
+
+    <p>
+        ATT answers the question: “What was the causal effect for the units that were actually treated?” It is particularly relevant in policy evaluation, marketing interventions, and healthcare treatments where only a subset of the population receives the intervention.
+    </p>
+
+    <div class="example">
+        <strong>Example:</strong> In a job training program:
+        <ul>
+            <li>Treated individuals: those who enrolled in training</li>
+            <li>Outcome: increase in monthly income</li>
+        </ul>
+        <p>
+            ATT estimates the average income gain specifically for those who participated, which may differ from the ATE if participants differ systematically from non-participants.
+        </p>
+    </div>
+
+    <h3>Identification and Estimation in Observational Studies</h3>
+    <p>
+        In observational studies, treatment assignment is not random, and confounders may affect both treatment assignment and outcome. To estimate causal effects, researchers use assumptions and statistical adjustments:
+    </p>
+    <ul>
+        <li><strong>Ignorability / Unconfoundedness:</strong> Treatment assignment is independent of potential outcomes given observed covariates <code>W</code>:  
+        <code>{Y(1), Y(0)} ⊥ X | W</code></li>
+        <li><strong>Overlap / Positivity:</strong> Each unit has a positive probability of receiving either treatment: 0 < P(X=1|W) < 1</li>
+        <li>With these assumptions, methods like propensity score matching, regression adjustment, or inverse probability weighting can estimate ATE and ATT.</li>
+    </ul>
+
+    <div class="example">
+        <strong>Propensity Score Example:</strong> Suppose we have a dataset with students' demographics, participation in a study program (X), and test scores (Y).  
+        <ul>
+            <li>Compute propensity scores P(X=1|W) based on covariates W.</li>
+            <li>Match treated and untreated students with similar propensity scores.</li>
+            <li>Estimate ATT by comparing outcomes in the matched sample.</li>
+        </ul>
+    </div>
+
+    <h3>Graphical Representation of Potential Outcomes</h3>
+    <p>
+        DAGs can also illustrate potential outcomes. A simple DAG with treatment <code>X</code>, outcome <code>Y</code>, and confounders <code>W</code> shows how adjusting for W can help recover causal effects:
+    </p>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/QlKIGX0.png" alt="Potential outcomes DAG with confounders">
+        <p><em>DAG: Confounder W affects both treatment X and outcome Y</em></p>
+    </div>
+
+    <p>
+        Adjusting for W blocks backdoor paths from X to Y, allowing estimation of the causal effect using observed data. Without adjustment, naive comparison of treated and untreated outcomes may be biased due to confounding.
+    </p>
+
+    <h3>Example of ATT vs ATE Differences</h3>
+    <div class="example">
+        <strong>Scenario:</strong> Job training program:
+        <ul>
+            <li>ATE: The expected increase in income if the entire population received training.</li>
+            <li>ATT: The expected increase for those who actually attended training.</li>
+        </ul>
+        <p>
+            Suppose participants are highly motivated, while non-participants are less motivated. ATT may be higher than ATE because participants differ systematically from the general population.
+        </p>
+    </div>
+
+    <h3>Applications of the Potential Outcomes Framework</h3>
+    <ul>
+        <li><strong>Healthcare:</strong> Estimating treatment effects in clinical trials and observational studies.</li>
+        <li><strong>Education:</strong> Evaluating interventions such as tutoring programs, new curricula, or policy changes.</li>
+        <li><strong>Economics:</strong> Measuring the impact of subsidies, tax incentives, or job training programs.</li>
+        <li><strong>Marketing:</strong> Estimating causal effects of advertisements, promotions, or product trials.</li>
+    </ul>
+
+    <h3>Practical Considerations</h3>
+    <p>
+        While the potential outcomes framework is powerful, practitioners must carefully consider:
+    </p>
+    <ul>
+        <li>Assumptions: Ignorability and overlap are critical for identification.</li>
+        <li>Confounders: All relevant confounders must be observed or accounted for using methods like instrumental variables.</li>
+        <li>Estimators: Choice between regression adjustment, matching, weighting, or double robust methods affects precision and bias.</li>
+        <li>Generalizability: ATE applies to the population, ATT to treated units; ensure clarity about the estimand.</li>
+    </ul>
+
+    <h3>Summary</h3>
+    <ul>
+        <li>The potential outcomes framework formalizes causality using hypothetical outcomes under treatment and control.</li>
+        <li>Individual causal effects are unobservable, but population-level effects like ATE and ATT can be estimated.</li>
+        <li>ATE captures the average effect across the entire population, while ATT focuses on the treated units.</li>
+        <li>Proper adjustment for confounders and adherence to identification assumptions are essential in observational studies.</li>
+        <li>The Rubin Causal Model underpins modern causal inference methods in healthcare, economics, education, and beyond.</li>
+    </ul>
+
+    <p>
+        By embracing the potential outcomes framework, researchers can clearly define causal estimands, understand the limitations of observational data, and apply rigorous statistical methods to estimate causal effects. DAGs, propensity scores, and matching methods complement this framework to provide robust and interpretable causal conclusions.
+    </p>
+
+</body>
+</html>

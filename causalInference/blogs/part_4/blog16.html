@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog 16: Synthetic Control Methods</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      margin: 20px;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h2 {
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    .example {
+      background-color: #e8f0fe;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 5px solid #3498db;
+    }
+    .note {
+      background-color: #fff3cd;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 5px solid #ffcc00;
+    }
+    code {
+      background-color: #eee;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Blog 16: Synthetic Control Methods</h1>
+
+  <p>
+    In the realm of causal inference, estimating the effect of a policy or intervention often becomes challenging when we do not have randomized experiments. Traditional approaches such as Difference-in-Differences (DiD) assume that control and treatment units follow parallel trends, which may not hold in complex real-world settings. This is where <strong>Synthetic Control Methods (SCM)</strong> come into play. These methods allow researchers to construct a weighted combination of control units to serve as a more accurate “synthetic” counterfactual for the treated unit. SCM has become a cornerstone in evaluating the causal impact of economic policies, public health interventions, and social programs.
+  </p>
+
+  <h2>1. Motivation for Synthetic Control Methods</h2>
+
+  <p>
+    Consider a scenario where a government implements a new economic policy in one region, and we want to measure its impact on GDP growth. A simple comparison of GDP in the treated region before and after the policy could be misleading due to confounding factors like global market trends, regional economic cycles, or other interventions. Traditional regression methods may fail if the treatment is non-random and control units differ significantly from the treated unit. Synthetic Control Methods overcome these limitations by constructing a counterfactual unit that closely mirrors the treated unit’s characteristics prior to the intervention.
+  </p>
+
+  <p>
+    SCM is particularly useful when we have:
+  </p>
+  <ul>
+    <li>One or a small number of treated units.</li>
+    <li>Many potential control units with pre-treatment data.</li>
+    <li>Observations over time (panel data).</li>
+  </ul>
+
+  <h2>2. Conceptual Overview</h2>
+
+  <p>
+    The central idea behind SCM is to approximate the counterfactual trajectory of the treated unit using a weighted combination of untreated units. Suppose we have <em>J+1</em> units, with unit 1 receiving the intervention and units 2 to J+1 serving as potential controls. Let <code>Y_it</code> denote the outcome for unit <code>i</code> at time <code>t</code>. The observed outcome for the treated unit after the intervention, <code>Y_1t</code>, can be expressed as:
+  </p>
+
+  <p style="text-align:center;">
+    <code>Y_1t = Y_1t^N + α_1t</code>
+  </p>
+
+  <p>
+    Here, <code>Y_1t^N</code> is the counterfactual outcome (what would have happened without treatment), and <code>α_1t</code> is the treatment effect. SCM estimates <code>Y_1t^N</code> as a convex combination of control units:
+  </p>
+
+  <p style="text-align:center;">
+    <code>Y_1t^N ≈ ∑_{j=2}^{J+1} w_j Y_jt</code>
+  </p>
+
+  <p>
+    where <code>w_j ≥ 0</code> and <code>∑ w_j = 1</code>. The weights <code>w_j</code> are chosen to best replicate the pre-treatment characteristics of the treated unit, including past outcomes and covariates.
+  </p>
+
+  <h2>3. Steps in Implementing SCM</h2>
+
+  <h3>3.1 Define Treatment and Control Units</h3>
+  <p>
+    The first step is to clearly identify the unit receiving the intervention (treated unit) and potential control units that did not receive the intervention. Controls should ideally be similar in characteristics to the treated unit to improve the accuracy of the synthetic counterfactual.
+  </p>
+
+  <h3>3.2 Collect Pre-Treatment Data</h3>
+  <p>
+    SCM relies heavily on pre-treatment outcomes and covariates to construct the synthetic control. Collect panel data on outcomes of interest and predictors across the treated and control units for several periods before the intervention.
+  </p>
+
+  <h3>3.3 Optimize Weights</h3>
+  <p>
+    Using pre-treatment data, we solve a constrained optimization problem to determine the weights <code>w_j</code> for control units. The goal is to minimize the difference between the treated unit and the synthetic control across all pre-treatment periods:
+  </p>
+  <p style="text-align:center;">
+    <code>min_w ∑_{t=1}^{T_0} (Y_1t − ∑_{j=2}^{J+1} w_j Y_jt)^2</code>
+  </p>
+  <p>
+    subject to <code>w_j ≥ 0</code> and <code>∑ w_j = 1</code>. Various algorithms such as quadratic programming can be used to find the optimal weights.
+  </p>
+
+  <h3>3.4 Estimate Treatment Effect</h3>
+  <p>
+    Once the synthetic control is constructed, the treatment effect at each post-treatment period is estimated by comparing the observed outcome of the treated unit with its synthetic counterpart:
+  </p>
+  <p style="text-align:center;">
+    <code>α_1t = Y_1t − ∑_{j=2}^{J+1} w_j Y_jt</code>
+  </p>
+
+  <h2>4. Advantages of Synthetic Control Methods</h2>
+  <ul>
+    <li><strong>Data-driven:</strong> SCM automatically selects weights to closely match the treated unit, reducing researcher bias.</li>
+    <li><strong>Flexibility:</strong> Can be applied with a single treated unit and multiple control units.</li>
+    <li><strong>Transparent:</strong> The contribution of each control unit to the synthetic control is explicit.</li>
+    <li><strong>Improved counterfactual:</strong> Generates more realistic estimates than simple averages or DiD in non-parallel trend scenarios.</li>
+  </ul>
+
+  <h2>5. Assumptions and Limitations</h2>
+  <p>
+    While SCM is powerful, it relies on certain assumptions:
+  </p>
+  <ul>
+    <li><strong>No interference:</strong> The treatment of one unit should not affect other units (SUTVA).</li>
+    <li><strong>Good pre-treatment fit:</strong> The synthetic control must closely approximate the treated unit before the intervention. Poor pre-treatment fit undermines credibility.</li>
+    <li><strong>Convex combination assumption:</strong> The treated unit’s counterfactual lies within the space spanned by control units. If the treated unit is an outlier, SCM may not provide a good estimate.</li>
+  </ul>
+  <p class="note">
+    Note: SCM does not inherently correct for time-varying confounders that are unobserved, so it is best used when sufficient pre-treatment data and covariates are available.
+  </p>
+
+  <h2>6. Example Applications</h2>
+
+  <h3>6.1 Economic Policy Evaluation</h3>
+  <p class="example">
+    Consider the case of California’s Proposition 99, which raised cigarette taxes in 1988. Researchers wanted to study its effect on cigarette consumption. By constructing a synthetic California from other states that did not implement a tax increase, the synthetic control closely mirrored California’s pre-1988 smoking trends. Post-1988, the divergence between actual California and its synthetic control allowed researchers to estimate the reduction in cigarette consumption due to the policy.
+  </p>
+
+  <h3>6.2 Epidemics and Health Interventions</h3>
+  <p class="example">
+    SCM has also been used to evaluate public health interventions. For instance, researchers studied the impact of anti-smoking campaigns or vaccination drives by constructing synthetic versions of cities or regions that did not implement the intervention. This allows precise estimation of the causal effect of interventions on disease spread or health outcomes.
+  </p>
+
+  <h2>7. Extensions of SCM</h2>
+  <p>
+    Researchers have extended the original SCM framework to handle more complex scenarios:
+  </p>
+  <ul>
+    <li><strong>Generalized Synthetic Control:</strong> Allows for multiple treated units and accommodates unobserved factors using factor models.</li>
+    <li><strong>Bayesian SCM:</strong> Incorporates uncertainty in the synthetic control through Bayesian inference.</li>
+    <li><strong>Augmented SCM:</strong> Combines SCM with regression adjustment to improve estimates when pre-treatment fit is imperfect.</li>
+  </ul>
+
+  <h2>8. Implementation in Practice</h2>
+  <p>
+    Popular statistical software provides packages for SCM. In <strong>R</strong>, the <code>Synth</code> package allows construction of synthetic controls, optimization of weights, and graphical evaluation of treatment effects. In <strong>Python</strong>, <code>synthetic-control-methods</code> or <code>scikit-learn</code>-based custom implementations can be used.
+  </p>
+  <p>
+    The typical workflow includes:
+  </p>
+  <ul>
+    <li>Loading panel data for treated and control units.</li>
+    <li>Specifying predictor variables and outcome variables.</li>
+    <li>Optimizing weights using pre-treatment outcomes.</li>
+    <li>Evaluating the post-treatment effect and conducting placebo tests.</li>
+  </ul>
+
+  <h2>9. Validation and Placebo Tests</h2>
+  <p>
+    To ensure robustness, SCM practitioners often conduct placebo tests:
+  </p>
+  <ul>
+    <li><strong>In-time placebo:</strong> Assign a pseudo-intervention date before the actual treatment and check if synthetic control shows no effect.</li>
+    <li><strong>In-space placebo:</strong> Apply SCM to control units as if they were treated and compare effects.</li>
+  </ul>
+  <p>
+    These tests help confirm that observed effects are due to the intervention and not random fluctuations.
+  </p>
+
+  <h2>10. Summary</h2>
+  <p>
+    Synthetic Control Methods provide a rigorous and transparent approach to causal inference in observational settings, especially when randomized experiments are unavailable. By constructing a weighted combination of control units that closely resemble the treated unit before the intervention, SCM generates a credible counterfactual. This enables researchers to estimate treatment effects in a variety of contexts, including economic policy evaluation, public health interventions, and social programs.
+  </p>
+
+  <p>
+    While SCM has assumptions and limitations, its flexibility, transparency, and robustness make it one of the most valuable tools in modern causal inference. With growing access to high-quality panel data and computational tools, the application of SCM continues to expand across economics, epidemiology, political science, and beyond.
+  </p>
+
+  <h2>References and Further Reading</h2>
+  <ul>
+    <li>Abadie, A., Diamond, A., & Hainmueller, J. (2010). Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California’s Tobacco Control Program. <em>Journal of the American Statistical Association</em>, 105(490), 493–505.</li>
+    <li>Abadie, A., & Gardeazabal, J. (2003). The Economic Costs of Conflict: A Case Study of the Basque Country. <em>American Economic Review</em>, 93(1), 113–132.</li>
+    <li>Xu, Y. (2017). Generalized Synthetic Control Method: Causal Inference with Interactive Fixed Effects Models. <em>Political Analysis</em>, 25(1), 57–76.</li>
+    <li>Rambachan, A., & Roth, J. (2020). Augmented Synthetic Control Methods. <em>Journal of the American Statistical Association</em>, 115(532), 1621–1634.</li>
+    <li>Horiuchi, Y., Abadie, A., & Gardeazabal, J. (2022). Practical Guide to Synthetic Control Methods. <em>Cambridge University Press</em>.</li>
+  </ul>
+
+</body>
+</html>

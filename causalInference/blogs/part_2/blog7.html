@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 7: Front-door Criterion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h3 {
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        ul {
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .example {
+            background-color: #fff0d9;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #e67e22;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog 7: Front-door Criterion</h1>
+
+    <p>
+        In causal inference, estimating the effect of a treatment or exposure (<code>X</code>) on an outcome (<code>Y</code>) is often complicated by unobserved confounders. Traditional approaches like the backdoor adjustment rely on measuring all confounders to block non-causal paths. But what happens when some confounders are unobserved or impossible to measure? This is where the <strong>front-door criterion</strong> becomes a powerful tool. By leveraging mediators—variables that lie on the causal path from <code>X</code> to <code>Y</code>—the front-door criterion allows us to identify causal effects even in the presence of unobserved confounding.
+    </p>
+
+    <h3>Understanding Mediators</h3>
+    <p>
+        A <strong>mediator</strong> is a variable that transmits part of the causal effect of a treatment (<code>X</code>) on an outcome (<code>Y</code>). Conceptually, mediators help explain the mechanism through which a treatment influences an outcome. Mediators are critical in front-door adjustment because they provide an observable pathway that can be used to estimate causal effects when the direct pathway from X to Y is confounded.
+    </p>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/6syDKnE.png" alt="Front-door DAG: X → M → Y">
+        <p><em>DAG showing treatment X affecting outcome Y through mediator M</em></p>
+    </div>
+
+    <p>
+        In the diagram above, the total causal effect of <code>X</code> on <code>Y</code> can be decomposed into:
+        <ul>
+            <li><strong>Direct effect:</strong> The effect of X on Y that does not pass through M.</li>
+            <li><strong>Indirect effect:</strong> The effect of X on Y that flows through M.</li>
+        </ul>
+        The front-door criterion uses the mediator (<code>M</code>) to isolate the total causal effect by combining estimates of these pathways.
+    </p>
+
+    <h3>Conditions for Applying the Front-door Criterion</h3>
+    <p>
+        For the front-door adjustment to be valid, three essential conditions must hold:
+    </p>
+    <ol>
+        <li><strong>X affects M:</strong> There must be a causal link from treatment to mediator (<code>X → M</code>).</li>
+        <li><strong>M affects Y:</strong> The mediator must causally influence the outcome (<code>M → Y</code>).</li>
+        <li><strong>No unblocked backdoor paths from X to M or from M to Y:</strong> All confounding paths between <code>X</code> and <code>M</code>, and between <code>M</code> and <code>Y</code>, must either be blocked by X or absent. This ensures that the observed relationships reflect the causal mechanisms.</li>
+    </ol>
+
+    <p>
+        When these conditions are satisfied, the front-door criterion allows researchers to estimate the causal effect of X on Y, even when unmeasured confounders exist between X and Y. This is in contrast to the backdoor adjustment, which requires measuring all confounders between X and Y.
+    </p>
+
+    <h3>Step-by-Step Estimation Using Front-door Criterion</h3>
+    <p>
+        To apply the front-door criterion practically, the following steps are used:
+    </p>
+    <ol>
+        <li>Estimate the causal effect of <code>X</code> on <code>M</code> (the mediator). This can be done using regression or other appropriate methods.</li>
+        <li>Estimate the causal effect of <code>M</code> on <code>Y</code>, adjusting for <code>X</code> to account for any direct effect of the treatment.</li>
+        <li>Combine the two estimates to calculate the total causal effect of <code>X</code> on <code>Y</code>. The total effect is the product of the effect of X on M and the effect of M on Y.</li>
+    </ol>
+
+    <h3>Example: Ad → Clicks → Purchase</h3>
+    <div class="example">
+        <strong>Scenario:</strong> Estimating the effect of online advertisements on purchase behavior.  
+        <ul>
+            <li><code>X</code> = seeing an ad</li>
+            <li><code>M</code> = clicking the ad</li>
+            <li><code>Y</code> = completing a purchase</li>
+        </ul>
+        <p>
+            Suppose there is an unobserved confounder, like user motivation, which affects both seeing the ad and making a purchase. Backdoor adjustment fails because we cannot measure this confounder.  
+        </p>
+        <p>
+            Using front-door adjustment:
+            <ol>
+                <li>Estimate the effect of seeing an ad (<code>X</code>) on clicking the ad (<code>M</code>).</li>
+                <li>Estimate the effect of clicking the ad (<code>M</code>) on making a purchase (<code>Y</code>), adjusting for whether the ad was seen (<code>X</code>).</li>
+                <li>Combine these estimates to find the total effect of X on Y.</li>
+            </ol>
+        </p>
+        <div class="diagram">
+            <img src="https://i.imgur.com/6syDKnE.png" alt="Ad → Click → Purchase DAG">
+            <p><em>DAG for ad → click → purchase, showing front-door adjustment</em></p>
+        </div>
+    </div>
+
+    <h3>Difference Between Front-door and Backdoor Adjustment</h3>
+    <p>
+        It is essential to understand how front-door adjustment differs from backdoor adjustment:
+    </p>
+    <ul>
+        <li><strong>Backdoor Adjustment:</strong> Blocks confounding paths between X and Y by conditioning on observed confounders. Requires that all confounders are measured. Example: Adjusting for age and income when studying the effect of exercise on heart disease.</li>
+        <li><strong>Front-door Adjustment:</strong> Leverages mediators to identify causal effects when confounders between X and Y are unobserved. Example: Using ad clicks as a mediator to estimate the causal effect of ads on purchase, even when user motivation is unmeasured.</li>
+    </ul>
+
+    <p>
+        Front-door adjustment is particularly useful in fields like digital marketing, social sciences, and epidemiology, where some confounders may be unobserved or unmeasurable.
+    </p>
+
+    <h3>Additional Real-World Examples</h3>
+
+    <h4>Healthcare Example</h4>
+    <div class="example">
+        <strong>Scenario:</strong> Estimating the effect of a new medication (X) on patient recovery (Y).  
+        <ul>
+            <li><code>M</code> = adherence to the medication (how well patients follow the treatment)</li>
+            <li>Unobserved confounder: patient motivation or health literacy</li>
+        </ul>
+        <p>
+            Using the front-door criterion, we first estimate the effect of prescribing medication on adherence, then estimate how adherence affects recovery, adjusting for prescription status. This allows causal inference even when patient motivation is unmeasured.
+        </p>
+    </div>
+
+    <h4>Education Example</h4>
+    <div class="example">
+        <strong>Scenario:</strong> Studying the effect of attending a tutoring program (X) on exam scores (Y).  
+        <ul>
+            <li><code>M</code> = hours spent studying</li>
+            <li>Unobserved confounder: intrinsic student ability</li>
+        </ul>
+        <p>
+            Front-door adjustment uses study hours as a mediator. The effect of tutoring on study hours is estimated, and then the effect of study hours on exam scores is estimated while adjusting for tutoring. This gives a total causal effect estimate even with unobserved ability.
+        </p>
+    </div>
+
+    <h3>Graphical Intuition Using DAGs</h3>
+    <p>
+        DAGs provide an intuitive way to check if front-door adjustment is applicable. The key is to verify:
+    </p>
+    <ul>
+        <li>All causal arrows from X to Y pass through the mediator (or at least the mediator captures a significant causal pathway).</li>
+        <li>There are no unblocked backdoor paths from X to M.</li>
+        <li>There are no unblocked backdoor paths from M to Y, except those blocked by X.</li>
+    </ul>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/6syDKnE.png" alt="Front-door DAG example">
+        <p><em>DAG showing mediator M capturing the causal path from X to Y</em></p>
+    </div>
+
+    <h3>Advantages and Limitations</h3>
+    <ul>
+        <li><strong>Advantages:</strong> Allows causal identification when confounders are unobserved; clarifies mechanisms through mediators; provides visual clarity using DAGs.</li>
+        <li><strong>Limitations:</strong> Requires a mediator that satisfies all front-door conditions; cannot be applied if mediator is affected by unmeasured confounders influencing the outcome; assumes correct model specification.</li>
+    </ul>
+
+    <h3>Summary</h3>
+    <p>
+        The front-door criterion is a powerful tool for causal inference:
+    </p>
+    <ul>
+        <li>Uses mediators to identify causal effects in the presence of unobserved confounding.</li>
+        <li>Relies on three key conditions involving causal pathways and blocked backdoor paths.</li>
+        <li>Step-by-step estimation combines the effect of X on M and M on Y to calculate the total effect of X on Y.</li>
+        <li>Complementary to backdoor adjustment; essential when confounders cannot be measured.</li>
+        <li>Applicable in diverse domains, including marketing, healthcare, and education.</li>
+    </ul>
+
+    <p>
+        By understanding and applying the front-door criterion, researchers can uncover causal effects that would otherwise remain hidden due to unmeasured confounding. DAGs serve as a critical visual aid to ensure the mediator satisfies the required conditions, making causal inference both rigorous and intuitive.
+    </p>
+
+</body>
+</html>

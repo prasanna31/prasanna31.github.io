@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog 15: Regression Discontinuity Design (RD)</title>
+<style>
+    body { font-family: Arial, sans-serif; line-height: 1.8; margin: 20px; background-color: #f9f9f9; color: #333; }
+    h1, h2, h3 { color: #2c3e50; }
+    h3 { margin-top: 30px; }
+    p { margin-bottom: 16px; }
+    ul, ol { margin-bottom: 16px; }
+    li { margin-bottom: 8px; }
+    code { background-color: #eaeaea; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+    .example { background-color: #f0f7e6; padding: 10px; margin: 10px 0; border-left: 5px solid #2ecc71; }
+    .diagram { text-align: center; margin: 20px 0; }
+    img { max-width: 100%; }
+</style>
+</head>
+<body>
+
+<h1>Blog 15: Regression Discontinuity (RD) Design – Comprehensive Guide</h1>
+
+<p>
+Regression Discontinuity (RD) design is a quasi-experimental method in causal inference that exploits a cutoff or threshold in a continuous assignment variable to estimate treatment effects. Unlike randomized experiments, RD relies on local variation around the cutoff, which approximates random assignment. This blog will cover sharp and fuzzy RD, intuition, practical examples, estimation strategies, assumptions, diagnostics, and extensions.
+</p>
+
+<h3>1. Intuition Behind Regression Discontinuity</h3>
+
+<p>
+The core idea is simple: if treatment assignment depends on whether an observed variable crosses a known threshold (cutoff), units just above and just below the cutoff are likely similar in all respects except treatment status. This local similarity allows us to identify causal effects at the cutoff.
+</p>
+
+<p>
+Formally, suppose <code>X</code> is the running variable and <code>c</code> is the cutoff. The treatment assignment <code>T</code> is defined as:
+</p>
+
+<p style="text-align:center;">
+<code>T = 1 if X ≥ c, 0 if X &lt; c</code>
+</p>
+
+<p>
+The causal effect of the treatment is the discontinuity in the outcome <code>Y</code> at <code>X = c</code>:
+</p>
+
+<p style="text-align:center;">
+<code>τ = lim_{x → c^+} E[Y | X = x] - lim_{x → c^-} E[Y | X = x]</code>
+</p>
+
+<div class="diagram">
+<img src="https://i.imgur.com/PvUknHV.png" alt="Regression Discontinuity illustration">
+<p><em>The jump in outcome at cutoff identifies the local treatment effect</em></p>
+</div>
+
+<h3>2. Sharp vs Fuzzy RD</h3>
+
+<p>
+RD designs can be categorized as <strong>sharp</strong> or <strong>fuzzy</strong> depending on whether the treatment assignment is deterministic at the cutoff.
+</p>
+
+<ul>
+<li><strong>Sharp RD:</strong> Treatment is assigned deterministically based on the cutoff (everyone above the threshold receives treatment, everyone below does not). Example: scholarship eligibility based on test score ≥ 80.</li>
+<li><strong>Fuzzy RD:</strong> Treatment assignment is probabilistic at the cutoff (not all units comply). Example: students above a threshold are encouraged to take a course, but some may not enroll. Fuzzy RD uses the cutoff as an instrumental variable for treatment.</li>
+</ul>
+
+<h3>3. Estimation Strategies</h3>
+
+<h4>3.1 Non-parametric Estimation</h4>
+
+<p>
+Local linear regression on either side of the cutoff is commonly used:
+</p>
+
+<ul>
+<li>Fit separate regression lines for <code>X &lt; c</code> and <code>X ≥ c</code>.</li>
+<li>The difference in predicted outcomes at <code>X = c</code> estimates the treatment effect.</li>
+<li>Bandwidth selection is crucial: too wide may include dissimilar units, too narrow increases variance.</li>
+</ul>
+
+<h4>3.2 Parametric Estimation</h4>
+
+<p>
+Alternatively, a global polynomial regression can be fitted, including an indicator for treatment:
+</p>
+
+<p style="text-align:center;">
+<code>Y = α + τ*T + f(X) + ε</code></p>
+
+<ul>
+<li><code>T</code> = treatment indicator</li>
+<li><code>f(X)</code> = polynomial function of running variable</li>
+<li><code>τ</code> = estimated treatment effect</li>
+</ul>
+
+<h3>4. Assumptions for Valid RD</h3>
+
+<ul>
+<li><strong>Continuity:</strong> All other determinants of <code>Y</code> must be continuous at the cutoff.</li>
+<li><strong>No manipulation:</strong> Units cannot precisely manipulate <code>X</code> to cross the cutoff (no sorting around threshold).</li>
+<li><strong>Local randomization:</strong> Units near the cutoff are assumed to be similar in unobserved characteristics.</li>
+<li><strong>Bandwidth choice:</strong> Must balance bias and variance.</li>
+</ul>
+
+<h3>5. Practical Examples</h3>
+
+<h4>5.1 Education and Scholarships</h4>
+<div class="example">
+<ul>
+<li>Cutoff: test score ≥ 80 → scholarship awarded.</li>
+<li>Sharp RD: all students above 80 receive scholarship.</li>
+<li>Outcome: GPA after one year.</li>
+<li>RD estimates the local effect of scholarship near cutoff.</li>
+</ul>
+</div>
+
+<h4>5.2 Healthcare Policy</h4>
+<div class="example">
+<ul>
+<li>Cutoff: age ≥ 65 → eligible for a government health program.</li>
+<li>Outcome: healthcare utilization.</li>
+<li>Sharp RD identifies effect of program on healthcare usage around age 65.</li>
+</ul>
+</div>
+
+<h4>5.3 Fuzzy RD Example</h4>
+<div class="example">
+<ul>
+<li>Cutoff: test score ≥ 80 → encouraged to attend advanced course.</li>
+<li>Not all students above 80 enroll → fuzzy RD.</li>
+<li>Use the cutoff as an instrumental variable to estimate local causal effect of course enrollment.</li>
+</ul>
+</div>
+
+<h3>6. Diagnostics and Checks</h3>
+
+<ul>
+<li><strong>Density test:</strong> Check for manipulation around cutoff using McCrary test.</li>
+<li><strong>Covariate balance:</strong> Verify continuity of pre-treatment covariates at cutoff.</li>
+<li><strong>Sensitivity to bandwidth:</strong> Estimate treatment effects with multiple bandwidths to ensure robustness.</li>
+<li><strong>Placebo cutoffs:</strong> Check for discontinuities at points away from the actual threshold.</li>
+</ul>
+
+<h3>7. Visualization</h3>
+
+<p>
+Plot outcome versus running variable with fitted regression lines on either side of cutoff. The jump visually demonstrates the local treatment effect.
+</p>
+
+<div class="diagram">
+<img src="https://i.imgur.com/fT0j1HZ.png" alt="Regression Discontinuity plot">
+<p><em>Sharp jump in outcome at cutoff indicates treatment effect</em></p>
+</div>
+
+<h3>8. Strengths and Limitations</h3>
+
+<ul>
+<li><strong>Strengths:</strong> Strong internal validity at the cutoff, easy to interpret, mimics randomization locally.</li>
+<li><strong>Limitations:</strong> Estimates are local (not generalizable far from cutoff), sensitive to bandwidth and model specification, requires sufficient observations near cutoff.</li>
+<li>Fuzzy RD requires instrumental variable interpretation, reducing precision.</li>
+</ul>
+
+<h3>9. Summary</h3>
+
+<ul>
+<li>Regression Discontinuity exploits thresholds in assignment variables to identify causal effects.</li>
+<li>Sharp RD: deterministic treatment at cutoff; Fuzzy RD: probabilistic treatment.</li>
+<li>Estimation can be non-parametric (local linear) or parametric (polynomial regression).</li>
+<li>Assumptions include continuity, no manipulation, and local randomization.</li>
+<li>Widely used in education, healthcare, policy evaluation, and social programs.</li>
+<li>Robust diagnostics include covariate balance, density checks, and sensitivity to bandwidth.</li>
+</ul>
+
+<p>
+In conclusion, RD design provides a credible quasi-experimental approach to causal inference when treatment assignment is determined by a known threshold. Proper implementation, diagnostics, and awareness of its local nature are critical for robust and interpretable estimates.
+</p>
+
+</body>
+</html>

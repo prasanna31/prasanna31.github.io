@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 12: Propensity Score Methods</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h3 {
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        ul {
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .example {
+            background-color: #f0f7e6;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #2ecc71;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog 12: Propensity Score Methods</h1>
+
+    <p>
+        When working with observational data, treatment assignment is often non-random, and confounding can bias causal estimates. Propensity score (PS) methods, introduced by Rosenbaum and Rubin (1983), are a powerful tool to reduce bias by balancing observed covariates between treated and control groups. In this blog, we explore the theory, methods (matching, weighting, stratification), practical examples, and limitations of propensity score methods.
+    </p>
+
+    <h3>What is a Propensity Score?</h3>
+    <p>
+        A propensity score is the probability that a unit receives the treatment, given observed covariates:
+    </p>
+    <p style="text-align:center;">
+        <code>e(X) = P(Treatment = 1 | X)</code>
+    </p>
+    <p>
+        Where <code>X</code> represents a set of observed covariates. By balancing units on their propensity scores, we aim to make treated and control groups comparable, similar to a randomized experiment.
+    </p>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/6Iu5xdv.png" alt="Propensity score balancing illustration">
+        <p><em>Propensity score balances covariates X between treated and control groups</em></p>
+    </div>
+
+    <h3>Propensity Score Methods</h3>
+    <p>
+        There are three main ways to use propensity scores to adjust for confounding: matching, weighting, and stratification. Each has its own advantages and considerations.
+    </p>
+
+    <h4>1. Propensity Score Matching (PSM)</h4>
+    <p>
+        Matching involves pairing treated units with control units that have similar propensity scores. This creates a pseudo-randomized dataset where covariates are balanced.
+    </p>
+    <ul>
+        <li><strong>Nearest neighbor matching:</strong> Pair each treated unit with the control unit with the closest propensity score.</li>
+        <li><strong>Caliper matching:</strong> Only match if the propensity score difference is within a threshold.</li>
+        <li><strong>Kernel matching:</strong> Weighted average of multiple controls is used to match each treated unit.</li>
+    </ul>
+
+    <div class="example">
+        <strong>Example:</strong> Estimating effect of a job training program:
+        <ul>
+            <li>Compute propensity scores using covariates: age, education, prior income.</li>
+            <li>Match treated and control individuals using nearest neighbor matching.</li>
+            <li>Compare post-training incomes in matched pairs to estimate ATT.</li>
+        </ul>
+    </div>
+
+    <h4>2. Propensity Score Weighting</h4>
+    <p>
+        Weighting creates a synthetic sample where treated and control groups are balanced. Common approaches:
+    </p>
+    <ul>
+        <li><strong>Inverse Probability of Treatment Weighting (IPTW):</strong>  
+            Weight each unit by the inverse of its probability of receiving the treatment they actually received:
+            <ul>
+                <li>Treated: weight = 1 / e(X)</li>
+                <li>Control: weight = 1 / (1 - e(X))</li>
+            </ul>
+        </li>
+        <li><strong>Stabilized weights:</strong> Reduce variance by scaling weights with the marginal probability of treatment.</li>
+    </ul>
+
+    <div class="example">
+        <strong>Example:</strong> Evaluating a new drug’s effect on recovery:
+        <ul>
+            <li>Compute propensity scores based on age, comorbidities, prior medications.</li>
+            <li>Assign IPTW to each patient.</li>
+            <li>Weighted regression estimates the treatment effect while balancing covariates.</li>
+        </ul>
+    </div>
+
+    <h4>3. Propensity Score Stratification</h4>
+    <p>
+        Stratification involves dividing the population into strata (e.g., quintiles) based on propensity scores. Within each stratum, treated and control units are compared, and overall effect is obtained by averaging across strata.
+    </p>
+
+    <div class="example">
+        <strong>Example:</strong> Estimating effect of an educational intervention:
+        <ul>
+            <li>Divide students into 5 strata based on propensity scores.</li>
+            <li>Compare treated vs. control students within each stratum.</li>
+            <li>Average treatment effect is obtained by weighting stratum-level differences by stratum size.</li>
+        </ul>
+    </div>
+
+    <h3>Practical Examples of Propensity Score Methods</h3>
+
+    <h4>Healthcare Example</h4>
+    <div class="example">
+        <strong>Scenario:</strong> Effect of statins on cardiovascular events:
+        <ul>
+            <li>Covariates: age, gender, comorbidities, cholesterol levels.</li>
+            <li>Compute propensity scores using logistic regression.</li>
+            <li>Use matching or IPTW to adjust for confounding.</li>
+            <li>Compare outcomes to estimate causal effect.</li>
+        </ul>
+    </div>
+
+    <h4>Tech/Marketing Example</h4>
+    <div class="example">
+        <strong>Scenario:</strong> Effect of sending promotional emails on purchase behavior:
+        <ul>
+            <li>Covariates: past purchase behavior, demographics, engagement metrics.</li>
+            <li>Compute propensity scores.</li>
+            <li>Apply weighting to create a balanced sample.</li>
+            <li>Estimate the effect of emails on purchase probability.</li>
+        </ul>
+    </div>
+
+    <h3>When Propensity Score Methods Work</h3>
+    <ul>
+        <li>All important confounders are observed and included in the propensity model.</li>
+        <li>There is sufficient overlap in propensity scores between treated and control units (common support).</li>
+        <li>The propensity score model is correctly specified (e.g., functional form, interactions).</li>
+        <li>Sample size is adequate to perform matching, weighting, or stratification effectively.</li>
+    </ul>
+
+    <h3>When Propensity Score Methods Fail</h3>
+    <ul>
+        <li>Unmeasured confounding: PS methods cannot account for variables not included in the model.</li>
+        <li>Poor overlap: Treated units with very high or low propensity scores may lack comparable controls.</li>
+        <li>Model misspecification: Incorrect functional form or omitted interactions can bias estimates.</li>
+        <li>Extreme weights in IPTW can increase variance and lead to unstable estimates.</li>
+    </ul>
+
+    <h3>Key Takeaways</h3>
+    <ul>
+        <li>Propensity score methods aim to emulate randomized experiments by balancing observed covariates.</li>
+        <li>Matching, weighting, and stratification are the three main approaches, each with trade-offs.</li>
+        <li>Effectiveness relies on proper covariate selection, overlap, and correct model specification.</li>
+        <li>They are widely used in healthcare, economics, education, and marketing to reduce confounding bias.</li>
+        <li>PS methods cannot fix unobserved confounding; domain knowledge is essential.</li>
+    </ul>
+
+    <p>
+        In conclusion, propensity score methods provide a rigorous framework to control for confounders in observational studies. They are powerful tools for causal inference when randomized experiments are not possible, but their success depends on careful implementation, diagnostics, and understanding of limitations.
+    </p>
+
+</body>
+</html>

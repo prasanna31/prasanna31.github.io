@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 13: Instrumental Variables</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h3 {
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        ul {
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .example {
+            background-color: #f0f7e6;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #2ecc71;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog 13: Instrumental Variables (IV)</h1>
+
+    <p>
+        Instrumental variables (IV) are a fundamental tool in causal inference, particularly useful when unobserved confounding prevents direct estimation of causal effects. IV methods allow researchers to recover causal effects even when standard regression or propensity score methods fail due to unmeasured confounders. In this blog, we explore the concept of instrumental variables, assumptions required for valid instruments, examples in real-world settings, and practical interpretation.
+    </p>
+
+    <h3>Motivation for Instrumental Variables</h3>
+    <p>
+        In observational studies, unmeasured confounding often biases estimates. Suppose we want to estimate the causal effect of a treatment <code>X</code> on an outcome <code>Y</code>, but there exists an unobserved confounder <code>U</code> affecting both. Ordinary regression will produce biased estimates:
+    </p>
+    <div class="diagram">
+        <img src="https://i.imgur.com/1wq7g0N.png" alt="IV confounding DAG">
+        <p><em>DAG illustrating confounding by unobserved variable U</em></p>
+    </div>
+
+    <p>
+        In this scenario, an <strong>instrumental variable</strong> <code>Z</code> can help identify the causal effect of <code>X</code> on <code>Y</code>. An instrument is a variable that:
+    </p>
+    <ul>
+        <li>Is correlated with the treatment (<code>Z → X</code>) — relevance condition.</li>
+        <li>Does not directly affect the outcome except through the treatment (<code>Z ⊥⊥ Y | X, U</code>) — exclusion restriction.</li>
+        <li>Is independent of unobserved confounders (<code>Z ⊥⊥ U</code>) — independence condition.</li>
+    </ul>
+
+    <h3>Two-Stage Least Squares (2SLS)</h3>
+    <p>
+        The standard method for estimating causal effects with IV is <strong>Two-Stage Least Squares (2SLS)</strong>. It proceeds as follows:
+    </p>
+    <ol>
+        <li><strong>Stage 1:</strong> Regress treatment <code>X</code> on instrument(s) <code>Z</code> and any covariates <code>W</code> to obtain predicted values <code>X̂</code>:
+            <p style="text-align:center;"><code>X = α0 + α1*Z + α2*W + ε1</code></p>
+        </li>
+        <li><strong>Stage 2:</strong> Regress outcome <code>Y</code> on predicted treatment <code>X̂</code> and covariates <code>W</code>:
+            <p style="text-align:center;"><code>Y = β0 + β1*X̂ + β2*W + ε2</code></p>
+        </li>
+    </ol>
+
+    <p>
+        The coefficient <code>β1</code> provides a consistent estimate of the causal effect of <code>X</code> on <code>Y</code> even in the presence of unmeasured confounders, provided the instrument is valid.
+    </p>
+
+    <div class="example">
+        <strong>Example:</strong> Estimating effect of education (<code>X</code>) on earnings (<code>Y</code>):
+        <ul>
+            <li>Problem: Ability (<code>U</code>) is unobserved but affects both education and earnings.</li>
+            <li>Instrument: Distance to the nearest college (<code>Z</code>) affects education but is unlikely to directly affect earnings.</li>
+            <li>2SLS: Stage 1 predicts education using distance, stage 2 regresses earnings on predicted education.</li>
+        </ul>
+    </div>
+
+    <h3>Assumptions for a Valid Instrument</h3>
+    <p>
+        The validity of IV estimates depends critically on the following assumptions:
+    </p>
+    <ul>
+        <li><strong>Relevance:</strong> Instrument must affect the treatment. Weak instruments can lead to biased and imprecise estimates.</li>
+        <li><strong>Exclusion restriction:</strong> Instrument affects outcome only through treatment; no direct path from <code>Z</code> to <code>Y</code>.</li>
+        <li><strong>Independence:</strong> Instrument is independent of unobserved confounders.</li>
+        <li><strong>Monotonicity (optional):</strong> All individuals respond to the instrument in the same direction, important for interpreting local average treatment effect (LATE).</li>
+    </ul>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/Rzlmwgl.png" alt="IV DAG">
+        <p><em>DAG showing instrument Z affecting X, which in turn affects Y, independent of confounder U</em></p>
+    </div>
+
+    <h3>Local Average Treatment Effect (LATE)</h3>
+    <p>
+        When treatment effects vary across individuals, IV estimates often represent the <strong>Local Average Treatment Effect (LATE)</strong> rather than the average treatment effect (ATE). LATE is the effect of treatment for individuals whose treatment status is influenced by the instrument (compliers).
+    </p>
+    <div class="example">
+        <strong>Example:</strong> Using college distance as an instrument for education:
+        <ul>
+            <li>Compliers: Students who attend college because it is nearby.</li>
+            <li>LATE: Effect of education on earnings for compliers.</li>
+            <li>Does not generalize to never-takers or always-takers (students who would attend or not attend regardless of distance).</li>
+        </ul>
+    </div>
+
+    <h3>Applications of Instrumental Variables</h3>
+
+    <h4>1. Encouragement Designs</h4>
+    <p>
+        Encouragement designs randomize an encouragement to take a treatment rather than the treatment itself. IV methods use encouragement as an instrument for actual treatment uptake.
+    </p>
+    <div class="example">
+        <strong>Scenario:</strong> Promoting vaccination by sending reminder letters:
+        <ul>
+            <li>Instrument: Letter sent or not (encouragement)</li>
+            <li>Treatment: Actually getting vaccinated</li>
+            <li>Outcome: Disease incidence</li>
+            <li>IV estimates the causal effect of vaccination for those encouraged by letters (compliers)</li>
+        </ul>
+    </div>
+
+    <h4>2. Policy Shifts / Natural Experiments</h4>
+    <p>
+        Policy changes or natural experiments often create exogenous variation that can serve as instruments.
+    </p>
+    <div class="example">
+        <strong>Scenario:</strong> Estimating effect of minimum wage increase on employment:
+        <ul>
+            <li>Policy change in certain regions acts as instrument (<code>Z</code>) for exposure to higher minimum wage (<code>X</code>).</li>
+            <li>Outcome: employment levels (<code>Y</code>).</li>
+            <li>IV estimation accounts for unobserved economic conditions (<code>U</code>) that affect employment.</li>
+        </ul>
+    </div>
+
+    <h3>Practical Considerations</h3>
+    <ul>
+        <li>Check instrument relevance: F-statistic > 10 in first-stage regression is commonly used to avoid weak instrument problems.</li>
+        <li>Assess exclusion restriction plausibility using domain knowledge.</li>
+        <li>Interpret IV estimates as LATE when treatment effects are heterogeneous.</li>
+        <li>Multiple instruments can increase efficiency but require overidentification tests for validity.</li>
+        <li>Instrumental variables cannot fix bias due to direct pathways from instrument to outcome or invalid instruments.</li>
+    </ul>
+
+    <h3>Strengths and Limitations</h3>
+    <ul>
+        <li><strong>Strengths:</strong> IV methods allow causal estimation in presence of unmeasured confounding; natural experiments provide credible instruments; LATE provides interpretable estimates for compliers.</li>
+        <li><strong>Limitations:</strong> Requires valid instruments; weak instruments produce biased estimates; estimates may not generalize beyond compliers; interpretation can be subtle.</li>
+    </ul>
+
+    <h3>Summary</h3>
+    <ul>
+        <li>Instrumental variables are a powerful tool to estimate causal effects when unobserved confounding exists.</li>
+        <li>Key requirements: relevance, exclusion restriction, independence from confounders.</li>
+        <li>2SLS is the standard estimation method.</li>
+        <li>IV estimates often represent Local Average Treatment Effects (LATE) for compliers.</li>
+        <li>Applications include encouragement designs, policy changes, and natural experiments.</li>
+        <li>Careful selection and validation of instruments are crucial for credible causal inference.</li>
+    </ul>
+
+    <p>
+        In conclusion, instrumental variables provide a principled approach to recovering causal effects under challenging observational settings. With careful design, domain knowledge, and robust statistical methods, IVs expand the toolkit for researchers aiming to make credible causal statements even in the presence of unobserved confounding.
+    </p>
+
+</body>
+</html>

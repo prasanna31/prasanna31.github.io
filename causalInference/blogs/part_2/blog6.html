@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 6: Backdoor Criterion and Adjustment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h3 {
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        ul {
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .example {
+            background-color: #dfefff;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #2980b9;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog 6: Backdoor Criterion and Adjustment</h1>
+
+    <p>
+        In causal inference, Directed Acyclic Graphs (DAGs) are not just diagrams—they provide a systematic method for identifying which variables need adjustment to estimate causal effects correctly. The <strong>backdoor criterion</strong> is a central concept that guides this process. This blog explains how DAGs inform adjustment, how to identify confounders, and provides clear examples using simple DAGs.
+    </p>
+
+    <h3>How DAGs Guide Adjustment</h3>
+    <p>
+        DAGs encode assumptions about causal relationships, which helps us answer: “Which variables should I adjust for to estimate the causal effect of X on Y?” The principle is simple: we must block all non-causal paths (backdoor paths) from the treatment (<code>X</code>) to the outcome (<code>Y</code>) without blocking the direct causal effect.
+    </p>
+
+    <p>
+        A <strong>backdoor path</strong> is any path from <code>X</code> to <code>Y</code> that starts with an arrow pointing into <code>X</code>. These paths often transmit spurious associations due to confounders. Adjusting for confounders blocks these paths and isolates the causal effect.
+    </p>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/3LvC0Lb.png" alt="Confounder DAG example: C → X → Y, C → Y">
+        <p><em>DAG Example: C → X → Y, C → Y</em></p>
+    </div>
+    <p>
+        In this diagram, <code>C</code> is a confounder. There is a backdoor path <code>X ← C → Y</code>. To estimate the effect of <code>X</code> on <code>Y</code>, we must adjust for <code>C</code>—this blocks the spurious association through the backdoor path.
+    </p>
+
+    <h3>Identifying Confounders Using the Backdoor Criterion</h3>
+    <p>
+        The backdoor criterion provides a formal rule for identifying adjustment sets:
+    </p>
+    <ul>
+        <li>A set of variables <code>Z</code> satisfies the backdoor criterion relative to treatment <code>X</code> and outcome <code>Y</code> if:</li>
+        <ul>
+            <li>No variable in <code>Z</code> is a descendant of <code>X</code>.</li>
+            <li><code>Z</code> blocks every path between <code>X</code> and <code>Y</code> that contains an arrow into <code>X</code> (all backdoor paths).</li>
+        </ul>
+    </ul>
+
+    <p>
+        In practice, this means:
+    </p>
+    <ol>
+        <li>Draw the DAG representing the assumed causal relationships.</li>
+        <li>Identify all backdoor paths from <code>X</code> to <code>Y</code>.</li>
+        <li>Determine which variables, if adjusted for, block these paths without removing causal paths from <code>X</code> to <code>Y</code>.</li>
+    </ol>
+
+    <div class="example">
+        <strong>Example:</strong> Smoking (<code>X</code>) → Lung Cancer (<code>Y</code>), Age (<code>C</code>) affects both.
+        <ul>
+            <li>DAG: C → X → Y, C → Y</li>
+            <li>Backdoor path: X ← C → Y</li>
+            <li>Adjustment: Control for Age (<code>C</code>) to block the backdoor path.</li>
+        </ul>
+    </div>
+
+    <h3>Examples Using Simple DAGs</h3>
+
+    <h4>Example 1: Single Confounder</h4>
+    <div class="example">
+        <strong>Scenario:</strong> Exercise (<code>X</code>) → Heart Disease (<code>Y</code>), Age (<code>C</code>) influences both.
+        <div class="diagram">
+            <img src="https://i.imgur.com/3LvC0Lb.png" alt="Exercise and Heart Disease DAG">
+            <p><em>DAG: C → X → Y, C → Y</em></p>
+        </div>
+        <p>Backdoor path: X ← C → Y. Adjustment set: {C}. This isolates the causal effect of exercise on heart disease.</p>
+    </div>
+
+    <h4>Example 2: Multiple Confounders</h4>
+    <div class="example">
+        <strong>Scenario:</strong> Study effect of education (<code>X</code>) on income (<code>Y</code>), with parental education (<code>C1</code>) and innate ability (<code>C2</code>) as confounders.
+        <div class="diagram">
+            <img src="https://i.imgur.com/8gNWTQk.png" alt="Education DAG with multiple confounders">
+            <p><em>DAG: C1 → X → Y, C2 → X, C1 → Y, C2 → Y</em></p>
+        </div>
+        <p>
+            Backdoor paths:
+            <ul>
+                <li>X ← C1 → Y</li>
+                <li>X ← C2 → Y</li>
+            </ul>
+            Adjustment set: {C1, C2}. Adjusting for both blocks all backdoor paths and allows correct estimation of the causal effect of education on income.
+        </p>
+    </div>
+
+    <h4>Example 3: Avoiding Colliders</h4>
+    <div class="example">
+        <strong>Scenario:</strong> Suppose X → M ← Y, where M is a mediator/collider.
+        <div class="diagram">
+            <img src="https://i.imgur.com/5xQYd17.png" alt="Collider DAG">
+            <p><em>DAG: X → M ← Y</em></p>
+        </div>
+        <p>Important: Do NOT adjust for colliders like M when identifying backdoor paths, as this can introduce spurious associations.</p>
+    </div>
+
+    <h3>Summary</h3>
+    <ul>
+        <li>The backdoor criterion provides a formal method to identify variables to adjust for when estimating causal effects.</li>
+        <li>DAGs are essential for visualizing backdoor paths and ensuring correct adjustment.</li>
+        <li>Only adjust for confounders; avoid descendants of the treatment and colliders.</li>
+        <li>Adjustment blocks non-causal paths, isolating the causal effect of interest.</li>
+        <li>Practical application involves drawing the DAG, identifying backdoor paths, and choosing the appropriate adjustment set.</li>
+    </ul>
+
+    <p>
+        By mastering the backdoor criterion, researchers and data scientists can systematically control confounding and make more accurate causal inferences, whether in healthcare, social sciences, or technology applications.
+    </p>
+
+</body>
+</html>

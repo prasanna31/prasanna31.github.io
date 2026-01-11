@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 8: Collider Bias and M-Bias</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h3 {
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        ul {
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .example {
+            background-color: #fbeaea;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #e74c3c;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog 8: Collider Bias and M-Bias</h1>
+
+    <p>
+        In causal inference, identifying confounders is critical for unbiased estimation of causal effects. However, conditioning on the wrong variables—particularly colliders—can introduce a new type of bias known as <strong>collider bias</strong>. Collider bias is subtle but can completely distort causal conclusions, especially in observational studies. This blog explores what colliders are, why conditioning on them introduces bias, graphical intuition using DAGs, the concept of M-bias, and practical pitfalls in research and data analysis.
+    </p>
+
+    <h3>Understanding Colliders</h3>
+    <p>
+        A <strong>collider</strong> is a variable on a path between two other variables where two arrows meet pointing into it. Unlike confounders, which create spurious associations that need to be blocked, colliders act differently: conditioning on them can <strong>create a spurious association between otherwise independent variables</strong>.
+    </p>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/5xQYd17.png" alt="Collider DAG example: X → C ← Y">
+        <p><em>DAG: X → C ← Y (C is a collider)</em></p>
+    </div>
+
+    <p>
+        In the DAG above, <code>X</code> and <code>Y</code> are independent. However, if we condition on <code>C</code>, a spurious association is induced between X and Y. This is counterintuitive because conditioning, which usually reduces bias by blocking paths, can in this case <strong>introduce bias</strong> rather than remove it.
+    </p>
+
+    <div class="example">
+        <strong>Example:</strong> Suppose <code>X</code> = attending a study group, <code>Y</code> = high exam performance, and <code>C</code> = being selected for a special honors class. Both attending the study group and natural ability influence selection into the honors class. If we only analyze students in the honors class (conditioning on C), we might falsely conclude that attending the study group negatively affects exam performance, even if it has a positive effect.
+    </div>
+
+    <h3>Mechanism of Collider Bias</h3>
+    <p>
+        Collider bias arises because conditioning on a collider opens a path that would otherwise be closed. This path is called a <strong>backdoor path through the collider</strong>. The key steps are:
+    </p>
+    <ol>
+        <li>Two independent causes (X and Y) both influence a variable C.</li>
+        <li>Without conditioning, the path X → C ← Y is blocked naturally.</li>
+        <li>Conditioning on C “opens” the path, creating a spurious correlation between X and Y.</li>
+    </ol>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/tF6gh2b.png" alt="Backdoor through collider">
+        <p><em>Conditioning on C opens a spurious path between X and Y</em></p>
+    </div>
+
+    <h3>M-Bias: A Special Form of Collider Bias</h3>
+    <p>
+        M-bias is an advanced form of collider bias that arises when conditioning on a variable that is part of an “M-shaped” DAG structure. Unlike simple collider bias, M-bias can occur even when confounders exist on both sides of the M.
+    </p>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/1pN7Lrt.png" alt="M-Bias DAG example">
+        <p><em>M-shaped DAG: conditioning on M induces bias between X and Y</em></p>
+    </div>
+
+    <p>
+        In the DAG above:
+        <ul>
+            <li>X and Y are initially unassociated.</li>
+            <li>M is a collider between two independent pathways leading to X and Y.</li>
+            <li>Conditioning on M induces a spurious association between X and Y.</li>
+        </ul>
+    </p>
+
+    <div class="example">
+        <strong>Example:</strong> Suppose X = parental income, Y = child’s educational attainment, L = neighborhood, R = social network, and M = elite school attendance. L and R both influence M. Conditioning on M (an elite school) creates a spurious correlation between parental income and social networks even if they were independent in the general population.
+    </div>
+
+    <h3>Graphical Examples and Intuition</h3>
+    <p>
+        DAGs are crucial for visualizing and understanding collider bias. Some common patterns include:
+    </p>
+    <ul>
+        <li><strong>Simple collider:</strong> X → C ← Y. Conditioning on C creates a spurious link between X and Y.</li>
+        <li><strong>M-Bias structure:</strong> X ← L → M ← R → Y. Conditioning on M opens a backdoor path between X and Y.</li>
+        <li><strong>Chain with collider:</strong> X → A → C ← B → Y. Conditioning on C induces bias between X and Y even if X and Y were independent initially.</li>
+    </ul>
+
+    <h3>Practical Pitfalls of Collider Bias</h3>
+    <p>
+        Collider bias is easy to overlook because standard statistical techniques often assume that conditioning always reduces bias. In reality, conditioning on colliders can lead to counterintuitive results:
+    </p>
+    <ul>
+        <li><strong>Selection on subpopulations:</strong> Analyzing only a subset of the population (e.g., only hospitalized patients, only survey respondents) can induce collider bias.</li>
+        <li><strong>Controlling for post-treatment variables:</strong> Variables affected by the treatment should not be adjusted for, as they often act as colliders or mediators.</li>
+        <li><strong>Overadjustment:</strong> Including too many variables in regression models without DAG guidance can inadvertently condition on colliders.</li>
+        <li><strong>Misinterpretation of associations:</strong> Spurious correlations induced by collider conditioning can be mistaken for causal effects.</li>
+    </ul>
+
+    <div class="example">
+        <strong>Example:</strong> Suppose we study the effect of exercise (X) on weight loss (Y). If we condition on gym attendance (C), which is influenced by both exercise and social motivations, we may see a distorted relationship between exercise and weight loss due to collider bias.
+    </div>
+
+    <h3>Strategies to Avoid Collider Bias</h3>
+    <p>
+        The best strategy is to use DAGs to carefully plan which variables to adjust for:
+    </p>
+    <ul>
+        <li>Identify potential colliders before analysis using domain knowledge.</li>
+        <li>Avoid conditioning on variables that are affected by both the treatment and the outcome.</li>
+        <li>Use backdoor and front-door criteria to select appropriate adjustment sets.</li>
+        <li>Be cautious when selecting subpopulations or post-treatment variables.</li>
+    </ul>
+
+    <h3>Real-World Examples of Collider Bias</h3>
+
+    <h4>Healthcare Example</h4>
+    <div class="example">
+        <strong>Scenario:</strong> Studying the effect of a new drug (X) on recovery (Y), but only analyzing hospitalized patients (C).  
+        <p>
+            Hospitalization is influenced by both the drug usage and disease severity. Conditioning on hospitalization induces a spurious association between drug usage and recovery, potentially reversing the apparent effect.
+        </p>
+    </div>
+
+    <h4>Tech Example</h4>
+    <div class="example">
+        <strong>Scenario:</strong> Studying effect of notifications (X) on app engagement (Y), analyzing only active users (C).  
+        <p>
+            Active users are influenced by both notifications and personal interest. Conditioning on active users creates a spurious correlation between notifications and engagement, potentially overestimating effects.
+        </p>
+    </div>
+
+    <h3>Summary</h3>
+    <ul>
+        <li>Collider bias occurs when conditioning on a variable influenced by two or more independent variables, creating spurious associations.</li>
+        <li>M-bias is a special form where the DAG forms an “M” shape, and conditioning on the middle collider induces bias.</li>
+        <li>DAGs provide visual intuition to detect colliders and avoid conditioning on them.</li>
+        <li>Practical pitfalls include selection bias, overadjustment, and misinterpretation of spurious associations.</li>
+        <li>Using proper causal inference frameworks, such as backdoor/front-door criteria and DAG-guided adjustment, helps avoid collider bias.</li>
+    </ul>
+
+    <p>
+        Understanding collider bias and M-bias is crucial for any researcher or data scientist performing causal analysis. Without awareness of these biases, well-intentioned statistical adjustments can inadvertently distort results. DAGs are invaluable in detecting colliders, ensuring correct adjustment, and providing a rigorous approach to causal inference.
+    </p>
+
+</body>
+</html>

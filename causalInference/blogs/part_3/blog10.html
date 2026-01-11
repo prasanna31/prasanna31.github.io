@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 10: Randomized Experiments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h3 {
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        ul {
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .example {
+            background-color: #e6f7ff;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #3498db;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog 10: Randomized Experiments</h1>
+
+    <p>
+        Randomized experiments are considered the <strong>gold standard for causal inference</strong>. By randomly assigning units to treatment or control, researchers ensure that confounding factors are, on average, balanced across groups. This allows estimation of causal effects without relying heavily on assumptions about unmeasured confounders. In this blog, we explore the design, implementation, intuition behind randomization, and practical examples of randomized experiments.
+    </p>
+
+    <h3>Why Randomization is Critical</h3>
+    <p>
+        The main challenge in causal inference is that treatment assignment is often correlated with factors that also affect the outcome. These confounding factors can bias the estimation of causal effects. Randomization solves this by ensuring that treatment assignment is independent of both observed and unobserved confounders:
+    </p>
+    <ul>
+        <li>Random assignment breaks the link between treatment and potential confounders.</li>
+        <li>Groups are comparable at baseline.</li>
+        <li>Observed differences in outcomes can be attributed to the treatment itself.</li>
+    </ul>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/fVUv9Lt.png" alt="Randomized experiment diagram">
+        <p><em>DAG illustration: random assignment ensures X ⊥ {confounders}</em></p>
+    </div>
+
+    <h3>Design of Randomized Experiments</h3>
+    <p>
+        A well-designed randomized experiment involves several critical components:
+    </p>
+    <ul>
+        <li><strong>Population selection:</strong> Define the target population and eligibility criteria.</li>
+        <li><strong>Random assignment:</strong> Assign units to treatment or control groups using a random process, such as random number generators or coin flips.</li>
+        <li><strong>Treatment implementation:</strong> Ensure the treatment is administered consistently.</li>
+        <li><strong>Outcome measurement:</strong> Measure outcomes accurately and objectively.</li>
+        <li><strong>Blinding:</strong> Reduce bias by blinding participants and researchers to group assignment when possible.</li>
+        <li><strong>Analysis:</strong> Compare average outcomes between treatment and control groups to estimate causal effects.</li>
+    </ul>
+
+    <h3>Types of Randomized Experiments</h3>
+    <p>
+        Randomized experiments can take multiple forms:
+    </p>
+    <ul>
+        <li><strong>Simple Randomized Trials:</strong> Each unit has an equal chance of being assigned to treatment or control.</li>
+        <li><strong>Stratified Randomization:</strong> Units are stratified by important covariates, and randomization occurs within strata to ensure balance.</li>
+        <li><strong>Cluster Randomized Trials:</strong> Groups (e.g., schools, clinics) are randomized instead of individuals.</li>
+        <li><strong>Factorial Designs:</strong> Multiple treatments are tested simultaneously, with units randomly assigned to combinations.</li>
+    </ul>
+
+    <div class="example">
+        <strong>Example:</strong> Testing a new educational program:
+        <ul>
+            <li>Population: 500 students</li>
+            <li>Random assignment: 250 receive the new program (treatment), 250 follow the standard curriculum (control)</li>
+            <li>Outcome: test scores after one semester</li>
+            <li>Analysis: mean difference in test scores estimates the causal effect</li>
+        </ul>
+    </div>
+
+    <h3>Intuition Behind Randomization</h3>
+    <p>
+        Randomization ensures that both observed and unobserved covariates are, on average, equally distributed across groups. This creates a situation similar to a perfectly balanced experiment where treatment is the only systematic difference between groups. As a result:
+    </p>
+    <ul>
+        <li>Confounding bias is eliminated.</li>
+        <li>Standard statistical tests (t-tests, regression) provide unbiased estimates of causal effects.</li>
+        <li>The fundamental problem of causal inference is mitigated at the population level because randomization guarantees that differences in outcomes can be attributed to the treatment.</li>
+    </ul>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/ZJ1r3Ff.png" alt="Randomization intuition diagram">
+        <p><em>Randomization balances confounders between groups</em></p>
+    </div>
+
+    <h3>Implementation Considerations</h3>
+    <p>
+        Successfully implementing randomized experiments requires careful attention to:
+    </p>
+    <ul>
+        <li><strong>Randomization integrity:</strong> Ensure that the random assignment process cannot be manipulated.</li>
+        <li><strong>Blinding:</strong> Reduce placebo effects and measurement bias.</li>
+        <li><strong>Attrition:</strong> Minimize dropout rates and account for missing data.</li>
+        <li><strong>Sample size:</strong> Power calculations ensure sufficient ability to detect meaningful effects.</li>
+        <li><strong>Ethical considerations:</strong> Randomization must respect participant rights and welfare.</li>
+    </ul>
+
+    <h3>Examples in Healthcare</h3>
+    <div class="example">
+        <strong>Clinical trial for a new drug:</strong>
+        <ul>
+            <li>Population: 1000 patients with hypertension</li>
+            <li>Random assignment: 500 receive the new drug, 500 receive a placebo</li>
+            <li>Outcome: reduction in systolic blood pressure after 6 months</li>
+            <li>Analysis: mean difference in blood pressure between treatment and control estimates the causal effect</li>
+        </ul>
+    </div>
+
+    <h3>Examples in Technology</h3>
+    <div class="example">
+        <strong>AB testing for a new app feature:</strong>
+        <ul>
+            <li>Population: 10,000 users</li>
+            <li>Random assignment: 5,000 see the new feature (treatment), 5,000 see the standard interface (control)</li>
+            <li>Outcome: engagement metrics, click-through rates</li>
+            <li>Analysis: differences in engagement estimate the causal effect of the feature</li>
+        </ul>
+    </div>
+
+    <h3>Advantages of Randomized Experiments</h3>
+    <ul>
+        <li>Gold standard for causal inference.</li>
+        <li>Reduces bias from both observed and unobserved confounders.</li>
+        <li>Facilitates straightforward estimation and inference.</li>
+        <li>Supports replication and generalization when designed appropriately.</li>
+    </ul>
+
+    <h3>Limitations and Practical Challenges</h3>
+    <ul>
+        <li>Randomization is not always feasible due to ethical, logistical, or cost constraints.</li>
+        <li>External validity may be limited if the sample does not represent the target population.</li>
+        <li>Noncompliance and dropout can introduce bias if not properly handled.</li>
+        <li>Complex interventions may require sophisticated designs (cluster or factorial) to estimate effects accurately.</li>
+    </ul>
+
+    <h3>Summary</h3>
+    <p>
+        Randomized experiments are the gold standard for causal inference because they ensure treatment assignment is independent of confounders. Proper design, randomization, blinding, and careful outcome measurement allow unbiased estimation of causal effects. Applications span healthcare, education, marketing, and technology, making randomized experiments foundational for evidence-based decision-making.
+    </p>
+
+    <p>
+        While they have limitations, including feasibility and external validity, randomization remains the most reliable tool for causal estimation, and understanding its principles is essential for any practitioner or researcher working in causal inference.
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 11: Observational Data Methods – Regression</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h3 {
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        ul {
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .example {
+            background-color: #f0f7e6;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #2ecc71;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog 11: Observational Data Methods – Regression</h1>
+
+    <p>
+        While randomized experiments are the gold standard for causal inference, they are not always feasible. In many real-world scenarios, we rely on <strong>observational data</strong>, where treatment assignment is not controlled by the researcher. To estimate causal effects from such data, we often use <strong>regression methods</strong> to adjust for confounding factors. This blog explores how regression works for causal inference, the types of regression used, assumptions, limitations, and practical examples.
+    </p>
+
+    <h3>Controlling for Confounders with Regression</h3>
+    <p>
+        In observational studies, confounders are variables that influence both the treatment and the outcome. Failing to account for them can lead to biased estimates. Regression allows us to include confounders as covariates, thereby adjusting for their influence.
+    </p>
+
+    <p>
+        Consider a simple linear regression model:
+    </p>
+    <p style="text-align:center;">
+        <code>Y = β0 + β1*X + β2*W + ε</code>
+    </p>
+    <p>
+        Where:
+        <ul>
+            <li><code>Y</code> = outcome variable</li>
+            <li><code>X</code> = treatment variable</li>
+            <li><code>W</code> = confounder(s)</li>
+            <li><code>ε</code> = error term</li>
+        </ul>
+        By including <code>W</code> in the regression, we estimate the effect of <code>X</code> on <code>Y</code> while holding <code>W</code> constant. The coefficient <code>β1</code> represents the adjusted causal effect of the treatment under certain assumptions.
+    </p>
+
+    <div class="example">
+        <strong>Example:</strong> Studying the effect of a job training program (<code>X</code>) on income (<code>Y</code>), controlling for education and prior work experience (<code>W</code>).
+        <ul>
+            <li>Linear regression can estimate the effect of training while adjusting for confounders.</li>
+            <li>This helps reduce bias compared to a naive comparison of treated vs. untreated.</li>
+        </ul>
+    </div>
+
+    <h3>Linear Regression for Continuous Outcomes</h3>
+    <p>
+        Linear regression is used when the outcome variable is continuous. It assumes a linear relationship between covariates and the outcome:
+    </p>
+    <p style="text-align:center;">
+        <code>Y = β0 + β1*X + β2*W + ... + ε</code>
+    </p>
+
+    <p>
+        Key points:
+        <ul>
+            <li><strong>Interpretation:</strong> β1 estimates the average change in Y per unit change in X, holding other variables constant.</li>
+            <li><strong>Assumptions:</strong> Linearity, independence, homoscedasticity, normality of errors, and no perfect multicollinearity.</li>
+            <li><strong>Adjustment:</strong> Including confounders W ensures that the estimate of β1 approximates the causal effect of X on Y.</li>
+        </ul>
+    </p>
+
+    <div class="diagram">
+        <img src="https://i.imgur.com/UwY1HXN.png" alt="Linear regression adjustment DAG">
+        <p><em>DAG illustrating regression adjustment: including W blocks backdoor paths from X to Y</em></p>
+    </div>
+
+    <h3>Logistic Regression for Binary Outcomes</h3>
+    <p>
+        When the outcome is binary (e.g., success/failure, yes/no), linear regression is inappropriate. Logistic regression models the probability of the outcome:
+    </p>
+    <p style="text-align:center;">
+        <code>logit(P(Y=1)) = ln(P(Y=1)/P(Y=0)) = β0 + β1*X + β2*W + ...</code>
+    </p>
+
+    <p>
+        Key points:
+        <ul>
+            <li><strong>Interpretation:</strong> exp(β1) represents the odds ratio for the effect of X on Y, adjusting for W.</li>
+            <li><strong>Assumptions:</strong> Correct model specification, independent observations, no perfect multicollinearity, linearity in the logit for continuous covariates.</li>
+            <li><strong>Adjustment:</strong> Including confounders W ensures unbiased estimation of the treatment effect on the outcome odds.</li>
+        </ul>
+    </p>
+
+    <div class="example">
+        <strong>Example:</strong> Evaluating the effect of a vaccine (<code>X</code>) on infection status (<code>Y</code>), adjusting for age and comorbidities (<code>W</code>):
+        <ul>
+            <li>Logistic regression estimates the odds of infection given vaccination and confounders.</li>
+            <li>Coefficient for X shows whether vaccination reduces the odds of infection.</li>
+        </ul>
+    </div>
+
+    <h3>Assumptions of Regression for Causal Inference</h3>
+    <p>
+        Using regression to estimate causal effects requires assumptions beyond standard statistical assumptions:
+    </p>
+    <ul>
+        <li><strong>Ignorability/No unmeasured confounding:</strong> All relevant confounders must be included in the model.</li>
+        <li><strong>Correct functional form:</strong> The relationship between covariates and outcome must be correctly modeled (e.g., linear vs. nonlinear).</li>
+        <li><strong>No measurement error:</strong> Treatment, outcome, and covariates must be measured accurately.</li>
+        <li><strong>No collider adjustment:</strong> Avoid including variables affected by treatment that act as colliders, which can induce bias.</li>
+        <li><strong>Overlap/positivity:</strong> Each unit should have a positive probability of receiving each treatment level conditional on covariates.</li>
+    </ul>
+
+    <h3>Limitations of Regression in Observational Studies</h3>
+    <p>
+        While regression is widely used, it has limitations:
+    </p>
+    <ul>
+        <li>Residual confounding: Unmeasured confounders can still bias estimates.</li>
+        <li>Model dependence: Estimates can be sensitive to functional form and interactions.</li>
+        <li>Multicollinearity: Highly correlated covariates can inflate standard errors.</li>
+        <li>Extrapolation: Estimates may rely on regions of covariate space with little data.</li>
+    </ul>
+
+    <h3>Practical Guidance</h3>
+    <ul>
+        <li>Use domain knowledge to select confounders to include in regression.</li>
+        <li>Check model assumptions through residual analysis and diagnostics.</li>
+        <li>Consider interactions and nonlinear effects to avoid misspecification.</li>
+        <li>Complement regression with other causal inference methods (e.g., propensity scores, instrumental variables) when possible.</li>
+    </ul>
+
+    <h3>Real-World Example</h3>
+    <div class="example">
+        <strong>Scenario:</strong> Estimating effect of an online learning program (<code>X</code>) on exam scores (<code>Y</code>):
+        <ul>
+            <li>Confounders: prior GPA, socioeconomic status, study hours (<code>W</code>)</li>
+            <li>Linear regression: <code>Y = β0 + β1*X + β2*W + ε</code></li>
+            <li>Interpretation: β1 represents the adjusted effect of the program, accounting for baseline differences.</li>
+            <li>Limitations: Unobserved motivation may still bias results.</li>
+        </ul>
+    </div>
+
+    <h3>Summary</h3>
+    <ul>
+        <li>Regression methods are essential for estimating causal effects in observational data.</li>
+        <li>Linear regression is used for continuous outcomes, logistic regression for binary outcomes.</li>
+        <li>Including confounders as covariates adjusts for bias but relies on strong assumptions.</li>
+        <li>Regression cannot correct for unmeasured confounding or model misspecification.</li>
+        <li>Careful design, diagnostics, and complementary methods increase robustness of causal inference.</li>
+    </ul>
+
+    <p>
+        In summary, regression is a powerful and widely used tool for controlling confounders in observational studies, but it is not a panacea. Understanding assumptions, limitations, and proper model specification is crucial for credible causal analysis.
+    </p>
+
+</body>
+</html>

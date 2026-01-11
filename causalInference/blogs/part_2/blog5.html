@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 5: Confounding and Bias</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h3 {
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        ul {
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .example {
+            background-color: #dff0d8;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #27ae60;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog 5: Confounding and Bias</h1>
+
+    <p>
+        In causal inference, understanding confounding and bias is essential. While causal diagrams like DAGs help visualize relationships, practical estimation of causal effects is often threatened by confounding variables and biases. This blog explores what confounding is, different types of bias, and real-world examples from healthcare and technology.
+    </p>
+
+    <h3>What is Confounding?</h3>
+    <p>
+        Confounding occurs when an extraneous variable, called a <strong>confounder</strong>, influences both the treatment/exposure and the outcome, creating a spurious association. In simpler terms, it’s a hidden factor that makes two variables appear related even if there is no direct causal link.
+    </p>
+    <p>
+        Graphically, using DAGs, a confounder <code>C</code> can be represented as:
+    </p>
+    <div class="diagram">
+        <img src="https://i.imgur.com/3LvC0Lb.png" alt="Confounder: C → X and C → Y">
+        <p><em>C → X and C → Y</em></p>
+    </div>
+    <p>
+        In this diagram, <code>C</code> influences both the treatment <code>X</code> and the outcome <code>Y</code>. If we ignore <code>C</code> while estimating the causal effect of <code>X</code> on <code>Y</code>, our results will be biased.
+    </p>
+
+    <div class="example">
+        <strong>Example:</strong> Consider the effect of exercise (<em>X</em>) on heart disease (<em>Y</em>). Age (<em>C</em>) affects both exercise habits and heart disease risk. If we do not adjust for age, we might overestimate or underestimate the true effect of exercise.
+    </div>
+
+    <p>
+        Confounding can be controlled in several ways:
+    </p>
+    <ul>
+        <li><strong>Randomization:</strong> In experiments, random assignment balances confounders across treatment groups.</li>
+        <li><strong>Stratification:</strong> Analyzing the treatment effect within levels of the confounder.</li>
+        <li><strong>Regression Adjustment:</strong> Including confounders as covariates in regression models.</li>
+        <li><strong>Propensity Score Matching:</strong> Matching individuals with similar likelihood of receiving treatment based on confounders.</li>
+    </ul>
+
+    <h3>Types of Bias</h3>
+    <p>
+        Bias occurs when estimates systematically deviate from the true causal effect. In practice, two major types of bias often occur: <strong>selection bias</strong> and <strong>measurement bias</strong>.
+    </p>
+
+    <h4>Selection Bias</h4>
+    <p>
+        Selection bias arises when the sample studied is not representative of the target population due to the method of selection or conditioning on a collider. This can distort observed associations and lead to incorrect causal conclusions.
+    </p>
+    <div class="diagram">
+        <img src="https://i.imgur.com/5xQYd17.png" alt="Collider-induced selection bias: X → C ← Y">
+        <p><em>Conditioning on C induces an association between X and Y even if independent</em></p>
+    </div>
+    <div class="example">
+        <strong>Example:</strong> Suppose we want to study exercise and diet effects on hospitalization. If we only analyze hospitalized patients, we condition on a collider (hospitalization). This may induce a spurious negative correlation between exercise and poor diet, even if no such correlation exists in the general population.
+    </div>
+
+    <h4>Measurement Bias</h4>
+    <p>
+        Measurement bias occurs when the measurement of variables is systematically inaccurate. It can arise from faulty instruments, misreporting, or errors in data collection.
+    </p>
+    <div class="example">
+        <strong>Example:</strong> In health studies, self-reported smoking status may be inaccurate due to underreporting. In technology, if users misreport activity on an app, the measured engagement variable may be biased, leading to incorrect conclusions about factors driving engagement.
+    </div>
+
+    <h3>Examples in Health and Technology</h3>
+
+    <h4>Health Example</h4>
+    <div class="example">
+        <strong>Scenario:</strong> Estimating the effect of a new drug on blood pressure reduction.
+        <ul>
+            <li><strong>Confounder:</strong> Age affects both drug prescription and blood pressure.</li>
+            <li><strong>Selection Bias:</strong> If only hospitalized patients are analyzed, results may not generalize to the wider population.</li>
+            <li><strong>Measurement Bias:</strong> Blood pressure measured inconsistently across patients can distort effect estimates.</li>
+        </ul>
+        <p>
+            <strong>Solution:</strong> Adjust for age, include both hospitalized and non-hospitalized patients, and use standardized measurement instruments.
+        </p>
+    </div>
+
+    <h4>Technology Example</h4>
+    <div class="example">
+        <strong>Scenario:</strong> Estimating the effect of push notifications on user engagement in a mobile app.
+        <ul>
+            <li><strong>Confounder:</strong> User activity level (frequent users may get more notifications and also engage more).</li>
+            <li><strong>Selection Bias:</strong> Only analyzing users who open the app regularly may misrepresent overall effect.</li>
+            <li><strong>Measurement Bias:</strong> Logging errors or missing events may bias engagement measurements.</li>
+        </ul>
+        <p>
+            <strong>Solution:</strong> Include activity level as a covariate, ensure a representative sample, and validate data logging systems.
+        </p>
+    </div>
+
+    <h3>Key Takeaways</h3>
+    <ul>
+        <li>Confounding can create spurious associations; identifying and adjusting for confounders is crucial for causal inference.</li>
+        <li>Selection bias occurs when the study sample is non-representative or a collider is conditioned upon.</li>
+        <li>Measurement bias arises from systematic errors in measuring variables.</li>
+        <li>Real-world applications in health and technology are susceptible to all these biases, so careful study design and data collection are essential.</li>
+        <li>DAGs provide a visual framework to detect potential confounding and selection bias.</li>
+    </ul>
+
+    <h3>Conclusion</h3>
+    <p>
+        Confounding and bias are central challenges in causal inference. Understanding the types, sources, and solutions is critical for designing studies and analyzing observational data correctly. By carefully identifying confounders, avoiding selection on colliders, and using accurate measurement methods, researchers can produce more reliable causal estimates. Directed Acyclic Graphs, randomization, and statistical adjustments are key tools to achieve this goal, whether in health research, tech analytics, or other applied fields.
+    </p>
+
+</body>
+</html>
