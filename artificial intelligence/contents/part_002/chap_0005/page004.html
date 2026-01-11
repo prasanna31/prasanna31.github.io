@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rational Agents</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.75;
+        }
+
+        header {
+            background: linear-gradient(135deg, #020617, #1e3a8a);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            max-width: 900px;
+            margin: auto;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        section h2 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.9rem;
+        }
+
+        section h3 {
+            color: #020617;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: #eef2ff;
+            padding: 15px;
+            border-left: 5px solid #1e40af;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .example {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table th, table td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #eef2ff;
+            color: #1e40af;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #020617;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Rational Agents</h1>
+    <p>
+        Understanding intelligence as rational decision-making under uncertainty
+    </p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. What Is a Rational Agent?</h2>
+        <p>
+            A <strong>rational agent</strong> is an agent that selects actions that maximize its
+            expected performance measure, given the information available to it at the time.
+            Rationality is the central concept that defines intelligence in modern Artificial
+            Intelligence.
+        </p>
+        <div class="highlight">
+            Rationality is about doing the <em>best possible action</em>, not about being perfect.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Rationality vs Intelligence</h2>
+        <p>
+            In AI, intelligence is often equated with rational behavior. An intelligent system is
+            not necessarily one that thinks like a human, but one that acts appropriately to
+            achieve its goals.
+        </p>
+        <ul>
+            <li>Intelligence is measured by behavior, not internal thought</li>
+            <li>Rationality depends on goals and available information</li>
+            <li>Different goals imply different rational actions</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Performance Measure</h2>
+        <p>
+            A rational agent’s behavior is evaluated using a <strong>performance measure</strong>,
+            which defines what counts as success.
+        </p>
+        <div class="example">
+            <strong>Examples:</strong>
+            <ul>
+                <li>Maximizing safety and minimizing travel time (self-driving car)</li>
+                <li>Winning the game (chess agent)</li>
+                <li>Maximizing user engagement (recommendation system)</li>
+            </ul>
+        </div>
+        <p>
+            Rational agents optimize exactly what they are measured on—good or bad.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. What Rationality Depends On</h2>
+        <p>
+            Whether an agent is rational depends on four factors:
+        </p>
+        <ul>
+            <li>The performance measure</li>
+            <li>The agent’s percept sequence</li>
+            <li>The agent’s available actions</li>
+            <li>The agent’s prior knowledge of the environment</li>
+        </ul>
+        <div class="highlight">
+            Rationality is always defined relative to the agent’s environment and capabilities.
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Rationality vs Omniscience</h2>
+        <p>
+            A rational agent is <strong>not omniscient</strong>. It does not know the outcome of
+            future actions with certainty.
+        </p>
+        <p>
+            Instead, it chooses actions that maximize <em>expected</em> performance based on
+            probabilities and available evidence.
+        </p>
+        <div class="example">
+            A rational chess agent may still lose due to uncertainty or limited computation.
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Rationality vs Perfection</h2>
+        <p>
+            Rationality does not mean always achieving the best outcome. It means selecting the
+            best action given constraints.
+        </p>
+        <ul>
+            <li>Limited sensing</li>
+            <li>Incomplete models</li>
+            <li>Time and computational limits</li>
+        </ul>
+        <p>
+            Agents operating under such constraints are called <strong>bounded rational agents</strong>.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Examples of Rational Agents</h2>
+        <div class="example">
+            <strong>Vacuum Cleaner Agent:</strong><br>
+            Rational action: Clean when dirt is detected, move when no dirt is present.
+        </div>
+        <div class="example">
+            <strong>Self-Driving Car:</strong><br>
+            Rational action: Slow down in poor visibility even if the road is clear.
+        </div>
+        <div class="example">
+            <strong>Chatbot:</strong><br>
+            Rational action: Generate responses that maximize relevance and user satisfaction.
+        </div>
+    </section>
+
+    <section>
+        <h2>8. Rational Agents in Different Environments</h2>
+        <table>
+            <tr>
+                <th>Environment Type</th>
+                <th>Rational Behavior</th>
+            </tr>
+            <tr>
+                <td>Deterministic</td>
+                <td>Choose action with guaranteed best outcome</td>
+            </tr>
+            <tr>
+                <td>Stochastic</td>
+                <td>Maximize expected utility</td>
+            </tr>
+            <tr>
+                <td>Partially Observable</td>
+                <td>Maintain beliefs about hidden state</td>
+            </tr>
+            <tr>
+                <td>Multi-Agent</td>
+                <td>Consider actions of other agents</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>9. Learning and Rationality</h2>
+        <p>
+            Learning allows agents to become more rational over time by improving their models of
+            the environment.
+        </p>
+        <p>
+            A learning agent may behave sub-optimally initially, yet still be rational if it is
+            gathering information to improve future performance.
+        </p>
+    </section>
+
+    <section>
+        <h2>10. Why Rational Agents Matter</h2>
+        <p>
+            The concept of rational agents provides a unified foundation for Artificial
+            Intelligence. It applies equally to simple rule-based systems and advanced learning
+            agents.
+        </p>
+        <div class="highlight">
+            AI is best understood as the study of rational agents acting in complex environments.
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 | Artificial Intelligence Concepts Series | Rational Agents
+</footer>
+
+</body>
+</html>

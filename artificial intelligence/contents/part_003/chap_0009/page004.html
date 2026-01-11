@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Goal State Definition in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #1b2631;
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 28px 32px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #1b2631;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            margin-top: 25px;
+            color: #2c3e50;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 22px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #e8f0f8;
+            border-left: 5px solid #1b2631;
+            padding: 16px 22px;
+            margin: 22px 0;
+            border-radius: 4px;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 5px solid #f1c40f;
+            padding: 16px 22px;
+            margin: 22px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1b2631;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Goal State Definition</h1>
+    <p>Defining the Objective in Search-Based Problem Solving</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction</h2>
+        <p>
+            In search-based problem solving, the <strong>goal state</strong> defines the desired
+            outcome that an agent aims to achieve. While the initial state marks the starting point,
+            the goal state specifies where the agent wants to reach.
+        </p>
+        <p>
+            Accurately defining the goal state is essential for guiding the search process and
+            evaluating the success of a solution.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. What is a Goal State?</h2>
+        <p>
+            A <strong>goal state</strong> is a state within the state space that satisfies the
+            objectives of the problem. Reaching a goal state signals the successful completion of
+            the task.
+        </p>
+        <ul>
+            <li>Represents the desired solution</li>
+            <li>May be unique or multiple acceptable states</li>
+            <li>Serves as a stopping criterion for search algorithms</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Characteristics of a Well-Defined Goal State</h2>
+
+        <h3>3.1 Explicitness</h3>
+        <p>
+            The goal state must be clearly defined so that it can be easily recognized by the agent.
+        </p>
+
+        <h3>3.2 Feasibility</h3>
+        <p>
+            The goal should be achievable within the state space given the available actions.
+        </p>
+
+        <h3>3.3 Measurable Criteria</h3>
+        <p>
+            There should be concrete conditions or metrics to test if a state satisfies the goal.
+        </p>
+
+        <div class="note">
+            <strong>Key Insight:</strong>  
+            A vague or poorly defined goal can make search algorithms ineffective or misdirected.
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Role of Goal State in Search</h2>
+        <p>
+            The goal state plays several important roles in the search process:
+        </p>
+        <ul>
+            <li>Acts as a target for the search algorithm</li>
+            <li>Determines when to stop exploration</li>
+            <li>Helps evaluate the quality of paths (especially when combined with path cost)</li>
+            <li>Guides heuristic functions in informed search</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>5. Examples of Goal State Definition</h2>
+
+        <div class="example">
+            <h3>Example 1: Route Finding Problem</h3>
+            <p>
+                <strong>Goal State:</strong> Agent reaches the destination city (e.g., Bucharest).
+            </p>
+        </div>
+
+        <div class="example">
+            <h3>Example 2: 8-Puzzle Problem</h3>
+            <p>
+                <strong>Goal State:</strong> Tiles arranged in the correct numerical order with the blank in the bottom-right corner.
+            </p>
+        </div>
+
+        <div class="example">
+            <h3>Example 3: Robot Navigation</h3>
+            <p>
+                <strong>Goal State:</strong> Robot reaches the target location with the correct orientation.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Goal State vs Initial State</h2>
+        <ul>
+            <li><strong>Initial State:</strong> Known starting point for the search</li>
+            <li><strong>Goal State:</strong> Desired ending point or condition to achieve</li>
+            <li><strong>Search:</strong> Finds a path connecting initial state to goal state</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>7. Summary</h2>
+        <p>
+            The goal state is the ultimate objective of a search-based problem. A clearly defined
+            goal allows the agent to evaluate its progress, stop the search when successful, and
+            guide search strategies efficiently.
+        </p>
+        <p>
+            Together with the initial state, the goal state forms the foundation of the state space
+            representation and problem definition in AI.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Problem Solving by Search</p>
+</footer>
+
+</body>
+</html>

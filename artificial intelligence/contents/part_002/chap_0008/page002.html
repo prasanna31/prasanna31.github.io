@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Competitive Environments in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #7d3c98;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.4em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #7d3c98;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #f4ecf7;
+            border-left: 5px solid #7d3c98;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .comparison {
+            background-color: #fff3e0;
+            border-left: 5px solid #f39c12;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #7d3c98;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Competitive Environments</h1>
+    <p>Environments Where Agents Have Conflicting Goals</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction to Competitive Environments</h2>
+        <p>
+            In many Artificial Intelligence applications, an agent does not operate alone or in
+            cooperation with others. Instead, it must function in the presence of other agents
+            whose goals are directly opposed to its own.
+        </p>
+        <p>
+            Such environments are called <strong>competitive environments</strong>. These
+            environments introduce strategic reasoning, adversarial thinking, and uncertainty
+            due to the presence of opponents.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Definition of Competitive Environments</h2>
+        <p>
+            A <strong>competitive environment</strong> is a type of multi-agent environment in which
+            agents have <strong>conflicting or opposing objectives</strong>. The success of one
+            agent often implies the failure or reduced performance of another.
+        </p>
+        <p>
+            In competitive environments:
+        </p>
+        <ul>
+            <li>Agents act to maximize their own performance</li>
+            <li>Agents’ goals are in direct conflict</li>
+            <li>The environment’s dynamics depend on opponents’ actions</li>
+            <li>Outcomes are influenced by strategic interactions</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Key Characteristics of Competitive Environments</h2>
+
+        <h3>3.1 Opposing Goals</h3>
+        <p>
+            Agents pursue goals that cannot all be satisfied simultaneously. One agent’s gain
+            often corresponds to another agent’s loss.
+        </p>
+
+        <h3>3.2 Strategic Decision Making</h3>
+        <p>
+            Agents must reason about the possible actions, intentions, and strategies of opponents.
+        </p>
+
+        <h3>3.3 Non-Stationary Environment</h3>
+        <p>
+            From the perspective of any single agent, the environment is non-stationary because
+            other agents are continuously adapting their behavior.
+        </p>
+
+        <h3>3.4 Uncertainty Due to Opponents</h3>
+        <p>
+            Even if the environment itself is deterministic, uncertainty arises because opponents’
+            choices are unknown.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Examples of Competitive Environments</h2>
+
+        <div class="example">
+            <h3>Example 1: Chess</h3>
+            <p>
+                Two agents compete with the goal of checkmating the opponent’s king.
+            </p>
+            <ul>
+                <li>Zero-sum game</li>
+                <li>Perfect information</li>
+                <li>Highly strategic</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 2: Online Auctions</h3>
+            <p>
+                Multiple bidders compete to win an item at the lowest possible price.
+            </p>
+            <ul>
+                <li>Conflicting objectives</li>
+                <li>Strategic bidding</li>
+                <li>Imperfect information</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 3: Robot Soccer (Opposing Teams)</h3>
+            <p>
+                Two teams of robots compete to score goals against each other.
+            </p>
+            <ul>
+                <li>Mixed cooperation and competition</li>
+                <li>Dynamic and real-time</li>
+                <li>Strategic team behavior</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Competitive vs Cooperative Environments</h2>
+
+        <div class="comparison">
+            <p>
+                Competitive environments are often contrasted with cooperative environments.
+            </p>
+            <ul>
+                <li>
+                    <strong>Competitive:</strong> Agents have conflicting goals
+                </li>
+                <li>
+                    <strong>Cooperative:</strong> Agents share common objectives
+                </li>
+                <li>
+                    <strong>Competitive:</strong> Requires adversarial reasoning
+                </li>
+                <li>
+                    <strong>Cooperative:</strong> Focuses on coordination and communication
+                </li>
+            </ul>
+            <p>
+                Chess is competitive, while multi-robot object transport is cooperative.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Implications for Agent Design</h2>
+        <p>
+            Agents in competitive environments require specialized techniques, including:
+        </p>
+        <ul>
+            <li>Game theory</li>
+            <li>Adversarial search (minimax, alpha-beta pruning)</li>
+            <li>Opponent modeling</li>
+            <li>Multi-agent reinforcement learning</li>
+        </ul>
+        <p>
+            Agents must balance optimal play with robustness against unpredictable opponents.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Summary</h2>
+        <p>
+            Competitive environments are multi-agent settings where agents have opposing goals.
+            These environments introduce strategic complexity, uncertainty, and non-stationarity.
+        </p>
+        <p>
+            Understanding competitive environments is essential for building intelligent systems
+            that operate effectively in games, markets, and adversarial real-world scenarios.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Multi-Agent and Competitive Environments</p>
+</footer>
+
+</body>
+</html>

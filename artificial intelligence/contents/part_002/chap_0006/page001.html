@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Environment Specification (PEAS)</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f6fb;
+            color: #1f2937;
+            line-height: 1.75;
+        }
+
+        header {
+            background: linear-gradient(135deg, #020617, #1e3a8a);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            max-width: 900px;
+            margin: auto;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        section h2 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.9rem;
+        }
+
+        section h3 {
+            color: #020617;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: #eef2ff;
+            padding: 15px;
+            border-left: 5px solid #1e40af;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .example {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table th, table td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #eef2ff;
+            color: #1e40af;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #020617;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Task Environment Specification (PEAS)</h1>
+    <p>
+        A structured way to define what an intelligent agent should do and how its success is measured
+    </p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. What Is a Task Environment?</h2>
+        <p>
+            A <strong>task environment</strong> defines the problem space in which an intelligent agent operates.
+            It specifies the goals of the agent, what it can perceive, and what actions it can perform.
+        </p>
+        <p>
+            Before designing an agent, we must clearly describe the environment in which it will act.
+            This prevents ambiguity and helps ensure rational behavior.
+        </p>
+        <div class="highlight">
+            A task environment answers the question: “What exactly is the agent supposed to do?”
+        </div>
+    </section>
+
+    <section>
+        <h2>2. What Is PEAS?</h2>
+        <p>
+            <strong>PEAS</strong> is a framework used to specify a task environment in Artificial Intelligence.
+            It stands for:
+        </p>
+        <ul>
+            <li><strong>P</strong> – Performance Measure</li>
+            <li><strong>E</strong> – Environment</li>
+            <li><strong>A</strong> – Actuators</li>
+            <li><strong>S</strong> – Sensors</li>
+        </ul>
+        <p>
+            The PEAS framework ensures that all critical aspects of the agent’s interaction with the world
+            are considered.
+        </p>
+    </section>
+
+    <section>
+        <h2>3. Performance Measure (P)</h2>
+        <p>
+            The <strong>performance measure</strong> defines how the success of the agent is evaluated.
+            It reflects the designer’s objectives and determines what behavior is considered rational.
+        </p>
+        <ul>
+            <li>Must be objective and measurable</li>
+            <li>Should align with real-world goals</li>
+            <li>May involve multiple criteria</li>
+        </ul>
+        <div class="example">
+            <strong>Example:</strong> For a self-driving car: safety, travel time, fuel efficiency, and comfort.
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Environment (E)</h2>
+        <p>
+            The <strong>environment</strong> is everything external to the agent that it interacts with.
+            It includes physical, digital, social, and economic factors.
+        </p>
+        <ul>
+            <li>Physical world (roads, buildings, obstacles)</li>
+            <li>Other agents (humans, robots, competitors)</li>
+            <li>Rules and constraints</li>
+        </ul>
+        <p>
+            The complexity of the environment heavily influences the design of the agent.
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Actuators (A)</h2>
+        <p>
+            <strong>Actuators</strong> are the mechanisms through which an agent acts upon the environment.
+            They convert decisions into actions.
+        </p>
+        <ul>
+            <li>Motors, wheels, robotic arms</li>
+            <li>Speech or display outputs</li>
+            <li>Digital actions (API calls, database updates)</li>
+        </ul>
+        <div class="highlight">
+            Actuators define what the agent is capable of doing.
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Sensors (S)</h2>
+        <p>
+            <strong>Sensors</strong> allow the agent to perceive its environment.
+            They provide the raw information required for decision-making.
+        </p>
+        <ul>
+            <li>Cameras, microphones, GPS</li>
+            <li>Keyboard and mouse input</li>
+            <li>System logs and data streams</li>
+        </ul>
+        <p>
+            An agent’s intelligence is limited by the quality and scope of its sensors.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Complete PEAS Example: Autonomous Taxi</h2>
+        <table>
+            <tr>
+                <th>PEAS Component</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Performance Measure</td>
+                <td>Safety, legality, passenger satisfaction, profit</td>
+            </tr>
+            <tr>
+                <td>Environment</td>
+                <td>Roads, traffic, pedestrians, weather, maps</td>
+            </tr>
+            <tr>
+                <td>Actuators</td>
+                <td>Steering, accelerator, brake, horn, display</td>
+            </tr>
+            <tr>
+                <td>Sensors</td>
+                <td>Cameras, lidar, radar, GPS, speedometer</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>8. Why PEAS Is Important</h2>
+        <ul>
+            <li>Clarifies agent objectives</li>
+            <li>Prevents incomplete problem definitions</li>
+            <li>Guides architecture and algorithm selection</li>
+            <li>Improves evaluation and testing</li>
+        </ul>
+        <div class="highlight">
+            A well-defined PEAS description is the foundation of any intelligent agent design.
+        </div>
+    </section>
+
+    <section>
+        <h2>9. PEAS and Rationality</h2>
+        <p>
+            Rationality is defined with respect to the performance measure in a given task environment.
+            Without PEAS, rational behavior cannot be meaningfully evaluated.
+        </p>
+        <p>
+            An agent may appear irrational if the performance measure is poorly designed.
+        </p>
+    </section>
+
+    <section>
+        <h2>10. Summary</h2>
+        <p>
+            The PEAS framework provides a systematic way to specify task environments by clearly
+            defining goals, surroundings, actions, and perceptions.
+        </p>
+        <div class="highlight">
+            PEAS transforms vague problems into precise, solvable AI tasks.
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 | Artificial Intelligence Concepts Series | Task Environment Specification (PEAS)
+</footer>
+
+</body>
+</html>

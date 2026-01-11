@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Environments in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f7fb;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #c0392b;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.4em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #c0392b;
+            border-bottom: 2px solid #e6e6e6;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #fdecea;
+            border-left: 5px solid #c0392b;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .comparison {
+            background-color: #fff3e0;
+            border-left: 5px solid #f39c12;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #c0392b;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Dynamic Environments</h1>
+    <p>Environments That Change While an Agent Is Thinking</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction to Dynamic Environments</h2>
+        <p>
+            In many real-world situations, an intelligent agent must operate in an environment that
+            changes continuously and independently of the agent’s actions. Such environments introduce
+            uncertainty, time pressure, and the need for rapid decision making.
+        </p>
+        <p>
+            These environments are known as <strong>dynamic environments</strong>, and they represent
+            some of the most challenging settings for artificial intelligence systems.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Definition of Dynamic Environments</h2>
+        <p>
+            A <strong>dynamic environment</strong> is an environment that can change while the agent
+            is deliberating or between actions, even if the agent does nothing.
+        </p>
+        <p>
+            In dynamic environments:
+        </p>
+        <ul>
+            <li>The environment evolves over time.</li>
+            <li>Changes may occur independently of the agent.</li>
+            <li>Delays in action can lead to outdated decisions.</li>
+            <li>Time is a critical factor.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Key Characteristics of Dynamic Environments</h2>
+
+        <h3>3.1 Time Sensitivity</h3>
+        <p>
+            In dynamic environments, taking too long to decide can result in failure because
+            the environment may change before the action is executed.
+        </p>
+
+        <h3>3.2 Continuous Change</h3>
+        <p>
+            The environment may change continuously due to external processes such as other agents,
+            physical laws, or random events.
+        </p>
+
+        <h3>3.3 Uncertainty and Unpredictability</h3>
+        <p>
+            Changes in the environment are often partially unpredictable, requiring agents
+            to operate under uncertainty.
+        </p>
+
+        <h3>3.4 Need for Continuous Sensing</h3>
+        <p>
+            Agents must constantly monitor the environment to maintain an accurate understanding
+            of the current state.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Examples of Dynamic Environments</h2>
+
+        <div class="example">
+            <h3>Example 1: Autonomous Driving</h3>
+            <p>
+                Traffic conditions change continuously due to the actions of other vehicles,
+                pedestrians, and traffic signals.
+            </p>
+            <ul>
+                <li>Other agents act independently.</li>
+                <li>Delays can cause accidents.</li>
+                <li>Real-time reactions are essential.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 2: Stock Market Trading</h3>
+            <p>
+                Market prices fluctuate constantly due to external economic factors
+                and actions of other traders.
+            </p>
+            <ul>
+                <li>The environment changes even if the agent is inactive.</li>
+                <li>Decisions must be made quickly.</li>
+                <li>Outdated information can lead to losses.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 3: Robot Soccer</h3>
+            <p>
+                Multiple robots and a moving ball create a rapidly changing environment.
+            </p>
+            <ul>
+                <li>State changes continuously.</li>
+                <li>Coordination and fast response are required.</li>
+                <li>Opponent actions introduce uncertainty.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Comparison with Static Environments</h2>
+
+        <div class="comparison">
+            <p>
+                Dynamic environments are the opposite of static environments.
+            </p>
+            <ul>
+                <li>
+                    <strong>Dynamic:</strong> Environment can change while the agent is thinking.
+                </li>
+                <li>
+                    <strong>Static:</strong> Environment remains unchanged during deliberation.
+                </li>
+                <li>
+                    <strong>Dynamic:</strong> Requires real-time decision making.
+                </li>
+                <li>
+                    <strong>Static:</strong> Allows unlimited computation time.
+                </li>
+            </ul>
+            <p>
+                Driving a car is dynamic, whereas solving a crossword puzzle is static.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Implications for Agent Design</h2>
+        <p>
+            Agents in dynamic environments must be designed to handle time pressure and uncertainty.
+            They often rely on:
+        </p>
+        <ul>
+            <li>Reactive architectures</li>
+            <li>Real-time planning and control</li>
+            <li>Continuous sensing and feedback loops</li>
+            <li>Reinforcement learning and adaptive strategies</li>
+        </ul>
+        <p>
+            These agents must balance decision quality with decision speed to operate effectively.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Summary</h2>
+        <p>
+            Dynamic environments are characterized by ongoing changes that occur independently
+            of the agent’s actions. Time, uncertainty, and rapid response are central challenges.
+        </p>
+        <p>
+            Mastering dynamic environments is essential for building AI systems that can operate
+            successfully in real-world, unpredictable scenarios.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Task Environment Classification</p>
+</footer>
+
+</body>
+</html>

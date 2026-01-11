@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Actions and Transitions in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #1c2833;
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 28px 32px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #1c2833;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            margin-top: 25px;
+            color: #2c3e50;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 22px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #e8f0f8;
+            border-left: 5px solid #1c2833;
+            padding: 16px 22px;
+            margin: 22px 0;
+            border-radius: 4px;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 5px solid #f1c40f;
+            padding: 16px 22px;
+            margin: 22px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1c2833;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Actions and Transitions</h1>
+    <p>Defining How Agents Move Through the State Space</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction</h2>
+        <p>
+            In search-based problem solving, an agent moves from one state to another by performing
+            <strong>actions</strong>. Each action causes a <strong>transition</strong> from a current
+            state to a successor state. Properly defining actions and transitions is essential for
+            creating an accurate state space representation.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Actions</h2>
+        <p>
+            An <strong>action</strong> is an operation that the agent can perform to change its
+            current state. Actions are determined by the rules and constraints of the problem.
+        </p>
+        <ul>
+            <li>Actions must be valid in the context of the current state</li>
+            <li>Each action produces one or more successor states</li>
+            <li>Actions can have associated costs (e.g., time, distance, energy)</li>
+        </ul>
+
+        <h3>2.1 Types of Actions</h3>
+        <ul>
+            <li><strong>Deterministic:</strong> Produces a single known successor state</li>
+            <li><strong>Non-Deterministic:</strong> May produce multiple possible successor states</li>
+            <li><strong>Primitive:</strong> Basic indivisible actions (e.g., move left)</li>
+            <li><strong>Composite:</strong> Sequence of primitive actions forming a higher-level action</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Transitions</h2>
+        <p>
+            A <strong>transition</strong> describes the result of applying an action to a state. It
+            determines which state(s) the agent can move into next. In a state space, transitions
+            define the edges connecting states (nodes).
+        </p>
+
+        <h3>3.1 Successor Function</h3>
+        <p>
+            The <strong>successor function</strong> formalizes transitions:
+        </p>
+        <ul>
+            <li>Input: current state</li>
+            <li>Output: set of successor states resulting from all possible actions</li>
+            <li>Encapsulates the rules of the problem domain</li>
+        </ul>
+
+        <div class="note">
+            <strong>Key Insight:</strong>  
+            The successor function is central to search algorithms because it defines the legal
+            moves and builds the search tree dynamically.
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Properties of Actions and Transitions</h2>
+        <ul>
+            <li><strong>Reversibility:</strong> Some actions can be undone; others cannot</li>
+            <li><strong>Cost:</strong> Different actions may have different path costs</li>
+            <li><strong>Constraints:</strong> Actions may be restricted depending on the state</li>
+            <li><strong>Determinism:</strong> Determines predictability of successor states</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>5. Examples</h2>
+
+        <div class="example">
+            <h3>Example 1: Route Finding</h3>
+            <ul>
+                <li><strong>Action:</strong> Drive from one city to a connected neighboring city</li>
+                <li><strong>Transition:</strong> New state corresponds to the agent being in the new city</li>
+                <li><strong>Cost:</strong> Distance or travel time between cities</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 2: 8-Puzzle</h3>
+            <ul>
+                <li><strong>Action:</strong> Slide a tile into the blank space</li>
+                <li><strong>Transition:</strong> New state is the updated tile configuration</li>
+                <li><strong>Cost:</strong> Usually 1 per move</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 3: Robot Navigation</h3>
+            <ul>
+                <li><strong>Action:</strong> Move forward, turn left, turn right</li>
+                <li><strong>Transition:</strong> New state includes updated position and orientation</li>
+                <li><strong>Cost:</strong> Energy used or time taken for movement</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Importance of Actions and Transitions</h2>
+        <ul>
+            <li>Define the structure of the state space</li>
+            <li>Guide search algorithms by enumerating successors</li>
+            <li>Enable calculation of path cost and heuristics</li>
+            <li>Determine feasibility and efficiency of solutions</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>7. Summary</h2>
+        <p>
+            Actions and transitions are the mechanisms that allow an agent to move through the
+            state space toward a goal state. By precisely defining them, AI systems can systematically
+            explore solutions, evaluate paths, and find optimal or feasible solutions efficiently.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Problem Solving by Search</p>
+</footer>
+
+</body>
+</html>

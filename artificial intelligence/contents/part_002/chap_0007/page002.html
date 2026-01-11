@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sequential Environments in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f6f8fb;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.4em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #eef5ff;
+            border-left: 5px solid #2c3e50;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .comparison {
+            background-color: #fff3e0;
+            border-left: 5px solid #f39c12;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c3e50;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Sequential Environments</h1>
+    <p>Understanding Time-Dependent Decision Making in Artificial Intelligence</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction to Sequential Environments</h2>
+        <p>
+            In Artificial Intelligence, an intelligent agent operates within an environment by continuously
+            perceiving its state and taking actions. One important way of classifying environments is based on
+            whether the agent’s decisions affect only the current situation or also influence future situations.
+        </p>
+        <p>
+            <strong>Sequential environments</strong> represent the class of environments where an agent’s
+            current actions have a direct impact on future states, future percepts, and future rewards.
+            Decision making in such environments is inherently dependent on time.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Definition of Sequential Environments</h2>
+        <p>
+            A <strong>sequential environment</strong> is an environment in which the agent’s experience is
+            extended over a sequence of time steps, and the <strong>current action affects future states
+            of the environment</strong>.
+        </p>
+        <p>
+            In these environments:
+        </p>
+        <ul>
+            <li>The environment evolves over time.</li>
+            <li>Actions have long-term consequences.</li>
+            <li>Future decisions depend on past actions.</li>
+            <li>The agent must consider the entire sequence of actions, not just the immediate outcome.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Key Characteristics of Sequential Environments</h2>
+
+        <h3>3.1 Dependency on Past Actions</h3>
+        <p>
+            Unlike episodic environments, decisions in sequential environments are not independent.
+            What the agent does now can significantly alter the set of possibilities available in the future.
+        </p>
+
+        <h3>3.2 Requirement of Memory</h3>
+        <p>
+            The agent often needs to remember past percepts or maintain an internal state. This memory
+            helps the agent reason about how it arrived at the current situation.
+        </p>
+
+        <h3>3.3 Need for Planning</h3>
+        <p>
+            Sequential environments require planning and foresight. An agent must evaluate not only
+            immediate rewards but also delayed rewards that may occur much later.
+        </p>
+
+        <h3>3.4 Continuous Interaction</h3>
+        <p>
+            The agent and the environment interact continuously over time. The environment may change
+            even while the agent is deliberating.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Real-World Examples of Sequential Environments</h2>
+
+        <div class="example">
+            <h3>Example 1: Chess</h3>
+            <p>
+                Chess is a classic example of a sequential environment.
+            </p>
+            <ul>
+                <li>Each move affects future board positions.</li>
+                <li>A poor early move can lead to unavoidable loss later.</li>
+                <li>Long-term strategy is essential.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 2: Autonomous Driving</h3>
+            <p>
+                An autonomous vehicle must continuously make decisions such as accelerating, braking,
+                or turning.
+            </p>
+            <ul>
+                <li>Each action changes the vehicle’s position and speed.</li>
+                <li>Errors accumulate over time.</li>
+                <li>Safety depends on long-term planning.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 3: Robot Navigation</h3>
+            <p>
+                A robot navigating a building must decide a sequence of movements to reach a destination.
+            </p>
+            <ul>
+                <li>Wrong turns waste time or cause collisions.</li>
+                <li>The path taken affects future options.</li>
+                <li>The task cannot be solved in a single step.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Comparison with Episodic Environments</h2>
+
+        <div class="comparison">
+            <p>
+                Sequential environments are fundamentally different from episodic environments.
+            </p>
+            <ul>
+                <li>
+                    <strong>Sequential:</strong> Current actions influence future states and rewards.
+                </li>
+                <li>
+                    <strong>Episodic:</strong> Each decision is independent of previous ones.
+                </li>
+                <li>
+                    <strong>Sequential:</strong> Requires planning and long-term strategy.
+                </li>
+                <li>
+                    <strong>Episodic:</strong> Focuses only on immediate performance.
+                </li>
+            </ul>
+            <p>
+                Games, navigation, and control systems are sequential, whereas classification tasks
+                are typically episodic.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Implications for Agent Design</h2>
+        <p>
+            Designing agents for sequential environments is significantly more complex. Such agents often rely on:
+        </p>
+        <ul>
+            <li>State representations</li>
+            <li>Search algorithms (e.g., minimax, A*)</li>
+            <li>Markov Decision Processes (MDPs)</li>
+            <li>Reinforcement Learning techniques</li>
+        </ul>
+        <p>
+            These tools allow agents to reason over time, evaluate future outcomes, and optimize long-term performance.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Summary</h2>
+        <p>
+            Sequential environments are a fundamental concept in Artificial Intelligence, representing
+            scenarios where actions have lasting consequences. They demand memory, planning, and
+            strategic reasoning from intelligent agents.
+        </p>
+        <p>
+            Understanding sequential environments is essential for building intelligent systems
+            capable of operating in dynamic, real-world situations.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Task Environment Classification</p>
+</footer>
+
+</body>
+</html>

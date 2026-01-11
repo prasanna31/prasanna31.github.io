@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Path Cost Functions in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #1a237e;
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 28px 32px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #1a237e;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            margin-top: 25px;
+            color: #2c3e50;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 22px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #e8eaf6;
+            border-left: 5px solid #1a237e;
+            padding: 16px 22px;
+            margin: 22px 0;
+            border-radius: 4px;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 5px solid #f1c40f;
+            padding: 16px 22px;
+            margin: 22px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1a237e;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Path Cost Functions</h1>
+    <p>Measuring the Quality of a Solution in Search Problems</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction</h2>
+        <p>
+            In search-based problem solving, multiple paths may exist from the initial state to the
+            goal state. To determine the best path, we use a <strong>path cost function</strong>.
+            It assigns a numeric value to each path, allowing comparison of alternative solutions.
+        </p>
+        <p>
+            Path cost functions are essential in informed and uninformed search strategies, such as
+            Uniform Cost Search and A* search, to find optimal solutions efficiently.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Definition of Path Cost</h2>
+        <p>
+            The <strong>path cost</strong>, usually denoted as <code>g(n)</code>, is the cumulative
+            cost of all actions taken from the initial state to reach a given state <code>n</code>.
+        </p>
+        <p>
+            Formally, if a path consists of a sequence of states connected by actions
+            <code>a1, a2, ..., an</code>, the path cost is:
+        </p>
+        <p style="text-align:center;"><strong>g(n) = c(s0, a1, s1) + c(s1, a2, s2) + ... + c(sn-1, an, sn)</strong></p>
+        <ul>
+            <li><code>c(si, ai+1, si+1)</code> is the cost of applying action <code>ai+1</code> in
+                state <code>si</code> to reach <code>si+1</code>
+            </li>
+            <li>g(n) accumulates all costs from the start state to state n</li>
+            <li>The function helps find the <strong>least-cost path</strong> to the goal</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Properties of Path Cost Functions</h2>
+        <ul>
+            <li><strong>Non-Negativity:</strong> Costs are usually non-negative (<code>c ≥ 0</code>)</li>
+            <li><strong>Additivity:</strong> Total path cost is the sum of individual action costs</li>
+            <li><strong>Consistency:</strong> For some problems, costs satisfy the triangle inequality</li>
+            <li><strong>State-Dependence:</strong> Cost may depend on current state, action, or successor</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. Examples of Path Cost Functions</h2>
+
+        <div class="example">
+            <h3>Example 1: Route Finding</h3>
+            <ul>
+                <li><strong>Action Cost:</strong> Distance between two connected cities</li>
+                <li><strong>Path Cost:</strong> Sum of distances along the traveled route</li>
+                <li><strong>Goal:</strong> Find the shortest path from start city to destination</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 2: 8-Puzzle Problem</h3>
+            <ul>
+                <li><strong>Action Cost:</strong> Typically 1 per tile move</li>
+                <li><strong>Path Cost:</strong> Total number of moves to reach goal configuration</li>
+                <li><strong>Goal:</strong> Minimize number of moves</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 3: Robot Navigation</h3>
+            <ul>
+                <li><strong>Action Cost:</strong> Energy consumed per movement or turn</li>
+                <li><strong>Path Cost:</strong> Total energy to reach target location</li>
+                <li><strong>Goal:</strong> Minimize energy consumption</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Importance in Search Algorithms</h2>
+        <ul>
+            <li>Determines optimality of paths (finding the least-cost path)</li>
+            <li>Guides algorithms like Uniform Cost Search and A*</li>
+            <li>Allows comparison of multiple solution paths</li>
+            <li>Crucial in problems with varying action costs</li>
+        </ul>
+
+        <div class="note">
+            <strong>Key Insight:</strong>  
+            Without a path cost function, an agent may find a solution but cannot determine whether it is
+            optimal or efficient.
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Summary</h2>
+        <p>
+            The path cost function quantifies the quality of a path in search-based problem solving.
+            By associating costs with actions and summing them along a path, agents can select
+            optimal solutions, evaluate alternatives, and guide search strategies efficiently.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Problem Solving by Search</p>
+</footer>
+
+</body>
+</html>

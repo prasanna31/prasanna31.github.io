@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deterministic Environments</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.75;
+        }
+
+        header {
+            background: linear-gradient(135deg, #020617, #1e3a8a);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            max-width: 900px;
+            margin: auto;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        section h2 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.9rem;
+        }
+
+        section h3 {
+            color: #020617;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: #eef2ff;
+            padding: 15px;
+            border-left: 5px solid #1e40af;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .example {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table th, table td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #eef2ff;
+            color: #1e40af;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #020617;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Deterministic Environments</h1>
+    <p>
+        When actions have predictable and certain outcomes
+    </p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Definition</h2>
+        <p>
+            An environment is <strong>deterministic</strong> if the next state of the environment
+            is completely determined by the current state and the agent’s action.
+        </p>
+        <p>
+            In such environments, there is no randomness or uncertainty in how actions affect the world.
+        </p>
+        <div class="highlight">
+            Same state + same action → same outcome.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Key Characteristics</h2>
+        <ul>
+            <li>Predictable state transitions</li>
+            <li>No randomness in action outcomes</li>
+            <li>Exact modeling is possible</li>
+            <li>Future states can be planned precisely</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Deterministic vs Stochastic</h2>
+        <p>
+            Deterministic environments are often contrasted with stochastic environments,
+            where actions may have probabilistic outcomes.
+        </p>
+        <table>
+            <tr>
+                <th>Aspect</th>
+                <th>Deterministic</th>
+                <th>Stochastic</th>
+            </tr>
+            <tr>
+                <td>Action outcome</td>
+                <td>Certain</td>
+                <td>Probabilistic</td>
+            </tr>
+            <tr>
+                <td>Uncertainty</td>
+                <td>None</td>
+                <td>Present</td>
+            </tr>
+            <tr>
+                <td>Planning</td>
+                <td>Exact</td>
+                <td>Expected value based</td>
+            </tr>
+            <tr>
+                <td>Example</td>
+                <td>Chess</td>
+                <td>Dice game</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>4. Examples</h2>
+
+        <div class="example">
+            <strong>Chess</strong>
+            <p>
+                Every move leads to a specific, predictable board configuration.
+            </p>
+        </div>
+
+        <div class="example">
+            <strong>Sudoku Solver</strong>
+            <p>
+                Placing a number deterministically updates the puzzle state.
+            </p>
+        </div>
+
+        <div class="example">
+            <strong>Automated Theorem Proving</strong>
+            <p>
+                Logical inference rules always produce the same results.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Implications for Agent Design</h2>
+        <p>
+            Deterministic environments allow agents to plan long sequences of actions with confidence.
+        </p>
+        <ul>
+            <li>Classical search algorithms are effective</li>
+            <li>Minimax and planning techniques apply</li>
+            <li>No need for probabilistic reasoning</li>
+        </ul>
+        <div class="highlight">
+            Perfect planning is possible if the environment is fully observable and deterministic.
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Determinism vs Predictability</h2>
+        <p>
+            An environment may be deterministic but still difficult to predict if it is complex
+            or computationally intractable.
+        </p>
+        <p>
+            Determinism refers to certainty in rules, not ease of computation.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Limitations of Deterministic Models</h2>
+        <ul>
+            <li>Rare in real-world systems</li>
+            <li>Often idealized abstractions</li>
+            <li>Ignore noise and uncertainty</li>
+        </ul>
+        <p>
+            Most real-world environments exhibit some degree of stochasticity.
+        </p>
+    </section>
+
+    <section>
+        <h2>8. Summary</h2>
+        <p>
+            Deterministic environments provide certainty in outcomes, enabling exact planning
+            and simpler agent architectures.
+        </p>
+        <div class="highlight">
+            Determinism simplifies decision-making by eliminating uncertainty.
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 | Artificial Intelligence Concepts Series | Deterministic Environments
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Initial State Definition in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #2e4053;
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 28px 32px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #2e4053;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            margin-top: 25px;
+            color: #2c3e50;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 22px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #ebedef;
+            border-left: 5px solid #2e4053;
+            padding: 16px 22px;
+            margin: 22px 0;
+            border-radius: 4px;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 5px solid #f1c40f;
+            padding: 16px 22px;
+            margin: 22px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2e4053;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Initial State Definition</h1>
+    <p>The Starting Point of Search-Based Problem Solving</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction</h2>
+        <p>
+            In Artificial Intelligence, search-based problem solving begins from a clearly defined
+            starting situation known as the <strong>initial state</strong>. Every search algorithm
+            assumes that the agent starts from this state and attempts to reach a goal state by
+            applying a sequence of actions.
+        </p>
+        <p>
+            The correctness, efficiency, and feasibility of the search process depend heavily on how
+            accurately the initial state is defined.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. What is an Initial State?</h2>
+        <p>
+            The <strong>initial state</strong> is a formal description of the environment at the
+            moment when problem solving begins. It represents the agent’s current knowledge of the
+            world before any actions are taken.
+        </p>
+        <ul>
+            <li>It is the first node in the search tree</li>
+            <li>It represents the root of the state space</li>
+            <li>All search paths originate from this state</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Characteristics of a Good Initial State</h2>
+
+        <h3>3.1 Completeness</h3>
+        <p>
+            The initial state must contain all relevant information needed to determine valid
+            actions and transitions.
+        </p>
+
+        <h3>3.2 Unambiguity</h3>
+        <p>
+            The description should be precise and leave no room for multiple interpretations.
+        </p>
+
+        <h3>3.3 Consistency with the State Space</h3>
+        <p>
+            The initial state must be a valid member of the defined state space.
+        </p>
+
+        <div class="note">
+            <strong>Key Insight:</strong>  
+            An incorrect or incomplete initial state can lead the search algorithm toward invalid
+            or meaningless solutions.
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Role of the Initial State in Search</h2>
+        <p>
+            The initial state plays several crucial roles in the search process:
+        </p>
+        <ul>
+            <li>Acts as the starting node of the search tree</li>
+            <li>Determines the first set of possible actions</li>
+            <li>Influences the depth and breadth of the search</li>
+            <li>Affects time and space complexity</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>5. Examples of Initial State Definition</h2>
+
+        <div class="example">
+            <h3>Example 1: Route Finding Problem</h3>
+            <p>
+                <strong>Initial State:</strong> The agent is located in city A.
+            </p>
+            <p>
+                All routes explored by the search algorithm start from this city.
+            </p>
+        </div>
+
+        <div class="example">
+            <h3>Example 2: 8-Puzzle Problem</h3>
+            <p>
+                <strong>Initial State:</strong> A given configuration of numbered tiles and one blank
+                space.
+            </p>
+        </div>
+
+        <div class="example">
+            <h3>Example 3: Robot Navigation</h3>
+            <p>
+                <strong>Initial State:</strong> Robot’s starting position and orientation in a room.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Initial State vs Goal State</h2>
+        <p>
+            While the initial state defines where the agent starts, the goal state defines where the
+            agent wants to reach.
+        </p>
+        <ul>
+            <li><strong>Initial State:</strong> Known at the beginning</li>
+            <li><strong>Goal State:</strong> May be one or many acceptable states</li>
+            <li><strong>Search:</strong> Finds a path connecting them</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>7. Summary</h2>
+        <p>
+            The initial state is the foundation of search-based problem solving in AI. It defines the
+            starting point from which all exploration begins and directly impacts the efficiency and
+            correctness of the solution.
+        </p>
+        <p>
+            A well-defined initial state ensures that search algorithms operate within valid and
+            meaningful boundaries.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Problem Solving by Search</p>
+</footer>
+
+</body>
+</html>

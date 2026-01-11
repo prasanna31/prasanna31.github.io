@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Problem Solving by Search – Problem Formulation and Definition</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #154360;
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 28px 32px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #154360;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            margin-top: 25px;
+            color: #2c3e50;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 22px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #eaf2f8;
+            border-left: 5px solid #154360;
+            padding: 16px 22px;
+            margin: 22px 0;
+            border-radius: 4px;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 5px solid #f1c40f;
+            padding: 16px 22px;
+            margin: 22px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #154360;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>PART III: Problem Solving by Search</h1>
+    <p>Problem Formulation and Problem Definition</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction to Problem Solving by Search</h2>
+        <p>
+            One of the fundamental capabilities of an intelligent agent is the ability to
+            <strong>solve problems</strong>. In Artificial Intelligence, problem solving is often
+            modeled as a process of searching through a space of possible states to find a sequence
+            of actions that leads from an initial situation to a desired goal.
+        </p>
+        <p>
+            This approach is known as <strong>problem solving by search</strong>. Before an agent
+            can apply any search algorithm, it must first precisely understand and represent the
+            problem it is trying to solve. This is achieved through <em>problem formulation</em>
+            and <em>problem definition</em>.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Problem Formulation</h2>
+        <p>
+            <strong>Problem formulation</strong> is the process of deciding how to represent a
+            real-world problem in a way that an AI agent can reason about and solve using search
+            techniques.
+        </p>
+        <p>
+            The real world is complex and continuous, but search algorithms operate on well-defined,
+            abstract models. Problem formulation bridges this gap by selecting the relevant aspects
+            of the world and ignoring unnecessary details.
+        </p>
+
+        <h3>2.1 Purpose of Problem Formulation</h3>
+        <ul>
+            <li>To convert an informal problem into a formal structure</li>
+            <li>To define what states and actions are relevant</li>
+            <li>To make the problem solvable using search algorithms</li>
+            <li>To balance realism and computational feasibility</li>
+        </ul>
+
+        <div class="note">
+            <strong>Important Insight:</strong>  
+            A poorly formulated problem can be extremely hard or impossible to solve, even if a
+            solution exists.
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Problem Definition</h2>
+        <p>
+            Once the problem is formulated conceptually, it is expressed formally as a
+            <strong>problem definition</strong>. A problem definition specifies the exact components
+            required by a search algorithm.
+        </p>
+        <p>
+            In classical AI, a problem is defined by the following five elements.
+        </p>
+
+        <h3>3.1 Initial State</h3>
+        <p>
+            The <strong>initial state</strong> describes the starting point of the agent in the
+            state space.
+        </p>
+        <ul>
+            <li>Represents the current situation</li>
+            <li>Must be fully specified</li>
+            <li>Acts as the root node of the search tree</li>
+        </ul>
+
+        <h3>3.2 State Space</h3>
+        <p>
+            The <strong>state space</strong> is the set of all possible states that can be reached
+            from the initial state by applying actions.
+        </p>
+        <ul>
+            <li>May be finite or infinite</li>
+            <li>Defines the search domain</li>
+            <li>Graphically represented as a graph or tree</li>
+        </ul>
+
+        <h3>3.3 Actions (Successor Function)</h3>
+        <p>
+            The <strong>successor function</strong> defines the available actions for each state and
+            the resulting states after performing those actions.
+        </p>
+        <ul>
+            <li>Maps a state to possible next states</li>
+            <li>Defines the edges of the state space graph</li>
+            <li>Determines how the agent can move through the space</li>
+        </ul>
+
+        <h3>3.4 Goal Test</h3>
+        <p>
+            The <strong>goal test</strong> determines whether a given state satisfies the objective
+            of the problem.
+        </p>
+        <ul>
+            <li>Used to detect successful states</li>
+            <li>May check a single goal or multiple goals</li>
+            <li>Ends the search when satisfied</li>
+        </ul>
+
+        <h3>3.5 Path Cost</h3>
+        <p>
+            The <strong>path cost</strong> assigns a numeric cost to a sequence of actions.
+        </p>
+        <ul>
+            <li>Measures solution quality</li>
+            <li>May represent time, distance, energy, or risk</li>
+            <li>Used to find optimal solutions</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. Example: Route Finding Problem</h2>
+
+        <div class="example">
+            <p><strong>Initial State:</strong> Starting city (e.g., Arad)</p>
+            <p><strong>State Space:</strong> All cities and road connections</p>
+            <p><strong>Actions:</strong> Drive to a neighboring city</p>
+            <p><strong>Goal Test:</strong> Reach destination city (e.g., Bucharest)</p>
+            <p><strong>Path Cost:</strong> Total distance traveled</p>
+        </div>
+
+        <p>
+            Once defined this way, standard search algorithms such as BFS, DFS, Uniform Cost Search,
+            or A* can be applied.
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Relationship Between Formulation and Definition</h2>
+        <p>
+            Problem formulation is a conceptual and modeling step, while problem definition is a
+            precise and formal specification.
+        </p>
+        <ul>
+            <li>Formulation decides <em>what</em> to model</li>
+            <li>Definition specifies <em>how</em> it is represented</li>
+            <li>Both strongly influence search efficiency</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>6. Summary</h2>
+        <p>
+            Problem solving by search relies on accurately representing problems in a structured
+            manner. Problem formulation abstracts the real world into a solvable model, while
+            problem definition provides the exact components required by search algorithms.
+        </p>
+        <p>
+            A well-defined problem is the foundation upon which all search strategies operate.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Problem Solving by Search</p>
+</footer>
+
+</body>
+</html>

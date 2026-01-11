@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Single-Agent and Multi-Agent Systems in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #1a5276;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.4em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #1a5276;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #eaf2f8;
+            border-left: 5px solid #1a5276;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .comparison {
+            background-color: #fff3e0;
+            border-left: 5px solid #f39c12;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #d6dce5;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f4f9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1a5276;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Single-Agent Systems and Multi-Agent Systems</h1>
+    <p>Understanding Intelligent Decision Making with One or Multiple Agents</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction</h2>
+        <p>
+            In Artificial Intelligence, an <strong>agent</strong> is an entity that perceives
+            its environment through sensors and acts upon that environment through actuators.
+            Depending on how many agents operate within an environment, AI systems can be
+            classified as <strong>single-agent systems</strong> or <strong>multi-agent systems</strong>.
+        </p>
+        <p>
+            This distinction has significant implications for environment modeling, decision
+            making, complexity, and system behavior.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Single-Agent Systems</h2>
+
+        <h3>2.1 Definition</h3>
+        <p>
+            A <strong>single-agent system</strong> is a system in which only one intelligent
+            agent operates in the environment and is responsible for achieving its goals.
+        </p>
+
+        <h3>2.2 Characteristics</h3>
+        <ul>
+            <li>No interaction with other intelligent agents</li>
+            <li>Environment behavior depends only on the agent and natural dynamics</li>
+            <li>Simpler modeling and decision making</li>
+            <li>Performance depends solely on the agent’s actions</li>
+        </ul>
+
+        <div class="example">
+            <h3>Example: Maze-Solving Robot</h3>
+            <p>
+                A robot navigating a maze alone to reach a goal position operates as a
+                single-agent system. There are no competing or cooperating agents.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Multi-Agent Systems</h2>
+
+        <h3>3.1 Definition</h3>
+        <p>
+            A <strong>multi-agent system</strong> consists of two or more intelligent agents
+            that interact with each other within a shared environment.
+        </p>
+
+        <h3>3.2 Characteristics</h3>
+        <ul>
+            <li>Presence of multiple autonomous agents</li>
+            <li>Agents may cooperate, compete, or coexist</li>
+            <li>Environment dynamics depend on actions of multiple agents</li>
+            <li>Higher complexity and uncertainty</li>
+        </ul>
+
+        <div class="example">
+            <h3>Example: Traffic System</h3>
+            <p>
+                Each vehicle acts as an independent agent. The behavior of one vehicle
+                influences the decisions of others, making traffic a multi-agent system.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Types of Multi-Agent Interactions</h2>
+
+        <h3>4.1 Cooperative Systems</h3>
+        <p>
+            Agents work together to achieve a shared goal, such as multiple robots
+            carrying an object collaboratively.
+        </p>
+
+        <h3>4.2 Competitive Systems</h3>
+        <p>
+            Agents have conflicting goals. Games like chess and poker fall into this category.
+        </p>
+
+        <h3>4.3 Mixed Systems</h3>
+        <p>
+            Agents may cooperate within teams while competing against other teams,
+            as seen in robot soccer.
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Comparison: Single-Agent vs Multi-Agent Systems</h2>
+
+        <div class="comparison">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Single-Agent Systems</th>
+                    <th>Multi-Agent Systems</th>
+                </tr>
+                <tr>
+                    <td>Number of Agents</td>
+                    <td>One</td>
+                    <td>Two or more</td>
+                </tr>
+                <tr>
+                    <td>Interaction</td>
+                    <td>No interaction with other agents</td>
+                    <td>Agents interact with each other</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>Lower</td>
+                    <td>Higher</td>
+                </tr>
+                <tr>
+                    <td>Environment Dynamics</td>
+                    <td>Depends mainly on one agent</td>
+                    <td>Depends on actions of multiple agents</td>
+                </tr>
+                <tr>
+                    <td>Examples</td>
+                    <td>Single robot, puzzle solving</td>
+                    <td>Games, traffic, markets</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Implications for Agent Design</h2>
+        <p>
+            Designing multi-agent systems requires addressing additional challenges such as:
+        </p>
+        <ul>
+            <li>Coordination and communication</li>
+            <li>Negotiation and cooperation</li>
+            <li>Game-theoretic reasoning</li>
+            <li>Handling strategic behavior of other agents</li>
+        </ul>
+        <p>
+            In contrast, single-agent systems can often be solved using classical planning
+            and search techniques.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Summary</h2>
+        <p>
+            Single-agent systems involve a lone agent interacting with its environment,
+            while multi-agent systems involve multiple agents whose actions affect each other.
+        </p>
+        <p>
+            Understanding this distinction is crucial for modeling real-world AI problems,
+            from robotics and games to economics and social systems.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Agents and Environments</p>
+</footer>
+
+</body>
+</html>

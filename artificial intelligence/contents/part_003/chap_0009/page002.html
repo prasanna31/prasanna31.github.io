@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>State Space Representation in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #1b4f72;
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 28px 32px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #1b4f72;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            margin-top: 25px;
+            color: #2c3e50;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 22px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #ebf5fb;
+            border-left: 5px solid #1b4f72;
+            padding: 16px 22px;
+            margin: 22px 0;
+            border-radius: 4px;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 5px solid #f1c40f;
+            padding: 16px 22px;
+            margin: 22px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1b4f72;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>State Space Representation</h1>
+    <p>Formalizing Problems for Search-Based AI</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction</h2>
+        <p>
+            In Artificial Intelligence, solving a problem using search requires a precise and
+            structured representation of all possible situations the agent may encounter. This
+            representation is known as the <strong>state space</strong>.
+        </p>
+        <p>
+            A state space provides the foundation upon which search algorithms operate. Without
+            a well-defined state space, it is impossible to systematically explore solutions.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. What is a State?</h2>
+        <p>
+            A <strong>state</strong> is an abstract description of the environment at a specific
+            point in time. It captures all the relevant information needed to determine future
+            actions.
+        </p>
+        <ul>
+            <li>States ignore irrelevant details</li>
+            <li>They must be complete and unambiguous</li>
+            <li>They are problem-dependent abstractions</li>
+        </ul>
+
+        <div class="example">
+            <p>
+                In the 8-puzzle problem, a state is a particular arrangement of the tiles on the
+                board.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. State Space</h2>
+        <p>
+            The <strong>state space</strong> is the set of all states reachable from the initial
+            state by applying any sequence of valid actions.
+        </p>
+        <p>
+            It defines the universe in which the search takes place.
+        </p>
+
+        <h3>3.1 Properties of a State Space</h3>
+        <ul>
+            <li>May be finite or infinite</li>
+            <li>May be discrete or continuous</li>
+            <li>Often represented implicitly rather than explicitly</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. State Space Representation</h2>
+        <p>
+            <strong>State space representation</strong> refers to how states and transitions between
+            them are formally described so that a computer can manipulate them.
+        </p>
+
+        <h3>4.1 Graph Representation</h3>
+        <p>
+            The most common representation is a graph where:
+        </p>
+        <ul>
+            <li>Nodes represent states</li>
+            <li>Edges represent actions</li>
+            <li>Edge weights represent path costs</li>
+        </ul>
+
+        <h3>4.2 Tree Representation</h3>
+        <p>
+            During search, the state space is often explored as a tree rooted at the initial state.
+            Duplicate states may appear multiple times in the tree.
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Explicit vs Implicit State Spaces</h2>
+
+        <h3>5.1 Explicit Representation</h3>
+        <p>
+            All states and transitions are listed in advance.
+        </p>
+        <ul>
+            <li>Feasible only for very small problems</li>
+            <li>High memory requirements</li>
+        </ul>
+
+        <h3>5.2 Implicit Representation</h3>
+        <p>
+            States are generated on the fly using a successor function.
+        </p>
+        <ul>
+            <li>Used in most real problems</li>
+            <li>Efficient and scalable</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>6. Example: 8-Puzzle State Space</h2>
+        <div class="example">
+            <p><strong>State:</strong> Arrangement of 8 numbered tiles and one blank</p>
+            <p><strong>Initial State:</strong> Given configuration</p>
+            <p><strong>Actions:</strong> Move blank tile up, down, left, or right</p>
+            <p><strong>State Space Size:</strong> 9! / 2 reachable states</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>7. Importance of State Space Representation</h2>
+        <ul>
+            <li>Determines search efficiency</li>
+            <li>Influences memory and time complexity</li>
+            <li>Affects applicability of algorithms</li>
+            <li>Enables formal reasoning and correctness</li>
+        </ul>
+
+        <div class="note">
+            <strong>Key Idea:</strong>  
+            A good state space representation simplifies the problem and reduces unnecessary
+            complexity.
+        </div>
+    </section>
+
+    <section>
+        <h2>8. Summary</h2>
+        <p>
+            State space representation is the backbone of search-based problem solving in AI.
+            It defines how problems are structured, explored, and solved by intelligent agents.
+        </p>
+        <p>
+            Careful design of the state space often makes the difference between a solvable and
+            an intractable problem.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Problem Solving by Search</p>
+</footer>
+
+</body>
+</html>

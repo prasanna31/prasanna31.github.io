@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stochastic Environments</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.75;
+        }
+
+        header {
+            background: linear-gradient(135deg, #020617, #1e3a8a);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            max-width: 900px;
+            margin: auto;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        section h2 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.9rem;
+        }
+
+        section h3 {
+            color: #020617;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: #eef2ff;
+            padding: 15px;
+            border-left: 5px solid #1e40af;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .example {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table th, table td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #eef2ff;
+            color: #1e40af;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #020617;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Stochastic Environments</h1>
+    <p>
+        When actions lead to uncertain or probabilistic outcomes
+    </p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Definition</h2>
+        <p>
+            An environment is <strong>stochastic</strong> if the outcome of an agent’s action
+            is not completely determined by the current state and action alone.
+        </p>
+        <p>
+            Instead, outcomes are governed by probability distributions.
+        </p>
+        <div class="highlight">
+            Same state + same action → different possible outcomes.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Sources of Stochasticity</h2>
+        <ul>
+            <li>Random events in the environment</li>
+            <li>Noisy actuators or sensors</li>
+            <li>Unpredictable behavior of other agents</li>
+            <li>Incomplete environmental models</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Stochastic vs Deterministic</h2>
+        <table>
+            <tr>
+                <th>Aspect</th>
+                <th>Deterministic</th>
+                <th>Stochastic</th>
+            </tr>
+            <tr>
+                <td>Outcome certainty</td>
+                <td>Guaranteed</td>
+                <td>Probabilistic</td>
+            </tr>
+            <tr>
+                <td>Uncertainty</td>
+                <td>None</td>
+                <td>Intrinsic</td>
+            </tr>
+            <tr>
+                <td>Decision criterion</td>
+                <td>Exact outcome</td>
+                <td>Expected utility</td>
+            </tr>
+            <tr>
+                <td>Example</td>
+                <td>Chess</td>
+                <td>Backgammon</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>4. Examples</h2>
+
+        <div class="example">
+            <strong>Backgammon</strong>
+            <p>
+                Dice rolls introduce randomness into the game.
+            </p>
+        </div>
+
+        <div class="example">
+            <strong>Stock Market Trading</strong>
+            <p>
+                Market reactions are uncertain and influenced by many hidden factors.
+            </p>
+        </div>
+
+        <div class="example">
+            <strong>Robotics in the Real World</strong>
+            <p>
+                Slippage, sensor noise, and external disturbances affect outcomes.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Implications for Agent Design</h2>
+        <p>
+            In stochastic environments, agents cannot plan based on certainty.
+            Instead, they aim to maximize <strong>expected performance</strong>.
+        </p>
+        <ul>
+            <li>Probabilistic reasoning is essential</li>
+            <li>Utility functions guide decisions</li>
+            <li>Risk-sensitive planning may be required</li>
+        </ul>
+        <div class="highlight">
+            Rational agents choose actions with the highest expected utility.
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Formal Models</h2>
+        <p>
+            Stochastic environments are commonly modeled using
+            <strong>Markov Decision Processes (MDPs)</strong>.
+        </p>
+        <p>
+            MDPs represent probabilistic transitions and rewards over states and actions.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Stochastic vs Uncertain</h2>
+        <p>
+            Stochasticity refers to known probability distributions.
+            Uncertainty may also arise when probabilities themselves are unknown.
+        </p>
+        <p>
+            Learning agents attempt to reduce uncertainty through experience.
+        </p>
+    </section>
+
+    <section>
+        <h2>8. Real-World Significance</h2>
+        <p>
+            Almost all real-world environments are stochastic to some degree.
+        </p>
+        <ul>
+            <li>Weather systems</li>
+            <li>Traffic patterns</li>
+            <li>Human behavior</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>9. Summary</h2>
+        <p>
+            Stochastic environments introduce uncertainty, requiring agents to reason
+            probabilistically and optimize expected outcomes rather than guaranteed ones.
+        </p>
+        <div class="highlight">
+            Intelligence emerges from making good decisions under uncertainty.
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 | Artificial Intelligence Concepts Series | Stochastic Environments
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Concept of Intelligent Agents</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.75;
+        }
+
+        header {
+            background: linear-gradient(135deg, #020617, #1e3a8a);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            max-width: 900px;
+            margin: auto;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        section h2 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.9rem;
+        }
+
+        section h3 {
+            color: #020617;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: #eef2ff;
+            padding: 15px;
+            border-left: 5px solid #1e40af;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .example {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #020617;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Concept of Intelligent Agents</h1>
+    <p>
+        The foundational model for understanding artificial intelligence as entities that
+        perceive, decide, and act rationally in an environment
+    </p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. What Is an Intelligent Agent?</h2>
+        <p>
+            An <strong>intelligent agent</strong> is any entity that perceives its environment
+            through sensors and acts upon that environment through actuators in order to achieve
+            goals. This definition forms the core of modern Artificial Intelligence.
+        </p>
+        <p>
+            Humans, animals, robots, and software programs can all be modeled as agents. What makes
+            an agent <em>intelligent</em> is its ability to make decisions that improve its
+            performance over time.
+        </p>
+        <div class="highlight">
+            <strong>Formal definition:</strong> An intelligent agent perceives its environment,
+            reasons about it, and takes actions that maximize a given performance measure.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Agent–Environment Interaction</h2>
+        <p>
+            The agent and its environment form a continuous feedback loop. At each step, the agent
+            observes the environment, decides what to do, and performs an action that changes the
+            environment.
+        </p>
+
+        <h3>Core Components</h3>
+        <ul>
+            <li><strong>Sensors:</strong> Collect information from the environment</li>
+            <li><strong>Actuators:</strong> Execute actions in the environment</li>
+            <li><strong>Agent Program:</strong> Maps percepts to actions</li>
+            <li><strong>Environment:</strong> The external world the agent operates in</li>
+        </ul>
+
+        <div class="example">
+            <strong>Example:</strong> A self-driving car uses cameras and lidar as sensors, steering
+            and brakes as actuators, and driving policies as its agent program.
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Rational Agents</h2>
+        <p>
+            Intelligence in AI is closely tied to the concept of <strong>rationality</strong>.
+            A rational agent chooses actions that maximize its expected performance given its
+            percepts and knowledge.
+        </p>
+        <p>
+            Rationality does not imply perfection or omniscience. A rational agent may still make
+            mistakes due to incomplete information or uncertainty.
+        </p>
+        <div class="highlight">
+            Rational behavior is defined relative to goals, percepts, and available actions—not
+            absolute correctness.
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Performance Measure</h2>
+        <p>
+            A performance measure defines how successful an agent is. It is specified by the
+            designer and depends on the task environment.
+        </p>
+
+        <h3>Examples</h3>
+        <ul>
+            <li>Winning a game (chess, Go)</li>
+            <li>Minimizing fuel consumption</li>
+            <li>Maximizing user satisfaction</li>
+            <li>Reducing error rate in predictions</li>
+        </ul>
+
+        <p>
+            Designing the right performance measure is critical, as agents optimize exactly what
+            they are rewarded for.
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Types of Intelligent Agents</h2>
+
+        <h3>Simple Reflex Agents</h3>
+        <p>
+            These agents act based solely on the current percept, using condition–action rules.
+            They do not maintain internal state.
+        </p>
+
+        <h3>Model-Based Agents</h3>
+        <p>
+            These agents maintain an internal model of the environment to handle partial
+            observability.
+        </p>
+
+        <h3>Goal-Based Agents</h3>
+        <p>
+            These agents act to achieve specific goals, requiring planning and search.
+        </p>
+
+        <h3>Utility-Based Agents</h3>
+        <p>
+            These agents use a utility function to measure how desirable a state is, allowing
+            trade-offs between competing goals.
+        </p>
+
+        <h3>Learning Agents</h3>
+        <p>
+            Learning agents improve their behavior over time by learning from experience.
+        </p>
+    </section>
+
+    <section>
+        <h2>6. Learning Agents: Internal Structure</h2>
+        <p>
+            A learning agent typically consists of four components:
+        </p>
+        <ul>
+            <li><strong>Performance Element:</strong> Chooses actions</li>
+            <li><strong>Learning Element:</strong> Improves the performance element</li>
+            <li><strong>Critic:</strong> Evaluates performance</li>
+            <li><strong>Problem Generator:</strong> Suggests exploratory actions</li>
+        </ul>
+        <p>
+            This architecture allows agents to adapt to unknown or changing environments.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Task Environments (PEAS Framework)</h2>
+        <p>
+            Task environments are specified using the PEAS framework:
+        </p>
+        <ul>
+            <li><strong>P</strong>erformance measure</li>
+            <li><strong>E</strong>nvironment</li>
+            <li><strong>A</strong>ctuators</li>
+            <li><strong>S</strong>ensors</li>
+        </ul>
+
+        <div class="example">
+            <strong>Example (Vacuum Cleaner Agent):</strong><br>
+            Performance: Cleanliness, time, energy<br>
+            Environment: Rooms, dirt, walls<br>
+            Actuators: Move, suck, turn off<br>
+            Sensors: Dirt sensor, location sensor
+        </div>
+    </section>
+
+    <section>
+        <h2>8. Why Intelligent Agents Are Central to AI</h2>
+        <p>
+            The intelligent agent model unifies diverse AI problems—search, planning, learning,
+            perception, and reasoning—under a single conceptual framework.
+        </p>
+        <p>
+            Modern AI systems, including chatbots, recommendation engines, robots, and autonomous
+            systems, can all be understood as intelligent agents operating in different
+            environments.
+        </p>
+    </section>
+
+    <section>
+        <h2>9. Limitations of the Agent Model</h2>
+        <ul>
+            <li>Difficulty modeling complex human values</li>
+            <li>Challenges in multi-agent coordination</li>
+            <li>Computational constraints in real-world environments</li>
+            <li>Uncertainty and incomplete information</li>
+        </ul>
+        <p>
+            Despite these challenges, the agent-based perspective remains the most influential
+            framework in Artificial Intelligence.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 | Artificial Intelligence Concepts Series | Intelligent Agents
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Continuous Environments in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f7fb;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #0b5345;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.4em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #0b5345;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #e8f8f5;
+            border-left: 5px solid #0b5345;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .comparison {
+            background-color: #fff3e0;
+            border-left: 5px solid #f39c12;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #0b5345;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Continuous Environments</h1>
+    <p>Environments with Infinite, Real-Valued States, Actions, and Time</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction to Continuous Environments</h2>
+        <p>
+            In Artificial Intelligence, not all environments can be described using a finite
+            set of states or actions. Many real-world environments involve quantities such as
+            time, distance, speed, and force, which vary smoothly over a range of values.
+        </p>
+        <p>
+            Such environments are known as <strong>continuous environments</strong>. They
+            represent a more realistic but more complex class of environments compared to
+            discrete environments.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Definition of Continuous Environments</h2>
+        <p>
+            A <strong>continuous environment</strong> is an environment in which:
+        </p>
+        <ul>
+            <li>The state space is continuous (often real-valued)</li>
+            <li>The action space is continuous</li>
+            <li>Percepts may be continuous signals</li>
+            <li>Time progresses continuously</li>
+        </ul>
+        <p>
+            Small changes in actions or time can lead to small changes in the environment’s state.
+        </p>
+    </section>
+
+    <section>
+        <h2>3. Key Characteristics of Continuous Environments</h2>
+
+        <h3>3.1 Infinite State Space</h3>
+        <p>
+            The number of possible states is uncountably infinite. For example, an agent’s
+            position in physical space can take infinitely many values.
+        </p>
+
+        <h3>3.2 Real-Valued Actions</h3>
+        <p>
+            Actions are not limited to a fixed set. Instead, they may be real-valued, such as
+            applying a certain amount of force or turning a steering wheel by a specific angle.
+        </p>
+
+        <h3>3.3 Continuous Time</h3>
+        <p>
+            The environment evolves continuously over time, not in discrete steps.
+        </p>
+
+        <h3>3.4 Sensitivity to Small Changes</h3>
+        <p>
+            Small variations in perception or action can significantly affect future states,
+            making control and prediction more challenging.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Examples of Continuous Environments</h2>
+
+        <div class="example">
+            <h3>Example 1: Autonomous Vehicle Control</h3>
+            <p>
+                Steering, acceleration, and braking involve continuous control variables.
+            </p>
+            <ul>
+                <li>Speed varies continuously</li>
+                <li>Steering angles are real-valued</li>
+                <li>Vehicle dynamics evolve smoothly</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 2: Robotic Arm Manipulation</h3>
+            <p>
+                A robotic arm must control joint angles and forces with high precision.
+            </p>
+            <ul>
+                <li>Joint positions are continuous</li>
+                <li>Force and torque are real-valued</li>
+                <li>Small errors can cause failure</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 3: Temperature Control System</h3>
+            <p>
+                A thermostat controls temperature, which changes continuously over time.
+            </p>
+            <ul>
+                <li>Temperature is a real-valued variable</li>
+                <li>System response is gradual</li>
+                <li>Feedback control is required</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Comparison with Discrete Environments</h2>
+
+        <div class="comparison">
+            <p>
+                Continuous environments differ fundamentally from discrete environments.
+            </p>
+            <ul>
+                <li>
+                    <strong>Continuous:</strong> Infinite, real-valued states and actions
+                </li>
+                <li>
+                    <strong>Discrete:</strong> Finite or countable states and actions
+                </li>
+                <li>
+                    <strong>Continuous:</strong> Time flows smoothly
+                </li>
+                <li>
+                    <strong>Discrete:</strong> Time advances in steps
+                </li>
+            </ul>
+            <p>
+                Controlling a drone is continuous, whereas playing chess is discrete.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Implications for Agent Design</h2>
+        <p>
+            Continuous environments require more advanced techniques, such as:
+        </p>
+        <ul>
+            <li>Control theory</li>
+            <li>Continuous Markov Decision Processes</li>
+            <li>Function approximation</li>
+            <li>Reinforcement learning with continuous action spaces</li>
+        </ul>
+        <p>
+            Exact solutions are often infeasible, so approximation and learning-based
+            methods are commonly used.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Summary</h2>
+        <p>
+            Continuous environments involve infinite, smoothly varying states, actions,
+            and time. They more accurately model real-world systems but introduce significant
+            complexity in perception, control, and decision making.
+        </p>
+        <p>
+            Mastering continuous environments is crucial for building intelligent systems
+            that interact with the physical world.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Task Environment Classification</p>
+</footer>
+
+</body>
+</html>

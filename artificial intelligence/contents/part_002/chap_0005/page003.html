@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sensors and Actuators in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.75;
+        }
+
+        header {
+            background: linear-gradient(135deg, #020617, #1e3a8a);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            max-width: 900px;
+            margin: auto;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        section h2 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.9rem;
+        }
+
+        section h3 {
+            color: #020617;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: #eef2ff;
+            padding: 15px;
+            border-left: 5px solid #1e40af;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .example {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table th, table td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #eef2ff;
+            color: #1e40af;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #020617;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Sensors and Actuators</h1>
+    <p>
+        How intelligent agents perceive their environment and act upon it
+    </p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction</h2>
+        <p>
+            In Artificial Intelligence, an agent cannot operate in isolation. To function
+            intelligently, an agent must be able to <strong>perceive</strong> its environment and
+            <strong>act</strong> upon it. Sensors and actuators provide this essential interface
+            between the agent and the world.
+        </p>
+        <div class="highlight">
+            Sensors provide input to the agent, while actuators enable the agent to produce output.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Sensors: Perceiving the Environment</h2>
+        <p>
+            Sensors are components that collect information from the environment and convert it
+            into a form usable by the agent. The data obtained through sensors is called a
+            <strong>percept</strong>.
+        </p>
+
+        <h3>Types of Sensors</h3>
+        <ul>
+            <li><strong>Physical sensors:</strong> Cameras, microphones, GPS, lidar</li>
+            <li><strong>Software sensors:</strong> APIs, logs, databases, user inputs</li>
+            <li><strong>Virtual sensors:</strong> Game state variables, simulation data</li>
+        </ul>
+
+        <p>
+            Sensors may provide incomplete, noisy, or delayed information, making perception a
+            challenging problem in AI.
+        </p>
+    </section>
+
+    <section>
+        <h2>3. Percepts and Percept Sequences</h2>
+        <p>
+            A <strong>percept</strong> is a single snapshot of sensory input at a given moment. Over
+            time, the agent accumulates a <strong>percept sequence</strong>, which represents its
+            entire experience.
+        </p>
+        <p>
+            Intelligent agents often rely on percept sequences rather than current percepts alone,
+            especially in partially observable environments.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Actuators: Acting on the Environment</h2>
+        <p>
+            Actuators are mechanisms through which an agent affects the environment. They convert
+            the agent’s decisions into actions.
+        </p>
+
+        <h3>Types of Actuators</h3>
+        <ul>
+            <li><strong>Mechanical actuators:</strong> Motors, wheels, robotic arms</li>
+            <li><strong>Digital actuators:</strong> API calls, database updates</li>
+            <li><strong>Communicative actuators:</strong> Text, speech, notifications</li>
+        </ul>
+
+        <p>
+            The range and precision of an agent’s actions depend on its actuators.
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Sensors vs Actuators</h2>
+        <table>
+            <tr>
+                <th>Aspect</th>
+                <th>Sensors</th>
+                <th>Actuators</th>
+            </tr>
+            <tr>
+                <td>Purpose</td>
+                <td>Perceive the environment</td>
+                <td>Act on the environment</td>
+            </tr>
+            <tr>
+                <td>Direction</td>
+                <td>Environment → Agent</td>
+                <td>Agent → Environment</td>
+            </tr>
+            <tr>
+                <td>Output</td>
+                <td>Percepts</td>
+                <td>Actions</td>
+            </tr>
+            <tr>
+                <td>Examples</td>
+                <td>Cameras, logs, APIs</td>
+                <td>Motors, text output, commands</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>6. Example: Self-Driving Car</h2>
+        <div class="example">
+            <p>
+                <strong>Sensors:</strong> Cameras, radar, lidar, GPS, speed sensors
+            </p>
+            <p>
+                <strong>Actuators:</strong> Steering, accelerator, brake, indicators
+            </p>
+            <p>
+                The car continuously senses the road environment and takes actions to drive safely
+                and efficiently.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>7. Importance in Intelligent Behavior</h2>
+        <p>
+            Sensors and actuators define the limits of an agent’s intelligence. An agent cannot act
+            beyond what it can sense or influence.
+        </p>
+        <div class="highlight">
+            Better sensors improve perception, while better actuators improve control.
+        </div>
+    </section>
+
+    <section>
+        <h2>8. Sensors and Actuators in Modern AI Systems</h2>
+        <ul>
+            <li>Reinforcement learning agents in simulated environments</li>
+            <li>Chatbots sensing text and acting via generated responses</li>
+            <li>Robots interacting with physical environments</li>
+            <li>Financial agents sensing markets and executing trades</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>9. Summary</h2>
+        <p>
+            Sensors and actuators form the communication bridge between an intelligent agent and
+            its environment. Together, they enable perception, decision-making, action, and
+            learning—core components of Artificial Intelligence.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 | Artificial Intelligence Concepts Series | Sensors and Actuators
+</footer>
+
+</body>
+</html>

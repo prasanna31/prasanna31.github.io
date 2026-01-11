@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Static Environments in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #34495e;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.4em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #eef3f8;
+            border-left: 5px solid #34495e;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .comparison {
+            background-color: #fff7e6;
+            border-left: 5px solid #f39c12;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #34495e;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Static Environments</h1>
+    <p>Understanding Environments That Do Not Change During Decision Making</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction to Static Environments</h2>
+        <p>
+            In Artificial Intelligence, the environment in which an agent operates can change in various ways.
+            One important classification of environments is based on whether the environment changes while
+            the agent is deciding what action to take.
+        </p>
+        <p>
+            <strong>Static environments</strong> are those in which the environment remains unchanged
+            while the agent is deliberating. Time does not play a role in the evolution of the environment
+            unless the agent itself takes an action.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Definition of Static Environments</h2>
+        <p>
+            A <strong>static environment</strong> is an environment that does not change during the agent’s
+            decision-making process. The environment remains fixed until the agent performs an action.
+        </p>
+        <p>
+            In static environments:
+        </p>
+        <ul>
+            <li>The environment does not evolve on its own.</li>
+            <li>Time has no direct impact on the environment.</li>
+            <li>The agent does not need to act quickly to prevent changes.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Key Characteristics of Static Environments</h2>
+
+        <h3>3.1 No Time Pressure</h3>
+        <p>
+            Since the environment remains unchanged while the agent is thinking, there is no penalty
+            for taking additional time to compute the best action.
+        </p>
+
+        <h3>3.2 Environment Changes Only Due to Agent Actions</h3>
+        <p>
+            Any change in the environment occurs solely as a result of the agent’s actions, not due
+            to external processes.
+        </p>
+
+        <h3>3.3 Simplified Reasoning</h3>
+        <p>
+            Static environments simplify reasoning and planning because the agent can assume that
+            the world will remain the same until it acts.
+        </p>
+
+        <h3>3.4 Predictable Perception</h3>
+        <p>
+            The agent can safely assume that the percept it receives remains valid while deciding
+            what to do next.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Examples of Static Environments</h2>
+
+        <div class="example">
+            <h3>Example 1: Crossword Puzzle</h3>
+            <p>
+                A crossword puzzle does not change while a person is thinking about the next word.
+            </p>
+            <ul>
+                <li>The puzzle remains fixed.</li>
+                <li>Time does not affect the puzzle.</li>
+                <li>Only the solver’s actions fill in answers.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 2: Chess (During a Player’s Turn)</h3>
+            <p>
+                During a player’s turn, the chessboard remains static until a move is made.
+            </p>
+            <ul>
+                <li>The board does not change while the player thinks.</li>
+                <li>No external events alter the game state.</li>
+                <li>The next state depends only on the chosen move.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 3: Mathematical Problem Solving</h3>
+            <p>
+                When solving a math problem, the problem statement does not change over time.
+            </p>
+            <ul>
+                <li>The given information remains fixed.</li>
+                <li>The agent can take unlimited reasoning time.</li>
+                <li>Only the solution attempt changes the state.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Comparison with Dynamic Environments</h2>
+
+        <div class="comparison">
+            <p>
+                Static environments are often contrasted with <strong>dynamic environments</strong>.
+            </p>
+            <ul>
+                <li>
+                    <strong>Static:</strong> Environment does not change while the agent is thinking.
+                </li>
+                <li>
+                    <strong>Dynamic:</strong> Environment may change independently of the agent.
+                </li>
+                <li>
+                    <strong>Static:</strong> No urgency in decision making.
+                </li>
+                <li>
+                    <strong>Dynamic:</strong> Requires real-time responses.
+                </li>
+            </ul>
+            <p>
+                For example, a crossword puzzle is static, whereas driving a car in traffic is dynamic.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Implications for Agent Design</h2>
+        <p>
+            Agents operating in static environments can be designed with simpler architectures.
+            They often rely on:
+        </p>
+        <ul>
+            <li>Search-based problem solving</li>
+            <li>Logical reasoning systems</li>
+            <li>Offline planning algorithms</li>
+        </ul>
+        <p>
+            Since the environment does not change unexpectedly, the agent does not need continuous sensing
+            or rapid reactions.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Summary</h2>
+        <p>
+            Static environments are characterized by the absence of change during the agent’s deliberation.
+            This property makes them easier to reason about and ideal for classical AI problem-solving techniques.
+        </p>
+        <p>
+            Understanding static environments provides a foundation for appreciating more complex
+            dynamic and real-time environments encountered in real-world AI systems.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Task Environment Classification</p>
+</footer>
+
+</body>
+</html>

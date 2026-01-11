@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Performance Measures</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.75;
+        }
+
+        header {
+            background: linear-gradient(135deg, #020617, #1e3a8a);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            max-width: 900px;
+            margin: auto;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        section h2 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.9rem;
+        }
+
+        section h3 {
+            color: #020617;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: #eef2ff;
+            padding: 15px;
+            border-left: 5px solid #1e40af;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .example {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table th, table td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #eef2ff;
+            color: #1e40af;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #020617;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Performance Measures</h1>
+    <p>
+        Defining success and guiding rational behavior in intelligent agents
+    </p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. What Is a Performance Measure?</h2>
+        <p>
+            A <strong>performance measure</strong> is a criterion that defines how successful an
+            intelligent agent is at achieving its objectives. It is the standard by which an
+            agent’s behavior is evaluated.
+        </p>
+        <p>
+            In Artificial Intelligence, rational agents aim to maximize their performance measure
+            over time.
+        </p>
+        <div class="highlight">
+            A rational agent acts to maximize its performance measure, not to imitate human behavior.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Role of Performance Measures in AI</h2>
+        <p>
+            Performance measures serve as the <strong>goal specification</strong> for an agent.
+            They convert vague objectives like “do well” into measurable outcomes.
+        </p>
+        <ul>
+            <li>Guide decision-making</li>
+            <li>Enable objective evaluation</li>
+            <li>Determine what “rational” means</li>
+            <li>Influence learning and adaptation</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Performance Measure vs Goal</h2>
+        <p>
+            A goal describes a desired outcome, while a performance measure specifies
+            <em>how well</em> that goal is achieved.
+        </p>
+        <table>
+            <tr>
+                <th>Aspect</th>
+                <th>Goal</th>
+                <th>Performance Measure</th>
+            </tr>
+            <tr>
+                <td>Nature</td>
+                <td>Qualitative</td>
+                <td>Quantitative</td>
+            </tr>
+            <tr>
+                <td>Example</td>
+                <td>Drive safely</td>
+                <td>Accidents avoided, time taken</td>
+            </tr>
+            <tr>
+                <td>Usage</td>
+                <td>Planning</td>
+                <td>Evaluation & optimization</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>4. Characteristics of a Good Performance Measure</h2>
+        <ul>
+            <li><strong>Objective:</strong> Clearly measurable and unambiguous</li>
+            <li><strong>Aligned:</strong> Matches the designer’s true intent</li>
+            <li><strong>Comprehensive:</strong> Covers all important aspects of behavior</li>
+            <li><strong>Robust:</strong> Resistant to exploitation or loopholes</li>
+        </ul>
+        <div class="highlight">
+            Poorly designed performance measures lead to irrational or harmful behavior.
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Examples of Performance Measures</h2>
+
+        <div class="example">
+            <strong>Vacuum Cleaner Agent</strong>
+            <ul>
+                <li>Percentage of clean tiles</li>
+                <li>Time taken</li>
+                <li>Energy consumption</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <strong>Self-Driving Car</strong>
+            <ul>
+                <li>Safety (collisions avoided)</li>
+                <li>Travel time</li>
+                <li>Passenger comfort</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <strong>Chess Agent</strong>
+            <ul>
+                <li>Win/loss/draw outcome</li>
+                <li>Material advantage</li>
+                <li>Time efficiency</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Single vs Multiple Performance Measures</h2>
+        <p>
+            Many real-world problems require optimizing multiple, often conflicting objectives.
+        </p>
+        <ul>
+            <li>Speed vs safety</li>
+            <li>Accuracy vs efficiency</li>
+            <li>Profit vs fairness</li>
+        </ul>
+        <p>
+            These are often combined using weighted sums or utility functions.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Performance Measures and Utility Functions</h2>
+        <p>
+            A <strong>utility function</strong> maps states of the environment to numerical values,
+            representing how desirable each state is.
+        </p>
+        <p>
+            Utility functions are often used to implement performance measures in complex
+            environments.
+        </p>
+        <div class="highlight">
+            Utility is the internal representation; performance measure is the external evaluation.
+        </div>
+    </section>
+
+    <section>
+        <h2>8. Pitfalls in Designing Performance Measures</h2>
+        <ul>
+            <li>Rewarding proxy metrics instead of true objectives</li>
+            <li>Ignoring long-term consequences</li>
+            <li>Encouraging unsafe shortcuts</li>
+            <li>Over-optimizing measurable aspects</li>
+        </ul>
+        <div class="example">
+            Maximizing “clicks” may reduce content quality and user trust.
+        </div>
+    </section>
+
+    <section>
+        <h2>9. Performance Measures in Learning Agents</h2>
+        <p>
+            Learning agents use performance measures as feedback to improve behavior over time.
+        </p>
+        <p>
+            In reinforcement learning, the performance measure is often encoded as a reward signal.
+        </p>
+        <div class="highlight">
+            What you reward is what the agent learns.
+        </div>
+    </section>
+
+    <section>
+        <h2>10. Summary</h2>
+        <p>
+            Performance measures define what it means for an intelligent agent to succeed. They
+            shape rational behavior, guide learning, and determine the effectiveness of AI systems.
+        </p>
+        <div class="highlight">
+            Designing the right performance measure is one of the most important tasks in AI.
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 | Artificial Intelligence Concepts Series | Performance Measures
+</footer>
+
+</body>
+</html>

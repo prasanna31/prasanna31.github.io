@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI as Search and Optimization</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            color: #1f2933;
+            line-height: 1.75;
+        }
+
+        header {
+            background: linear-gradient(135deg, #020617, #065f46);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.7rem;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        main {
+            max-width: 950px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background-color: #ffffff;
+            padding: 28px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        }
+
+        section h2 {
+            color: #065f46;
+            margin-bottom: 16px;
+            border-left: 5px solid #10b981;
+            padding-left: 14px;
+        }
+
+        section h3 {
+            margin-top: 20px;
+            color: #020617;
+        }
+
+        ul {
+            margin-left: 22px;
+        }
+
+        footer {
+            background-color: #020617;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        .highlight {
+            background-color: #ecfdf5;
+            padding: 12px;
+            border-left: 4px solid #10b981;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>AI as Search and Optimization</h1>
+    <p>Viewing intelligence as finding optimal solutions in vast spaces</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>Introduction</h2>
+        <p>
+            One of the classical and most influential views of Artificial Intelligence
+            is that AI is fundamentally a problem of <strong>search</strong> and
+            <strong>optimization</strong>. Many intelligent tasks can be framed as
+            searching through a space of possible solutions to find the best one
+            according to a defined objective.
+        </p>
+    </section>
+
+    <section>
+        <h2>Problem Formulation as Search</h2>
+        <p>
+            In classical AI, a problem is defined by:
+        </p>
+        <ul>
+            <li><strong>Initial state</strong> – where the agent starts</li>
+            <li><strong>Actions</strong> – possible moves from a state</li>
+            <li><strong>State space</strong> – all reachable states</li>
+            <li><strong>Goal test</strong> – checks if a state is a solution</li>
+            <li><strong>Path cost</strong> – cost of reaching a state</li>
+        </ul>
+        <p>
+            Solving the problem means searching the state space efficiently.
+        </p>
+    </section>
+
+    <section>
+        <h2>Uninformed Search</h2>
+        <p>
+            Uninformed (blind) search algorithms explore the state space without
+            additional domain knowledge.
+        </p>
+        <ul>
+            <li>Breadth-First Search (BFS)</li>
+            <li>Depth-First Search (DFS)</li>
+            <li>Uniform-Cost Search</li>
+        </ul>
+        <div class="highlight">
+            These methods guarantee completeness under certain conditions but
+            can be computationally expensive.
+        </div>
+    </section>
+
+    <section>
+        <h2>Informed Search and Heuristics</h2>
+        <p>
+            Informed search uses heuristics—estimates of the distance to the goal—
+            to guide exploration.
+        </p>
+        <ul>
+            <li>Greedy Best-First Search</li>
+            <li>A* Search</li>
+        </ul>
+        <p>
+            A* search is optimal if the heuristic is admissible and consistent.
+        </p>
+    </section>
+
+    <section>
+        <h2>Search vs Optimization</h2>
+        <p>
+            Search focuses on finding <em>a solution</em>, while optimization focuses
+            on finding the <em>best solution</em> among many.
+        </p>
+        <p>
+            Optimization problems involve defining:
+        </p>
+        <ul>
+            <li>An objective (fitness) function</li>
+            <li>Constraints</li>
+            <li>A solution space</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Local Search and Optimization Algorithms</h2>
+        <p>
+            Local search methods improve a candidate solution iteratively:
+        </p>
+        <ul>
+            <li>Hill Climbing</li>
+            <li>Simulated Annealing</li>
+            <li>Tabu Search</li>
+        </ul>
+        <p>
+            These methods scale well to large spaces but may get stuck in local optima.
+        </p>
+    </section>
+
+    <section>
+        <h2>Evolutionary and Population-Based Methods</h2>
+        <p>
+            Inspired by natural evolution, these methods operate on populations
+            of solutions.
+        </p>
+        <ul>
+            <li>Genetic Algorithms</li>
+            <li>Genetic Programming</li>
+            <li>Swarm Intelligence</li>
+        </ul>
+        <p>
+            They balance exploration and exploitation effectively.
+        </p>
+    </section>
+
+    <section>
+        <h2>Optimization in Machine Learning</h2>
+        <p>
+            Modern AI systems rely heavily on optimization.
+        </p>
+        <ul>
+            <li>Training neural networks minimizes loss functions</li>
+            <li>Gradient-based optimization dominates deep learning</li>
+            <li>Regularization introduces constraints</li>
+        </ul>
+        <p>
+            Learning can be seen as searching for parameters that minimize error.
+        </p>
+    </section>
+
+    <section>
+        <h2>Computational Challenges</h2>
+        <p>
+            Search and optimization often face exponential complexity.
+            Trade-offs between optimality and efficiency are unavoidable.
+        </p>
+        <p>
+            Approximation and heuristics are essential in real-world AI systems.
+        </p>
+    </section>
+
+    <section>
+        <h2>Why Search and Optimization Matter</h2>
+        <p>
+            Viewing AI as search and optimization provides a unifying framework
+            across planning, games, robotics, and machine learning.
+        </p>
+        <p>
+            Even modern AI successes can be traced back to efficient search
+            guided by mathematical objectives.
+        </p>
+    </section>
+
+    <section>
+        <h2>Conclusion</h2>
+        <p>
+            AI as search and optimization emphasizes that intelligence emerges
+            from efficiently exploring vast possibilities under constraints.
+            While representations and learning matter, the ability to search
+            and optimize remains at the core of intelligent behavior.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 Artificial Intelligence Learning Series
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Partially Observable Environments</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.75;
+        }
+
+        header {
+            background: linear-gradient(135deg, #020617, #1e3a8a);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            max-width: 900px;
+            margin: auto;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        section h2 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.9rem;
+        }
+
+        section h3 {
+            color: #020617;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: #eef2ff;
+            padding: 15px;
+            border-left: 5px solid #1e40af;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .example {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table th, table td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #eef2ff;
+            color: #1e40af;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #020617;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Partially Observable Environments</h1>
+    <p>
+        When an intelligent agent must act with incomplete or uncertain information
+    </p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Definition</h2>
+        <p>
+            An environment is <strong>partially observable</strong> when an agent’s sensors do not
+            provide access to the complete state of the environment at each point in time.
+        </p>
+        <p>
+            Some relevant information may be hidden, noisy, delayed, or impossible to sense directly.
+        </p>
+        <div class="highlight">
+            Partial observability introduces uncertainty into decision-making.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Causes of Partial Observability</h2>
+        <ul>
+            <li>Imperfect or noisy sensors</li>
+            <li>Hidden variables in the environment</li>
+            <li>Occlusion or limited field of view</li>
+            <li>Delayed or missing percepts</li>
+        </ul>
+        <p>
+            These limitations prevent the agent from knowing the exact environment state.
+        </p>
+    </section>
+
+    <section>
+        <h2>3. Role of Memory and Belief</h2>
+        <p>
+            In partially observable environments, agents often maintain an internal
+            <strong>belief state</strong>, representing a probability distribution over possible
+            environment states.
+        </p>
+        <p>
+            Past percepts and actions are combined with current observations to estimate the true state.
+        </p>
+        <div class="highlight">
+            Memory compensates for missing information.
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Examples</h2>
+
+        <div class="example">
+            <strong>Poker</strong>
+            <p>
+                Players cannot see opponents’ cards and must infer them from behavior and probabilities.
+            </p>
+        </div>
+
+        <div class="example">
+            <strong>Autonomous Driving</strong>
+            <p>
+                Weather, sensor noise, and occluded pedestrians make the environment partially observable.
+            </p>
+        </div>
+
+        <div class="example">
+            <strong>Medical Diagnosis</strong>
+            <p>
+                Doctors infer hidden diseases based on incomplete symptoms and test results.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Comparison with Fully Observable Environments</h2>
+        <table>
+            <tr>
+                <th>Aspect</th>
+                <th>Fully Observable</th>
+                <th>Partially Observable</th>
+            </tr>
+            <tr>
+                <td>State knowledge</td>
+                <td>Complete</td>
+                <td>Incomplete</td>
+            </tr>
+            <tr>
+                <td>Need for inference</td>
+                <td>No</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Complexity</td>
+                <td>Lower</td>
+                <td>Higher</td>
+            </tr>
+            <tr>
+                <td>Example</td>
+                <td>Chess</td>
+                <td>Poker</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>6. Implications for Agent Design</h2>
+        <p>
+            Partial observability requires more sophisticated agent architectures.
+        </p>
+        <ul>
+            <li>Model-based agents</li>
+            <li>Probabilistic reasoning</li>
+            <li>State estimation techniques</li>
+            <li>Learning from experience</li>
+        </ul>
+        <div class="highlight">
+            Rationality depends on maximizing expected performance under uncertainty.
+        </div>
+    </section>
+
+    <section>
+        <h2>7. Formal Models</h2>
+        <p>
+            Partially observable environments are often modeled using
+            <strong>Partially Observable Markov Decision Processes (POMDPs)</strong>.
+        </p>
+        <p>
+            POMDPs explicitly represent uncertainty in state perception and action outcomes.
+        </p>
+    </section>
+
+    <section>
+        <h2>8. Why Most Real-World Environments Are Partially Observable</h2>
+        <ul>
+            <li>Sensors are never perfect</li>
+            <li>The world is complex and dynamic</li>
+            <li>Some information is fundamentally unobservable</li>
+        </ul>
+        <p>
+            As a result, partial observability is the norm rather than the exception.
+        </p>
+    </section>
+
+    <section>
+        <h2>9. Summary</h2>
+        <p>
+            In partially observable environments, agents must act under uncertainty, relying on
+            memory, inference, and probabilistic reasoning.
+        </p>
+        <div class="highlight">
+            Intelligence is most clearly revealed when agents perform well despite incomplete information.
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 | Artificial Intelligence Concepts Series | Partially Observable Environments
+</footer>
+
+</body>
+</html>

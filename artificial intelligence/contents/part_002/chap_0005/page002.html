@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agent–Environment Interaction</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.75;
+        }
+
+        header {
+            background: linear-gradient(135deg, #020617, #1e3a8a);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            max-width: 900px;
+            margin: auto;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        section h2 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.9rem;
+        }
+
+        section h3 {
+            color: #020617;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: #eef2ff;
+            padding: 15px;
+            border-left: 5px solid #1e40af;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .example {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #020617;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Agent–Environment Interaction</h1>
+    <p>
+        Understanding intelligence as a continuous feedback loop between perception,
+        decision-making, and action
+    </p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. What Is Agent–Environment Interaction?</h2>
+        <p>
+            In Artificial Intelligence, intelligence is best understood as an ongoing interaction
+            between an <strong>agent</strong> and its <strong>environment</strong>. The agent
+            perceives the state of the environment, decides what to do, and performs actions that
+            affect the environment.
+        </p>
+        <p>
+            This interaction does not occur once, but continuously over time, forming a feedback
+            loop. The success of an agent depends on how effectively it can sense, decide, and act
+            within this loop.
+        </p>
+        <div class="highlight">
+            Intelligence emerges from interaction, not isolation.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. The Agent–Environment Loop</h2>
+        <p>
+            The interaction between an agent and the environment can be described as a repeating
+            cycle:
+        </p>
+        <ul>
+            <li>The environment exists in some state</li>
+            <li>The agent perceives part of that state through sensors</li>
+            <li>The agent selects an action based on its percepts</li>
+            <li>The action alters the environment</li>
+            <li>The cycle repeats</li>
+        </ul>
+
+        <div class="example">
+            <strong>Simple Loop:</strong><br>
+            Environment → Sensors → Agent → Actuators → Environment
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Role of Sensors</h2>
+        <p>
+            Sensors are the agent’s interface to the environment. They provide perceptual input
+            about the current state of the world.
+        </p>
+
+        <h3>Examples of Sensors</h3>
+        <ul>
+            <li>Cameras and microphones (robots, self-driving cars)</li>
+            <li>Keyboard input and mouse events (software agents)</li>
+            <li>Market data feeds (trading agents)</li>
+            <li>Text prompts and conversation history (chatbots)</li>
+        </ul>
+
+        <p>
+            Sensors may provide incomplete, noisy, or delayed information, which significantly
+            affects agent behavior.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Role of Actuators</h2>
+        <p>
+            Actuators allow an agent to act upon the environment. Through actuators, decisions are
+            converted into physical or virtual actions.
+        </p>
+
+        <h3>Examples of Actuators</h3>
+        <ul>
+            <li>Motors, wheels, robotic arms</li>
+            <li>Screen output, API calls</li>
+            <li>Network requests or database updates</li>
+            <li>Text generation in conversational agents</li>
+        </ul>
+
+        <p>
+            The effectiveness of an agent is limited by the capabilities of its actuators.
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Percepts and Percept Sequences</h2>
+        <p>
+            A <strong>percept</strong> is the agent’s immediate sensory input at a given time step.
+            Over time, the agent accumulates a <strong>percept sequence</strong>, which represents
+            its experience.
+        </p>
+        <p>
+            Intelligent agents typically base their actions not just on the current percept, but
+            on the entire percept history.
+        </p>
+        <div class="highlight">
+            The same percept may require different actions depending on past experiences.
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Environment Properties</h2>
+        <p>
+            The nature of the environment strongly influences agent design. Environments are
+            classified along several dimensions.
+        </p>
+
+        <h3>Key Environment Characteristics</h3>
+        <ul>
+            <li><strong>Fully observable vs partially observable</strong></li>
+            <li><strong>Deterministic vs stochastic</strong></li>
+            <li><strong>Episodic vs sequential</strong></li>
+            <li><strong>Static vs dynamic</strong></li>
+            <li><strong>Discrete vs continuous</strong></li>
+            <li><strong>Single-agent vs multi-agent</strong></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>7. Example: Vacuum Cleaner World</h2>
+        <div class="example">
+            <p>
+                In the classic vacuum cleaner environment:
+            </p>
+            <ul>
+                <li>Agent: Vacuum cleaner</li>
+                <li>Environment: Rooms with dirt</li>
+                <li>Sensors: Dirt sensor, location sensor</li>
+                <li>Actuators: Move left, move right, suck</li>
+            </ul>
+            <p>
+                The agent repeatedly senses dirt and location, decides an action, and updates the
+                environment accordingly.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>8. Why Interaction Matters for Intelligence</h2>
+        <p>
+            Intelligence cannot be separated from interaction. An agent that never acts cannot
+            learn, adapt, or improve. Similarly, an agent that cannot perceive cannot act
+            meaningfully.
+        </p>
+        <p>
+            Learning, planning, reasoning, and decision-making all depend on feedback from the
+            environment.
+        </p>
+    </section>
+
+    <section>
+        <h2>9. Agent–Environment Interaction in Modern AI</h2>
+        <ul>
+            <li>Reinforcement learning agents interacting with simulators</li>
+            <li>Autonomous vehicles interacting with traffic environments</li>
+            <li>Game-playing agents interacting with game states</li>
+            <li>Conversational agents interacting with users</li>
+        </ul>
+        <p>
+            Modern AI systems are increasingly evaluated based on how well they adapt through
+            interaction rather than static prediction.
+        </p>
+    </section>
+
+    <section>
+        <h2>10. Summary</h2>
+        <p>
+            The agent–environment interaction framework provides a unified way to understand
+            Artificial Intelligence. It highlights intelligence as an adaptive, goal-driven
+            process rooted in perception and action.
+        </p>
+        <div class="highlight">
+            AI is not just about computation—it is about interaction with the world.
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 | Artificial Intelligence Concepts Series | Agent–Environment Interaction
+</footer>
+
+</body>
+</html>

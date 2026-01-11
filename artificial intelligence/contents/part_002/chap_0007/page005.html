@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Discrete Environments in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #6c3483;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.4em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #6c3483;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #f4ecf7;
+            border-left: 5px solid #6c3483;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .comparison {
+            background-color: #fff3e0;
+            border-left: 5px solid #f39c12;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #6c3483;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Discrete Environments</h1>
+    <p>Environments with Countable States, Actions, and Time Steps</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Introduction to Discrete Environments</h2>
+        <p>
+            In Artificial Intelligence, environments can be categorized based on how states,
+            actions, perceptions, and time are represented. One important distinction is
+            between <strong>discrete</strong> and <strong>continuous</strong> environments.
+        </p>
+        <p>
+            <strong>Discrete environments</strong> are those in which the agent can perceive
+            and act in a world composed of a finite or countably infinite set of distinct states,
+            actions, and time steps.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Definition of Discrete Environments</h2>
+        <p>
+            A <strong>discrete environment</strong> is an environment where:
+        </p>
+        <ul>
+            <li>The set of possible states is finite or countably infinite</li>
+            <li>The set of possible actions is finite</li>
+            <li>Percepts are distinct and well-defined</li>
+            <li>Time progresses in discrete steps</li>
+        </ul>
+        <p>
+            At each time step, the agent observes the current state, selects an action from
+            a predefined set, and transitions to a new state.
+        </p>
+    </section>
+
+    <section>
+        <h2>3. Key Characteristics of Discrete Environments</h2>
+
+        <h3>3.1 Countable State Space</h3>
+        <p>
+            The environment consists of a limited number of distinct states that can be
+            explicitly represented and enumerated.
+        </p>
+
+        <h3>3.2 Finite Action Set</h3>
+        <p>
+            At any point, the agent has a finite set of actions available. Each action leads
+            to a clearly defined state transition.
+        </p>
+
+        <h3>3.3 Step-Based Time Progression</h3>
+        <p>
+            Time advances in discrete steps. The environment changes only at these time steps,
+            not continuously.
+        </p>
+
+        <h3>3.4 Clear State Transitions</h3>
+        <p>
+            Transitions between states are clearly defined, often modeled using state
+            transition tables or graphs.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Examples of Discrete Environments</h2>
+
+        <div class="example">
+            <h3>Example 1: Chess</h3>
+            <p>
+                Chess is a classic discrete environment.
+            </p>
+            <ul>
+                <li>Finite board positions</li>
+                <li>Discrete moves</li>
+                <li>Turn-based time steps</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 2: Grid-Based Maze</h3>
+            <p>
+                An agent navigating a grid maze moves one cell at a time.
+            </p>
+            <ul>
+                <li>Finite number of cells</li>
+                <li>Actions: up, down, left, right</li>
+                <li>Clear success and failure states</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 3: Board Games</h3>
+            <p>
+                Games like Tic-Tac-Toe or Checkers operate in discrete environments.
+            </p>
+            <ul>
+                <li>Well-defined states</li>
+                <li>Finite action sets</li>
+                <li>Turn-based interaction</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Comparison with Continuous Environments</h2>
+
+        <div class="comparison">
+            <p>
+                Discrete environments are often contrasted with <strong>continuous environments</strong>.
+            </p>
+            <ul>
+                <li>
+                    <strong>Discrete:</strong> Finite or countable states and actions
+                </li>
+                <li>
+                    <strong>Continuous:</strong> Infinite, real-valued states and actions
+                </li>
+                <li>
+                    <strong>Discrete:</strong> Step-by-step time progression
+                </li>
+                <li>
+                    <strong>Continuous:</strong> Time flows continuously
+                </li>
+            </ul>
+            <p>
+                Chess is discrete, whereas controlling a robotic arm involves continuous environments.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Implications for Agent Design</h2>
+        <p>
+            Discrete environments allow the use of classical AI techniques such as:
+        </p>
+        <ul>
+            <li>Search algorithms (BFS, DFS, A*)</li>
+            <li>Game tree exploration</li>
+            <li>Markov Decision Processes with finite states</li>
+            <li>Dynamic programming</li>
+        </ul>
+        <p>
+            Because the state space is countable, agents can often explicitly represent
+            and reason about all possible outcomes.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Summary</h2>
+        <p>
+            Discrete environments consist of well-defined, countable states, actions,
+            and time steps. They are easier to model and reason about than continuous
+            environments and form the foundation of many classical AI problems.
+        </p>
+        <p>
+            Understanding discrete environments is essential before moving on to
+            continuous and hybrid environments encountered in real-world AI systems.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Task Environment Classification</p>
+</footer>
+
+</body>
+</html>

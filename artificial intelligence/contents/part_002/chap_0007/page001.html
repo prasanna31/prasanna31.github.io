@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Episodic Environments in Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f7f9fc;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #1f3c88;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 40px;
+        }
+
+        section {
+            background-color: white;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #1f3c88;
+            border-bottom: 2px solid #e3e8f0;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .example {
+            background-color: #eef3ff;
+            border-left: 5px solid #1f3c88;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .comparison {
+            background-color: #fff7e6;
+            border-left: 5px solid #f39c12;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1f3c88;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Episodic Environments</h1>
+    <p>An Important Classification of Task Environments in Artificial Intelligence</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. What is an Environment in AI?</h2>
+        <p>
+            In Artificial Intelligence, an <strong>environment</strong> refers to everything that exists outside
+            an intelligent agent and with which the agent interacts. The environment provides percepts (inputs)
+            to the agent through sensors and is affected by the agent’s actions through actuators.
+        </p>
+        <p>
+            To design intelligent systems effectively, AI researchers classify environments based on their
+            properties. One such important classification is based on whether the agent’s experience can be
+            broken into independent episodes. This leads to the concept of <strong>episodic environments</strong>.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Definition of Episodic Environments</h2>
+        <p>
+            An <strong>episodic environment</strong> is an environment in which the agent’s experience is divided
+            into a sequence of episodes, and <strong>each episode is independent of all others</strong>.
+        </p>
+        <p>
+            In such environments:
+        </p>
+        <ul>
+            <li>The agent perceives the environment.</li>
+            <li>The agent performs a single action.</li>
+            <li>The episode ends immediately.</li>
+            <li>The next episode starts fresh, unaffected by previous actions.</li>
+        </ul>
+        <p>
+            The key idea is that <strong>the agent’s current decision does not affect future states of the environment</strong>.
+        </p>
+    </section>
+
+    <section>
+        <h2>3. Key Characteristics of Episodic Environments</h2>
+
+        <h3>3.1 Independence of Episodes</h3>
+        <p>
+            Each episode is self-contained. What the agent does in one episode has no influence on what happens
+            in the next episode. There is no long-term dependency.
+        </p>
+
+        <h3>3.2 No Need for Memory</h3>
+        <p>
+            Since past episodes do not affect future ones, the agent does not need to remember previous percepts
+            or actions. Decisions can be made solely based on the current percept.
+        </p>
+
+        <h3>3.3 Simplified Decision Making</h3>
+        <p>
+            The agent’s goal is to choose the best action for the current episode only. There is no planning over
+            time or concern for delayed consequences.
+        </p>
+
+        <h3>3.4 Often Static During an Episode</h3>
+        <p>
+            In many episodic environments, the environment does not change while the agent is deciding what to do.
+            Once the action is taken, the episode ends.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Real-World Examples of Episodic Environments</h2>
+
+        <div class="example">
+            <h3>Example 1: Image Classification</h3>
+            <p>
+                An AI system is given an image and asked to classify it (for example, cat or dog).
+            </p>
+            <ul>
+                <li>Each image is a separate episode.</li>
+                <li>The classification of one image does not affect the classification of another.</li>
+                <li>No memory of previous images is required.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 2: Spam Email Detection</h3>
+            <p>
+                Each incoming email is evaluated independently to decide whether it is spam or not.
+            </p>
+            <ul>
+                <li>Emails are independent episodes.</li>
+                <li>Decisions on earlier emails do not influence future emails.</li>
+                <li>The agent only needs the current email’s content.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>Example 3: Quality Inspection System</h3>
+            <p>
+                A vision-based system checks whether a manufactured part is defective.
+            </p>
+            <ul>
+                <li>Each inspection is a separate episode.</li>
+                <li>One defective decision does not affect the next inspection.</li>
+                <li>No sequential strategy is required.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Comparison with Sequential Environments</h2>
+
+        <div class="comparison">
+            <p>
+                To better understand episodic environments, it is helpful to compare them with
+                <strong>sequential environments</strong>.
+            </p>
+            <ul>
+                <li>
+                    <strong>Episodic Environment:</strong> Current action affects only the current episode.
+                </li>
+                <li>
+                    <strong>Sequential Environment:</strong> Current action affects future states and rewards.
+                </li>
+                <li>
+                    <strong>Episodic:</strong> No planning or long-term strategy needed.
+                </li>
+                <li>
+                    <strong>Sequential:</strong> Requires planning, memory, and reasoning over time.
+                </li>
+            </ul>
+            <p>
+                For example, a game of chess is sequential, while classifying images is episodic.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Implications for Agent Design</h2>
+        <p>
+            Episodic environments greatly simplify the design of intelligent agents. Since the agent does not need
+            to consider future consequences, it can use:
+        </p>
+        <ul>
+            <li>Simple rule-based systems</li>
+            <li>Supervised learning models</li>
+            <li>Stateless decision functions</li>
+        </ul>
+        <p>
+            This is why many early and successful AI applications—such as pattern recognition and classification—
+            naturally fit into episodic environments.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Summary</h2>
+        <p>
+            Episodic environments represent one of the simplest types of task environments in Artificial Intelligence.
+            They are characterized by independent episodes, lack of long-term consequences, and minimal need for memory
+            or planning.
+        </p>
+        <p>
+            Understanding episodic environments is essential because they form the foundation for many real-world AI
+            systems and provide a contrast to more complex sequential and stochastic environments.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Artificial Intelligence – Task Environment Classification</p>
+</footer>
+
+</body>
+</html>
