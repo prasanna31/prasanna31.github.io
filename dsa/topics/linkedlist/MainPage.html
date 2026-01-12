@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linked List Patterns – Complete Reference</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      color: #1a237e;
+    }
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 25px;
+      color: #283593;
+    }
+    ul {
+      margin-left: 25px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Linked List Patterns — Complete Taxonomy</h1>
+<p>
+This document enumerates the core algorithmic patterns used when solving
+linked list problems across singly, doubly, circular, and circular doubly
+linked lists.
+</p>
+
+<!-- ================= FUNDAMENTALS ================= -->
+
+<h2>I. Fundamental Traversal & Pointer Patterns</h2>
+
+<h3>1. Linear Traversal Pattern</h3>
+<ul>
+  <li>Forward traversal</li>
+  <li>Node counting</li>
+  <li>Search and scan</li>
+</ul>
+
+<h3>2. Reverse Traversal Simulation Pattern</h3>
+<ul>
+  <li>Stack-based traversal</li>
+  <li>Recursive backtracking</li>
+  <li>Reverse printing</li>
+</ul>
+
+<h3>3. Multiple Pointer Coordination Pattern</h3>
+<ul>
+  <li>Previous–current–next tracking</li>
+  <li>Safe pointer rewiring</li>
+</ul>
+
+<!-- ================= SAFETY & EDGES ================= -->
+
+<h2>II. Structural Safety & Edge-Case Patterns</h2>
+
+<h3>4. Dummy Node (Sentinel) Pattern</h3>
+<ul>
+  <li>Head-safe deletion</li>
+  <li>Head-safe insertion</li>
+</ul>
+
+<h3>5. Boundary Management Pattern</h3>
+<ul>
+  <li>Head and tail updates</li>
+  <li>Empty and single-node lists</li>
+</ul>
+
+<h3>6. Length-Based Control Pattern</h3>
+<ul>
+  <li>Length precomputation</li>
+  <li>Index-based operations</li>
+</ul>
+
+<!-- ================= RELATIVE MOTION ================= -->
+
+<h2>III. Fast–Slow & Relative Motion Patterns</h2>
+
+<h3>7. Slow–Fast Pointer Pattern</h3>
+<ul>
+  <li>Middle node detection</li>
+  <li>Cycle detection</li>
+</ul>
+
+<h3>8. Offset Pointer Pattern</h3>
+<ul>
+  <li>Nth node from end</li>
+  <li>Fixed-distance traversal</li>
+</ul>
+
+<h3>9. Multi-Speed Traversal Pattern</h3>
+<ul>
+  <li>Periodic structure detection</li>
+  <li>Circular list behavior</li>
+</ul>
+
+<!-- ================= REVERSAL ================= -->
+
+<h2>IV. Reversal & Rewiring Patterns</h2>
+
+<h3>10. In-Place Reversal Pattern</h3>
+<ul>
+  <li>Full list reversal</li>
+  <li>Three-pointer rewiring</li>
+</ul>
+
+<h3>11. Sublist Reversal Pattern</h3>
+<ul>
+  <li>Reverse between positions</li>
+  <li>Boundary-aware rewiring</li>
+</ul>
+
+<h3>12. K-Group Reversal Pattern</h3>
+<ul>
+  <li>Block-wise reversal</li>
+  <li>Partial group handling</li>
+</ul>
+
+<h3>13. Circular Reversal Pattern</h3>
+<ul>
+  <li>Circular list reversal</li>
+  <li>Preserving circular links</li>
+</ul>
+
+<!-- ================= MERGE & SPLIT ================= -->
+
+<h2>V. Merge, Split & Partition Patterns</h2>
+
+<h3>14. Two-List Merge Pattern</h3>
+<ul>
+  <li>Sorted merge</li>
+  <li>Alternating merge</li>
+</ul>
+
+<h3>15. Multi-List Merge Pattern</h3>
+<ul>
+  <li>Sequential merge</li>
+  <li>Divide-and-conquer merge</li>
+</ul>
+
+<h3>16. Partitioning Pattern</h3>
+<ul>
+  <li>Partition around value</li>
+  <li>Stable vs unstable partition</li>
+</ul>
+
+<h3>17. Split Pattern</h3>
+<ul>
+  <li>Equal split</li>
+  <li>Odd–even split</li>
+  <li>Circular list split</li>
+</ul>
+
+<!-- ================= CYCLE & INTERSECTION ================= -->
+
+<h2>VI. Cycle, Intersection & Connectivity Patterns</h2>
+
+<h3>18. Cycle Detection Pattern</h3>
+<ul>
+  <li>Loop existence</li>
+  <li>Loop entry detection</li>
+</ul>
+
+<h3>19. Intersection Detection Pattern</h3>
+<ul>
+  <li>Shared tail detection</li>
+  <li>Length alignment method</li>
+</ul>
+
+<h3>20. Circular Intersection Pattern</h3>
+<ul>
+  <li>Intersection in circular lists</li>
+  <li>Loop-aware logic</li>
+</ul>
+
+<!-- ================= DELETION ================= -->
+
+<h2>VII. Deletion & Modification Patterns</h2>
+
+<h3>21. Targeted Deletion Pattern</h3>
+<ul>
+  <li>Delete by value</li>
+  <li>Delete by position</li>
+</ul>
+
+<h3>22. Relative Deletion Pattern</h3>
+<ul>
+  <li>Delete nth from end</li>
+  <li>Delete before or after node</li>
+</ul>
+
+<h3>23. Duplicate Removal Pattern</h3>
+<ul>
+  <li>Sorted duplicate removal</li>
+  <li>Unsorted duplicate removal</li>
+</ul>
+
+<!-- ================= DOUBLY LINKED LIST ================= -->
+
+<h2>VIII. Doubly Linked List Specific Patterns</h2>
+
+<h3>24. Bidirectional Traversal Pattern</h3>
+<ul>
+  <li>Forward traversal</li>
+  <li>Backward traversal</li>
+</ul>
+
+<h3>25. DLL In-Place Reversal Pattern</h3>
+<ul>
+  <li>Swap prev and next</li>
+  <li>Head–tail exchange</li>
+</ul>
+
+<h3>26. DLL Insertion & Deletion Pattern</h3>
+<ul>
+  <li>O(1) middle insertion</li>
+  <li>O(1) middle deletion</li>
+</ul>
+
+<!-- ================= CIRCULAR & CDLL ================= -->
+
+<h2>IX. Circular & Circular Doubly Linked List Patterns</h2>
+
+<h3>27. Circular Traversal & Termination Pattern</h3>
+<ul>
+  <li>Loop-based traversal</li>
+  <li>Full cycle detection</li>
+</ul>
+
+<h3>28. Circular Insertion & Deletion Pattern</h3>
+<ul>
+  <li>Head and tail insertion</li>
+  <li>Maintaining circularity</li>
+</ul>
+
+<h3>29. Circular Doubly Rewiring Pattern</h3>
+<ul>
+  <li>Four-pointer consistency</li>
+  <li>Symmetric pointer maintenance</li>
+</ul>
+
+<!-- ================= TRANSFORMATION ================= -->
+
+<h2>X. Advanced Structural Transformation</h2>
+
+<h3>30. Structural Transformation Pattern</h3>
+<ul>
+  <li>Clone list with random pointers</li>
+  <li>Flatten multi-level lists</li>
+  <li>Convert list to tree or array</li>
+</ul>
+
+<p><b>Total Patterns:</b> 30</p>
+
+</body>
+</html>

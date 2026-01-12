@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linked List Pattern 1 — Linear Traversal</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #1a237e;
+    }
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 25px;
+      color: #283593;
+    }
+    p {
+      max-width: 950px;
+    }
+    ul {
+      margin-left: 25px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .concept {
+      background: #ffffff;
+      padding: 20px;
+      margin: 25px 0;
+      border-left: 6px solid #3949ab;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .invariant {
+      background: #f3f4ff;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #5c6bc0;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Linked List Pattern 1: Linear Traversal</h1>
+
+<p>
+Linear Traversal is the foundational pattern for all linked list algorithms.
+Every linked list solution either directly uses this pattern or builds on top of it.
+Mastering this pattern means you can confidently solve any basic linked list problem.
+</p>
+
+<!-- ================= WHAT IT IS ================= -->
+
+<h2>What Is the Linear Traversal Pattern?</h2>
+
+<div class="concept">
+  <p>
+    The Linear Traversal Pattern means visiting each node of the linked list
+    <b>exactly once</b>, in order, by following the <code>next</code> pointer
+    until no further node exists.
+  </p>
+  <p>
+    You cannot jump nodes. You cannot move backward.
+    The only legal move is from a node to its <code>next</code>.
+  </p>
+</div>
+
+<!-- ================= MENTAL MODEL ================= -->
+
+<h2>Mental Model</h2>
+
+<p>
+Think of a linked list as a chain of train coaches.
+Each coach only knows the coach in front of it.
+If you want to inspect every coach, you must walk forward one by one.
+</p>
+
+<ul>
+  <li>You start at the first coach (head)</li>
+  <li>You inspect the current coach</li>
+  <li>You move to the next coach</li>
+  <li>You stop when there is no next coach</li>
+</ul>
+
+<!-- ================= WHERE TO START ================= -->
+
+<h2>Where Do You Start?</h2>
+
+<div class="concept">
+  <p>
+    Every linear traversal <b>must start at the head</b>.
+  </p>
+  <p>
+    The head is the only guaranteed reference to the list.
+    All other nodes are reachable only through it.
+  </p>
+</div>
+
+<p>
+So the first decision in your mind is:
+</p>
+
+<ul>
+  <li>Create a pointer that starts at the head</li>
+  <li>This pointer represents your current position</li>
+</ul>
+
+<!-- ================= INVARIANT ================= -->
+
+<h2>The Core Invariant</h2>
+
+<div class="invariant">
+  <p>
+    <b>Invariant:</b> At every step of the traversal,
+    the pointer refers to a valid node that has not yet been processed.
+  </p>
+</div>
+
+<p>
+Every line you write must preserve this invariant.
+If the invariant breaks, the algorithm is incorrect.
+</p>
+
+<!-- ================= FORWARD TRAVERSAL ================= -->
+
+<h2>Forward Traversal — Why It Works</h2>
+
+<div class="concept">
+  <p>
+    Forward traversal exists because the linked list gives you only one direction of movement.
+    The algorithm must respect this structural constraint.
+  </p>
+</div>
+
+<p>The logical order of actions is always:</p>
+
+<ul>
+  <li>Check that the current node exists</li>
+  <li>Process the current node</li>
+  <li>Move to the next node</li>
+</ul>
+
+<p>
+This order prevents null pointer access and ensures no node is skipped.
+</p>
+
+<!-- ================= NODE COUNTING ================= -->
+
+<h2>Node Counting — Why Each Step Exists</h2>
+
+<div class="concept">
+  <p>
+    Counting nodes means accumulating one unit of information per node visited.
+  </p>
+</div>
+
+<ul>
+  <li>Initialize count to zero because no nodes have been seen yet</li>
+  <li>Increment count once per node</li>
+  <li>Traversal guarantees no duplication or omission</li>
+</ul>
+
+<div class="invariant">
+  <p>
+    After processing <b>k</b> nodes, the count equals <b>k</b>.
+  </p>
+</div>
+
+<!-- ================= SEARCH ================= -->
+
+<h2>Search and Scan — Why the Check Comes First</h2>
+
+<p>
+Searching means asking a question about the current node:
+</p>
+
+<ul>
+  <li>Does this node satisfy my condition?</li>
+</ul>
+
+<div class="concept">
+  <p>
+    The condition must be checked <b>before</b> moving to the next node.
+    Otherwise, the current node is skipped and never examined.
+  </p>
+</div>
+
+<p>
+Search logic always lives <b>inside</b> the traversal loop.
+</p>
+
+<!-- ================= HOW TO START SOLVING ================= -->
+
+<h2>How to Start Writing the Solution</h2>
+
+<p>
+When solving a linked list problem, start by saying:
+</p>
+
+<div class="concept">
+  <p>
+    “I will traverse the linked list once starting from the head.
+    For each node, I will process its value and move to the next node.
+    I will stop when the pointer becomes null.”
+  </p>
+</div>
+
+<p>
+This statement already defines:
+</p>
+
+<ul>
+  <li>The traversal strategy</li>
+  <li>The termination condition</li>
+  <li>The time and space complexity</li>
+</ul>
+
+<!-- ================= WHEN TO USE ================= -->
+
+<h2>When This Pattern Is Sufficient</h2>
+
+<ul>
+  <li>Counting nodes</li>
+  <li>Searching for a value</li>
+  <li>Checking properties (sorted, monotonic)</li>
+  <li>Computing sum, min, max</li>
+  <li>Copying a linked list</li>
+</ul>
+
+<!-- ================= SUMMARY ================= -->
+
+<h2>One-Line Summary</h2>
+
+<div class="invariant">
+  <p>
+    Linear Traversal Pattern = One pointer, one pass, one invariant, zero surprises.
+  </p>
+</div>
+
+<p>
+Every advanced linked list technique builds on this foundation.
+If this pattern feels natural, the rest will feel inevitable.
+</p>
+
+</body>
+</html>
