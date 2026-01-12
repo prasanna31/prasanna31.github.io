@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Multiplication as Function Composition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #222;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h2 { font-size: 2em; margin-top: 30px; margin-bottom: 10px; }
+        h3 { font-size: 1.5em; margin-top: 20px; margin-bottom: 5px; }
+        p { margin-bottom: 15px; }
+        ul, ol { margin-bottom: 15px; }
+        code { background-color: #ecf0f1; padding: 2px 4px; border-radius: 3px; }
+        .formula {
+            background-color: #f4ecf7;
+            padding: 10px;
+            border-left: 4px solid #9b59b6;
+            margin-bottom: 15px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .example {
+            background-color: #eaf2f8;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fcf3cf;
+            padding: 10px;
+            border-left: 4px solid #f1c40f;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Matrix Multiplication as Function Composition</h1>
+
+<p>Matrix multiplication is not just an algebraic operation—it is the concrete realization of <strong>function composition</strong> for linear transformations. Viewing matrices as functions allows us to see multiplication as "doing one linear transformation after another."</p>
+
+<h2>1. Linear Transformations and Matrices</h2>
+
+<p>Let <code>T: U → V</code> and <code>S: V → W</code> be linear maps between vector spaces U, V, W. Selecting bases for each space allows us to represent T and S as matrices:</p>
+
+<ul>
+    <li>[T] relative to bases of U and V</li>
+    <li>[S] relative to bases of V and W</li>
+</ul>
+
+<p>These matrices encode exactly how basis vectors are mapped by the linear transformations.</p>
+
+<h2>2. Function Composition</h2>
+
+<p>The composition of two functions is defined as:</p>
+
+<div class="formula">
+(S ∘ T)(u) = S(T(u)) , &nbsp; for u ∈ U
+</div>
+
+<p>In words: first apply T, then apply S to the result. Composition preserves linearity if both T and S are linear.</p>
+
+<h2>3. Matrix Representation of Composition</h2>
+
+<p>If [T] and [S] are matrices representing T and S, then the matrix representing S ∘ T is the product:</p>
+
+<div class="formula">
+[S ∘ T] = [S] [T]
+</div>
+
+<p>Important: the order matters. First T, then S → multiply S on the left, T on the right.</p>
+
+<h2>4. Why Matrix Multiplication Works</h2>
+
+<p>Let T map basis vectors of U to V, and S map basis vectors of V to W. If we compute (S ∘ T)(u) for a vector u, we first express u in terms of U's basis, multiply by [T] to get coordinates in V, then multiply by [S] to get coordinates in W:</p>
+
+<div class="formula">
+[u]_U → [T][u]_U = [T(u)]_V → [S][T(u)]_V = [S ∘ T](u)_W
+</div>
+
+<p>Thus, matrix multiplication is exactly the application of one linear map after another in coordinate space.</p>
+
+<h2>5. Example: Composition in ℝ²</h2>
+
+<div class="example">
+Let T: ℝ² → ℝ² be T(x,y) = (x + y, x - y) <br>
+S: ℝ² → ℝ² be S(u,v) = (2u, 3v)<br>
+
+Matrices in standard basis:
+
+<div class="formula">
+[T] = 
+\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}, 
+[S] = 
+\begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix}
+</div>
+
+Compute composition S ∘ T:
+
+<div class="formula">
+[S ∘ T] = [S][T] = 
+\begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix} 
+\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} 
+= 
+\begin{bmatrix} 2 & 2 \\ 3 & -3 \end{bmatrix}
+</div>
+
+Check on vector v = (1,2):
+
+<ul>
+    <li>T(v) = (1+2, 1-2) = (3, -1)</li>
+    <li>S(T(v)) = (2*3, 3*-1) = (6, -3)</li>
+    <li>Matrix multiplication: [S ∘ T] * [v] = [[2,2],[3,-3]] * [1,2]ᵀ = [6,-3] ✅</li>
+</ul>
+</div>
+
+<h2>6. Geometric Intuition</h2>
+
+<ul>
+    <li>Each matrix represents a linear transformation as stretching, rotating, shearing, or reflecting.</li>
+    <li>Matrix multiplication = applying one transformation, then the next.</li>
+    <li>The columns of the resulting matrix are exactly the images of the domain basis vectors under the composed transformation.</li>
+</ul>
+
+<h2>7. Properties of Matrix Multiplication as Composition</h2>
+
+<ul>
+    <li><strong>Associativity:</strong> (R ∘ S) ∘ T = R ∘ (S ∘ T) → (R S) T = R (S T)</li>
+    <li><strong>Non-commutativity:</strong> Usually S ∘ T ≠ T ∘ S → matrix multiplication order matters.</li>
+    <li><strong>Identity:</strong> The identity transformation corresponds to the identity matrix I, which acts as the neutral element for multiplication.</li>
+    <li><strong>Inverse:</strong> If T is invertible, T⁻¹ corresponds to the inverse matrix [T]⁻¹, satisfying [T]⁻¹ [T] = I</li>
+</ul>
+
+<h2>8. Steps to Compute Matrix of Composition</h2>
+
+<ol>
+    <li>Express linear maps T: U → V and S: V → W in matrix form relative to chosen bases.</li>
+    <li>Multiply matrices: [S ∘ T] = [S][T]</li>
+    <li>Apply [S ∘ T] to any vector in coordinate form: [S ∘ T][v]_U</li>
+    <li>Interpret geometrically: each column is where the basis vectors of U are mapped in W.</li>
+</ol>
+
+<h2>9. Applications</h2>
+
+<ul>
+    <li>Computer graphics: successive transformations (rotate → scale → translate) are matrix multiplications.</li>
+    <li>Linear systems: combining transformations simplifies analysis of multiple operations.</li>
+    <li>Quantum mechanics: composition of linear operators represented as matrix multiplication.</li>
+    <li>Engineering: control systems, signal processing, where sequential operations are linear.</li>
+</ul>
+
+<h2>10. Summary Formulas</h2>
+
+<div class="formula">
+(S ∘ T)(v) = S(T(v))<br>
+[T] = matrix of T relative to basis<br>
+[S] = matrix of S relative to basis<br>
+[S ∘ T] = [S][T]<br>
+[T(v)] = [T][v] <br>
+[(S ∘ T)(v)] = [S][T][v]
+</div>
+
+<p>Matrix multiplication is therefore exactly the algebraic manifestation of linear function composition, preserving linear structure and enabling computational efficiency.</p>
+
+</body>
+</html>

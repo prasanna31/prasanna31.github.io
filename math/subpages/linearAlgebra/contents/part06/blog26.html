@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eigenvalues and Eigenvectors — Definitions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #222;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h2 { font-size: 2em; margin-top: 30px; margin-bottom: 10px; }
+        h3 { font-size: 1.5em; margin-top: 20px; margin-bottom: 5px; }
+        p { margin-bottom: 15px; }
+        ul, ol { margin-bottom: 15px; }
+        code { background-color: #ecf0f1; padding: 2px 4px; border-radius: 3px; }
+        .formula {
+            background-color: #f4ecf7;
+            padding: 10px;
+            border-left: 4px solid #9b59b6;
+            margin-bottom: 15px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .example {
+            background-color: #eaf2f8;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fcf3cf;
+            padding: 10px;
+            border-left: 4px solid #f1c40f;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Eigenvalues and Eigenvectors — Definitions</h1>
+
+<p>Eigenvalues and eigenvectors are fundamental concepts in linear algebra that reveal the "intrinsic directions" in which a linear transformation acts as a simple scaling. They play a central role in diagonalization, stability analysis, quantum mechanics, principal component analysis, and many other areas in mathematics, physics, and engineering.</p>
+
+<h2>1. Definitions</h2>
+
+<p>Let A be an n×n square matrix (or equivalently, let T: V → V be a linear operator on a vector space V). A non-zero vector <code>v ∈ V</code> is called an <strong>eigenvector</strong> of A if there exists a scalar <code>λ ∈ F</code> such that:</p>
+
+<div class="formula">
+A v = λ v
+</div>
+
+<p>Where:</p>
+
+<ul>
+    <li><code>v ≠ 0</code> (the zero vector cannot be an eigenvector)</li>
+    <li><code>λ</code> is called the <strong>eigenvalue</strong> corresponding to <code>v</code></li>
+</ul>
+
+<p>In words: applying A to v **stretches or compresses v by a factor λ** but does not change its direction.</p>
+
+<h2>2. Intuition Behind Eigenvectors and Eigenvalues</h2>
+
+<p>Consider a linear transformation T that acts on a vector space. Most vectors will change direction and length under T, but eigenvectors are special—they only scale, not rotate:</p>
+
+<ul>
+    <li>Eigenvectors indicate the **principal directions** of a transformation.</li>
+    <li>Eigenvalues tell you **how much the transformation stretches or shrinks** vectors in that direction.</li>
+    <li>Negative eigenvalues indicate **reversal of direction**, while positive eigenvalues preserve direction.</li>
+</ul>
+
+<p>Geometrically, in 2D, imagine a transformation that stretches a plane along one line and compresses along another. The lines along which the stretching/compressing occurs are the eigenvectors, and the factors by which they stretch/compress are the eigenvalues.</p>
+
+<h2>3. Characteristic Equation</h2>
+
+<p>To find eigenvalues λ of a matrix A, we rewrite the eigenvector equation:</p>
+
+<div class="formula">
+A v = λ v ⇔ (A - λ I) v = 0
+</div>
+
+<p>Since v ≠ 0, the matrix (A - λ I) must be singular:</p>
+
+<div class="formula">
+det(A - λ I) = 0
+</div>
+
+<p>This equation is called the <strong>characteristic equation</strong> of A. Solving this equation gives all eigenvalues of A. Once λ is known, eigenvectors v are found by solving:</p>
+
+<div class="formula">
+(A - λ I)v = 0
+</div>
+
+<p>The set of all eigenvectors corresponding to a given eigenvalue, together with the zero vector, forms a **subspace** called the <strong>eigenspace</strong>:</p>
+
+<div class="formula">
+E_λ = { v ∈ V | (A - λ I)v = 0 }
+</div>
+
+<h2>4. Algebraic and Geometric Multiplicity</h2>
+
+<p>Eigenvalues can have multiplicities:</p>
+
+<ul>
+    <li><strong>Algebraic multiplicity:</strong> The number of times λ appears as a root of the characteristic polynomial <code>det(A - λ I) = 0</code>.</li>
+    <li><strong>Geometric multiplicity:</strong> The dimension of the eigenspace E_λ.</li>
+    <li>Always: <code>1 ≤ geometric multiplicity ≤ algebraic multiplicity</code>.</li>
+</ul>
+
+<p>Understanding multiplicities is important for determining whether a matrix is diagonalizable and how many linearly independent eigenvectors exist.</p>
+
+<h2>5. Examples</h2>
+
+<div class="example">
+1. Diagonal matrix: A = [[2, 0], [0, 3]]<br>
+Eigenvalues: λ₁ = 2, λ₂ = 3<br>
+Eigenvectors: any non-zero vector along x-axis for λ₁, along y-axis for λ₂<br>
+Observation: Each axis is invariant under the transformation.
+</div>
+
+<div class="example">
+2. Upper-triangular matrix: A = [[1, 1], [0, 1]]<br>
+Characteristic equation: det(A - λ I) = (1-λ)² = 0 → λ = 1 (double)<br>
+Eigenvectors: multiples of [1, 0] → geometric multiplicity = 1, algebraic multiplicity = 2<br>
+Observation: Only one line remains invariant, showing that multiplicities can differ.
+</div>
+
+<div class="example">
+3. 3×3 matrix: A = [[2,0,0],[0,3,0],[0,0,5]]<br>
+Eigenvalues: λ = 2,3,5<br>
+Eigenvectors: any vector along x, y, z axes respectively
+</div>
+
+<h2>6. Geometric Interpretation</h2>
+
+<ul>
+    <li>Eigenvectors are directions in space that **remain fixed (except for scaling)** under the linear transformation.</li>
+    <li>Eigenvalues indicate **stretching (>1), compression (0<λ<1), or reflection (λ<0)** along those directions.</li>
+    <li>In 2D, imagine a transformation that stretches the plane along one line and compresses along another. These invariant lines correspond to eigenvectors.</li>
+    <li>In higher dimensions, eigenvectors identify **principal directions** of transformations, such as rotation axes or scaling axes.</li>
+</ul>
+
+<h2>7. Summary Formulas</h2>
+
+<div class="formula">
+Eigenvector equation: A v = λ v, &nbsp; v ≠ 0<br>
+Characteristic equation: det(A - λ I) = 0<br>
+Eigenspace: E_λ = { v | (A - λ I)v = 0 }<br>
+Algebraic multiplicity: number of times λ is root<br>
+Geometric multiplicity: dim(E_λ)
+</div>
+
+<p>Eigenvalues and eigenvectors reveal the "hidden structure" of linear transformations. Recognizing these special directions and their scaling factors allows us to simplify computations, analyze transformations geometrically, and apply them in areas ranging from physics to machine learning.</p>
+
+</body>
+</html>

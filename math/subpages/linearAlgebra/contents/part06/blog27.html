@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invariant Subspaces and Diagonalization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #222;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h2 { font-size: 2em; margin-top: 30px; margin-bottom: 10px; }
+        h3 { font-size: 1.5em; margin-top: 20px; margin-bottom: 5px; }
+        p { margin-bottom: 15px; }
+        ul, ol { margin-bottom: 15px; }
+        code { background-color: #ecf0f1; padding: 2px 4px; border-radius: 3px; }
+        .formula {
+            background-color: #f4ecf7;
+            padding: 10px;
+            border-left: 4px solid #9b59b6;
+            margin-bottom: 15px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .example {
+            background-color: #eaf2f8;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fcf3cf;
+            padding: 10px;
+            border-left: 4px solid #f1c40f;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Invariant Subspaces and Diagonalization</h1>
+
+<p>Invariant subspaces and diagonalization are central concepts in linear algebra. They allow us to simplify linear transformations by identifying subspaces that remain unchanged under the transformation, and represent matrices in a simpler, diagonal form using eigenvectors.</p>
+
+<h2>1. Invariant Subspaces</h2>
+
+<p>A subspace <code>W ⊆ V</code> is called <strong>invariant</strong> under a linear transformation T: V → V if applying T to any vector in W keeps it in W:</p>
+
+<div class="formula">
+v ∈ W ⇒ T(v) ∈ W
+</div>
+
+<p>Intuition: The transformation T "does not leave" the subspace W. Examples of invariant subspaces include:</p>
+
+<ul>
+    <li>The zero subspace {0} (trivial invariant subspace)</li>
+    <li>The entire space V</li>
+    <li>Eigenspaces corresponding to a particular eigenvalue</li>
+</ul>
+
+<h3>1.1 Properties</h3>
+
+<ul>
+    <li>Intersection and sum of invariant subspaces are also invariant.</li>
+    <li>If V = W₁ ⊕ W₂ (direct sum) with W₁, W₂ invariant under T, then T can be analyzed separately on each Wᵢ.</li>
+</ul>
+
+<h2>2. Connection to Eigenvectors</h2>
+
+<p>Eigenvectors naturally generate invariant subspaces:</p>
+
+<div class="formula">
+If T(v) = λ v, then E_λ = {α v | α ∈ F} is 1-dimensional invariant subspace.
+</div>
+
+<p>More generally, the eigenspace corresponding to λ is an invariant subspace:</p>
+
+<div class="formula">
+v ∈ E_λ ⇒ T(v) = λ v ∈ E_λ
+</div>
+
+<p>Hence, eigenvectors and eigenspaces are the building blocks for invariant subspaces.</p>
+
+<h2>3. Diagonalization</h2>
+
+<p>A square matrix A (or linear transformation T) is <strong>diagonalizable</strong> if there exists a basis of V consisting of eigenvectors of A. In this basis, A has a diagonal representation:</p>
+
+<div class="formula">
+A = P D P⁻¹
+</div>
+
+<p>Where:</p>
+
+<ul>
+    <li>P = matrix whose columns are eigenvectors of A</li>
+    <li>D = diagonal matrix of corresponding eigenvalues</li>
+</ul>
+
+<p>Intuition: Diagonalization transforms A into a simpler form where the action of A on eigenvectors is just scaling, making powers, exponentials, and other functions of A easy to compute.</p>
+
+<h3>3.1 Criteria for Diagonalization</h3>
+
+<p>A matrix A ∈ ℝⁿˣⁿ is diagonalizable if:</p>
+
+<ul>
+    <li>The sum of the dimensions of all eigenspaces equals n</li>
+    <li>Equivalently: there exist n linearly independent eigenvectors</li>
+</ul>
+
+<p>Note: Distinct eigenvalues guarantee diagonalizability, but repeated eigenvalues require checking the geometric multiplicity.</p>
+
+<h2>4. Steps for Diagonalization</h2>
+
+<ol>
+    <li>Compute eigenvalues λ by solving det(A - λ I) = 0</li>
+    <li>For each eigenvalue, find the corresponding eigenspace E_λ by solving (A - λ I)v = 0</li>
+    <li>Check if the total number of independent eigenvectors = n</li>
+    <li>If yes, form P with columns as eigenvectors and D with diagonal entries as eigenvalues</li>
+    <li>Verify: A = P D P⁻¹</li>
+</ol>
+
+<h2>5. Examples</h2>
+
+<div class="example">
+1. 2×2 diagonal matrix: A = [[2,0],[0,3]]<br>
+Eigenvectors: v₁ = [1,0], v₂ = [0,1]<br>
+Diagonalization: P = [[1,0],[0,1]], D = [[2,0],[0,3]] (already diagonal)<br>
+Eigenspaces E₂ = span{[1,0]}, E₃ = span{[0,1]} → invariant subspaces
+</div>
+
+<div class="example">
+2. 2×2 matrix with distinct eigenvalues: A = [[4,1],[2,3]]<br>
+Characteristic equation: det(A-λI) = (4-λ)(3-λ) - 2*1 = λ² -7λ +10 =0 → λ=5,2<br>
+Eigenvectors: v₁=[1,1] for λ=5, v₂=[-1,2] for λ=2<br>
+Form P=[v₁ v₂], D=diag(5,2), check A=PDP⁻¹
+</div>
+
+<h2>6. Geometric Intuition</h2>
+
+<ul>
+    <li>Invariant subspaces are “fixed directions” or “planes” that remain within themselves under transformation.</li>
+    <li>Diagonalization decomposes the space into invariant subspaces along eigenvectors where the transformation acts as simple scaling.</li>
+    <li>Once diagonalized, computations like Aⁿ become easy: Aⁿ = P Dⁿ P⁻¹</li>
+</ul>
+
+<h2>7. Summary Formulas</h2>
+
+<div class="formula">
+Invariant subspace: W ⊆ V, T(W) ⊆ W<br>
+Eigenspace: E_λ = {v | (A - λ I)v = 0}, an invariant subspace<br>
+Diagonalization: A = P D P⁻¹, P = eigenvectors, D = diagonal eigenvalues<br>
+A diagonalizable ⇔ exists n independent eigenvectors
+</div>
+
+<p>Invariant subspaces and diagonalization simplify the analysis of linear transformations. Eigenvectors span invariant subspaces, and diagonalization expresses the transformation in a coordinate system where its action is purely scaling.</p>
+
+</body>
+</html>

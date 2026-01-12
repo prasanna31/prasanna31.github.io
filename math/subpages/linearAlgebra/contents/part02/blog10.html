@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linear Dependence and Independence</title>
+<style>
+    body { font-family: 'Georgia', serif; line-height: 1.8; margin: 2rem; color: #1b1b1b; background-color: #fdfdfd; }
+    h1, h2, h3 { color: #003366; }
+    h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    h2 { font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; }
+    h3 { font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 1rem; }
+    p { margin-bottom: 1rem; }
+    ul, ol { margin-bottom: 1rem; }
+    code { background-color: #f0f0f0; padding: 2px 4px; border-radius: 3px; }
+    .example { background-color: #eef6ff; padding: 1rem; margin: 1rem 0; border-left: 4px solid #003366; }
+    .diagram { text-align: center; margin: 2rem 0; }
+</style>
+</head>
+<body>
+
+<h1>Linear Dependence and Independence</h1>
+
+<p>Understanding linear dependence and independence is central to the structure of vector spaces. These concepts determine whether vectors are "redundant" or "essential" when describing a vector space. They form the foundation for defining <strong>basis</strong>, <strong>dimension</strong>, and many other fundamental linear algebra concepts.</p>
+
+<h2>1. Definitions</h2>
+<p>Let <code>v₁, v₂, ..., vₙ</code> be vectors in a vector space <code>V</code> over a field <code>F</code>.</p>
+
+<ul>
+<li><strong>Linear Combination:</strong> Any vector of the form <code>a₁v₁ + a₂v₂ + ... + aₙvₙ</code>, where <code>aᵢ ∈ F</code>, is called a linear combination of <code>v₁,...,vₙ</code>.</li>
+<li><strong>Linearly Dependent:</strong> The vectors are linearly dependent if there exist scalars <code>a₁,...,aₙ</code>, **not all zero**, such that:</li>
+<pre><code>a₁v₁ + a₂v₂ + ... + aₙvₙ = 0</code></pre>
+<li><strong>Linearly Independent:</strong> The vectors are linearly independent if the only solution to:</li>
+<pre><code>a₁v₁ + a₂v₂ + ... + aₙvₙ = 0</code></pre>
+<p>is <code>a₁ = a₂ = ... = aₙ = 0</code>.</p>
+</ul>
+
+<p>In simpler terms: independent vectors do not "overlap" in the sense that no vector in the set can be formed by combining the others. Dependent vectors have at least one vector expressible as a combination of the others.</p>
+
+<h2>2. Examples in ℝ² and ℝ³</h2>
+
+<div class="example">
+<h3>Example 2.1: ℝ²</h3>
+<p>Vectors <code>v₁=(1,0)</code> and <code>v₂=(0,1)</code> are linearly independent. Why? Suppose:</p>
+<pre><code>a*v₁ + b*v₂ = (0,0) 
+=> a*(1,0) + b*(0,1) = (0,0)
+=> (a, b) = (0,0)</code></pre>
+<p>Since only the trivial solution exists, they are independent.</p>
+</div>
+
+<div class="example">
+<h3>Example 2.2: ℝ²</h3>
+<p>Vectors <code>v₁=(1,2)</code> and <code>v₂=(2,4)</code> are linearly dependent because <code>2*v₁ - 1*v₂ = 0</code>. Here, non-zero scalars exist, proving dependence.</p>
+</div>
+
+<div class="example">
+<h3>Example 2.3: ℝ³</h3>
+<p>Vectors <code>v₁=(1,0,0)</code>, <code>v₂=(0,1,0)</code>, <code>v₃=(1,1,0)</code> are dependent because <code>v₃ = v₁ + v₂</code>. Only two vectors are independent; the third is redundant.</p>
+</div>
+
+<h2>3. Geometric Interpretation</h2>
+<p>Visual intuition helps:</p>
+<ul>
+<li>In ℝ²:
+    <ul>
+        <li>Two vectors are independent if they do not lie on the same line through the origin.</li>
+        <li>If they lie on the same line, they are dependent.</li>
+    </ul>
+</li>
+<li>In ℝ³:
+    <ul>
+        <li>Three vectors are independent if they do not lie on the same plane through the origin.</li>
+        <li>If all three lie on a plane, one is a combination of the others, hence dependent.</li>
+    </ul>
+</li>
+</ul>
+
+<div class="diagram">
+<p><strong>Diagram 1:</strong> Linear independence in 2D and 3D</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Linear_independence.svg/320px-Linear_independence.svg.png" alt="Linear Independence Illustration">
+</div>
+
+<h2>4. Properties of Linear Dependence</h2>
+<ul>
+<li>A set containing the zero vector is always linearly dependent.</li>
+<li>If a subset of vectors is dependent, the entire set is dependent.</li>
+<li>If vectors are independent, every proper subset is also independent.</li>
+<li>Adding a vector to a set of independent vectors may either preserve independence or create dependence.</li>
+</ul>
+
+<h2>5. Testing Linear Dependence</h2>
+<p>To check if vectors <code>v₁,...,vₙ</code> are dependent, solve:</p>
+<pre><code>a₁v₁ + a₂v₂ + ... + aₙvₙ = 0</code></pre>
+<p>If a non-trivial solution exists, they are dependent. Common techniques:</p>
+<ul>
+<li><strong>Row reduction (Gaussian elimination):</strong> Form a matrix with vectors as columns, reduce to check if a nontrivial solution exists.</li>
+<li><strong>Determinant method:</strong> For n vectors in n-dimensional space, compute the determinant. If det=0, vectors are dependent.</li>
+<li><strong>Geometric check:</strong> Check if vectors lie on the same line (2D) or plane (3D).</li>
+</ul>
+
+<div class="example">
+<h3>Example 5.1</h3>
+<p>Check if vectors <code>(1,2,3)</code>, <code>(4,5,6)</code>, <code>(7,8,9)</code> are independent:</p>
+<pre><code>| 1 4 7 |
+| 2 5 8 |
+| 3 6 9 |</code></pre>
+<p>Determinant = 0 → dependent.</p>
+</div>
+
+<h2>6. Linear Independence and Bases</h2>
+<p>Linear independence is crucial for defining <strong>basis</strong>:</p>
+<ul>
+<li>A basis of a vector space is a set of linearly independent vectors that span the space.</li>
+<li>All bases of a finite-dimensional space have the same number of vectors (dimension).</li>
+</ul>
+
+<div class="example">
+<h3>Example 6.1</h3>
+<p>In ℝ³, vectors <code>(1,0,0), (0,1,0), (0,0,1)</code> form a basis. They are independent, and every vector in ℝ³ is a linear combination of them.</p>
+</div>
+
+<h2>7. Exercises</h2>
+<ol>
+<li>Determine if <code>{(1,2,3), (4,5,6), (7,8,9)}</code> are independent.</li>
+<li>Find a maximal independent subset of <code>{(1,0,0,0), (0,1,0,0), (1,1,0,0), (0,0,1,0)}</code> in ℝ⁴.</li>
+<li>Explain geometrically why <code>{(1,2), (2,4), (3,6)}</code> are dependent.</li>
+<li>Prove that any set containing zero vector is dependent.</li>
+<li>Show that two independent vectors in ℝ² span the plane.</li>
+</ol>
+
+<h2>8. Summary</h2>
+<p>Linear dependence and independence are about redundancy of vectors. Key takeaways:</p>
+<ul>
+<li>Independent vectors cannot be expressed as combinations of others.</li>
+<li>Dependent vectors include at least one vector that is redundant.</li>
+<li>Testing independence involves solving linear equations or checking determinants.</li>
+<li>Understanding these concepts is essential for bases, dimension, and vector space structure.</li>
+</ul>
+
+<h2>References</h2>
+<ul>
+<li>Gilbert Strang, <em>Introduction to Linear Algebra</em>, 5th Edition</li>
+<li>Sheldon Axler, <em>Linear Algebra Done Right</em>, 3rd Edition</li>
+<li>David C. Lay, <em>Linear Algebra and Its Applications</em>, 5th Edition</li>
+<li>MIT OpenCourseWare – Linear Algebra Lecture Notes</li>
+</ul>
+
+</body>
+</html>

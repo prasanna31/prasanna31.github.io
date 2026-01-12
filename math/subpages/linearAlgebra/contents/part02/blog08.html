@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Subspaces and the Geometry of Containment</title>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      background-color: #ffffff;
+      color: #111827;
+      line-height: 2.1;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #020617;
+      color: #ffffff;
+      padding: 80px 40px;
+      text-align: center;
+    }
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 80px 40px;
+    }
+    h1, h2, h3 {
+      font-family: "Times New Roman", serif;
+      color: #020617;
+    }
+    h2 {
+      margin-top: 120px;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 18px;
+    }
+    h3 {
+      margin-top: 60px;
+    }
+    blockquote {
+      background: #f1f5f9;
+      border-left: 6px solid #020617;
+      padding: 32px;
+      margin: 60px 0;
+      font-style: italic;
+    }
+    ul {
+      margin-left: 40px;
+    }
+    code {
+      background: #e5e7eb;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 50px 0;
+    }
+    th, td {
+      border: 1px solid #111827;
+      padding: 14px;
+      text-align: left;
+    }
+    th {
+      background: #020617;
+      color: #ffffff;
+    }
+    footer {
+      background: #020617;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 45px;
+      margin-top: 160px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Subspaces and the Geometry of Containment</h1>
+  <p>Understanding How Vector Spaces Nest and Interact</p>
+</header>
+
+<section>
+
+<h2>1. Why Subspaces Matter</h2>
+
+<p>
+A vector space can be huge and abstract, like <code>ℝⁿ</code> or the space
+of all continuous functions. Subspaces allow us to focus on meaningful
+“sub-universes” where all the vector space structure remains intact.
+</p>
+
+<blockquote>
+A subspace is a self-contained linear world living inside a larger universe.
+</blockquote>
+
+<p>
+Every concept in linear algebra — span, linear independence, basis, dimension — is easier to understand by first seeing how subspaces interact.
+</p>
+
+---
+
+<h2>2. Definition of a Subspace</h2>
+
+<p>
+A subset <code>W</code> of a vector space <code>V</code> is a subspace if:</p>
+<ul>
+  <li><strong>Zero vector:</strong> <code>0 ∈ W</code></li>
+  <li><strong>Closed under addition:</strong> <code>u + v ∈ W</code> for all <code>u,v ∈ W</code></li>
+  <li><strong>Closed under scalar multiplication:</strong> <code>a·v ∈ W</code> for all <code>v ∈ W</code> and scalars <code>a</code></li>
+</ul>
+
+<p>
+Notice how this mirrors the axioms of a vector space — a subspace is essentially a vector space in its own right, but living inside another space.
+</p>
+
+---
+
+<h2>3. Geometric Intuition in ℝ² and ℝ³</h2>
+
+<h3>3.1 Lines Through the Origin</h3>
+
+<p>
+Every line in <code>ℝ²</code> that passes through the origin is a subspace. Why?  
+- Zero vector: line passes through the origin  
+- Closure under addition: sum of two vectors on the line is still on the line  
+- Closure under scalar multiplication: stretching or reversing a vector keeps it on the line
+</p>
+
+<p>
+This shows the connection between **algebraic axioms and geometric containment**.
+</p>
+
+<h3>3.2 Planes Through the Origin</h3>
+
+<p>
+Similarly, any plane in <code>ℝ³</code> passing through the origin is a subspace.  
+Lines are 1D subspaces, planes are 2D subspaces.  
+Dimension naturally emerges as a measure of “size” inside the bigger space.
+</p>
+
+<h3>3.3 Trivial Subspace</h3>
+
+<p>
+The set {0} is a subspace of every vector space. It is “tiny” but still respects all axioms.  
+This demonstrates that subspaces range from minimal to maximal.
+</p>
+
+---
+
+<h2>4. Examples in Function Spaces</h2>
+
+<ul>
+  <li>Continuous functions: all polynomials of degree ≤ n form a subspace.</li>
+  <li>Even functions: set of all f(x) with f(-x) = f(x) is a subspace.</li>
+  <li>Zero function is always included.</li>
+</ul>
+
+<p>
+The principle is the same: ensure closure under addition and scaling.
+</p>
+
+---
+
+<h2>5. Subspace Criteria — How to Check</h2>
+
+<p>Given a subset W of V, verify systematically:</p>
+
+<ol>
+  <li>Zero vector is in W</li>
+  <li>For all u,v ∈ W, check u+v ∈ W</li>
+  <li>For all v ∈ W and scalar a, check a·v ∈ W</li>
+</ol>
+
+<p>
+If any condition fails, W is not a subspace.
+</p>
+
+---
+
+<h2>6. Non-Examples — When Containment Fails</h2>
+
+<table>
+<tr>
+<th>Subset</th>
+<th>Why It Fails</th>
+</tr>
+<tr>
+<td>Line in ℝ² not through origin</td>
+<td>Zero vector not included → violates subspace axiom</td>
+</tr>
+<tr>
+<td>Set of all vectors in ℝ³ with positive components only</td>
+<td>Not closed under additive inverses → fails</td>
+</tr>
+<tr>
+<td>Polynomials of degree exactly n</td>
+<td>Addition can produce lower degree → not closed under addition</td>
+</tr>
+<tr>
+<td>Functions f with f(0) = 1</td>
+<td>Zero function not included → violates subspace axiom</td>
+</tr>
+</table>
+
+<p>
+These counterexamples reinforce that **every subspace must be fully “stable” under linear operations**.
+</p>
+
+---
+
+<h2>7. Intersections and Containment Hierarchy</h2>
+
+<p>
+- Intersection of two subspaces is always a subspace.  
+- Union of subspaces is generally <em>not</em> a subspace unless one is contained in the other.
+</p>
+
+<blockquote>
+Subspaces naturally form a hierarchy — “nested universes” inside the bigger vector space.
+</blockquote>
+
+<p>
+Example in ℝ³:  
+- Line L₁ ⊂ Plane P ⊂ ℝ³.  
+- L₁ + L₂ = smallest subspace containing both lines.
+</p>
+
+---
+
+<h2>8. Span: Building Subspaces from Vectors</h2>
+
+<p>
+Given any set of vectors {v₁,...,vₖ} in V, their <code>span</code> is the smallest subspace containing all of them:  
+</p>
+<blockquote>
+span{v₁,...,vₖ} = {a₁v₁ + ... + aₖvₖ | aᵢ ∈ F}
+</blockquote>
+
+<p>
+This is where the geometric idea of “containment” meets linear algebra: any subspace can be constructed as the span of a set of vectors.
+</p>
+
+---
+
+<h2>9. Geometric Takeaways</h2>
+
+<ul>
+  <li>Subspaces are “self-contained” linear worlds.</li>
+  <li>Dimension measures the degrees of freedom in a subspace.</li>
+  <li>Lines, planes, and higher-dimensional analogues are all subspaces.</li>
+  <li>Intersections, spans, and sums create a rich hierarchy of containment.</li>
+</ul>
+
+---
+
+<h2>10. Why This Matters</h2>
+
+<p>
+Understanding subspaces is critical because:  
+- Solutions of linear equations form subspaces (the kernel)  
+- Column spaces of matrices are subspaces  
+- Orthogonal projections are always onto subspaces  
+
+Geometry and algebra merge: subspaces are the **shape of linear algebra inside a vector space**.
+</p>
+
+<blockquote>
+Mastering subspaces is mastering the geometry of linear algebra.
+</blockquote>
+
+<p>
+Next natural chapter:
+</p>
+
+<blockquote>
+Linear Combinations, Span, and Basis — Building Every Vector From Few Ingredients
+</blockquote>
+
+</section>
+
+<footer>
+  <p>Foundations of Linear Algebra</p>
+</footer>
+
+</body>
+</html>

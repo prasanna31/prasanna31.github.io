@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finite vs Infinite Dimensional Vector Spaces</title>
+<style>
+    body { font-family: 'Georgia', serif; line-height: 1.9; margin: 2rem; color: #1b1b1b; background-color: #fdfdfd; }
+    h1, h2, h3 { color: #003366; }
+    h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    h2 { font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; }
+    h3 { font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 1rem; }
+    p { margin-bottom: 1rem; text-align: justify; }
+    ul, ol { margin-bottom: 1rem; }
+    code { background-color: #f0f0f0; padding: 2px 4px; border-radius: 3px; }
+    .example { background-color: #eef6ff; padding: 1rem; margin: 1rem 0; border-left: 4px solid #003366; }
+    .proof { background-color: #fff3e6; padding: 1rem; margin: 1rem 0; border-left: 4px solid #ff6600; }
+    .diagram { text-align: center; margin: 2rem 0; }
+</style>
+</head>
+<body>
+
+<h1>Finite vs Infinite Dimensional Vector Spaces</h1>
+
+<p>In linear algebra, the concept of <strong>dimension</strong> is fundamental. It captures the notion of the “degrees of freedom” in a vector space — essentially, how many independent directions exist in the space. Understanding the distinction between finite and infinite dimensions is critical for reasoning at the level of a linear algebraist. In this chapter, we explore this distinction rigorously, with proofs, examples, geometric intuition, and exercises.</p>
+
+<h2>1. Motivation and Concept of Dimension</h2>
+<p>Intuitively, dimension tells us how many vectors are needed to “describe” every vector in the space uniquely. For instance:</p>
+<ul>
+<li>A line in ℝ² has dimension 1: any point can be described by one parameter along the line.</li>
+<li>A plane in ℝ³ has dimension 2: any point can be expressed using two independent directions.</li>
+<li>Three-dimensional space ℝ³ has dimension 3: three independent directions are needed.</li>
+</ul>
+<p>Dimension is formalized using <strong>linear independence</strong> and <strong>span</strong>. A set of vectors is linearly independent if no vector in the set can be expressed as a linear combination of others. The span of a set is the collection of all possible linear combinations. The minimal set that is linearly independent and spans the space is called a <strong>basis</strong>, and its size defines the dimension.</p>
+
+<h2>2. Finite-Dimensional Vector Spaces</h2>
+<p>A vector space V over a field F is <strong>finite-dimensional</strong> if it has a finite basis. That is, there exists a finite set of vectors {v₁, v₂, ..., vₙ} such that:</p>
+<ol>
+<li>They are linearly independent.</li>
+<li>They span V.</li>
+</ol>
+<p>The number of vectors in any basis is called the <strong>dimension</strong> of V, denoted dim(V). All bases have the same number of vectors — a fundamental property called the <strong>dimension invariance theorem</strong>.</p>
+
+<div class="example">
+<h3>Example 2.1: ℝ³</h3>
+<p>The standard basis of ℝ³ is e₁=(1,0,0), e₂=(0,1,0), e₃=(0,0,1). Any vector v=(x,y,z) can be written uniquely as v = x e₁ + y e₂ + z e₃. Hence dim(ℝ³) = 3.</p>
+</div>
+
+<div class="example">
+<h3>Example 2.2: Polynomial Space P₂</h3>
+<p>P₂, the space of polynomials of degree ≤ 2, has basis {1, x, x²}. Any polynomial p(x) = a + bx + cx² is a unique linear combination of these basis vectors. Hence dim(P₂) = 3.</p>
+</div>
+
+<h3>2.1 Properties</h3>
+<ul>
+<li>Any linearly independent set has at most dim(V) elements.</li>
+<li>Any spanning set has at least dim(V) elements.</li>
+<li>Every finite-dimensional vector space is isomorphic to Fⁿ.</li>
+<li>Linear transformations can be represented as matrices.</li>
+</ul>
+
+<h2>3. Infinite-Dimensional Vector Spaces</h2>
+<p>A vector space V is <strong>infinite-dimensional</strong> if it has no finite basis. That is, for any finite set {v₁,...,vₙ}, there exists a vector v ∈ V not in their span.</p>
+
+<div class="example">
+<h3>Example 3.1: Space of All Polynomials P</h3>
+<p>The space P of all polynomials with real coefficients is infinite-dimensional. For any finite set {1, x, ..., xⁿ}, the polynomial xⁿ⁺¹ cannot be expressed as a linear combination of these. Hence, no finite basis exists.</p>
+</div>
+
+<div class="example">
+<h3>Example 3.2: Continuous Functions C([0,1])</h3>
+<p>The space C([0,1]) of continuous functions on [0,1] is infinite-dimensional. No finite set of functions spans all continuous functions. For example, no finite combination of {1, x, x²} can represent sin(x).</p>
+</div>
+
+<h3>3.1 Hamel and Schauder Bases</h3>
+<p>Even infinite-dimensional spaces have bases (Hamel bases) — linearly independent sets that span the space. Hamel bases are infinite. For practical purposes, Schauder bases allow infinite sums converging in a norm. Fourier series are examples of Schauder expansions in L² spaces.</p>
+
+<div class="example">
+<h3>Example 3.3: Hamel Basis of P</h3>
+<p>The set {1, x, x², x³,...} is a Hamel basis of P. Any polynomial can be expressed as a finite combination of these basis elements.</p>
+</div>
+
+<div class="example">
+<h3>Example 3.4: Fourier Basis in L²([0,2π])</h3>
+<p>The orthonormal set {1, sin(nx), cos(nx) | n≥1} forms a Schauder basis of L²([0,2π]). Any square-integrable function can be represented as an infinite convergent sum of these basis elements.</p>
+</div>
+
+<h2>4. Comparing Finite and Infinite Dimensions</h2>
+<table border="1" cellpadding="10" cellspacing="0">
+<tr><th>Property</th><th>Finite-Dimensional</th><th>Infinite-Dimensional</th></tr>
+<tr><td>Basis</td><td>Finite set</td><td>Infinite set (Hamel)</td></tr>
+<tr><td>Spanning set</td><td>At least dim(V)</td><td>Infinite set required</td></tr>
+<tr><td>Linear independence</td><td>Max = dim(V)</td><td>Can be infinite</td></tr>
+<tr><td>Matrix representation</td><td>Always possible</td><td>Infinite matrices / operator theory required</td></tr>
+<tr><td>Computation</td><td>Gaussian elimination, determinants</td><td>Approximation/projection onto finite subspaces</td></tr>
+</table>
+
+<h2>5. Geometric Intuition</h2>
+<p>Finite-dimensional spaces are visualizable:</p>
+<ul>
+<li>ℝ¹: line</li>
+<li>ℝ²: plane</li>
+<li>ℝ³: 3D space</li>
+</ul>
+<p>Infinite-dimensional spaces can be conceptualized as “vector spaces of functions or sequences” where each coordinate corresponds to a basis element.</p>
+
+<div class="diagram">
+<p><strong>Diagram:</strong> Function space vector</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Function_space_vector.svg/320px-Function_space_vector.svg.png" alt="Function space vector">
+</div>
+
+<h2>6. Coordinate Representations</h2>
+<p>Coordinates in finite dimensions are tuples of length dim(V). In infinite dimensions, coordinates with respect to Hamel bases exist but may be uncountably infinite. Schauder bases allow infinite sums converging in norm.</p>
+
+<div class="example">
+<h3>Example 6.1: Fourier Series</h3>
+<p>f(x) in L²([0,2π]) can be expressed as:</p>
+<pre><code>f(x) = a₀ + Σ (aₙ cos(nx) + bₙ sin(nx))</code></pre>
+<p>This demonstrates infinite-dimensional coordinates.</p>
+</div>
+
+<h2>7. Applications</h2>
+<ul>
+<li>Quantum mechanics: wavefunctions in Hilbert spaces.</li>
+<li>Signal processing: Fourier and wavelet analysis.</li>
+<li>PDEs: solutions in function spaces.</li>
+<li>Numerical analysis: finite-dimensional approximations of infinite-dimensional problems.</li>
+</ul>
+
+<h2>8. Exercises</h2>
+<ol>
+<li>Prove that Pₙ is finite-dimensional and find a basis.</li>
+<li>Show that P is infinite-dimensional.</li>
+<li>Prove that C([0,1]) is infinite-dimensional.</li>
+<li>Explain why the Rank-Nullity theorem requires finite-dimensional spaces.</li>
+<li>Compute Fourier coefficients for f(x)=x on [0,π].</li>
+</ol>
+
+<h2>9. Summary</h2>
+<p>Finite-dimensional spaces allow full computation, geometric intuition, and theorem application. Infinite-dimensional spaces require subtle reasoning: bases are infinite, convergence matters, and coordinates may be infinite sums. Mastering this distinction is crucial for advanced linear algebra and functional analysis.</p>
+
+<h2>References</h2>
+<ul>
+<li>Sheldon Axler, <em>Linear Algebra Done Right</em></li>
+<li>Gilbert Strang, <em>Introduction to Linear Algebra</em></li>
+<li>David Lay, <em>Linear Algebra and Its Applications</em></li>
+<li>Walter Rudin, <em>Functional Analysis</em></li>
+<li>MIT OpenCourseWare – Linear Algebra and Functional Analysis</li>
+</ul>
+
+</body>
+</html>

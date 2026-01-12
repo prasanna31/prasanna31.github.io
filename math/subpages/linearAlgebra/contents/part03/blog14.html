@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coordinates Are Choices, Not Truth</title>
+<style>
+    body { font-family: 'Georgia', serif; line-height: 1.8; margin: 2rem; color: #1b1b1b; background-color: #fdfdfd; }
+    h1, h2, h3 { color: #003366; }
+    h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    h2 { font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; }
+    h3 { font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 1rem; }
+    p { margin-bottom: 1rem; text-align: justify; }
+    ul, ol { margin-bottom: 1rem; }
+    code { background-color: #f0f0f0; padding: 2px 4px; border-radius: 3px; }
+    .example { background-color: #eef6ff; padding: 1rem; margin: 1rem 0; border-left: 4px solid #003366; }
+    .proof { background-color: #fff3e6; padding: 1rem; margin: 1rem 0; border-left: 4px solid #ff6600; }
+    .diagram { text-align: center; margin: 2rem 0; }
+</style>
+</head>
+<body>
+
+<h1>Coordinates Are Choices, Not Truth</h1>
+
+<p>In linear algebra, the notion of a vector is fundamentally abstract. A vector exists independently of any representation or coordinate system. Yet, when we study linear algebra in classrooms or implement algorithms in computers, we almost always describe vectors by coordinates relative to some chosen basis. This raises a profound insight: <strong>coordinates are choices, not fundamental truths</strong>. They are tools for computation and communication, not intrinsic properties of the vector itself.</p>
+
+<h2>1. Understanding Vectors Beyond Coordinates</h2>
+<p>At its core, a vector is an element of a vector space. It has properties such as addition and scalar multiplication, and it can interact with other vectors through operations like the dot product. Importantly, these properties do not depend on how we write the vector down. Coordinates are merely a way to encode the vector relative to a chosen basis.</p>
+
+<div class="example">
+<h3>Example 1.1: Vector in ℝ³</h3>
+<p>The vector v = (2, 3, 5) in ℝ³ is often written in terms of the standard basis e₁=(1,0,0), e₂=(0,1,0), e₃=(0,0,1). But v exists independently of e₁, e₂, e₃. We could choose another basis b₁=(1,1,0), b₂=(0,1,1), b₃=(1,0,1), and write v in this basis as a linear combination of b₁, b₂, b₃. The vector itself hasn’t changed; only its coordinates have.</p>
+</div>
+
+<p>This separation between a vector and its coordinates is crucial. Coordinates are like labels we attach for convenience, not intrinsic properties of the vector. Changing the basis changes the coordinates, but the vector itself remains the same.</p>
+
+<h2>2. Bases Are Choices</h2>
+<p>A basis is a set of linearly independent vectors that span the vector space. Choosing a basis is essentially choosing a coordinate system. Different choices lead to different coordinate representations, but none is more “correct” than another.</p>
+
+<div class="example">
+<h3>Example 2.1: ℝ²</h3>
+<p>In ℝ², the standard basis is e₁=(1,0), e₂=(0,1). The vector v=(3,2) has coordinates (3,2) in this basis. If we choose a new basis b₁=(1,1), b₂=(1,-1), then the same vector v has coordinates (5/2,1/2) in the new basis. The coordinates are different, but the vector v hasn’t changed.</p>
+</div>
+
+<p>Thus, a basis is a <strong>human-imposed framework</strong>. Coordinates depend on this framework, but the vector space itself has its own structure independent of any basis.</p>
+
+<h2>3. Changing Coordinates: The Mechanics</h2>
+<p>Let V be a vector space with two bases, B = {b₁, ..., bₙ} and C = {c₁, ..., cₙ}. Any vector v ∈ V can be expressed as:</p>
+<pre><code>v = x₁b₁ + ... + xₙbₙ = y₁c₁ + ... + yₙcₙ</code></pre>
+<p>The two coordinate representations (x₁,...,xₙ) and (y₁,...,yₙ) are related by a <strong>change of basis matrix</strong> P:</p>
+<pre><code>[v]_C = P [v]_B</code></pre>
+<p>Here, [v]_B denotes the coordinates of v in basis B, and [v]_C denotes the coordinates in basis C. The matrix P encodes the relationship between the bases. Crucially, this formula shows that coordinates are dependent on the chosen basis, not on the vector itself.</p>
+
+<div class="example">
+<h3>Example 3.1: 2D Basis Change</h3>
+<p>Let B = { (1,0), (0,1) } and C = { (1,1), (1,-1) }. The change of basis matrix from B to C is:</p>
+<pre><code>P = [ [1/2, 1/2],
+      [1/2, -1/2] ]</code></pre>
+<p>If v = (3,2) in B coordinates, then in C coordinates:</p>
+<pre><code>[v]_C = P [v]_B = [ [1/2,1/2],[1/2,-1/2] ] * [3,2] = [5/2,1/2]</code></pre>
+<p>v itself hasn’t changed; only its coordinates have.</p>
+</div>
+
+<h2>4. Linear Transformations Are Basis-Independent</h2>
+<p>A linear transformation T: V → W exists independently of any coordinate system. Its representation as a matrix depends entirely on the choice of bases in V and W:</p>
+<pre><code>[T]_B^C = matrix representation of T from basis B in V to basis C in W</code></pre>
+<p>Changing bases changes the matrix, but the transformation itself remains the same mapping between vectors.</p>
+
+<div class="example">
+<h3>Example 4.1</h3>
+<p>Consider T: ℝ² → ℝ² defined by T(x,y) = (x+y, x-y). In standard basis B = {e₁,e₂}, the matrix is:</p>
+<pre><code>[T]_B = [[1,1],[1,-1]]</code></pre>
+<p>Choosing a new basis C = {b₁=(1,1), b₂=(1,-1)}, the matrix changes, but the linear transformation T itself remains unchanged. Coordinates are just a lens; the truth of the transformation is independent of the lens.</p>
+</div>
+
+<h2>5. Geometric Interpretation</h2>
+<p>Coordinates are a “grid” we impose on the vector space. Changing the grid changes the numbers but not the underlying vectors:</p>
+<ul>
+<li>Vectors are arrows in space; their direction and magnitude are intrinsic.</li>
+<li>Coordinates are labels telling us “how far along each chosen basis vector.”</li>
+<li>The same arrow can have many coordinate representations, depending on the basis we choose.</li>
+</ul>
+
+<div class="diagram">
+<p><strong>Diagram 5.1:</strong> Same vector, two different bases</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Vector_spaces_dimensions.png/320px-Vector_spaces_dimensions.png" alt="Vector coordinates in different bases">
+</div>
+
+<h2>6. Consequences for Computation and Theory</h2>
+<p>This insight has profound consequences:</p>
+<ol>
+<li><strong>Matrix Representations Are Not Absolute:</strong> Any matrix representing a linear transformation is valid only with respect to the chosen bases.</li>
+<li><strong>Coordinate-Free Understanding:</strong> Many theorems in linear algebra are best understood abstractly, without relying on coordinates (e.g., dimension theorem, rank-nullity theorem).</li>
+<li><strong>Flexibility in Problem Solving:</strong> Choosing a convenient basis simplifies computations but doesn’t affect the underlying vector or transformation.</li>
+<li><strong>Physics and Engineering:</strong> Coordinates are often tied to measurement systems. Changing coordinate systems (rotations, translations) changes numerical representation but not physical reality.</li>
+</ol>
+
+<div class="example">
+<h3>Example 6.1: Physics</h3>
+<p>Velocity vectors exist in space. Changing from Cartesian to polar coordinates changes the numbers representing the velocity, but the actual motion of the object is independent of the coordinates.</p>
+</div>
+
+<h2>7. Exercises</h2>
+<ol>
+<li>Given v = (4,3) in standard basis of ℝ², express it in basis {(1,1),(1,-1)}.</li>
+<li>Show that two different bases in ℝ³ yield different coordinate vectors for the same vector, and verify the change of basis formula.</li>
+<li>Let T: ℝ² → ℝ² be T(x,y) = (2x+y, x+3y). Represent T in two different bases and show that the transformation itself is invariant.</li>
+<li>Explain geometrically why coordinates are not intrinsic properties of vectors using ℝ² diagrams.</li>
+<li>Consider a polynomial space P₂. Explain why a polynomial p(x)=x²+2x+3 has different coordinates in bases {1,x,x²} and {1,x+1,(x+1)²}.</li>
+</ol>
+
+<h2>8. Summary</h2>
+<p>Coordinates are a tool, not a truth. Vectors, linear transformations, and vector spaces exist independently of our coordinate choices. The choice of a basis is like choosing a viewpoint: it changes our representation, our computations, and our convenience, but not the underlying mathematical objects. Understanding this distinction is crucial for higher-level linear algebra, abstract algebra, functional analysis, and applications in physics, computer graphics, and engineering.</p>
+
+<h2>References</h2>
+<ul>
+<li>Gilbert Strang, <em>Introduction to Linear Algebra</em>, 5th Edition</li>
+<li>Sheldon Axler, <em>Linear Algebra Done Right</em>, 3rd Edition</li>
+<li>David C. Lay, <em>Linear Algebra and Its Applications</em>, 5th Edition</li>
+<li>Axler, S., <em>Linear Algebra, Coordinate-Free Approach</em>, Lecture Notes</li>
+<li>MIT OpenCourseWare – Linear Algebra, Lecture 3: Vector Spaces and Bases</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Examples and Non-Examples of Vector Spaces — Deep Dive</title>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      background-color: #ffffff;
+      color: #111827;
+      line-height: 2.1;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #020617;
+      color: #ffffff;
+      padding: 80px 40px;
+      text-align: center;
+    }
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 80px 40px;
+    }
+    h1, h2, h3 {
+      font-family: "Times New Roman", serif;
+      color: #020617;
+    }
+    h2 {
+      margin-top: 120px;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 18px;
+    }
+    h3 {
+      margin-top: 60px;
+    }
+    blockquote {
+      background: #f1f5f9;
+      border-left: 6px solid #020617;
+      padding: 32px;
+      margin: 60px 0;
+      font-style: italic;
+    }
+    ul {
+      margin-left: 40px;
+    }
+    code {
+      background: #e5e7eb;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 50px 0;
+    }
+    th, td {
+      border: 1px solid #111827;
+      padding: 14px;
+      text-align: left;
+    }
+    th {
+      background: #020617;
+      color: #ffffff;
+    }
+    footer {
+      background: #020617;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 45px;
+      margin-top: 160px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Examples and Non-Examples of Vector Spaces</h1>
+  <p>Deep Exploration of Structure Through What Works and What Fails</p>
+</header>
+
+<section>
+
+<h2>1. Why Examples and Non-Examples Are Crucial</h2>
+
+<p>
+The abstract definition of a vector space is precise, but it can feel
+intimidating. Only by examining examples and counterexamples
+do we develop the intuition to recognize vector spaces in the wild.
+</p>
+
+<p>
+Examples reveal how the axioms interact naturally. Non-examples
+show exactly which axioms are violated, sharpening our understanding
+and preventing assumptions that “most sets of objects behave like vectors.”
+</p>
+
+<blockquote>
+Seeing both the successes and failures of the axioms trains your
+mathematical instinct more than any amount of mechanical computation.
+</blockquote>
+
+---
+
+<h2>2. Classic Examples of Vector Spaces — Explained</h2>
+
+<h3>2.1 Euclidean Spaces ℝⁿ</h3>
+
+<p>
+The set of all n-tuples of real numbers, <code>ℝⁿ</code>, is the archetype
+of a vector space. Addition and scalar multiplication are defined
+componentwise:
+</p>
+
+<blockquote>
+(u₁,...,uₙ) + (v₁,...,vₙ) = (u₁+v₁,...,uₙ+vₙ),  
+a·(v₁,...,vₙ) = (a·v₁,...,a·vₙ)
+</blockquote>
+
+<p>
+Why it works:</p>
+<ul>
+  <li><strong>Closure:</strong> Adding or scaling numbers keeps you in ℝⁿ.</li>
+  <li><strong>Associativity & Commutativity:</strong> Follows from real numbers.</li>
+  <li><strong>Zero vector:</strong> (0,...,0) acts as identity.</li>
+  <li><strong>Inverses:</strong> Negating each component satisfies the additive inverse requirement.</li>
+</ul>
+
+<p>
+Takeaway: Euclidean spaces are where geometry and algebra meet,
+showing how abstract axioms manifest as familiar objects.
+</p>
+
+---
+
+<h3>2.2 Polynomial Spaces Pₙ</h3>
+
+<p>
+Consider polynomials of degree ≤ n with real coefficients:
+<code>Pₙ = {a₀ + a₁x + ... + aₙxⁿ | aᵢ ∈ ℝ}</code>
+</p>
+
+<p>Why this works:</p>
+<ul>
+  <li><strong>Addition:</strong> Sum of two degree ≤ n polynomials remains degree ≤ n.</li>
+  <li><strong>Scalar multiplication:</strong> Multiplying a polynomial by a scalar preserves degree.</li>
+  <li><strong>Zero polynomial:</strong> Acts as additive identity.</li>
+  <li>All other axioms follow from real numbers and the definitions of addition and multiplication.</li>
+</ul>
+
+<p>
+Observation: Pₙ is finite-dimensional; its basis is {1, x, x²,..., xⁿ}.
+</p>
+
+---
+
+<h3>2.3 Function Spaces</h3>
+
+<p>
+Let <code>F = {f: ℝ → ℝ}</code> be all real-valued functions.  
+Pointwise addition and scalar multiplication:
+</p>
+<blockquote>
+(f+g)(x) = f(x)+g(x), a·f(x) = a·f(x)
+</blockquote>
+
+<p>Why this works:</p>
+<ul>
+  <li>Closure: sum or scalar multiple of functions is still a function.</li>
+  <li>Zero function: f(x)=0 satisfies additive identity.</li>
+  <li>Distributivity: scalar addition and vector addition work pointwise.</li>
+</ul>
+
+<p>
+Subspaces include continuous functions, differentiable functions,
+and integrable functions. This shows how vector spaces exist even
+in infinite dimensions.
+</p>
+
+---
+
+<h3>2.4 Matrices Mₘₓₙ(ℝ)</h3>
+
+<p>
+All m×n matrices with real entries form a vector space under
+elementwise addition and scalar multiplication.  
+The zero matrix acts as additive identity, and additive inverses exist elementwise.
+</p>
+
+---
+
+<h2>3. Non-Examples — Understanding Failures</h2>
+
+<p>
+Examining non-examples shows which axioms are fragile and why
+vector spaces are constrained.
+</p>
+
+<h3>3.1 Positive Reals ℝ⁺</h3>
+<p>
+<code>ℝ⁺</code> under normal addition fails because additive inverses
+do not exist (no negative numbers allowed).  
+Even though addition and scalar multiplication by positive numbers work,
+this violates the existence of additive inverses.
+</p>
+
+<h3>3.2 Polynomials of Degree Exactly n</h3>
+<p>
+Adding two degree n polynomials can yield a polynomial of lower degree.
+Thus, closure under addition fails.  
+This shows that “exact” restrictions often violate axioms subtly.
+</p>
+
+<h3>3.3 Functions f with f(0)=1</h3>
+<p>
+Zero function f(x)=0 does not satisfy f(0)=1.  
+Additive identity fails; closure may hold but the structure is incomplete.
+</p>
+
+<h3>3.4 Integers ℤ over ℝ</h3>
+<p>
+ℤ is closed under integer addition and subtraction, but not under
+scalar multiplication by arbitrary real numbers.  
+Hence, ℤ over ℝ is <em>not</em> a vector space.  
+This highlights the importance of the field matching the scaling operation.
+</p>
+
+<h3>3.5 Vectors with Cross Product as Multiplication</h3>
+<p>
+If one tried to define “scalar multiplication” using the vector cross product,
+distributivity fails and scalar algebra becomes meaningless.  
+This illustrates that both operations (addition and scalar multiplication) must align with the axioms.
+</p>
+
+---
+
+<h2>4. Infinite-Dimensional Examples</h2>
+
+<p>
+Function spaces and sequence spaces are infinite-dimensional.
+Axioms remain valid, but dimensions are no longer countable.  
+This emphasizes that the **definition applies equally to finite and infinite universes**.
+</p>
+
+<ul>
+  <li>Sequences a₁,a₂,... with real entries</li>
+  <li>Continuous functions on [0,1]</li>
+  <li>Square-integrable functions L²[0,1]</li>
+</ul>
+
+---
+
+<h2>5. Subspaces — Mini Vector Spaces</h2>
+
+<p>
+Subsets that themselves satisfy all axioms are called subspaces.  
+Checking subspaces enforces three key properties:</p>
+
+<ul>
+  <li>Contain the zero vector</li>
+  <li>Closed under addition</li>
+  <li>Closed under scalar multiplication</li>
+</ul>
+
+<p>
+Examples: lines through origin in ℝ², planes through origin in ℝ³,
+even functions in the space of all functions.
+</p>
+
+---
+
+<h2>6. How to Analyze New Candidates</h2>
+
+<p>
+When presented with a new set and operations, ask systematically:</p>
+
+<ul>
+  <li>Is addition closed?</li>
+  <li>Is scalar multiplication closed?</li>
+  <li>Does zero exist?</li>
+  <li>Do additive inverses exist?</li>
+  <li>Do distributive and associative laws hold?</li>
+</ul>
+
+<p>
+This step-by-step approach trains your mind to recognize vector spaces
+even in unconventional contexts.
+</p>
+
+---
+
+<h2>7. Takeaway</h2>
+
+<blockquote>
+Vector spaces exist wherever addition and scaling coexist coherently.  
+Examples reveal the axioms in action; non-examples show which
+axioms are indispensable.  
+Learning both builds the intuition to recognize and construct vector spaces everywhere.
+</blockquote>
+
+<p>
+Next chapter naturally continues:
+</p>
+
+<blockquote>
+Linear Combinations, Span, and Basis — Constructing Structure from First Principles
+</blockquote>
+
+</section>
+
+<footer>
+  <p>Foundations of Linear Algebra</p>
+</footer>
+
+</body>
+</html>

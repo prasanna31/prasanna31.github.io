@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Determinants — Algebraic and Geometric Meaning</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #222;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h2 { font-size: 2em; margin-top: 30px; margin-bottom: 10px; }
+        h3 { font-size: 1.5em; margin-top: 20px; margin-bottom: 5px; }
+        p { margin-bottom: 15px; }
+        ul, ol { margin-bottom: 15px; }
+        code { background-color: #ecf0f1; padding: 2px 4px; border-radius: 3px; }
+        .formula {
+            background-color: #f4ecf7;
+            padding: 10px;
+            border-left: 4px solid #9b59b6;
+            margin-bottom: 15px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .example {
+            background-color: #eaf2f8;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fcf3cf;
+            padding: 10px;
+            border-left: 4px solid #f1c40f;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Determinants — Algebraic and Geometric Meaning</h1>
+
+<p>The determinant is a fundamental concept in linear algebra that connects **matrix algebra** with **geometry**. It measures how a linear transformation scales space and provides crucial information about invertibility, volume scaling, orientation, and eigenvalues.</p>
+
+<h2>1. Definition of Determinant (Algebraic)</h2>
+
+<p>For a square matrix A = [aᵢⱼ] of order n×n, the determinant, denoted det(A) or |A|, is defined recursively:</p>
+
+<ul>
+    <li>For n = 1: <div class="formula">det([a₁₁]) = a₁₁</div></li>
+    <li>For n = 2: <div class="formula">A = [[a, b], [c, d]] → det(A) = ad - bc</div></li>
+    <li>For n ≥ 3 (Laplace expansion along row i):</li>
+</ul>
+
+<div class="formula">
+det(A) = Σ (-1)^(i+j) aᵢⱼ det(Mᵢⱼ),  
+i fixed, j = 1 to n
+</div>
+
+<p>Where Mᵢⱼ is the (n-1)×(n-1) matrix obtained by removing row i and column j. This formula is recursive, expanding the determinant in terms of smaller determinants.</p>
+
+<h2>2. Properties of Determinants</h2>
+
+<ul>
+    <li>det(I) = 1 (identity matrix)</li>
+    <li>det(Aᵀ) = det(A)</li>
+    <li>det(AB) = det(A) * det(B)</li>
+    <li>det(cA) = cⁿ * det(A) for scalar c and n×n matrix</li>
+    <li>Swapping two rows or columns multiplies the determinant by -1</li>
+    <li>If a row or column is zero, det(A) = 0</li>
+    <li>If a matrix has two identical rows, det(A) = 0</li>
+</ul>
+
+<h2>3. Determinant and Invertibility</h2>
+
+<p>A square matrix A is invertible ⇔ det(A) ≠ 0. Geometrically, det(A) = 0 means the transformation collapses space into a lower dimension (e.g., a line or plane), so no inverse exists.</p>
+
+<h2>4. Geometric Interpretation</h2>
+
+<p>Think of a linear transformation T: ℝⁿ → ℝⁿ represented by A. The determinant measures how T scales n-dimensional volume:</p>
+
+<ul>
+    <li>|det(A)| = scale factor of volume under T</li>
+    <li>det(A) > 0 → orientation preserved</li>
+    <li>det(A) < 0 → orientation reversed (like a mirror)</li>
+    <li>det(A) = 0 → volume collapses to lower dimension, not invertible</li>
+</ul>
+
+<p>Examples:</p>
+
+<div class="example">
+2×2 case: T maps unit square to parallelogram spanned by columns of A = [[a, b], [c, d]]<br>
+Area of parallelogram = |det(A)| = |ad - bc|
+</div>
+
+<div class="example">
+3×3 case: T maps unit cube to parallelepiped spanned by column vectors of A = [[a₁, a₂, a₃], [b₁, b₂, b₃], [c₁, c₂, c₃]]<br>
+Volume = |det(A)|
+</div>
+
+<h2>5. Determinant via Row Operations</h2>
+
+<p>Determinants can be efficiently computed using row reduction (Gaussian elimination) with these rules:</p>
+
+<ul>
+    <li>Swapping rows multiplies determinant by -1</li>
+    <li>Multiplying a row by scalar c multiplies determinant by c</li>
+    <li>Adding a multiple of one row to another does not change determinant</li>
+</ul>
+
+<p>After converting A to upper-triangular form U, det(A) = product of diagonal entries of U, adjusted for row swaps.</p>
+
+<h2>6. Examples</h2>
+
+<div class="example">
+2×2 matrix: A = [[3, 2], [1, 4]]<br>
+det(A) = 3*4 - 2*1 = 12 - 2 = 10<br>
+Geometric meaning: T maps unit square to parallelogram of area 10
+</div>
+
+<div class="example">
+3×3 matrix: 
+A = [[1,2,3],[0,1,4],[5,6,0]]<br>
+Compute det(A) using cofactor expansion along first row:<br>
+det(A) = 1*det([[1,4],[6,0]]) - 2*det([[0,4],[5,0]]) + 3*det([[0,1],[5,6]])<br>
+= 1*(1*0 - 4*6) - 2*(0*0 - 4*5) + 3*(0*6 - 1*5)<br>
+= 1*(-24) - 2*(-20) + 3*(-5) = -24 + 40 - 15 = 1<br>
+Volume of parallelepiped = 1 → unit volume preserved
+</div>
+
+<h2>7. Determinant as Orientation</h2>
+
+<p>If det(A) > 0, the orientation of basis vectors is preserved; if det(A) < 0, it is reversed. In 2D, this is like preserving clockwise/counterclockwise order; in 3D, it's like right-hand vs left-hand orientation.</p>
+
+<h2>8. Summary Formulas</h2>
+
+<div class="formula">
+det([[a]]) = a<br>
+det([[a, b],[c, d]]) = ad - bc<br>
+det(A) = Σ (-1)^(i+j) aᵢⱼ det(Mᵢⱼ) (Laplace expansion)<br>
+Volume scaling: vol(T(unit cube)) = |det(A)|<br>
+Invertibility: A invertible ⇔ det(A) ≠ 0
+</div>
+
+<p>Determinants unify algebra and geometry, connecting matrices to volumes, orientations, and invertibility, making them essential in linear algebra, geometry, physics, and engineering.</p>
+
+</body>
+</html>

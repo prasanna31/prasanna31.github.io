@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dimension as an Invariant</title>
+<style>
+    body { font-family: 'Georgia', serif; line-height: 1.8; margin: 2rem; color: #1b1b1b; background-color: #fdfdfd; }
+    h1, h2, h3 { color: #003366; }
+    h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    h2 { font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; }
+    h3 { font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 1rem; }
+    p { margin-bottom: 1rem; text-align: justify; }
+    ul, ol { margin-bottom: 1rem; }
+    code { background-color: #f0f0f0; padding: 2px 4px; border-radius: 3px; }
+    .example { background-color: #eef6ff; padding: 1rem; margin: 1rem 0; border-left: 4px solid #003366; }
+    .proof { background-color: #fff3e6; padding: 1rem; margin: 1rem 0; border-left: 4px solid #ff6600; }
+    .diagram { text-align: center; margin: 2rem 0; }
+</style>
+</head>
+<body>
+
+<h1>Dimension as an Invariant</h1>
+
+<p>In linear algebra, the concept of <strong>dimension</strong> captures the "size" or "degree of freedom" of a vector space. More importantly, dimension is an <strong>invariant</strong>, meaning that it is a property of the vector space itself, independent of the choice of basis. Understanding dimension as an invariant is central to many areas of mathematics, including linear transformations, matrices, and abstract vector spaces.</p>
+
+<h2>1. What Is Dimension?</h2>
+
+<p>The <strong>dimension</strong> of a vector space <code>V</code>, denoted <code>dim(V)</code>, is the number of vectors in any basis of <code>V</code>. This definition relies on two fundamental facts:</p>
+<ol>
+<li>Every basis of a finite-dimensional vector space has the same number of vectors.</li>
+<li>Every vector in the space can be uniquely represented as a linear combination of the basis vectors.</li>
+</ol>
+
+<p>Dimension counts the minimum number of vectors needed to “span” the space without redundancy. It is both a numerical and structural property of the space.</p>
+
+<div class="example">
+<h3>Example 1.1: ℝ²</h3>
+<p>ℝ² has dimension 2. Any two independent vectors form a basis, e.g., <code>{(1,0),(0,1)}</code> or <code>{(1,1),(1,-1)}</code>. No set of three or more independent vectors exists in ℝ²; any set of two independent vectors spans the space.</p>
+</div>
+
+<div class="example">
+<h3>Example 1.2: ℝ³</h3>
+<p>ℝ³ has dimension 3. Any three linearly independent vectors form a basis. Adding a fourth vector always introduces linear dependence.</p>
+</div>
+
+<h2>2. Dimension Is an Invariant</h2>
+
+<p>Why do we call dimension an <strong>invariant</strong>? Because the number of vectors in any basis of a vector space is <em>always the same</em>, regardless of which basis you choose. This is a deep structural property of the vector space.</p>
+
+<div class="proof">
+<h3>Theorem 2.1: All bases of a finite-dimensional vector space have the same number of vectors</h3>
+<p>Let <code>B₁={v₁,...,vₘ}</code> and <code>B₂={w₁,...,wₙ}</code> be two bases of a finite-dimensional vector space <code>V</code>. Then <code>m=n</code>.</p>
+<div class="proof">
+<h4>Proof:</h4>
+<ol>
+<li>Since <code>B₁</code> is a basis, it spans <code>V</code>. Each <code>wⱼ ∈ B₂</code> can be written as a linear combination of <code>B₁</code>.</li>
+<li>By a fundamental lemma of linear algebra (Steinitz Exchange Lemma), the number of vectors in any independent set ≤ number of vectors in any spanning set.</li>
+<li>Applying this lemma:
+    <ul>
+        <li>n ≤ m (B₂ is independent, B₁ spans)</li>
+        <li>m ≤ n (B₁ is independent, B₂ spans)</li>
+    </ul>
+</li>
+<li>Thus <code>m = n</code>.</li>
+</ol>
+<p>✅ Hence, dimension is well-defined and invariant under the choice of basis.</p>
+</div>
+</div>
+
+<div class="example">
+<h3>Example 2.1</h3>
+<p>In ℝ³, the standard basis has three vectors <code>{(1,0,0),(0,1,0),(0,0,1)}</code>. Another basis <code>{(1,1,0),(0,1,1),(1,0,1)}</code> also has exactly three vectors. Dimension is invariant: <code>dim(ℝ³)=3</code>.</p>
+</div>
+
+<h2>3. Geometric Intuition</h2>
+
+<p>Dimension measures “degrees of freedom”:</p>
+<ul>
+<li>In ℝ¹, vectors lie along a line: 1D space.</li>
+<li>In ℝ², vectors lie on a plane: 2D space.</li>
+<li>In ℝ³, vectors lie in 3D space: three independent directions span the space.</li>
+<li>In function spaces, dimension counts independent “directions” in infinite-dimensional spaces (e.g., polynomial degrees, Fourier modes).</li>
+</ul>
+
+<div class="diagram">
+<p><strong>Diagram 3.1:</strong> Geometric interpretation of dimension</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Vector_spaces_dimensions.png/320px-Vector_spaces_dimensions.png" alt="Vector space dimension">
+</div>
+
+<h2>4. Relation to Linear Independence and Span</h2>
+
+<p>Dimension is fundamentally tied to two concepts:</p>
+<ol>
+<li><strong>Linear Independence:</strong> Dimension equals the maximum number of independent vectors in the space.</li>
+<li><strong>Span:</strong> Dimension equals the minimum number of vectors needed to span the space.</li>
+</ol>
+
+<p>In other words:</p>
+<pre><code>dim(V) = size of any basis = max{|S| : S ⊆ V independent} = min{|S| : S ⊆ V spans V}</code></pre>
+
+<div class="example">
+<h3>Example 4.1</h3>
+<p>In ℝ², the set <code>{(1,0),(0,1),(1,1)}</code> is spanning but not independent (size 3). The set <code>{(1,0),(0,1)}</code> is both spanning and independent (size 2), giving the dimension.</p>
+</div>
+
+<h2>5. Dimension of Subspaces</h2>
+
+<p>If <code>W ⊆ V</code> is a subspace, <code>dim(W) ≤ dim(V)</code>. Equality occurs only if <code>W = V</code>.</p>
+
+<div class="example">
+<h3>Example 5.1</h3>
+<p>Consider the xy-plane in ℝ³: <code>W = {(x,y,0)}</code>. dim(W)=2 < dim(ℝ³)=3. Any basis of W (e.g., <code>{(1,0,0),(0,1,0)}</code>) has fewer vectors than any basis of ℝ³.</p>
+</div>
+
+<h2>6. Dimension Formula for Sum of Subspaces</h2>
+
+<p>Let <code>U,W ⊆ V</code> be subspaces. Then:</p>
+<pre><code>dim(U + W) = dim(U) + dim(W) - dim(U ∩ W)</code></pre>
+
+<div class="proof">
+<h3>Proof:</h3>
+<p>Choose a basis of <code>U ∩ W</code>, extend it to bases of <code>U</code> and <code>W</code>. Combine them to form a basis of <code>U+W</code>. Counting vectors gives the formula.</p>
+</div>
+
+<div class="example">
+<h3>Example 6.1</h3>
+<p>In ℝ³, let U = xy-plane, W = xz-plane. Then dim(U)=2, dim(W)=2, dim(U∩W)=1 (x-axis). Hence:</p>
+<pre><code>dim(U+W) = 2 + 2 - 1 = 3</code></pre>
+<p>Indeed, U+W = ℝ³.</p>
+</div>
+
+<h2>7. Applications of Dimension as an Invariant</h2>
+
+<ul>
+<li><strong>Linear Transformations:</strong> Rank-nullity theorem uses invariant dimension:</li>
+<pre><code>dim(V) = rank(T) + nullity(T)</code></pre>
+<li><strong>Matrices:</strong> Column space and row space dimensions (rank) are invariant under basis change.</li>
+<li><strong>Coordinates:</strong> Changing basis preserves dimension but changes coordinates of vectors.</li>
+<li><strong>Function Spaces:</strong> Count degrees of freedom for solutions of differential equations.</li>
+</ul>
+
+<div class="example">
+<h3>Example 7.1</h3>
+<p>Let T: ℝ³ → ℝ², T(x,y,z) = (x+y, y+z). dim(ℝ³)=3, rank(T)=2, nullity(T)=1. Dimension invariance ensures rank + nullity = 3.</p>
+</div>
+
+<h2>8. Exercises</h2>
+<ol>
+<li>Prove that all bases of a finite-dimensional vector space have the same number of vectors.</li>
+<li>Find the dimension of the subspace of ℝ³ defined by x+y+z=0.</li>
+<li>Let U and W be subspaces of ℝ³ with dim(U)=2, dim(W)=2, dim(U∩W)=1. Find dim(U+W).</li>
+<li>Verify rank-nullity theorem for a given 3x3 matrix.</li>
+<li>Give two different bases of ℝ² and show that dimension is invariant.</li>
+</ol>
+
+<h2>9. Summary</h2>
+
+<p>Dimension is an invariant that captures the fundamental structure of vector spaces. It counts independent directions, measures degrees of freedom, and underlies linear transformations, matrices, and subspace theory. Understanding dimension as an invariant provides deep insights into vector spaces, ensuring consistency across bases, subspaces, and transformations. Mastery of this concept is crucial for both theoretical and applied linear algebra.</p>
+
+<h2>References</h2>
+<ul>
+<li>Gilbert Strang, <em>Introduction to Linear Algebra</em>, 5th Edition</li>
+<li>Sheldon Axler, <em>Linear Algebra Done Right</em>, 3rd Edition</li>
+<li>David C. Lay, <em>Linear Algebra and Its Applications</em>, 5th Edition</li>
+<li>MIT OpenCourseWare – Linear Algebra Lecture Notes</li>
+</ul>
+
+</body>
+</html>

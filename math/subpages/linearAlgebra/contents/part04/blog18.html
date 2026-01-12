@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rank–Nullity Theorem — Full Proof and Explanation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #222;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h2 { font-size: 2em; margin-top: 30px; margin-bottom: 10px; }
+        h3 { font-size: 1.5em; margin-top: 20px; margin-bottom: 5px; }
+        p { margin-bottom: 15px; }
+        ul { margin-bottom: 15px; }
+        code { background-color: #ecf0f1; padding: 2px 4px; border-radius: 3px; }
+        .formula {
+            background-color: #f4ecf7;
+            padding: 10px;
+            border-left: 4px solid #9b59b6;
+            margin-bottom: 15px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .example {
+            background-color: #eaf2f8;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fcf3cf;
+            padding: 10px;
+            border-left: 4px solid #f1c40f;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Rank–Nullity Theorem — Full Proof and Explanation</h1>
+
+<p>The <strong>Rank–Nullity Theorem</strong> is a fundamental result in linear algebra that connects the dimension of a vector space with the dimensions of the kernel and image of a linear transformation. It precisely quantifies how many directions are “lost” versus how many survive under a linear transformation.</p>
+
+<h2>1. Statement of the Theorem</h2>
+
+<p>Let <code>T: V → W</code> be a linear transformation between finite-dimensional vector spaces. Then:</p>
+
+<div class="formula">
+dim(V) = dim(Ker(T)) + dim(Im(T))
+</div>
+
+<p>Where:</p>
+<ul>
+    <li><strong>dim(Ker(T))</strong> = nullity of T = number of independent directions lost</li>
+    <li><strong>dim(Im(T))</strong> = rank of T = number of independent directions that survive</li>
+</ul>
+
+<p><strong>Intuition:</strong> The domain V can be decomposed into two parts: the kernel (directions lost) and the part that maps to the image (directions that survive). Rank–Nullity formalizes this decomposition numerically.</p>
+
+<h2>2. Step-by-Step Proof</h2>
+
+<p>We will prove the theorem step by step.</p>
+
+<h3>Step 1: Choose a Basis for the Kernel</h3>
+
+<p>Let <code>Ker(T)</code> have dimension <code>k</code>. Then we can find a basis:</p>
+
+<div class="formula">
+{v₁, v₂, ..., vₖ} ⊆ V
+</div>
+
+<p>These vectors span the kernel, meaning any vector in the kernel is a linear combination of these basis vectors. These directions are “lost” under T.</p>
+
+<h3>Step 2: Extend Kernel Basis to a Basis of V</h3>
+
+<p>Since V is finite-dimensional, we can extend the kernel basis to a basis of V:</p>
+
+<div class="formula">
+{v₁, v₂, ..., vₖ, vₖ₊₁, ..., vₙ} ⊆ V
+</div>
+
+<p>Here, <code>n = dim(V)</code>. The extra vectors <code>vₖ₊₁, ..., vₙ</code> are not in the kernel; they will contribute to the image of T.</p>
+
+<h3>Step 3: Map the Extra Basis Vectors to the Image</h3>
+
+<p>Apply T to the vectors outside the kernel:</p>
+
+<div class="formula">
+T(vₖ₊₁), ..., T(vₙ)
+</div>
+
+<p>These vectors lie in <code>Im(T)</code>. We claim that:</p>
+
+<ul>
+    <li>The set <code>{T(vₖ₊₁), ..., T(vₙ)}</code> forms a basis of <code>Im(T)</code>.</li>
+</ul>
+
+<h3>Step 4: Show Linear Independence of T(vₖ₊₁), ..., T(vₙ)</h3>
+
+<p>Suppose we have a linear combination:</p>
+
+<div class="formula">
+cₖ₊₁ T(vₖ₊₁) + ... + cₙ T(vₙ) = 0
+</div>
+
+<p>By linearity of T:</p>
+
+<div class="formula">
+T(cₖ₊₁ vₖ₊₁ + ... + cₙ vₙ) = 0
+</div>
+
+<p>This means <code>cₖ₊₁ vₖ₊₁ + ... + cₙ vₙ ∈ Ker(T)</code>. But <code>vₖ₊₁, ..., vₙ</code> are chosen outside the kernel and together with <code>v₁, ..., vₖ</code> form a basis of V. Therefore, the only solution is:</p>
+
+<div class="formula">
+cₖ₊₁ = ... = cₙ = 0
+</div>
+
+<p>Hence, <code>{T(vₖ₊₁), ..., T(vₙ)}</code> are linearly independent.</p>
+
+<h3>Step 5: Show Span of Image</h3>
+
+<p>Every vector in <code>Im(T)</code> is of the form <code>T(v)</code> for some <code>v ∈ V</code>. Write <code>v</code> in terms of the basis of V:</p>
+
+<div class="formula">
+v = a₁v₁ + ... + aₖvₖ + aₖ₊₁vₖ₊₁ + ... + aₙvₙ
+</div>
+
+<p>Apply T:</p>
+
+<div class="formula">
+T(v) = T(a₁v₁ + ... + aₖvₖ + aₖ₊₁vₖ₊₁ + ... + aₙvₙ) = aₖ₊₁ T(vₖ₊₁) + ... + aₙ T(vₙ)
+</div>
+
+<p>(All kernel vectors map to zero.) This shows that <code>T(vₖ₊₁), ..., T(vₙ)</code> span <code>Im(T)</code>.</p>
+
+<h3>Step 6: Count Dimensions</h3>
+
+<p>The number of vectors <code>T(vₖ₊₁), ..., T(vₙ)</code> is <code>n - k</code>. Hence:</p>
+
+<div class="formula">
+dim(Im(T)) = n - k = dim(V) - dim(Ker(T))
+</div>
+
+<p>Rewriting:</p>
+
+<div class="formula">
+dim(V) = dim(Ker(T)) + dim(Im(T))
+</div>
+
+<p>✅ This proves the Rank–Nullity Theorem.</p>
+
+<h2>3. Geometrical Intuition</h2>
+
+<ul>
+    <li>Imagine a 3D cube being mapped into 2D space by a linear transformation.</li>
+    <li>Some directions collapse entirely (kernel) → lost.</li>
+    <li>Remaining directions are mapped to a plane in 2D (image) → survive.</li>
+    <li>The sum of lost and surviving dimensions always equals the original dimension of the domain.</li>
+</ul>
+
+<h2>4. Examples</h2>
+
+<div class="example">
+<b>Example 1:</b> T: ℝ³ → ℝ², T(x, y, z) = (x + y, y + z)<br>
+Ker(T) = { t(-1,1,-1) } → dim(Ker(T)) = 1<br>
+Im(T) = ℝ² → dim(Im(T)) = 2<br>
+Check: dim(V) = 3 = 1 + 2 ✅
+</div>
+
+<div class="example">
+<b>Example 2:</b> T: ℝ² → ℝ², T(x, y) = (x - y, x - y)<br>
+Ker(T) = { t(1,1) } → dim(Ker(T)) = 1<br>
+Im(T) = { t(1,1) } → dim(Im(T)) = 1<br>
+Check: dim(V) = 2 = 1 + 1 ✅
+</div>
+
+<h2>5. Applications</h2>
+
+<ul>
+    <li><strong>Solving Linear Systems:</strong> Nullity gives the number of free variables; rank gives constraints satisfied.</li>
+    <li><strong>Data Science & PCA:</strong> Null directions = variance lost; rank = dimensions retained.</li>
+    <li><strong>Linear Transformations:</strong> Understanding what collapses and what survives.</li>
+</ul>
+
+<h2>6. Summary Formulas</h2>
+
+<div class="formula">
+Ker(T) = { v ∈ V | T(v) = 0 }  &nbsp; (Null space, lost directions)<br>
+Im(T) = { T(v) | v ∈ V } &nbsp; (Image, surviving directions)<br>
+dim(V) = dim(Ker(T)) + dim(Im(T)) &nbsp; (Rank-Nullity Theorem)
+</div>
+
+<p>By carefully constructing a basis for the kernel and extending it to a basis for the entire domain, the Rank–Nullity Theorem provides a precise numerical relationship between lost and surviving dimensions under any linear transformation.</p>
+
+</body>
+</html>

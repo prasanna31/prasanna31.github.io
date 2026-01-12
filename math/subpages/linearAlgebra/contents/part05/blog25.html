@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Determinant-Based Proofs of Invertibility</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #222;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h2 { font-size: 2em; margin-top: 30px; margin-bottom: 10px; }
+        h3 { font-size: 1.5em; margin-top: 20px; margin-bottom: 5px; }
+        p { margin-bottom: 15px; }
+        ul, ol { margin-bottom: 15px; }
+        code { background-color: #ecf0f1; padding: 2px 4px; border-radius: 3px; }
+        .formula {
+            background-color: #f4ecf7;
+            padding: 10px;
+            border-left: 4px solid #9b59b6;
+            margin-bottom: 15px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .example {
+            background-color: #eaf2f8;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fcf3cf;
+            padding: 10px;
+            border-left: 4px solid #f1c40f;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Determinant-Based Proofs of Invertibility</h1>
+
+<p>Determinants provide a powerful algebraic and geometric tool for understanding when a square matrix or linear transformation is invertible. This page explores **why det(A) ≠ 0 is equivalent to invertibility**, and gives proofs, intuition, and examples.</p>
+
+<h2>1. Invertibility and Determinant: The Statement</h2>
+
+<p>Let A be an n×n matrix over a field F. Then:</p>
+
+<div class="formula">
+A is invertible ⇔ det(A) ≠ 0
+</div>
+
+<p>Equivalently, a linear map T: V → V represented by A is invertible ⇔ det(A) ≠ 0.</p>
+
+<h2>2. Intuition Behind Determinant and Invertibility</h2>
+
+<ul>
+    <li>Determinant measures **volume scaling** under the linear map T.</li>
+    <li>If det(A) = 0, T collapses n-dimensional space into a lower dimension → vectors become linearly dependent → no unique inverse exists.</li>
+    <li>If det(A) ≠ 0, the map preserves n-dimensional volume → linearly independent → an inverse map exists that can "undo" T.</li>
+</ul>
+
+<h2>3. Proof Using Linear Independence</h2>
+
+<p>Let A = [a₁, ..., aₙ] be the column vectors of the matrix. Then det(A) ≠ 0 ⇔ {a₁, ..., aₙ} are linearly independent. Proof outline:</p>
+
+<ol>
+    <li>Suppose det(A) ≠ 0. Then by definition, columns are linearly independent → equation A x = 0 has only the trivial solution x = 0.</li>
+    <li>If columns are independent, A x = b has a unique solution for any b → A is invertible.</li>
+    <li>Conversely, if det(A) = 0, columns are linearly dependent → A x = 0 has non-trivial solutions → not invertible.</li>
+</ol>
+
+<div class="formula">
+det(A) ≠ 0 ⇔ columns of A are linearly independent ⇔ A invertible
+</div>
+
+<h2>4. Proof Using Row Reduction</h2>
+
+<p>Another approach uses **elementary row operations**:</p>
+
+<ul>
+    <li>If A can be reduced to identity matrix I using invertible row operations, then det(A) ≠ 0.</li>
+    <li>Row swaps multiply det by -1, scaling a row multiplies det by scalar, adding multiples of rows does not change det.</li>
+    <li>If det(A) ≠ 0, we can reduce A → I → construct A⁻¹ using same operations → invertible.</li>
+</ul>
+
+<h2>5. Proof Using Cofactor Expansion</h2>
+
+<p>For n×n matrix A, det(A) is sum over cofactors:</p>
+
+<div class="formula">
+det(A) = Σ (-1)^(i+j) aᵢⱼ det(Mᵢⱼ)
+</div>
+
+<p>If det(A) ≠ 0, at least one cofactor det(Mᵢⱼ) ≠ 0. This allows construction of **adjugate matrix** A⁺ such that:</p>
+
+<div class="formula">
+A⁺ A = A A⁺ = det(A) I
+</div>
+
+<p>Dividing by det(A) gives inverse:</p>
+
+<div class="formula">
+A⁻¹ = (1 / det(A)) A⁺
+</div>
+
+<p>This proves: det(A) ≠ 0 ⇒ A is invertible.</p>
+
+<h2>6. Geometric Perspective</h2>
+
+<p>Consider linear transformation T: ℝⁿ → ℝⁿ represented by A:</p>
+
+<ul>
+    <li>det(A) = scaling factor of n-dimensional volume under T</li>
+    <li>det(A) ≠ 0 → T preserves volume → vectors maintain independence → map reversible</li>
+    <li>det(A) = 0 → T collapses volume → vectors become dependent → no inverse</li>
+</ul>
+
+<div class="example">
+2×2 example: A = [[2,1],[1,1]]<br>
+det(A) = 2*1 - 1*1 = 1 ≠ 0 → invertible<br>
+3×3 example: B = [[1,2,3],[0,1,4],[5,6,0]]<br>
+det(B) = 1 → invertible
+</div>
+
+<h2>7. Summary Steps to Check Invertibility via Determinant</h2>
+
+<ol>
+    <li>Compute determinant of square matrix A.</li>
+    <li>If det(A) ≠ 0 → A invertible, T is an isomorphism.</li>
+    <li>If det(A) = 0 → A not invertible, linear transformation collapses space.</li>
+    <li>Optional: compute inverse using adjugate or row operations if det(A) ≠ 0.</li>
+</ol>
+
+<h2>8. Summary Formulae</h2>
+
+<div class="formula">
+A invertible ⇔ det(A) ≠ 0<br>
+A⁻¹ = (1 / det(A)) adj(A) (if det(A) ≠ 0)<br>
+det(A B) = det(A) det(B) → composition of invertible maps is invertible
+</div>
+
+<p>Determinants provide a rigorous and visual way to check invertibility: algebraically via formulas, geometrically via volume scaling, and computationally via row operations or cofactors. They unify structure, volume, and reversibility in linear algebra.</p>
+
+</body>
+</html>

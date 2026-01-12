@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Linear Maps to Matrices</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #222;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h2 { font-size: 2em; margin-top: 30px; margin-bottom: 10px; }
+        h3 { font-size: 1.5em; margin-top: 20px; margin-bottom: 5px; }
+        p { margin-bottom: 15px; }
+        ul { margin-bottom: 15px; }
+        ol { margin-bottom: 15px; }
+        code { background-color: #ecf0f1; padding: 2px 4px; border-radius: 3px; }
+        .formula {
+            background-color: #f4ecf7;
+            padding: 10px;
+            border-left: 4px solid #9b59b6;
+            margin-bottom: 15px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .example {
+            background-color: #eaf2f8;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fcf3cf;
+            padding: 10px;
+            border-left: 4px solid #f1c40f;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>From Linear Maps to Matrices</h1>
+
+<p>In linear algebra, abstract <strong>linear maps</strong> (or linear transformations) are functions between vector spaces that preserve vector addition and scalar multiplication. To compute with them, we often represent these maps as <strong>matrices</strong> relative to chosen bases. This bridge allows us to move from theory to concrete computation.</p>
+
+<h2>1. Linear Map Definition</h2>
+
+<p>Let V and W be vector spaces over the same field F. A function <code>T: V → W</code> is called a <strong>linear map</strong> if, for all u,v ∈ V and c ∈ F:</p>
+
+<div class="formula">
+T(u + v) = T(u) + T(v), <br>
+T(c * u) = c * T(u)
+</div>
+
+<p>Intuition: Linear maps preserve the "structure" of the vector space.</p>
+
+<h2>2. Representing Linear Maps with Matrices</h2>
+
+<p>To compute with a linear map, we select a basis for V (domain) and W (codomain). Let:</p>
+
+<ul>
+    <li>B = {v₁, ..., vₙ} be a basis for V</li>
+    <li>C = {w₁, ..., wₘ} be a basis for W</li>
+</ul>
+
+<p>Then, for each basis vector vᵢ ∈ B, express T(vᵢ) as a linear combination of C:</p>
+
+<div class="formula">
+T(vᵢ) = a₁ᵢ w₁ + a₂ᵢ w₂ + ... + aₘᵢ wₘ
+</div>
+
+<p>The coefficients form the i-th column of the matrix representing T:</p>
+
+<div class="formula">
+[T]_{C←B} = 
+\begin{bmatrix}
+a₁₁ & a₁₂ & ... & a₁ₙ \\
+a₂₁ & a₂₂ & ... & a₂ₙ \\
+... & ... & ... & ... \\
+aₘ₁ & aₘ₂ & ... & aₘₙ
+\end{bmatrix}
+</div>
+
+<p>Where [T]_{C←B} is the matrix representing T from basis B of V to basis C of W.</p>
+
+<h2>3. Computing Coordinates</h2>
+
+<p>If v ∈ V has coordinates [v]_B relative to basis B, then the coordinates of T(v) relative to basis C are:</p>
+
+<div class="formula">
+[T(v)]_C = [T]_{C←B} [v]_B
+</div>
+
+<p>This formula is the computational bridge between abstract linear maps and matrix arithmetic.</p>
+
+<h2>4. Example: Linear Map in ℝ² → ℝ²</h2>
+
+<div class="example">
+Let T: ℝ² → ℝ² be defined by T(x,y) = (2x + y, x - y)<br>
+Choose standard bases B = C = {e₁=(1,0), e₂=(0,1)}<br>
+
+<ul>
+    <li>T(e₁) = T(1,0) = (2,1) → first column of matrix</li>
+    <li>T(e₂) = T(0,1) = (1,-1) → second column of matrix</li>
+</ul>
+
+Hence, the matrix representation is:
+
+<div class="formula">
+[T] = 
+\begin{bmatrix}
+2 & 1 \\
+1 & -1
+\end{bmatrix}
+</div>
+
+<p>Given v = (3,4), coordinates [v]_B = [3,4]ᵀ. Then:</p>
+
+<div class="formula">
+[T(v)]_C = [T] [v]_B = 
+\begin{bmatrix}2 & 1 \\ 1 & -1\end{bmatrix} 
+\begin{bmatrix}3 \\ 4\end{bmatrix} = 
+\begin{bmatrix}10 \\ -1\end{bmatrix}
+</div>
+</div>
+
+<h2>5. Changing Bases</h2>
+
+<p>If we choose different bases B' for V and C' for W, the matrix representation changes. Let P be the change of basis matrix from B' to B, and Q from C' to C. Then the new representation is:</p>
+
+<div class="formula">
+[T]_{C'←B'} = Q⁻¹ [T]_{C←B} P
+</div>
+
+<p>Intuition: the linear map itself doesn’t change; only its coordinate representation does. This is critical in diagonalization, similarity transformations, and simplifying linear systems.</p>
+
+<h2>6. Geometric Intuition</h2>
+
+<ul>
+    <li>Think of vectors in V as arrows in space and T as a “transformation” that stretches, rotates, or shears them.</li>
+    <li>Choosing a basis is like choosing a coordinate grid; the same transformation looks different in different grids.</li>
+    <li>The matrix encodes exactly how basis vectors are mapped, which allows us to compute the effect on any vector.</li>
+</ul>
+
+<h2>7. Steps to Represent a Linear Map as a Matrix</h2>
+
+<ol>
+    <li>Choose a basis B for the domain V and a basis C for the codomain W.</li>
+    <li>Apply T to each vector in B: T(v₁), ..., T(vₙ).</li>
+    <li>Express each T(vᵢ) as a linear combination of vectors in C.</li>
+    <li>Form the matrix [T]_{C←B} by placing these coordinate vectors as columns.</li>
+    <li>Use [T(v)]_C = [T]_{C←B} [v]_B for computations.</li>
+</ol>
+
+<h2>8. Applications</h2>
+
+<ul>
+    <li>Solving systems of linear equations: representing linear transformations as matrices allows computation via Gaussian elimination.</li>
+    <li>Diagonalization and Jordan form: changing basis to simplify matrix representation.</li>
+    <li>Computer graphics: representing rotations, scalings, and transformations as matrices for rendering.</li>
+    <li>Data science: transforming coordinates in PCA, linear regression, and other algorithms.</li>
+    <li>Control theory: representing state-space systems as matrices.</li>
+</ul>
+
+<h2>9. Summary Formulas</h2>
+
+<div class="formula">
+T(v) linear map: V → W<br>
+[T]_{C←B} = [T(v₁)_C ... T(vₙ)_C] <br>
+[T(v)]_C = [T]_{C←B} [v]_B <br>
+[T]_{C'←B'} = Q⁻¹ [T]_{C←B} P
+</div>
+
+<p>By representing linear maps as matrices, we convert abstract operations into concrete, computable forms while preserving the structure of the transformation.</p>
+
+</body>
+</html>

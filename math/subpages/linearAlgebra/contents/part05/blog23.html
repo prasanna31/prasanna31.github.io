@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invertibility and Linear Isomorphisms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #222;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h2 { font-size: 2em; margin-top: 30px; margin-bottom: 10px; }
+        h3 { font-size: 1.5em; margin-top: 20px; margin-bottom: 5px; }
+        p { margin-bottom: 15px; }
+        ul, ol { margin-bottom: 15px; }
+        code { background-color: #ecf0f1; padding: 2px 4px; border-radius: 3px; }
+        .formula {
+            background-color: #f4ecf7;
+            padding: 10px;
+            border-left: 4px solid #9b59b6;
+            margin-bottom: 15px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .example {
+            background-color: #eaf2f8;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fcf3cf;
+            padding: 10px;
+            border-left: 4px solid #f1c40f;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Invertibility and Linear Isomorphisms</h1>
+
+<p>Invertibility in linear algebra is a central concept linking linear maps, matrices, and vector space structure. An <strong>invertible linear map</strong> is one that has an inverse map, allowing us to "undo" the transformation. Invertible maps are exactly the <strong>linear isomorphisms</strong>—linear transformations that establish a structural equivalence between vector spaces.</p>
+
+<h2>1. Definition of Invertible Linear Map</h2>
+
+<p>Let T: V → W be a linear map between vector spaces over the same field. T is called <strong>invertible</strong> if there exists a linear map T⁻¹: W → V such that:</p>
+
+<div class="formula">
+T⁻¹ ∘ T = I_V, &nbsp; T ∘ T⁻¹ = I_W
+</div>
+
+<p>Where I_V and I_W are identity maps on V and W, respectively.</p>
+
+<p><strong>Intuition:</strong> Every vector in W is the image of exactly one vector in V, and we can recover v ∈ V from its image T(v) in W.</p>
+
+<h2>2. Linear Isomorphisms</h2>
+
+<p>A linear map T: V → W is an <strong>isomorphism</strong> if it is invertible. In other words:</p>
+
+<ul>
+    <li>T is linear</li>
+    <li>T is bijective (one-to-one and onto)</li>
+</ul>
+
+<div class="formula">
+T is a linear isomorphism ⇔ T is invertible
+</div>
+
+<p>Isomorphisms indicate that V and W are <strong>structurally equivalent</strong>. They have the same dimension and all linear properties are preserved under T.</p>
+
+<h2>3. Invertibility Criteria</h2>
+
+<p>A linear map T: V → V (square case) is invertible if any of the following equivalent conditions hold:</p>
+
+<ul>
+    <li>T is injective: Ker(T) = {0}</li>
+    <li>T is surjective: Im(T) = V</li>
+    <li>Matrix representation [T] relative to any basis is invertible (det([T]) ≠ 0)</li>
+    <li>Rank(T) = dim(V)</li>
+</ul>
+
+<p><strong>Note:</strong> For finite-dimensional spaces, injectivity, surjectivity, and invertibility are all equivalent.</p>
+
+<h2>4. Matrix Representation of Invertible Maps</h2>
+
+<p>If T: V → V is represented by a square matrix A = [T] in some basis, then:</p>
+
+<div class="formula">
+T is invertible ⇔ A is invertible ⇔ det(A) ≠ 0
+</div>
+
+<p>The inverse linear map T⁻¹ is represented by the matrix A⁻¹:</p>
+
+<div class="formula">
+[T⁻¹] = [T]⁻¹
+</div>
+
+<h2>5. Example: Invertible Linear Map in ℝ²</h2>
+
+<div class="example">
+Let T: ℝ² → ℝ² be T(x,y) = (2x + y, x + y)<br>
+Matrix representation in standard basis:
+
+<div class="formula">
+[T] = 
+\begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix}
+</div>
+
+Compute determinant: det([T]) = 2*1 - 1*1 = 1 ≠ 0 → T is invertible<br>
+Inverse matrix:
+
+<div class="formula">
+[T]⁻¹ = 
+\begin{bmatrix} 1 & -1 \\ -1 & 2 \end{bmatrix}
+</div>
+
+Verify: [T]⁻¹ [T] = I
+</div>
+
+<h2>6. Geometric Intuition</h2>
+
+<ul>
+    <li>Invertible linear maps preserve the "dimension" and "shape" of the vector space (up to stretching, rotation, reflection).</li>
+    <li>No collapse occurs: lines and planes are not squashed to lower dimensions.</li>
+    <li>The inverse map "reverses" these transformations exactly.</li>
+</ul>
+
+<h2>7. Properties of Invertible Linear Maps</h2>
+
+<ul>
+    <li>Composition: If T: U → V and S: V → W are invertible, then S ∘ T: U → W is invertible, with (S ∘ T)⁻¹ = T⁻¹ ∘ S⁻¹</li>
+    <li>Inverse of inverse: (T⁻¹)⁻¹ = T</li>
+    <li>Identity map I is always invertible, and I⁻¹ = I</li>
+    <li>Preserves linear independence and span of vectors</li>
+</ul>
+
+<h2>8. Steps to Determine Invertibility</h2>
+
+<ol>
+    <li>Check dimensions: for V → W, dim(V) must equal dim(W)</li>
+    <li>Compute kernel: T invertible ⇔ Ker(T) = {0}</li>
+    <li>Compute matrix determinant (square case): det([T]) ≠ 0 → invertible</li>
+    <li>If invertible, compute T⁻¹ by solving T(x) = y for basis vectors or using matrix inversion</li>
+</ol>
+
+<h2>9. Applications</h2>
+
+<ul>
+    <li>Solving linear systems: invertible matrices correspond to unique solutions</li>
+    <li>Diagonalization and similarity transforms</li>
+    <li>Computer graphics: reversible transformations of images and coordinates</li>
+    <li>Quantum mechanics: unitary operators are invertible linear maps</li>
+    <li>Control theory: state transformations require invertibility for system equivalence</li>
+</ul>
+
+<h2>10. Summary Formulas</h2>
+
+<div class="formula">
+T invertible ⇔ ∃ T⁻¹ such that T⁻¹ ∘ T = I, T ∘ T⁻¹ = I<br>
+[T⁻¹] = [T]⁻¹ ⇔ det([T]) ≠ 0<br>
+Invertibility ⇔ T is bijective ⇔ linear isomorphism<br>
+(S ∘ T)⁻¹ = T⁻¹ ∘ S⁻¹
+</div>
+
+<p>Invertibility ensures a perfect "one-to-one correspondence" between vector spaces and is exactly what makes a linear map a linear isomorphism, establishing structural equivalence between spaces.</p>
+
+</body>
+</html>

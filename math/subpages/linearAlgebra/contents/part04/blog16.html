@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Transformations - Complete Formulae and Explanation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #222;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h2 { font-size: 2em; margin-top: 30px; margin-bottom: 10px; }
+        h3 { font-size: 1.5em; margin-top: 20px; margin-bottom: 5px; }
+        p { margin-bottom: 15px; }
+        ul { margin-bottom: 15px; }
+        code { background-color: #ecf0f1; padding: 2px 4px; border-radius: 3px; }
+        .formula {
+            background-color: #f4ecf7;
+            padding: 10px;
+            border-left: 4px solid #9b59b6;
+            margin-bottom: 15px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .example {
+            background-color: #eaf2f8;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fcf3cf;
+            padding: 10px;
+            border-left: 4px solid #f1c40f;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Linear Transformations — Complete Formulae and Explanation</h1>
+
+<p>This guide explains linear transformations from the ground up, with every key formula paired with intuitive explanations. After reading this, you'll understand the concept algebraically, geometrically, and practically.</p>
+
+<h2>1. Definition</h2>
+
+<p>A <strong>linear transformation</strong> is a function <code>T: V → W</code> between vector spaces V and W that preserves vector addition and scalar multiplication.</p>
+
+<div class="formula">
+T(u + v) = T(u) + T(v), ∀ u,v ∈ V<br>
+T(c * u) = c * T(u), ∀ u ∈ V, c ∈ ℝ
+</div>
+
+<p><strong>Explanation:</strong></p>
+<ul>
+    <li>Linearity ensures that straight lines remain straight and proportions are preserved.</li>
+    <li>The origin is always mapped to the origin: <code>T(0) = 0</code>.</li>
+    <li>All linear combinations are preserved: <code>T(c₁v₁ + ... + cₖvₖ) = c₁T(v₁) + ... + cₖT(vₖ)</code>.</li>
+</ul>
+
+<h2>2. Matrix Representation</h2>
+
+<p>Every linear transformation in finite dimensions can be represented by a matrix. If <code>T: ℝⁿ → ℝᵐ</code>, there exists a matrix <code>A ∈ ℝᵐˣⁿ</code> such that:</p>
+
+<div class="formula">
+T(v) = A * v
+</div>
+
+<p><strong>Explanation:</strong></p>
+<ul>
+    <li>The columns of <code>A</code> are the images of the basis vectors of <code>ℝⁿ</code>.</li>
+    <li>Matrix multiplication automatically preserves linearity.</li>
+</ul>
+
+<div class="example">
+T: ℝ² → ℝ², T(x, y) = (2x + y, x - y)<br>
+Matrix: <code>A = [[2, 1], [1, -1]]</code><br>
+For v = [3,4]: T(v) = A*v = [10, -1]
+</div>
+
+<h2>3. Common Linear Transformations and Formulae</h2>
+
+<h3>3.1 Scaling</h3>
+<div class="formula">
+T(x, y) = (αx, βy)
+</div>
+<p>Explanation: Stretches/shrinks the vector along each axis independently. Lines through the origin remain lines.</p>
+
+<h3>3.2 Rotation (2D)</h3>
+<div class="formula">
+T([x, y]) = [x cosθ - y sinθ, x sinθ + y cosθ]
+</div>
+<p>Explanation: Rotates every vector around the origin by angle θ. Lengths and angles are preserved (orthogonal transformation).</p>
+
+<h3>3.3 Reflection</h3>
+<div class="formula">
+Reflection about x-axis: T(x, y) = (x, -y)<br>
+Reflection about y-axis: T(x, y) = (-x, y)<br>
+Reflection about y=x: T(x, y) = (y, x)
+</div>
+<p>Explanation: Flips vectors over a line or plane. Origin remains fixed, and linearity is preserved.</p>
+
+<h3>3.4 Shear</h3>
+<div class="formula">
+Shear along x-axis: T(x, y) = (x + ky, y)<br>
+Shear along y-axis: T(x, y) = (x, y + kx)
+</div>
+<p>Explanation: Slants shapes. Squares become parallelograms, but straight lines and origin are preserved.</p>
+
+<h3>3.5 Projection</h3>
+<div class="formula">
+Projection onto x-axis: T(x, y) = (x, 0)<br>
+Projection onto y-axis: T(x, y) = (0, y)
+</div>
+<p>Explanation: Collapses vectors onto a subspace. Lines along the subspace remain unchanged, lines perpendicular collapse.</p>
+
+<h2>4. Kernel and Image</h2>
+
+<h3>4.1 Kernel (Null Space)</h3>
+<div class="formula">
+Ker(T) = {v ∈ V | T(v) = 0}
+</div>
+<p>Explanation: Set of vectors that get mapped to zero. Geometrically, vectors “collapse” to the origin under T.</p>
+
+<h3>4.2 Image (Range)</h3>
+<div class="formula">
+Im(T) = {w ∈ W | ∃ v ∈ V such that T(v) = w}
+</div>
+<p>Explanation: All possible outputs of T. Geometrically, it is the subspace of W that T “covers”.</p>
+
+<h2>5. Composition and Inverse</h2>
+
+<h3>5.1 Composition</h3>
+<div class="formula">
+If T₁: V → W and T₂: W → U, then T₂ ∘ T₁: V → U is linear
+</div>
+<p>Explanation: Applying two linear transformations one after the other still preserves linearity.</p>
+
+<h3>5.2 Inverse</h3>
+<div class="formula">
+If T is invertible, then T⁻¹(T(v)) = v
+</div>
+<p>Explanation: Reverses the effect of T. Exists if the matrix representing T is non-singular (det(A) ≠ 0).</p>
+
+<h2>6. Linear Combination Preservation</h2>
+<div class="formula">
+T(c₁v₁ + c₂v₂ + ... + cₖvₖ) = c₁T(v₁) + c₂T(v₂) + ... + cₖT(vₖ)
+</div>
+<p>Explanation: Any linear combination of vectors before transformation is the same as the combination of their transformed vectors. This is the key property that defines linearity.</p>
+
+<h2>7. Geometrical Interpretation</h2>
+<ul>
+    <li>Lines and planes through the origin remain lines and planes.</li>
+    <li>Scaling stretches/shrinks space along axes.</li>
+    <li>Rotation moves all vectors around origin by θ.</li>
+    <li>Reflection flips vectors across axes or planes.</li>
+    <li>Shear slants shapes but preserves straight lines.</li>
+    <li>Projection collapses vectors onto a lower-dimensional subspace.</li>
+</ul>
+
+<h2>8. Higher-Dimensional Transformations</h2>
+
+<div class="formula">
+T(v) = A*v, v ∈ ℝⁿ, A ∈ ℝⁿˣⁿ
+</div>
+
+<p>Examples:</p>
+<div class="formula">
+Scaling: T(x, y, z) = (αx, βy, γz)<br>
+Projection onto xy-plane: T(x, y, z) = (x, y, 0)<br>
+Rotation about z-axis: T([x, y, z]) = [x cosθ - y sinθ, x sinθ + y cosθ, z]
+</div>
+
+<h2>9. Applications</h2>
+<ul>
+    <li>Computer Graphics: rotation, scaling, reflection, shear, projection</li>
+    <li>Machine Learning: PCA, embeddings, feature transformations</li>
+    <li>Physics: rotation matrices, stress-strain mapping</li>
+    <li>Engineering: signal processing, control systems</li>
+    <li>Economics: linear approximations and input-output models</li>
+</ul>
+
+<h2>10. Summary Formula Collection</h2>
+<div class="formula">
+T(u + v) = T(u) + T(v)<br>
+T(c * u) = c * T(u)<br>
+T(c₁v₁ + ... + cₖvₖ) = c₁T(v₁) + ... + cₖT(vₖ)<br>
+T(v) = A*v<br>
+Ker(T) = {v ∈ V | T(v) = 0}<br>
+Im(T) = {w ∈ W | ∃ v ∈ V: T(v) = w}<br>
+Composition: T₂ ∘ T₁ is linear<br>
+Inverse: T⁻¹(T(v)) = v
+</div>
+
+<p>With these formulae and explanations, one can fully understand linear transformations in any dimension, both algebraically and geometrically.</p>
+
+</body>
+</html>

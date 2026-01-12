@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kernel and Image — What Is Lost and What Survives</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #222;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h2 { font-size: 2em; margin-top: 30px; margin-bottom: 10px; }
+        h3 { font-size: 1.5em; margin-top: 20px; margin-bottom: 5px; }
+        p { margin-bottom: 15px; }
+        ul { margin-bottom: 15px; }
+        code { background-color: #ecf0f1; padding: 2px 4px; border-radius: 3px; }
+        .formula {
+            background-color: #f4ecf7;
+            padding: 10px;
+            border-left: 4px solid #9b59b6;
+            margin-bottom: 15px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .example {
+            background-color: #eaf2f8;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fcf3cf;
+            padding: 10px;
+            border-left: 4px solid #f1c40f;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Kernel and Image — What Is Lost and What Survives</h1>
+
+<p>Linear transformations are like magical lenses that reshape space. Some directions in the domain disappear entirely when viewed through the transformation, while others survive and form the resulting image. Understanding <strong>kernel</strong> and <strong>image</strong> allows us to see exactly what is lost and what survives, both algebraically and geometrically. This page explains these concepts in depth, step by step.</p>
+
+<h2>1. The Kernel (Null Space) — The Lost Directions</h2>
+
+<p>The <strong>kernel</strong> of a linear transformation <code>T: V → W</code> is the set of all vectors in the domain that get mapped to the zero vector in the codomain:</p>
+
+<div class="formula">
+Ker(T) = { v ∈ V | T(v) = 0 }
+</div>
+
+<p><strong>Intuitive Explanation:</strong></p>
+<ul>
+    <li>Vectors in the kernel are “invisible” to the transformation — no matter how long or big they are, they collapse to zero.</li>
+    <li>Geometrically, the kernel is a subspace of the domain that disappears completely in the output.</li>
+    <li>The number of independent directions in the kernel is called the <strong>nullity</strong> of T. These are exactly the directions that get “lost”.</li>
+    <li>Every vector in the domain can be decomposed into a sum of a kernel component (lost) and a component that survives (contributes to the image).</li>
+</ul>
+
+<div class="example">
+<b>Example 1:</b><br>
+T: ℝ² → ℝ², T(x, y) = (x - y, x - y)<br>
+Solve T(x, y) = (0,0) → x - y = 0 → y = x<br>
+<code>Ker(T) = { t(1,1) | t ∈ ℝ }</code><br>
+<p>All vectors along the line y = x collapse to zero. These directions are “lost” in T.</p>
+</div>
+
+<div class="example">
+<b>Example 2 (3D):</b><br>
+T: ℝ³ → ℝ², T(x, y, z) = (x + y, y + z)<br>
+Solve T(x, y, z) = (0,0): x + y = 0, y + z = 0 → x = -y, z = -y<br>
+<code>Ker(T) = { t(-1,1,-1) | t ∈ ℝ }</code><br>
+<p>All vectors along the line in direction (-1,1,-1) vanish under T. This shows how in higher dimensions, the kernel can be a line, plane, or higher-dimensional subspace.</p>
+</div>
+
+<h2>2. The Image (Range) — The Surviving Directions</h2>
+
+<p>The <strong>image</strong> of a linear transformation T is the set of all vectors in the codomain that are actually produced as outputs:</p>
+
+<div class="formula">
+Im(T) = { w ∈ W | ∃ v ∈ V such that T(v) = w }
+</div>
+
+<p><strong>Intuitive Explanation:</strong></p>
+<ul>
+    <li>The image contains all directions in W that “survive” the transformation.</li>
+    <li>Geometrically, it is a subspace of the codomain formed by the vectors that T can reach.</li>
+    <li>The dimension of the image is called the <strong>rank</strong> of T. These are exactly the independent directions that survive.</li>
+    <li>Every vector in the codomain not in the image is “unreachable” by T.</li>
+</ul>
+
+<div class="example">
+<b>Example 1:</b><br>
+T: ℝ² → ℝ², T(x, y) = (x - y, x - y)<br>
+The output is always along the line y = x:<br>
+<code>Im(T) = { t(1,1) | t ∈ ℝ }</code><br>
+<p>Explanation: Every output vector lies on the line y = x in ℝ². This line is the “surviving” part of T.</p>
+</div>
+
+<div class="example">
+<b>Example 2:</b><br>
+T: ℝ³ → ℝ², T(x, y, z) = (x + y, y + z)<br>
+By varying x, y, z, all points in ℝ² can be reached:<br>
+<code>Im(T) = ℝ²</code><br>
+<p>Here, everything in the codomain survives. The kernel accounts for the “lost” direction, and the rest fills the codomain.</p>
+</div>
+
+<h2>3. Kernel vs Image — The Lost and Survived Components</h2>
+
+<p>Every vector in the domain can be thought of as having two components:</p>
+<ul>
+    <li><strong>Kernel Component:</strong> part that collapses to zero → lost</li>
+    <li><strong>Image Component:</strong> part that contributes to output → survives</li>
+</ul>
+
+<p>Mathematically, for any v ∈ V:</p>
+<div class="formula">
+v = v_kernel + v_survive, where T(v_kernel) = 0 and T(v_survive) ∈ Im(T)
+</div>
+
+<p>Geometrically:</p>
+<ul>
+    <li>v_kernel lies in the subspace that gets mapped to the origin.</li>
+    <li>v_survive lies in the subspace whose image is the codomain subspace (image).</li>
+</ul>
+
+<h2>4. Rank-Nullity Theorem — Linking Lost and Survived</h2>
+
+<p>The <strong>rank-nullity theorem</strong> precisely relates the lost and surviving directions:</p>
+
+<div class="formula">
+dim(V) = dim(Ker(T)) + dim(Im(T))
+</div>
+
+<p><strong>Explanation:</strong></p>
+<ul>
+    <li>The total number of independent directions in the domain equals the number lost (kernel) plus the number that survive (image).</li>
+    <li>Nullity = dim(Ker(T)) → lost directions</li>
+    <li>Rank = dim(Im(T)) → surviving directions</li>
+    <li>This theorem ensures we can always account for “everything” in the domain — either lost or survived.</li>
+</ul>
+
+<div class="example">
+T: ℝ³ → ℝ², T(x, y, z) = (x + y, y + z)<br>
+Ker(T) = { t(-1,1,-1) | t ∈ ℝ } → dim(Ker(T)) = 1<br>
+Im(T) = ℝ² → dim(Im(T)) = 2<br>
+Check: dim(V) = 3 = 1 (lost) + 2 (survived) ✅
+</div>
+
+<h2>5. Geometrical Visualization</h2>
+
+<p>Imagine a 3D cube in the domain:</p>
+<ul>
+    <li>Vectors along the kernel collapse → cube is “flattened” along these directions.</li>
+    <li>Vectors along other directions survive → cube projects onto the image subspace in codomain.</li>
+    <li>Projection, rotation, and shear are good ways to see this: kernel = collapsed direction, image = surviving plane/line.</li>
+</ul>
+
+<div class="note">
+Kernel = “lost directions” → collapse to zero.<br>
+Image = “surviving directions” → fill the codomain subspace.
+</div>
+
+<h2>6. Applications of Lost vs Survived</h2>
+
+<ul>
+    <li><strong>Data Compression & PCA:</strong> Kernel directions = zero-variance → lost. Image = retained components → survive.</li>
+    <li><strong>Linear Systems:</strong> Kernel = free variables in homogeneous solution → lost. Image = constraints that survive.</li>
+    <li><strong>Computer Graphics:</strong> Projection onto a screen → kernel = depth direction lost. Image = visible screen coordinates survive.</li>
+</ul>
+
+<h2>7. Summary and Key Formulas</h2>
+
+<div class="formula">
+Ker(T) = { v ∈ V | T(v) = 0 }  &nbsp; (Lost directions)<br>
+Im(T) = { w ∈ W | ∃ v ∈ V: T(v) = w } &nbsp; (Surviving directions)<br>
+v = v_kernel + v_survive, T(v_kernel) = 0, T(v_survive) ∈ Im(T)<br>
+dim(V) = dim(Ker(T)) + dim(Im(T)) &nbsp; (Rank-Nullity Theorem)
+</div>
+
+<p>By understanding kernel as the “lost” part of a transformation and image as the “surviving” part, one can fully grasp the behavior of linear transformations in any dimension, both algebraically and geometrically.</p>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change of Basis and Representation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #222;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h2 { font-size: 2em; margin-top: 30px; margin-bottom: 10px; }
+        h3 { font-size: 1.5em; margin-top: 20px; margin-bottom: 5px; }
+        p { margin-bottom: 15px; }
+        ul { margin-bottom: 15px; }
+        ol { margin-bottom: 15px; }
+        code { background-color: #ecf0f1; padding: 2px 4px; border-radius: 3px; }
+        .formula {
+            background-color: #f4ecf7;
+            padding: 10px;
+            border-left: 4px solid #9b59b6;
+            margin-bottom: 15px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .example {
+            background-color: #eaf2f8;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fcf3cf;
+            padding: 10px;
+            border-left: 4px solid #f1c40f;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Change of Basis and Representation</h1>
+
+<p>In linear algebra, the concept of a <strong>basis</strong> allows us to represent vectors in terms of coordinates relative to that basis. Changing the basis gives us a new perspective on the vector space, and understanding how to represent vectors and linear transformations in different bases is crucial for applications ranging from computer graphics to quantum mechanics.</p>
+
+<h2>1. What is a Basis?</h2>
+
+<p>A <strong>basis</strong> of a vector space <code>V</code> is a set of vectors {v₁, v₂, ..., vₙ} that satisfy two properties:</p>
+
+<ul>
+    <li><strong>Linearly independent:</strong> No vector in the set can be written as a combination of others.</li>
+    <li><strong>Spanning:</strong> Every vector in V can be expressed as a linear combination of the basis vectors.</li>
+</ul>
+
+<div class="formula">
+v = a₁v₁ + a₂v₂ + ... + aₙvₙ
+</div>
+
+<p>The coefficients <code>a₁, a₂, ..., aₙ</code> are the <strong>coordinates of v in the basis {v₁,...,vₙ}</strong>.</p>
+
+<h2>2. Representation of a Vector in a Basis</h2>
+
+<p>If B = {v₁, ..., vₙ} is a basis of V, then for any vector v ∈ V, the coordinate vector of v with respect to B is:</p>
+
+<div class="formula">
+[v]_B = 
+\begin{bmatrix} a₁ \\ a₂ \\ ... \\ aₙ \end{bmatrix} \text{ such that } v = a₁v₁ + ... + aₙvₙ
+</div>
+
+<p><strong>Intuition:</strong> The coordinate vector [v]_B is a compact representation of v in terms of B. Changing the basis changes these coordinates.</p>
+
+<div class="example">
+<b>Example:</b><br>
+V = ℝ², standard basis B = {e₁, e₂} with e₁ = (1,0), e₂ = (0,1)<br>
+v = (3,5)<br>
+Then [v]_B = [3,5]ᵀ<br>
+If we choose a new basis C = {u₁, u₂} with u₁ = (1,1), u₂ = (1,-1), coordinates of v change:<br>
+Solve v = c₁u₁ + c₂u₂ → c₁ = 4, c₂ = -1 → [v]_C = [4,-1]ᵀ
+</div>
+
+<h2>3. Change of Basis — Concept</h2>
+
+<p>Suppose we have two bases of V: B = {v₁,...,vₙ} and C = {u₁,...,uₙ}. The <strong>change of basis</strong> problem asks: given the coordinates of a vector v in basis B, how can we find its coordinates in basis C?</p>
+
+<p>We introduce the <strong>change of basis matrix</strong> P:</p>
+
+<div class="formula">
+[v]_C = P [v]_B
+</div>
+
+<p>P is constructed by expressing the vectors of B in terms of the C basis:</p>
+
+<div class="formula">
+P = 
+\begin{bmatrix} [v₁]_C & [v₂]_C & ... & [vₙ]_C \end{bmatrix}
+</div>
+
+<p>Each column of P is the coordinate vector of a basis vector of B expressed in terms of C.</p>
+
+<h2>4. Example of Change of Basis</h2>
+
+<div class="example">
+V = ℝ², B = {v₁=(1,0), v₂=(0,1)}, C = {u₁=(1,1), u₂=(1,-1)}<br>
+Coordinates of B vectors in C:<br>
+v₁ = 0.5 u₁ + 0.5 u₂ → [v₁]_C = [0.5,0.5]ᵀ<br>
+v₂ = 0.5 u₁ - 0.5 u₂ → [v₂]_C = [0.5,-0.5]ᵀ<br>
+Change of basis matrix P = [[0.5,0.5],[0.5,-0.5]]<br>
+Given [v]_B = [3,5]ᵀ → [v]_C = P [v]_B = [4,-1]ᵀ
+</div>
+
+<h2>5. Change of Basis for Linear Transformations</h2>
+
+<p>Let T: V → V be a linear transformation. Its matrix representation depends on the basis. Suppose [T]_B is the matrix of T in basis B, and [T]_C is the matrix in basis C. Then:</p>
+
+<div class="formula">
+[T]_C = P [T]_B P⁻¹
+</div>
+
+<p>Where P is the change of basis matrix from B to C.</p>
+
+<p><strong>Intuition:</strong> The matrix [T]_B encodes T relative to B. Changing the basis essentially rotates and scales our “coordinate axes,” and the conjugation formula adjusts the matrix accordingly while preserving the linear transformation’s action.</p>
+
+<h2>6. Geometric Interpretation</h2>
+
+<ul>
+    <li>Think of B and C as two different coordinate grids on the same vector space.</li>
+    <li>Coordinates of vectors change, but the vectors themselves do not move.</li>
+    <li>Linear transformations look different in different bases, but the underlying mapping remains identical.</li>
+    <li>Diagonalization is a special case where we choose a basis in which the transformation is represented by a diagonal matrix — making computations easier.</li>
+</ul>
+
+<h2>7. Steps to Compute Change of Basis</h2>
+
+<ol>
+    <li>Choose old basis B = {v₁,...,vₙ} and new basis C = {u₁,...,uₙ}.</li>
+    <li>Express each vector of B as a linear combination of C: vᵢ = c₁ᵢ u₁ + ... + cₙᵢ uₙ.</li>
+    <li>Construct the change of basis matrix P = [[v₁]_C ... [vₙ]_C].</li>
+    <li>Compute new coordinates of any vector: [v]_C = P [v]_B.</li>
+    <li>For linear transformations: [T]_C = P [T]_B P⁻¹.</li>
+</ol>
+
+<h2>8. Applications</h2>
+
+<ul>
+    <li>Diagonalization of matrices and simplifying computations.</li>
+    <li>Quantum mechanics: changing from one basis of eigenvectors to another.</li>
+    <li>Computer graphics: converting coordinates from world space to camera space.</li>
+    <li>Data analysis: PCA uses change of basis to rotate axes to principal components.</li>
+    <li>Control theory: changing coordinates to simplify system representation.</li>
+</ul>
+
+<h2>9. Summary Formulas</h2>
+
+<div class="formula">
+[v]_C = P [v]_B  &nbsp; (change of vector coordinates)<br>
+[T]_C = P [T]_B P⁻¹ &nbsp; (change of linear transformation matrix)<br>
+P = [[v₁]_C ... [vₙ]_C] &nbsp; (change of basis matrix)
+</div>
+
+<p>Understanding change of basis allows us to view vectors and transformations from multiple perspectives, simplifying computations and revealing deeper structure in vector spaces.</p>
+
+</body>
+</html>

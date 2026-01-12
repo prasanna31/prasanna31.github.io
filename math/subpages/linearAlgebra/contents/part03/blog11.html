@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bases — Existence, Uniqueness, and Meaning</title>
+<style>
+    body { font-family: 'Georgia', serif; line-height: 1.8; margin: 2rem; color: #1b1b1b; background-color: #fdfdfd; }
+    h1, h2, h3 { color: #003366; }
+    h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    h2 { font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; }
+    h3 { font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 1rem; }
+    p { margin-bottom: 1rem; text-align: justify; }
+    ul, ol { margin-bottom: 1rem; }
+    code { background-color: #f0f0f0; padding: 2px 4px; border-radius: 3px; }
+    .example { background-color: #eef6ff; padding: 1rem; margin: 1rem 0; border-left: 4px solid #003366; }
+    .proof { background-color: #fff3e6; padding: 1rem; margin: 1rem 0; border-left: 4px solid #ff6600; }
+    .diagram { text-align: center; margin: 2rem 0; }
+</style>
+</head>
+<body>
+
+<h1>Bases — Existence, Uniqueness, and Meaning</h1>
+
+<p>A <strong>basis</strong> is the heart of vector space theory. It provides the minimal “building blocks” of a space: a set of vectors that are independent yet enough to describe every vector in the space uniquely. Understanding bases deeply requires integrating algebraic definitions, geometric intuition, and constructive methods. This chapter provides a comprehensive guide, covering finite and infinite-dimensional spaces, proofs of existence, uniqueness of representation, and the significance of bases in mathematics.</p>
+
+<h2>1. Definition of a Basis</h2>
+
+<p>Formally, let <code>V</code> be a vector space over a field <code>F</code>. A set of vectors <code>B = {v₁, v₂, ..., vₙ}</code> is called a <strong>basis</strong> of <code>V</code> if it satisfies two properties:</p>
+
+<ol>
+<li><strong>Spanning:</strong> Every vector <code>v ∈ V</code> can be expressed as a linear combination of vectors in <code>B</code>:</li>
+<pre><code>v = a₁v₁ + a₂v₂ + ... + aₙvₙ,  where aᵢ ∈ F</code></pre>
+<li><strong>Linear Independence:</strong> No vector in <code>B</code> can be written as a combination of the others:</li>
+<pre><code>a₁v₁ + ... + aₙvₙ = 0  ⇒  a₁ = ... = aₙ = 0</code></pre>
+</ol>
+
+<p>Intuitively, a basis is a “coordinate system” for a vector space: it tells us the directions along which we measure every vector uniquely.</p>
+
+<div class="example">
+<h3>Example 1.1: Basis of ℝ²</h3>
+<p>Consider ℝ². The vectors <code>e₁=(1,0)</code> and <code>e₂=(0,1)</code> form a basis. Every vector <code>(x, y)</code> is uniquely represented as <code>x*e₁ + y*e₂</code>. They are linearly independent and span the plane.</p>
+</div>
+
+<div class="example">
+<h3>Example 1.2: Basis of ℝ³</h3>
+<p>The standard basis <code>e₁=(1,0,0), e₂=(0,1,0), e₃=(0,0,1)</code> spans ℝ³. Every vector <code>(x, y, z)</code> has a unique representation using these vectors.</p>
+</div>
+
+<h2>2. Existence of Bases</h2>
+
+<p>Does every vector space have a basis? The answer is yes, but the argument differs for finite-dimensional and infinite-dimensional spaces.</p>
+
+<h3>2.1 Finite-Dimensional Spaces</h3>
+
+<p>If <code>V</code> is finite-dimensional with dimension <code>n</code>, a basis always exists, and any spanning set can be reduced to a basis by removing dependent vectors. Conversely, any linearly independent set can be extended to a basis by adding vectors until the space is spanned.</p>
+
+<div class="proof">
+<h3>Proof Sketch (Finite Dimensional)</h3>
+<ol>
+<li>Start with a spanning set <code>S</code> of <code>V</code>.</li>
+<li>Remove vectors that are linear combinations of others iteratively.</li>
+<li>Stop when the remaining set is linearly independent; this set is a basis.</li>
+</ol>
+</div>
+
+<div class="example">
+<h3>Example 2.1</h3>
+<p>In ℝ³, consider <code>v₁=(1,0,0), v₂=(0,1,0), v₃=(1,1,0), v₄=(0,0,1)</code>. <code>v₃</code> is dependent: <code>v₃=v₁+v₂</code>. Removing it leaves <code>{v₁,v₂,v₄}</code>, which forms a basis of ℝ³.</p>
+</div>
+
+<h3>2.2 Infinite-Dimensional Spaces</h3>
+
+<p>For spaces like the set of all polynomials, infinite bases exist. The existence relies on the <strong>Axiom of Choice</strong>, often invoked via <strong>Zorn's Lemma</strong>: every vector space has a maximal linearly independent set, which is then a basis.</p>
+
+<div class="example">
+<h3>Example 2.2: Polynomial Basis</h3>
+<p>The vector space of all polynomials P over ℝ has basis <code>{1, x, x², x³, ...}</code>. Every polynomial is a unique combination of these monomials.</p>
+</div>
+
+<h2>3. Uniqueness of Representation</h2>
+
+<p>One of the defining features of a basis is that <strong>each vector has a unique representation in terms of basis vectors</strong>. Formally:</p>
+<pre><code>If B={v₁,...,vₙ} is a basis and
+a₁v₁+...+aₙvₙ = b₁v₁+...+bₙvₙ,
+then aᵢ = bᵢ for all i.</code></pre>
+
+<div class="proof">
+<h3>Proof:</h3>
+<p>Subtract the two representations:</p>
+<pre><code>(a₁-b₁)v₁ + ... + (aₙ-bₙ)vₙ = 0</code></pre>
+<p>Since the vectors are independent, each coefficient must be zero: <code>aᵢ-bᵢ = 0 ⇒ aᵢ = bᵢ</code>.</p>
+</div>
+
+<div class="example">
+<h3>Example 3.1</h3>
+<p>In ℝ² with basis <code>{(1,0),(0,1)}</code>, the vector <code>(3,4)</code> has the unique representation <code>3*(1,0)+4*(0,1)</code>. No other combination can produce it.</p>
+</div>
+
+<h2>4. Dimension and Number of Basis Vectors</h2>
+
+<p>The number of vectors in any basis is called the <strong>dimension</strong> of the space, denoted <code>dim(V)</code>. All bases of a finite-dimensional vector space have the same number of vectors.</p>
+
+<div class="example">
+<h3>Example 4.1</h3>
+<p>ℝ³ has dimension 3. Any basis will have exactly 3 vectors, whether standard basis <code>{e₁,e₂,e₃}</code> or any other independent set spanning the space.</p>
+</div>
+
+<h2>5. Geometric Interpretation</h2>
+
+<p>A basis provides directions in space. In 2D, two independent vectors form a plane. In 3D, three independent vectors form a volume. In higher dimensions, bases define abstract "directions" along which vectors are measured.</p>
+
+<div class="diagram">
+<p><strong>Diagram 5.1:</strong> Basis vectors in 3D space</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Vector_space_basis.png/320px-Vector_space_basis.png" alt="3D Basis">
+</div>
+
+<h2>6. Constructing Bases</h2>
+
+<ul>
+<li><strong>From Spanning Sets:</strong> Remove dependent vectors iteratively.</li>
+<li><strong>From Independent Sets:</strong> Add vectors until the space is spanned.</li>
+<li><strong>Algorithmically:</strong> Use Gaussian elimination or row reduction on matrices to find pivot columns as a basis.</li>
+</ul>
+
+<div class="example">
+<h3>Example 6.1: Column Space Basis</h3>
+<p>Matrix A = [[1,2,3],[0,1,4],[0,0,1]]. Pivot columns (1,2,3) form a basis for the column space of A.</p>
+</div>
+
+<h2>7. Bases in Function Spaces</h2>
+
+<p>Bases extend beyond ℝⁿ. For example, in polynomial space P₃:</p>
+<pre><code>B = {1, x, x², x³}</code></pre>
+<p>Every polynomial of degree ≤3 is uniquely represented as <code>a + bx + cx² + dx³</code>. In Fourier analysis, sin/cos functions form an infinite basis for square-integrable functions.</p>
+
+<h2>8. Exercises</h2>
+<ol>
+<li>Find a basis for the subspace of ℝ³ defined by <code>x+y+z=0</code>.</li>
+<li>Check if <code>{(1,0,0),(0,1,0),(1,1,1)}</code> forms a basis for ℝ³.</li>
+<li>Prove that <code>{1,x,x²,...,xⁿ}</code> forms a basis for Pₙ.</li>
+<li>Find a basis for the row space of matrix <code>[[1,2,3],[0,1,4],[0,0,1]]</code>.</li>
+<li>Explain geometrically why any two independent vectors in ℝ² form a basis.</li>
+</ol>
+
+<h2>9. Summary</h2>
+
+<p>Bases are fundamental: they allow unique representation of vectors, define dimension, and provide geometric and computational frameworks. Mastery of bases is essential for understanding coordinates, transformations, and vector space structure. The concepts scale from finite-dimensional ℝⁿ to infinite-dimensional function spaces.</p>
+
+<h2>References</h2>
+<ul>
+<li>Gilbert Strang, <em>Introduction to Linear Algebra</em>, 5th Edition</li>
+<li>Sheldon Axler, <em>Linear Algebra Done Right</em>, 3rd Edition</li>
+<li>David C. Lay, <em>Linear Algebra and Its Applications</em>, 5th Edition</li>
+<li>MIT OpenCourseWare – Linear Algebra Lecture Notes</li>
+</ul>
+
+</body>
+</html>
