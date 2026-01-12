@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Graph Patterns – Complete Interview Guide</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      margin: 40px;
+      background: #fbfbfb;
+      color: #1a1a1a;
+      line-height: 1.9;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    h2 {
+      margin-top: 80px;
+      border-bottom: 3px solid #ddd;
+      padding-bottom: 8px;
+    }
+    h3 {
+      margin-top: 35px;
+    }
+    p {
+      margin: 14px 0;
+    }
+    ul, ol {
+      margin-left: 28px;
+    }
+    li {
+      margin: 10px 0;
+    }
+    .note {
+      background: #f2f2f2;
+      padding: 20px;
+      border-left: 6px solid #444;
+      margin: 35px 0;
+      font-style: italic;
+    }
+    code {
+      background: #eee;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Complete Graph Patterns (Google Interview Ready)</h1>
+
+<p>
+Graphs are not hard.
+</p>
+<p>
+What is hard is failing to recognize
+<strong>which mental model the problem belongs to</strong>.
+</p>
+
+<div class="note">
+Every graph problem reduces to one of a small number of invariants.
+</div>
+
+<hr>
+
+<h2>1. Graph Representation Patterns</h2>
+
+<h3>Adjacency List vs Adjacency Matrix</h3>
+<ul>
+  <li>Sparse graph → adjacency list</li>
+  <li>Dense graph → adjacency matrix</li>
+</ul>
+
+<div class="note">
+Choosing representation is the first optimization decision.
+</div>
+
+<hr>
+
+<h2>2. Graph Traversal Patterns</h2>
+
+<h3>2.1 Breadth First Search (BFS)</h3>
+
+<p>
+BFS explores by layers.
+</p>
+
+<div class="note">
+If the problem asks for the shortest path in an unweighted graph → BFS.
+</div>
+
+<p><strong>Invariant:</strong> first time you visit a node is the shortest distance.</p>
+
+<p>Used for:</p>
+<ul>
+  <li>Shortest path (unweighted)</li>
+  <li>Minimum steps</li>
+  <li>Level order traversal</li>
+</ul>
+
+<hr>
+
+<h3>2.2 Depth First Search (DFS)</h3>
+
+<p>
+DFS explores fully before backing up.
+</p>
+
+<div class="note">
+DFS is about structure, not distance.
+</div>
+
+<p>Used for:</p>
+<ul>
+  <li>Connected components</li>
+  <li>Cycle detection</li>
+  <li>Topological sort</li>
+</ul>
+
+<hr>
+
+<h2>3. Connected Components Pattern</h2>
+
+<p>
+Ask:
+</p>
+
+<div class="note">
+How many independent subgraphs exist?
+</div>
+
+<p>
+DFS/BFS from every unvisited node.
+</p>
+
+<p><strong>Invariant:</strong> one traversal = one component.</p>
+
+Used in:
+<ul>
+  <li>Number of islands</li>
+  <li>Friend groups</li>
+  <li>Network connectivity</li>
+</ul>
+
+<hr>
+
+<h2>4. Cycle Detection Patterns</h2>
+
+<h3>4.1 Undirected Graph Cycle</h3>
+<ul>
+  <li>DFS with parent tracking</li>
+</ul>
+
+<div class="note">
+Visited neighbor ≠ parent → cycle.
+</div>
+
+<h3>4.2 Directed Graph Cycle</h3>
+<ul>
+  <li>DFS with recursion stack</li>
+</ul>
+
+<div class="note">
+Back-edge → cycle.
+</div>
+
+Used in:
+<ul>
+  <li>Deadlock detection</li>
+  <li>Dependency resolution</li>
+</ul>
+
+<hr>
+
+<h2>5. Topological Sort Pattern</h2>
+
+<p>
+Applies only to:
+</p>
+<ul>
+  <li>Directed Acyclic Graphs (DAG)</li>
+</ul>
+
+<p><strong>Two methods:</strong></p>
+<ul>
+  <li>DFS + stack</li>
+  <li>Kahn’s Algorithm (BFS + indegree)</li>
+</ul>
+
+<div class="note">
+If topo sort fails → cycle exists.
+</div>
+
+Used in:
+<ul>
+  <li>Course schedule</li>
+  <li>Build systems</li>
+  <li>Task scheduling</li>
+</ul>
+
+<hr>
+
+<h2>6. Shortest Path Patterns</h2>
+
+<h3>6.1 BFS (Unweighted)</h3>
+<ul>
+  <li>Uniform cost edges</li>
+</ul>
+
+<h3>6.2 Dijkstra’s Algorithm</h3>
+<ul>
+  <li>Non-negative weights</li>
+  <li>Greedy + priority queue</li>
+</ul>
+
+<div class="note">
+Greedy is valid because once chosen, distance never improves.
+</div>
+
+<h3>6.3 Bellman–Ford</h3>
+<ul>
+  <li>Negative edges</li>
+  <li>Cycle detection</li>
+</ul>
+
+<h3>6.4 Floyd–Warshall</h3>
+<ul>
+  <li>All-pairs shortest path</li>
+</ul>
+
+<hr>
+
+<h2>7. Grid as Graph Pattern</h2>
+
+<p>
+2D grids are graphs in disguise.
+</p>
+
+<ul>
+  <li>Cells → nodes</li>
+  <li>Moves → edges</li>
+</ul>
+
+<div class="note">
+Most matrix problems are graph traversal problems.
+</div>
+
+Used in:
+<ul>
+  <li>Islands</li>
+  <li>Maze problems</li>
+  <li>Shortest path in grid</li>
+</ul>
+
+<hr>
+
+<h2>8. Multi-Source BFS</h2>
+
+<p>
+Start BFS from multiple nodes at once.
+</p>
+
+<div class="note">
+Initial queue contains all sources.
+</div>
+
+Used in:
+<ul>
+  <li>Rotting oranges</li>
+  <li>Nearest distance problems</li>
+</ul>
+
+<hr>
+
+<h2>9. Bipartite Graph Pattern</h2>
+
+<p>
+Ask:
+</p>
+
+<div class="note">
+Can I color the graph using two colors?
+</div>
+
+<p>
+Use BFS/DFS coloring.
+</p>
+
+Used in:
+<ul>
+  <li>Graph partitioning</li>
+  <li>Conflict detection</li>
+</ul>
+
+<hr>
+
+<h2>10. Union Find (Disjoint Set Union)</h2>
+
+<p>
+Tracks connectivity dynamically.
+</p>
+
+<div class="note">
+Use when edges are added incrementally.
+</div>
+
+Used in:
+<ul>
+  <li>Cycle detection</li>
+  <li>Dynamic connectivity</li>
+  <li>Kruskal’s MST</li>
+</ul>
+
+<hr>
+
+<h2>11. Minimum Spanning Tree Patterns</h2>
+
+<h3>Kruskal’s Algorithm</h3>
+<ul>
+  <li>Sort edges</li>
+  <li>Union Find</li>
+</ul>
+
+<h3>Prim’s Algorithm</h3>
+<ul>
+  <li>Greedy growth</li>
+  <li>Priority queue</li>
+</ul>
+
+<hr>
+
+<h2>12. Strongly Connected Components (SCC)</h2>
+
+<p>
+Directed graph where every node reaches every other.
+</p>
+
+<ul>
+  <li>Kosaraju’s Algorithm</li>
+  <li>Tarjan’s Algorithm</li>
+</ul>
+
+<div class="note">
+Collapse SCCs → DAG.
+</div>
+
+<hr>
+
+<h2>13. Backtracking on Graphs</h2>
+
+<p>
+Used when:
+</p>
+<ul>
+  <li>Path existence with constraints</li>
+</ul>
+
+Examples:
+<ul>
+  <li>Hamiltonian paths</li>
+  <li>Word search</li>
+</ul>
+
+<hr>
+
+<h2>14. State Space Graph Pattern</h2>
+
+<p>
+Nodes represent states, not vertices.
+</p>
+
+<div class="note">
+Classic Google favorite.
+</div>
+
+Used in:
+<ul>
+  <li>Lock problems</li>
+  <li>Game states</li>
+  <li>Puzzle solvers</li>
+</ul>
+
+<hr>
+
+<h2>15. Graph DP on DAGs</h2>
+
+<p>
+Topo sort + DP.
+</p>
+
+Used in:
+<ul>
+  <li>Longest path in DAG</li>
+  <li>Dependency optimization</li>
+</ul>
+
+<hr>
+
+<h2>16. Flow & Cut (Advanced / Bonus)</h2>
+
+<ul>
+  <li>Max Flow (Ford–Fulkerson)</li>
+  <li>Min Cut</li>
+</ul>
+
+<div class="note">
+Rare but deadly if ignored.
+</div>
+
+<hr>
+
+<h2>Final Mental Checklist (Google Mode)</h2>
+
+<ol>
+  <li>Is it a graph or a grid?</li>
+  <li>Shortest path or structure?</li>
+  <li>Cycle or DAG?</li>
+  <li>Static or dynamic connectivity?</li>
+  <li>One source or many?</li>
+</ol>
+
+<hr>
+
+<h2>Final Truth</h2>
+
+<div class="note">
+Graphs are not about code.
+They are about invariants and reachability.
+</div>
+
+<p>
+If you identify the invariant,
+the algorithm is obvious.
+</p>
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linked List Pattern 3 — Multiple Pointer Coordination</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #1b5e20;
+    }
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 25px;
+      color: #2e7d32;
+    }
+    p {
+      max-width: 950px;
+    }
+    ul {
+      margin-left: 25px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .concept {
+      background: #ffffff;
+      padding: 20px;
+      margin: 25px 0;
+      border-left: 6px solid #43a047;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .invariant {
+      background: #f1f8e9;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #66bb6a;
+      font-style: italic;
+    }
+    .warning {
+      background: #fff3e0;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #fb8c00;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Linked List Pattern 3: Multiple Pointer Coordination</h1>
+
+<p>
+This pattern is where most linked list bugs are born —
+and where mastery begins.
+</p>
+
+<p>
+If Pattern 1 taught you how to <b>observe</b> a list
+and Pattern 2 taught you how to <b>delay processing</b>,
+Pattern 3 teaches you how to <b>change structure safely</b>.
+</p>
+
+<!-- ================= CORE PROBLEM ================= -->
+
+<h2>The Core Structural Problem</h2>
+
+<div class="warning">
+  <p>
+    In a linked list, if you lose a pointer, you lose the list.
+  </p>
+</div>
+
+<p>
+There is no array index.
+There is no rewind.
+There is no undo.
+</p>
+
+<p>
+The moment you overwrite a pointer without saving it,
+everything after that node is gone forever.
+</p>
+
+---
+
+<h2>The Core Idea</h2>
+
+<div class="concept">
+  <p>
+    Any time you modify links, you must coordinate
+    <b>at least three perspectives</b>:
+  </p>
+  <ul>
+    <li>Where you came from (previous)</li>
+    <li>Where you are (current)</li>
+    <li>Where you are going (next)</li>
+  </ul>
+</div>
+
+<p>
+This is not optional.
+It is forced by the one-directional nature of pointers.
+</p>
+
+---
+
+<h2>Mental Model</h2>
+
+<p>
+Imagine walking across stepping stones in a river:
+</p>
+
+<ul>
+  <li>You must know where your foot is</li>
+  <li>You must remember the stone behind you</li>
+  <li>You must see the next stone before stepping</li>
+</ul>
+
+<p>
+If you step without knowing what’s next,
+you fall.
+</p>
+
+---
+
+<h2>Where Do You Start?</h2>
+
+<div class="concept">
+  <p>
+    The very first thought must be:
+  </p>
+  <p>
+    “I am about to change pointers.
+    What links could I accidentally destroy?”
+  </p>
+</div>
+
+<p>
+This immediately forces the introduction of:
+</p>
+
+<ul>
+  <li><b>curr</b> — the node being processed</li>
+  <li><b>next</b> — saved before rewiring</li>
+  <li><b>prev</b> — to reconnect backward context</li>
+</ul>
+
+---
+
+<!-- ================= WHY EACH POINTER ================= -->
+
+<h2>Why Each Pointer Exists</h2>
+
+<h3>Current Pointer (curr)</h3>
+
+<p>
+This is the node you are actively working on.
+</p>
+
+<p>
+Every iteration answers one question:
+</p>
+
+<ul>
+  <li>“What do I want to do with this node?”</li>
+</ul>
+
+---
+
+<h3>Next Pointer (next)</h3>
+
+<div class="warning">
+  <p>
+    This pointer must be saved
+    <b>before</b> any modification.
+  </p>
+</div>
+
+<p>
+Why?
+Because once you change <code>curr.next</code>,
+the rest of the list becomes unreachable.
+</p>
+
+<div class="invariant">
+  <p>
+    At the start of each iteration,
+    <code>next</code> preserves access to the unprocessed list.
+  </p>
+</div>
+
+---
+
+<h3>Previous Pointer (prev)</h3>
+
+<p>
+Since singly linked lists do not support backward traversal,
+<code>prev</code> is an artificial memory of the past.
+</p>
+
+<p>
+It allows you to:
+</p>
+
+<ul>
+  <li>Reverse links</li>
+  <li>Delete nodes</li>
+  <li>Reconnect sublists</li>
+</ul>
+
+---
+
+<!-- ================= SAFE REWIRING ================= -->
+
+<h2>Safe Pointer Rewiring</h2>
+
+<p>
+Every safe pointer algorithm follows this order:
+</p>
+
+<div class="concept">
+  <ol>
+    <li>Save next</li>
+    <li>Rewire current</li>
+    <li>Advance pointers</li>
+  </ol>
+</div>
+
+<p>
+This order is not stylistic.
+It is survival.
+</p>
+
+<div class="invariant">
+  <p>
+    After rewiring, the remaining list must still be reachable.
+  </p>
+</div>
+
+---
+
+<h2>Why Bugs Happen Here</h2>
+
+<ul>
+  <li>Forgetting to store <code>next</code></li>
+  <li>Moving <code>curr</code> too early</li>
+  <li>Breaking the chain before reconnecting</li>
+</ul>
+
+<p>
+Every one of these mistakes is a violation
+of the invariant.
+</p>
+
+---
+
+<!-- ================= HOW TO EXPLAIN ================= -->
+
+<h2>How to Start Explaining in an Interview</h2>
+
+<div class="concept">
+  <p>
+    “Since linked lists rely entirely on pointers,
+    modifying them is dangerous.
+    To avoid losing nodes, I coordinate three pointers:
+    previous, current, and next.
+    Before changing any link, I save the next pointer,
+    then rewire safely, and finally move forward.”
+  </p>
+</div>
+
+<p>
+This explanation shows:
+</p>
+
+<ul>
+  <li>Structural awareness</li>
+  <li>Safety-first thinking</li>
+  <li>Clear invariants</li>
+</ul>
+
+---
+
+<!-- ================= WHEN TO USE ================= -->
+
+<h2>When to Use This Pattern</h2>
+
+<ul>
+  <li>Reversing a linked list</li>
+  <li>Deleting nodes in-place</li>
+  <li>Partitioning a list</li>
+  <li>Reordering or grouping nodes</li>
+  <li>Cycle manipulation</li>
+</ul>
+
+---
+
+<h2>One-Line Summary</h2>
+
+<div class="invariant">
+  <p>
+    Multiple Pointer Coordination =
+    Change structure without losing access.
+  </p>
+</div>
+
+<p>
+If you truly understand this pattern,
+you can solve <b>most linked list problems ever asked</b>.
+</p>
+
+</body>
+</html>

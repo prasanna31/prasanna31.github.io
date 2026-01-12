@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linked List Pattern 8 — Offset Pointer</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #bf360c;
+    }
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 25px;
+      color: #d84315;
+    }
+    p {
+      max-width: 950px;
+    }
+    ul {
+      margin-left: 25px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .concept {
+      background: #ffffff;
+      padding: 20px;
+      margin: 25px 0;
+      border-left: 6px solid #e64a19;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .invariant {
+      background: #fbe9e7;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #ff7043;
+      font-style: italic;
+    }
+    .warning {
+      background: #fff3e0;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #fb8c00;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Linked List Pattern 8: Offset Pointer Pattern</h1>
+
+<p>
+This pattern generalizes the “nth-from-end” problem
+and any **fixed-distance pointer operations**.
+</p>
+
+<p>
+It builds directly on the slow–fast pointer idea but adds flexibility:
+you explicitly maintain a **fixed gap** between two pointers.
+</p>
+
+---
+
+<h2>The Core Insight</h2>
+
+<div class="concept">
+  <p>
+    If you keep two pointers separated by k nodes,
+    the first pointer reaching the end tells you
+    exactly where the second pointer is in relation to the tail.
+  </p>
+</div>
+
+<p>
+No need to know the length of the list.
+No extra passes required.
+</p>
+
+---
+
+<h2>The Questions This Pattern Answers</h2>
+
+<ul>
+  <li>Find the nth node from the end</li>
+  <li>Delete the nth node from the end</li>
+  <li>Maintain fixed-distance sliding windows in the list</li>
+</ul>
+
+<p>
+All problems reduce to: “Keep a gap of n nodes.”
+</p>
+
+---
+
+<h2>Mental Model</h2>
+
+<p>
+Imagine a rope with two climbers:
+</p>
+
+<ul>
+  <li>The lead climber moves first, n steps ahead</li>
+  <li>The follower starts and maintains a fixed distance</li>
+</ul>
+
+<p>
+When the lead reaches the end, the follower is exactly n steps behind — perfect position for deletion or access.
+</p>
+
+---
+
+<h2>Where Do You Start?</h2>
+
+<div class="concept">
+  <p>
+    The first question must be:
+  </p>
+  <p>
+    “What is the distance (offset) I need to maintain?”
+  </p>
+</div>
+
+<p>
+Then, initialize two pointers:
+</p>
+
+<ul>
+  <li>Lead pointer → moves first by the offset</li>
+  <li>Follow pointer → starts at head (or dummy)</li>
+</ul>
+
+<div class="invariant">
+  <p>
+    The distance between lead and follow is exactly k at all times.
+  </p>
+</div>
+
+---
+
+<h2>Step-by-Step Logic</h2>
+
+<h3>1. Advance Lead Pointer</h3>
+
+<p>
+Move the lead pointer k steps ahead.  
+Why? To create the exact gap needed for the follow pointer to land on the target.
+</p>
+
+<div class="invariant">
+  <p>
+    After this step, <code>lead - follow = k nodes</code>.
+  </p>
+</div>
+
+---
+
+<h3>2. Move Both Pointers Together</h3>
+
+<p>
+Advance both lead and follow one node at a time until lead reaches the end.
+</p>
+
+<ul>
+  <li>Lead reaches null → end of list</li>
+  <li>Follow is exactly k nodes behind → target node</li>
+</ul>
+
+<div class="invariant">
+  <p>
+    Distance between lead and follow remains constant.
+  </p>
+</div>
+
+---
+
+<h3>3. Perform Operation at Follow</h3>
+
+<ul>
+  <li>Read value (nth node from end)</li>
+  <li>Delete node (rewire previous.next = follow.next)</li>
+  <li>Insert / modify node</li>
+</ul>
+
+<p>
+This step works without traversing the list multiple times.
+</p>
+
+---
+
+<h2>Why Each Line Exists</h2>
+
+<ul>
+  <li>Initialize pointers → define roles clearly</li>
+  <li>Advance lead → create fixed offset</li>
+  <li>Loop both → maintain invariant</li>
+  <li>Operate at follow → solve the problem</li>
+</ul>
+
+<p>
+Every line enforces correctness and ensures one-pass solution.
+</p>
+
+---
+
+<h2>Edge Cases</h2>
+
+<ul>
+  <li>Offset = list length → target is head</li>
+  <li>Offset > list length → invalid, handle gracefully</li>
+  <li>Offset = 0 → target is tail</li>
+  <li>Single-node list → works for offset = 1</li>
+</ul>
+
+<div class="warning">
+  <p>
+    Always check for null pointers while advancing lead pointer.
+  </p>
+</div>
+
+---
+
+<h2>How to Explain in an Interview</h2>
+
+<div class="concept">
+  <p>
+    “I maintain two pointers separated by a fixed distance n.
+    I advance the lead pointer first to create the gap.
+    Then I move both pointers together.
+    When the lead reaches the end, the follow pointer points to the nth node from the end.
+    This works in one pass and requires no length computation.”
+  </p>
+</div>
+
+<p>
+This shows:
+</p>
+
+<ul>
+  <li>One-pass efficiency</li>
+  <li>Structural reasoning</li>
+  <li>Edge case awareness</li>
+</ul>
+
+---
+
+<h2>When to Use This Pattern</h2>
+
+<ul>
+  <li>Remove nth node from end</li>
+  <li>Find nth node from end</li>
+  <li>Sliding window of fixed length</li>
+  <li>Relative position tracking</li>
+  <li>Follow / leader simulations in a linked list</li>
+</ul>
+
+---
+
+<h2>One-Line Summary</h2>
+
+<div class="invariant">
+  <p>
+    Offset Pointer Pattern = Keep a fixed gap, move together, hit the target precisely.
+  </p>
+</div>
+
+<p>
+Master this, and nth-from-end problems are solved confidently in one pass.
+</p>
+
+</body>
+</html>

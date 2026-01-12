@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linked List Pattern 6 — Length-Based Control</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #1a237e;
+    }
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 25px;
+      color: #303f9f;
+    }
+    p {
+      max-width: 950px;
+    }
+    ul {
+      margin-left: 25px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .concept {
+      background: #ffffff;
+      padding: 20px;
+      margin: 25px 0;
+      border-left: 6px solid #3f51b5;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .invariant {
+      background: #e8eaf6;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #7986cb;
+      font-style: italic;
+    }
+    .warning {
+      background: #fff3e0;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #fb8c00;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Linked List Pattern 6: Length-Based Control Pattern</h1>
+
+<p>
+This pattern is about trading
+<b>extra traversal</b> for
+<b>precise control</b>.
+</p>
+
+<p>
+If pointer-based patterns feel like intuition,
+length-based control feels like arithmetic.
+</p>
+
+<!-- ================= CORE PROBLEM ================= -->
+
+<h2>The Core Problem</h2>
+
+<div class="warning">
+  <p>
+    Linked lists do not support random access.
+  </p>
+</div>
+
+<p>
+Yet many problems are phrased as:
+</p>
+
+<ul>
+  <li>“Delete the k-th node”</li>
+  <li>“Insert at index i”</li>
+  <li>“Split after n nodes”</li>
+</ul>
+
+<p>
+These are index-based requests
+on a structure that has no indices.
+</p>
+
+---
+
+<h2>The Core Idea</h2>
+
+<div class="concept">
+  <p>
+    Convert index-based problems
+    into traversal-based problems
+    by precomputing the length.
+  </p>
+</div>
+
+<p>
+Once you know the length,
+positions stop being abstract.
+</p>
+
+<div class="invariant">
+  <p>
+    Length transforms relative positions
+    into absolute traversal counts.
+  </p>
+</div>
+
+---
+
+<h2>Mental Model</h2>
+
+<p>
+Imagine walking a hallway with no floor numbers.
+</p>
+
+<ul>
+  <li>You cannot jump to room 17</li>
+  <li>You must count doors as you walk</li>
+</ul>
+
+<p>
+If someone asks:
+</p>
+
+<ul>
+  <li>“Go to the 3rd room from the end”</li>
+</ul>
+
+<p>
+You must first count total rooms.
+</p>
+
+<p>
+Linked lists behave the same way.
+</p>
+
+---
+
+<h2>Where Do You Start?</h2>
+
+<div class="concept">
+  <p>
+    The first question must be:
+  </p>
+  <p>
+    “Is the position defined relative to the list length?”
+  </p>
+</div>
+
+<p>
+If yes,
+a length pass is unavoidable.
+</p>
+
+<div class="invariant">
+  <p>
+    Any algorithm using length
+    has at least two traversals.
+  </p>
+</div>
+
+---
+
+<!-- ================= LENGTH PASS ================= -->
+
+<h2>Length Precomputation</h2>
+
+<h3>Why a Separate Pass Exists</h3>
+
+<p>
+Length does not exist magically.
+It must be measured.
+</p>
+
+<p>
+This first traversal:
+</p>
+
+<ul>
+  <li>Touches every node</li>
+  <li>Does no structural modification</li>
+  <li>Only counts</li>
+</ul>
+
+<div class="invariant">
+  <p>
+    After the first pass,
+    length is accurate and stable.
+  </p>
+</div>
+
+<p>
+This separation keeps logic clean.
+</p>
+
+---
+
+<!-- ================= INDEX OPERATIONS ================= -->
+
+<h2>Index-Based Operations</h2>
+
+<h3>Why Indices Are Dangerous</h3>
+
+<p>
+Indices encourage array thinking.
+</p>
+
+<p>
+But in linked lists:
+</p>
+
+<ul>
+  <li>Every index access costs traversal</li>
+  <li>Out-of-range indices must be guarded</li>
+</ul>
+
+<div class="warning">
+  <p>
+    Using indices without validating length
+    leads to null pointer errors.
+  </p>
+</div>
+
+---
+
+<h3>Converting Index to Traversal</h3>
+
+<p>
+Once length is known,
+index-based requests become:
+</p>
+
+<ul>
+  <li>Traverse <code>k</code> steps from head</li>
+  <li>Or traverse <code>length - k</code> steps</li>
+</ul>
+
+<div class="concept">
+  <p>
+    Index → number of pointer moves.
+  </p>
+</div>
+
+---
+
+<!-- ================= WHY EACH LINE EXISTS ================= -->
+
+<h2>Why Each Step Exists</h2>
+
+<ul>
+  <li>First traversal → establish total size</li>
+  <li>Bounds check → prevent invalid access</li>
+  <li>Second traversal → reach exact target</li>
+  <li>Operation → insert, delete, or split</li>
+</ul>
+
+<p>
+Every step enforces correctness.
+</p>
+
+---
+
+<!-- ================= TRADEOFF ================= -->
+
+<h2>Trade-Offs</h2>
+
+<h3>Advantages</h3>
+
+<ul>
+  <li>Simple logic</li>
+  <li>Easy to explain</li>
+  <li>Clear correctness</li>
+</ul>
+
+<h3>Disadvantages</h3>
+
+<ul>
+  <li>Extra traversal cost</li>
+  <li>Not optimal for streaming data</li>
+  <li>Slower than two-pointer alternatives</li>
+</ul>
+
+<div class="warning">
+  <p>
+    If a one-pass solution exists,
+    prefer it over length-based control.
+  </p>
+</div>
+
+---
+
+<!-- ================= HOW TO EXPLAIN ================= -->
+
+<h2>How to Start Explaining in an Interview</h2>
+
+<div class="concept">
+  <p>
+    “Since linked lists do not support indexing,
+    I first compute the length.
+    This allows me to convert the index-based requirement
+    into a precise number of traversal steps,
+    ensuring correct positioning.”
+  </p>
+</div>
+
+<p>
+This explanation signals:
+</p>
+
+<ul>
+  <li>Clear reasoning</li>
+  <li>Awareness of trade-offs</li>
+  <li>Methodical problem solving</li>
+</ul>
+
+---
+
+<!-- ================= WHEN TO USE ================= -->
+
+<h2>When to Use This Pattern</h2>
+
+<ul>
+  <li>Delete k-th node from start</li>
+  <li>Delete k-th node from end (simple version)</li>
+  <li>Split lists at position n</li>
+  <li>Rotate lists by k</li>
+  <li>Index-driven interview questions</li>
+</ul>
+
+---
+
+<h2>One-Line Summary</h2>
+
+<div class="invariant">
+  <p>
+    Length-Based Control = Measure first, act precisely.
+  </p>
+</div>
+
+<p>
+This pattern is about control, not cleverness.
+</p>
+
+</body>
+</html>

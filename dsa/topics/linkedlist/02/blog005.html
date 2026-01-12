@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linked List Pattern 5 — Boundary Management</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #0d47a1;
+    }
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 25px;
+      color: #1565c0;
+    }
+    p {
+      max-width: 950px;
+    }
+    ul {
+      margin-left: 25px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .concept {
+      background: #ffffff;
+      padding: 20px;
+      margin: 25px 0;
+      border-left: 6px solid #1976d2;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .invariant {
+      background: #e3f2fd;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #42a5f5;
+      font-style: italic;
+    }
+    .warning {
+      background: #fff3e0;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #fb8c00;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Linked List Pattern 5: Boundary Management Pattern</h1>
+
+<p>
+This pattern separates amateurs from professionals.
+</p>
+
+<p>
+Most linked list logic works perfectly
+— until the list is empty,
+has one node,
+or you touch the head or tail.
+</p>
+
+<p>
+Boundary Management is the discipline of
+<b>respecting the edges of the data structure</b>.
+</p>
+
+<!-- ================= CORE REALITY ================= -->
+
+<h2>The Core Reality</h2>
+
+<div class="warning">
+  <p>
+    Most linked list failures happen at the boundaries,
+    not in the middle.
+  </p>
+</div>
+
+<p>
+Boundaries are:
+</p>
+
+<ul>
+  <li>Head</li>
+  <li>Tail</li>
+  <li>Empty list</li>
+  <li>Single-node list</li>
+</ul>
+
+<p>
+These cases break assumptions that are true elsewhere.
+</p>
+
+---
+
+<h2>The Core Idea</h2>
+
+<div class="concept">
+  <p>
+    Before writing logic, explicitly reason about:
+  </p>
+  <ul>
+    <li>What happens if the list is empty?</li>
+    <li>What happens if the list has exactly one node?</li>
+    <li>Does this operation change the head?</li>
+    <li>Does this operation change the tail?</li>
+  </ul>
+</div>
+
+<p>
+This is not pessimism.
+This is correctness.
+</p>
+
+---
+
+<h2>Mental Model</h2>
+
+<p>
+Think of a rope:
+</p>
+
+<ul>
+  <li>The middle knots behave normally</li>
+  <li>The ends behave differently</li>
+</ul>
+
+<p>
+If you cut or tie without considering the ends,
+the rope frays or slips.
+</p>
+
+<p>
+Linked lists behave the same way.
+</p>
+
+---
+
+<h2>Where Do You Start?</h2>
+
+<div class="concept">
+  <p>
+    The first thing to ask is not
+    “What is the algorithm?”
+  </p>
+  <p>
+    The first thing to ask is:
+    “What boundaries can this operation touch?”
+  </p>
+</div>
+
+<p>
+Only after identifying boundaries
+do you write pointer logic.
+</p>
+
+<div class="invariant">
+  <p>
+    A correct algorithm explicitly protects head and tail.
+  </p>
+</div>
+
+---
+
+<!-- ================= EMPTY LIST ================= -->
+
+<h2>Empty List Handling</h2>
+
+<h3>Why Empty Lists Are Dangerous</h3>
+
+<p>
+In an empty list:
+</p>
+
+<ul>
+  <li>Head is <code>null</code></li>
+  <li>Tail is <code>null</code></li>
+  <li>No traversal is possible</li>
+</ul>
+
+<p>
+Any attempt to access <code>head.next</code>
+is an immediate crash.
+</p>
+
+<div class="invariant">
+  <p>
+    Empty list logic must short-circuit immediately.
+  </p>
+</div>
+
+---
+
+<!-- ================= SINGLE NODE ================= -->
+
+<h2>Single-Node List Handling</h2>
+
+<h3>Why Single-Node Lists Are Special</h3>
+
+<p>
+In a single-node list:
+</p>
+
+<ul>
+  <li>Head == Tail</li>
+  <li>Deleting head deletes tail</li>
+  <li>Inserting before or after affects both ends</li>
+</ul>
+
+<p>
+Assumptions like “there is a next node”
+break here.
+</p>
+
+<div class="invariant">
+  <p>
+    Operations on single-node lists
+    often collapse the list to empty
+    or expand it to multi-node.
+  </p>
+</div>
+
+---
+
+<!-- ================= HEAD UPDATES ================= -->
+
+<h2>Head Updates</h2>
+
+<h3>When Head Must Change</h3>
+
+<ul>
+  <li>Deleting the first node</li>
+  <li>Inserting before the first node</li>
+  <li>Reversing the list</li>
+</ul>
+
+<p>
+If head is not updated correctly,
+the list becomes unreachable.
+</p>
+
+<div class="concept">
+  <p>
+    Any operation touching the first element
+    must ask:
+    “Who becomes the new head?”
+  </p>
+</div>
+
+---
+
+<!-- ================= TAIL UPDATES ================= -->
+
+<h2>Tail Updates</h2>
+
+<h3>When Tail Must Change</h3>
+
+<ul>
+  <li>Deleting the last node</li>
+  <li>Appending a node</li>
+  <li>Reversing the list</li>
+</ul>
+
+<p>
+A stale tail pointer causes:
+</p>
+
+<ul>
+  <li>Incorrect appends</li>
+  <li>Hidden cycles</li>
+  <li>Memory leaks</li>
+</ul>
+
+<div class="invariant">
+  <p>
+    Tail must always point to the last reachable node.
+  </p>
+</div>
+
+---
+
+<!-- ================= WHY EACH CHECK EXISTS ================= -->
+
+<h2>Why Boundary Checks Exist</h2>
+
+<ul>
+  <li>Empty list check → avoid null dereference</li>
+  <li>Single-node check → avoid invalid assumptions</li>
+  <li>Head update → preserve entry point</li>
+  <li>Tail update → preserve termination point</li>
+</ul>
+
+<p>
+These checks are not noise.
+They are guardrails.
+</p>
+
+---
+
+<!-- ================= HOW TO EXPLAIN ================= -->
+
+<h2>How to Start Explaining in an Interview</h2>
+
+<div class="concept">
+  <p>
+    “Linked list operations often fail at boundaries.
+    Before writing pointer logic,
+    I explicitly reason about empty lists,
+    single-node lists,
+    and whether the head or tail changes.
+    This ensures correctness across all edge cases.”
+  </p>
+</div>
+
+<p>
+This explanation demonstrates:
+</p>
+
+<ul>
+  <li>Defensive programming</li>
+  <li>Real-world robustness</li>
+  <li>Experience with edge cases</li>
+</ul>
+
+---
+
+<!-- ================= WHEN TO USE ================= -->
+
+<h2>When to Apply Boundary Management</h2>
+
+<ul>
+  <li>Any insertion or deletion</li>
+  <li>List reversal</li>
+  <li>Splitting lists</li>
+  <li>Concatenation</li>
+  <li>Deque / custom list implementations</li>
+</ul>
+
+---
+
+<h2>One-Line Summary</h2>
+
+<div class="invariant">
+  <p>
+    Boundary Management = Respect the edges, or the list breaks.
+  </p>
+</div>
+
+<p>
+Master this pattern,
+and linked lists stop being fragile.
+</p>
+
+</body>
+</html>

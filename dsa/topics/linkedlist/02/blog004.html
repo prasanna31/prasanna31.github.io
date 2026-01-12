@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linked List Pattern 4 — Dummy Node (Sentinel)</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #4a148c;
+    }
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 25px;
+      color: #6a1b9a;
+    }
+    p {
+      max-width: 950px;
+    }
+    ul {
+      margin-left: 25px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .concept {
+      background: #ffffff;
+      padding: 20px;
+      margin: 25px 0;
+      border-left: 6px solid #8e24aa;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .invariant {
+      background: #f3e5f5;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #ab47bc;
+      font-style: italic;
+    }
+    .warning {
+      background: #fff3e0;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #fb8c00;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Linked List Pattern 4: Dummy Node (Sentinel Pattern)</h1>
+
+<p>
+This pattern does not add power to linked lists —
+it removes fear.
+</p>
+
+<p>
+If Pattern 3 taught you how to modify pointers safely,
+Pattern 4 teaches you how to eliminate
+<b>special cases entirely</b>.
+</p>
+
+<!-- ================= CORE PAIN ================= -->
+
+<h2>The Core Pain Point</h2>
+
+<div class="warning">
+  <p>
+    The head node is special — and special cases create bugs.
+  </p>
+</div>
+
+<p>
+Almost every linked list bug originates from this question:
+</p>
+
+<ul>
+  <li>“What if the node to delete or insert is the head?”</li>
+</ul>
+
+<p>
+The head has no previous node.
+That single fact contaminates your logic with:
+</p>
+
+<ul>
+  <li>If-else branches</li>
+  <li>Duplicated logic</li>
+  <li>Missed edge cases</li>
+</ul>
+
+---
+
+<h2>The Core Idea</h2>
+
+<div class="concept">
+  <p>
+    Add a fake node before the head
+    so the real head stops being special.
+  </p>
+</div>
+
+<p>
+This fake node is called:
+</p>
+
+<ul>
+  <li>Dummy node</li>
+  <li>Sentinel node</li>
+  <li>Pre-head</li>
+</ul>
+
+<p>
+Its value is irrelevant.
+Its existence is everything.
+</p>
+
+---
+
+<h2>Mental Model</h2>
+
+<p>
+Imagine a train:
+</p>
+
+<ul>
+  <li>The engine has no wagon before it</li>
+  <li>This makes coupling logic complicated</li>
+</ul>
+
+<p>
+Now imagine attaching a fake wagon in front.
+</p>
+
+<ul>
+  <li>Every real wagon now has a previous wagon</li>
+  <li>Coupling rules become uniform</li>
+</ul>
+
+<p>
+That fake wagon is the dummy node.
+</p>
+
+---
+
+<h2>Where Do You Start?</h2>
+
+<div class="concept">
+  <p>
+    The first thought must be:
+  </p>
+  <p>
+    “Does this problem involve deleting or inserting near the head?”
+  </p>
+</div>
+
+<p>
+If yes, the dummy node should be your default instinct.
+</p>
+
+<div class="invariant">
+  <p>
+    With a dummy node, every node has a previous node.
+  </p>
+</div>
+
+---
+
+<!-- ================= HEAD SAFE DELETION ================= -->
+
+<h2>Head-Safe Deletion</h2>
+
+<h3>Why Deletion Is Dangerous at the Head</h3>
+
+<p>
+Deleting a node requires access to its previous node.
+</p>
+
+<p>
+But the head has no previous node.
+So deletion logic splits into:
+</p>
+
+<ul>
+  <li>Delete head → update head pointer</li>
+  <li>Delete non-head → update prev.next</li>
+</ul>
+
+<p>
+This branching is unnecessary complexity.
+</p>
+
+---
+
+<h3>How Dummy Node Fixes This</h3>
+
+<div class="concept">
+  <p>
+    The dummy node becomes the previous node of the head.
+  </p>
+</div>
+
+<p>
+Now deletion logic becomes:
+</p>
+
+<ul>
+  <li>Always delete using <code>prev.next = curr.next</code></li>
+</ul>
+
+<div class="invariant">
+  <p>
+    Deletion logic is identical for all nodes,
+    including the original head.
+  </p>
+</div>
+
+---
+
+<!-- ================= HEAD SAFE INSERTION ================= -->
+
+<h2>Head-Safe Insertion</h2>
+
+<h3>Why Insertion Is Dangerous at the Head</h3>
+
+<p>
+Inserting before the head changes the head pointer.
+</p>
+
+<p>
+This again creates two cases:
+</p>
+
+<ul>
+  <li>Insert at head</li>
+  <li>Insert elsewhere</li>
+</ul>
+
+---
+
+<h3>How Dummy Node Fixes This</h3>
+
+<div class="concept">
+  <p>
+    You always insert after some node —
+    and that node always exists.
+  </p>
+</div>
+
+<p>
+Because the dummy node exists,
+even “insert at head” becomes:
+</p>
+
+<ul>
+  <li>Insert after dummy</li>
+</ul>
+
+<div class="invariant">
+  <p>
+    No insertion requires changing logic based on position.
+  </p>
+</div>
+
+---
+
+<!-- ================= WHY EACH LINE EXISTS ================= -->
+
+<h2>Why Each Line Exists (Conceptually)</h2>
+
+<ul>
+  <li>Create dummy → remove head specialness</li>
+  <li>Point dummy.next to head → preserve list</li>
+  <li>Operate from dummy → uniform logic</li>
+  <li>Return dummy.next → restore real head</li>
+</ul>
+
+<p>
+Every line exists to protect invariants,
+not to look clever.
+</p>
+
+---
+
+<!-- ================= HOW TO EXPLAIN ================= -->
+
+<h2>How to Start Explaining in an Interview</h2>
+
+<div class="concept">
+  <p>
+    “Linked list operations become complex near the head
+    because the head has no previous node.
+    To eliminate special cases,
+    I introduce a dummy node before the head.
+    This guarantees that every node has a previous node,
+    allowing uniform insertion and deletion logic.”
+  </p>
+</div>
+
+<p>
+This explanation signals:
+</p>
+
+<ul>
+  <li>Edge-case mastery</li>
+  <li>Clean design thinking</li>
+  <li>Professional-level reasoning</li>
+</ul>
+
+---
+
+<!-- ================= WHEN TO USE ================= -->
+
+<h2>When to Use This Pattern</h2>
+
+<ul>
+  <li>Remove nth node from end</li>
+  <li>Delete nodes by value</li>
+  <li>Insert at arbitrary positions</li>
+  <li>Partition lists</li>
+  <li>Merging lists safely</li>
+</ul>
+
+---
+
+<h2>One-Line Summary</h2>
+
+<div class="invariant">
+  <p>
+    Dummy Node Pattern = Eliminate head special cases forever.
+  </p>
+</div>
+
+<p>
+If you instinctively use a dummy node,
+you are thinking like a linked list expert.
+</p>
+
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linked List Pattern 7 — Slow–Fast Pointer</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #004d40;
+    }
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 25px;
+      color: #00695c;
+    }
+    p {
+      max-width: 950px;
+    }
+    ul {
+      margin-left: 25px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .concept {
+      background: #ffffff;
+      padding: 20px;
+      margin: 25px 0;
+      border-left: 6px solid #009688;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .invariant {
+      background: #e0f2f1;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #26a69a;
+      font-style: italic;
+    }
+    .warning {
+      background: #fff3e0;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #fb8c00;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Linked List Pattern 7: Slow–Fast Pointer (Tortoise–Hare)</h1>
+
+<p>
+This pattern introduces a completely new dimension:
+<b>relative motion</b>.
+</p>
+
+<p>
+Until now, every pointer moved at the same speed.
+Here, we deliberately move pointers at different speeds
+to extract hidden structural information.
+</p>
+
+---
+
+<h2>The Core Insight</h2>
+
+<div class="concept">
+  <p>
+    If two pointers traverse the same structure
+    at different speeds,
+    their relative positions reveal properties
+    of the structure itself.
+  </p>
+</div>
+
+<p>
+This is not a linked list trick.
+It is a mathematical idea.
+</p>
+
+---
+
+<h2>The Questions This Pattern Answers</h2>
+
+<ul>
+  <li>Where is the middle of the list?</li>
+  <li>Does the list contain a cycle?</li>
+  <li>If a cycle exists, where does it start?</li>
+</ul>
+
+<p>
+None of these questions require modifying the list
+or knowing its length.
+</p>
+
+---
+
+<h2>Mental Model</h2>
+
+<p>
+Imagine two runners on a track:
+</p>
+
+<ul>
+  <li>One runs at normal speed (slow)</li>
+  <li>One runs twice as fast (fast)</li>
+</ul>
+
+<p>
+By observing when and where they meet,
+you can infer:
+</p>
+
+<ul>
+  <li>The track’s midpoint</li>
+  <li>Whether the track loops</li>
+</ul>
+
+<p>
+The linked list is the track.
+</p>
+
+---
+
+<h2>Where Do You Start?</h2>
+
+<div class="concept">
+  <p>
+    The first thought must be:
+  </p>
+  <p>
+    “Can this problem be solved by comparing
+    positions reached at different speeds?”
+  </p>
+</div>
+
+<p>
+If yes, slow–fast pointers are likely the solution.
+</p>
+
+<div class="invariant">
+  <p>
+    Both pointers start at the same node.
+    Only speed differs.
+  </p>
+</div>
+
+---
+
+<!-- ================= MIDDLE ================= -->
+
+<h2>Middle Node Detection</h2>
+
+<h3>Why This Works</h3>
+
+<p>
+At each step:
+</p>
+
+<ul>
+  <li>Slow pointer moves 1 node</li>
+  <li>Fast pointer moves 2 nodes</li>
+</ul>
+
+<p>
+When the fast pointer reaches the end,
+the slow pointer must be at the middle.
+</p>
+
+<div class="invariant">
+  <p>
+    Fast has traveled twice the distance of slow.
+  </p>
+</div>
+
+<p>
+This logic holds regardless of list length.
+</p>
+
+---
+
+<h3>Why Each Line Exists (Conceptually)</h3>
+
+<ul>
+  <li>Initialize both pointers → shared starting reference</li>
+  <li>Move slow by one → measure progress</li>
+  <li>Move fast by two → create relative speed</li>
+  <li>Stop when fast ends → midpoint reached</li>
+</ul>
+
+<p>
+No line is arbitrary.
+Each line enforces the distance ratio.
+</p>
+
+---
+
+<!-- ================= CYCLE ================= -->
+
+<h2>Cycle Detection</h2>
+
+<h3>Why Cycles Change Everything</h3>
+
+<p>
+In a linear list, fast eventually reaches null.
+</p>
+
+<p>
+In a cyclic list:
+</p>
+
+<ul>
+  <li>Fast never reaches null</li>
+  <li>Fast laps slow</li>
+</ul>
+
+<div class="concept">
+  <p>
+    If a faster runner keeps circling,
+    it must eventually catch the slower runner.
+  </p>
+</div>
+
+<div class="invariant">
+  <p>
+    If slow and fast ever point to the same node,
+    a cycle exists.
+  </p>
+</div>
+
+---
+
+<h3>Why Meeting Implies a Cycle</h3>
+
+<p>
+The fast pointer gains one node per step
+relative to slow.
+</p>
+
+<p>
+Inside a loop, that advantage guarantees a meeting.
+</p>
+
+<p>
+No cycle → no meeting.
+</p>
+
+---
+
+<!-- ================= WHY NOT LENGTH ================= -->
+
+<h2>Why Not Use Length?</h2>
+
+<div class="warning">
+  <p>
+    Length-based methods fail on cyclic lists.
+  </p>
+</div>
+
+<p>
+A cycle has no defined end.
+</p>
+
+<p>
+Relative speed does not require termination.
+</p>
+
+---
+
+<!-- ================= HOW TO THINK ================= -->
+
+<h2>How to Think While Writing the Solution</h2>
+
+<ul>
+  <li>Ask what information relative motion can reveal</li>
+  <li>Define clear speed difference</li>
+  <li>Establish loop termination conditions</li>
+  <li>Protect against null access</li>
+</ul>
+
+<div class="invariant">
+  <p>
+    The loop condition must ensure
+    the fast pointer can safely advance twice.
+  </p>
+</div>
+
+---
+
+<!-- ================= HOW TO EXPLAIN ================= -->
+
+<h2>How to Start Explaining in an Interview</h2>
+
+<div class="concept">
+  <p>
+    “I use two pointers moving at different speeds.
+    For middle detection,
+    when the faster pointer reaches the end,
+    the slower pointer must be halfway.
+    For cycle detection,
+    if the faster pointer ever meets the slower one,
+    the list must contain a loop.”
+  </p>
+</div>
+
+<p>
+This explanation shows:
+</p>
+
+<ul>
+  <li>Mathematical reasoning</li>
+  <li>Structural understanding</li>
+  <li>One-pass optimization</li>
+</ul>
+
+---
+
+<!-- ================= WHEN TO USE ================= -->
+
+<h2>When to Use This Pattern</h2>
+
+<ul>
+  <li>Find middle of list</li>
+  <li>Detect cycles</li>
+  <li>Find cycle entry point</li>
+  <li>Check palindromes (combined with reversal)</li>
+  <li>One-pass replacements for length logic</li>
+</ul>
+
+---
+
+<h2>One-Line Summary</h2>
+
+<div class="invariant">
+  <p>
+    Slow–Fast Pointer Pattern =
+    Learn structure by comparing speed.
+  </p>
+</div>
+
+<p>
+This pattern is one of the most powerful ideas
+in linked list problem solving.
+</p>
+
+</body>
+</html>
