@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Patterns – Sorting-Based Techniques</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #1a1a1a;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #111;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 60px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 35px;
+    }
+    p {
+      margin: 14px 0;
+    }
+    ul, ol {
+      margin-left: 25px;
+    }
+    li {
+      margin: 10px 0;
+    }
+    .note {
+      background: #f1f1f1;
+      padding: 15px;
+      border-left: 4px solid #555;
+      margin: 25px 0;
+    }
+    code {
+      background: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Sorting-Based Patterns in Arrays</h1>
+
+<p>
+Sorting-based patterns are often misunderstood.
+Beginners think sorting is a brute-force shortcut.
+Experts know sorting is a <strong>structural transformation</strong>.
+</p>
+
+<p>
+Sorting changes the geometry of the problem.
+It aligns information so that simple linear scans become powerful.
+</p>
+
+<p>
+After this chapter, you will:
+</p>
+<ul>
+  <li>Know exactly when sorting is justified</li>
+  <li>Understand why O(n log n) is often optimal</li>
+  <li>Build linear scans on top of sorted arrays</li>
+  <li>Explain sorting-based solutions convincingly in interviews</li>
+</ul>
+
+<hr>
+
+<h2>Why Sorting Helps at All</h2>
+
+<p>
+Many array problems feel hard because:
+</p>
+
+<ul>
+  <li>Elements are unordered</li>
+  <li>Relationships are hidden</li>
+  <li>Comparisons are expensive</li>
+</ul>
+
+<p>
+Sorting solves this by enforcing:
+</p>
+
+<ul>
+  <li>Monotonicity</li>
+  <li>Adjacency of related elements</li>
+  <li>Predictable movement</li>
+</ul>
+
+<div class="note">
+Sorting converts “global chaos” into “local order”.
+</div>
+
+<p>
+Once sorted, many problems collapse into:
+</p>
+<ul>
+  <li>Single pass</li>
+  <li>Neighbor comparison</li>
+  <li>Boundary detection</li>
+</ul>
+
+<hr>
+
+<h2>16. Sorting + Linear Scan</h2>
+
+<h3>When This Pattern Applies</h3>
+
+<p>
+Use this pattern when:
+</p>
+<ul>
+  <li>You care about relative order, not original positions</li>
+  <li>You want to group similar elements</li>
+  <li>You want to detect patterns between neighbors</li>
+</ul>
+
+<p>
+Typical problem signals:
+</p>
+<ul>
+  <li>Minimum difference</li>
+  <li>Merging intervals</li>
+  <li>Removing duplicates</li>
+  <li>Greedy pairing</li>
+</ul>
+
+<h3>The Mental Model</h3>
+
+<p>
+Think of sorting as preprocessing.
+</p>
+
+<div class="note">
+After sorting, all meaningful interactions happen between neighbors.
+</div>
+
+<p>
+This is why a linear scan is enough afterward.
+</p>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li>Sort array → enforce order</li>
+  <li>Initialize variables → track best answer</li>
+  <li>Single loop → compare adjacent elements</li>
+</ul>
+
+<p>
+You never need nested loops after sorting.
+If you do, you’re missing something.
+</p>
+
+<h3>How to Start Writing the Solution</h3>
+
+<p>
+Ask:
+</p>
+
+<div class="note">
+“If the array were sorted, would the answer become obvious?”
+</div>
+
+<p>
+If yes — sorting is not optional, it’s necessary.
+</p>
+
+<hr>
+
+<h2>17. Counting Sort Technique</h2>
+
+<h3>Why Comparison-Based Sorting Is Not Always Ideal</h3>
+
+<p>
+When values lie in a small range,
+comparison-based sorting wastes time.
+</p>
+
+<p>
+Example:
+</p>
+<ul>
+  <li>Array of 0s, 1s, and 2s</li>
+  <li>Grades from 0 to 100</li>
+</ul>
+
+<p>
+You don’t need comparisons.
+You need counts.
+</p>
+
+<h3>The Key Insight</h3>
+
+<div class="note">
+If values are bounded, count frequency instead of sorting.
+</div>
+
+<p>
+Counting sort is not about sorting.
+It’s about <strong>distribution</strong>.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+You map:
+</p>
+<ul>
+  <li>Value → frequency</li>
+</ul>
+
+<p>
+Then rebuild the array in order.
+</p>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li>Create count array → domain knowledge</li>
+  <li>Increment counts → frequency tracking</li>
+  <li>Reconstruct array → ordered output</li>
+</ul>
+
+<p>
+No comparisons.
+No swaps.
+Just logic.
+</p>
+
+<h3>How to Recognize This Pattern</h3>
+
+<p>
+If the problem says:
+</p>
+<ul>
+  <li>“Elements are between 1 and K”</li>
+  <li>“Only few distinct values”</li>
+</ul>
+
+<p>
+Your brain should immediately think:
+</p>
+
+<div class="note">
+“Why sort when I can count?”
+</div>
+
+<hr>
+
+<h2>18. Bucket-Based Processing</h2>
+
+<h3>Why Counting Alone Is Sometimes Not Enough</h3>
+
+<p>
+Sometimes values are:
+</p>
+<ul>
+  <li>Large</li>
+  <li>Continuous</li>
+  <li>Unevenly distributed</li>
+</ul>
+
+<p>
+Exact counting becomes impractical.
+</p>
+
+<h3>The Key Insight</h3>
+
+<div class="note">
+Group values into ranges (buckets) instead of exact values.
+</div>
+
+<p>
+Each bucket represents a region of the number line.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+Think spatially:
+</p>
+<ul>
+  <li>Number line divided into zones</li>
+  <li>Elements fall into zones</li>
+</ul>
+
+<p>
+You process zone-by-zone, not value-by-value.
+</p>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li>Define bucket size → resolution</li>
+  <li>Map elements to buckets → locality</li>
+  <li>Process buckets → local sorting or scanning</li>
+</ul>
+
+<p>
+Bucket sort works because:
+</p>
+
+<div class="note">
+Order inside a bucket is simpler than global order.
+</div>
+
+<h3>Where This Pattern Appears</h3>
+
+<ul>
+  <li>Top-K frequent elements</li>
+  <li>Maximum gap problems</li>
+  <li>Distribution-based statistics</li>
+</ul>
+
+<hr>
+
+<h2>How to Design Sorting-Based Solutions (Universal Recipe)</h2>
+
+<ol>
+  <li>Ask what order reveals</li>
+  <li>Decide if original indices matter</li>
+  <li>Choose comparison vs counting vs buckets</li>
+  <li>Apply linear scan or greedy logic</li>
+</ol>
+
+<div class="note">
+Sorting is preprocessing, not the solution.
+</div>
+
+<hr>
+
+<h2>How to Explain Sorting-Based Solutions in Interviews</h2>
+
+<p>
+Never say:
+</p>
+<ul>
+  <li>“I sorted the array to make it easy”</li>
+</ul>
+
+<p>
+Always say:
+</p>
+<ul>
+  <li>“Sorting enforces monotonic structure that simplifies the problem”</li>
+</ul>
+
+<p>
+That shows intent, not laziness.
+</p>
+
+<hr>
+
+<h2>Final Insight</h2>
+
+<p>
+Sorting is one of the most powerful ideas in algorithms because:
+</p>
+
+<div class="note">
+Order exposes structure.
+Structure enables simplicity.
+</div>
+
+<p>
+If you understand this chapter,
+you will stop fearing O(n log n)
+and start using it strategically.
+</p>
+
+</body>
+</html>

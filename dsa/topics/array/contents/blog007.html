@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Patterns – Subarray & Range Techniques</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      margin: 40px;
+      background: #fbfbfb;
+      color: #1a1a1a;
+      line-height: 1.8;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 70px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 35px;
+    }
+    p {
+      margin: 14px 0;
+    }
+    ul, ol {
+      margin-left: 25px;
+    }
+    li {
+      margin: 10px 0;
+    }
+    .note {
+      background: #f1f1f1;
+      padding: 18px;
+      border-left: 5px solid #444;
+      margin: 30px 0;
+      font-style: italic;
+    }
+    code {
+      background: #eee;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Subarray & Range Patterns in Arrays</h1>
+
+<p>
+This chapter is where brute force officially dies.
+</p>
+
+<p>
+Most array problems secretly ask:
+</p>
+
+<div class="note">
+“What happens if I take a continuous slice of this array?”
+</div>
+
+<p>
+That slice is called a <strong>subarray</strong>.
+</p>
+
+<p>
+Once you understand how to reason about subarrays,
+entire classes of problems collapse into simple patterns.
+</p>
+
+<hr>
+
+<h2>What Is a Subarray (Really)?</h2>
+
+<p>
+A subarray is:
+</p>
+
+<ul>
+  <li>Continuous</li>
+  <li>Defined by a start index and an end index</li>
+</ul>
+
+<p>
+This continuity is everything.
+</p>
+
+<p>
+Because of it:
+</p>
+
+<ul>
+  <li>Subarrays overlap</li>
+  <li>Brute force requires O(n²)</li>
+  <li>Optimized solutions rely on <em>running state</em></li>
+</ul>
+
+<div class="note">
+Subarray problems are not about elements.
+They are about accumulation.
+</div>
+
+<hr>
+
+<h2>22. Kadane’s Algorithm</h2>
+
+<h3>The Problem It Solves</h3>
+
+<p>
+Find the maximum sum of any subarray.
+</p>
+
+<p>
+At first glance, this screams:
+</p>
+
+<div class="note">
+“Try all subarrays.”
+</div>
+
+<p>
+That is O(n²).
+Kadane reduces it to O(n).
+</p>
+
+<h3>The Core Insight (This Is Everything)</h3>
+
+<p>
+Ask this question:
+</p>
+
+<div class="note">
+If my current sum becomes negative, will it ever help a future subarray?
+</div>
+
+<p>
+Answer: <strong>No.</strong>
+</p>
+
+<p>
+A negative prefix only drags future sums down.
+</p>
+
+<h3>The Mental Model</h3>
+
+<ul>
+  <li>We walk left to right</li>
+  <li>We carry the best subarray ending here</li>
+  <li>If it hurts us, we drop it</li>
+</ul>
+
+<h3>Why Each Line Exists</h3>
+
+<ul>
+  <li>Initialize currentSum → start fresh</li>
+  <li>Add current element → extend subarray</li>
+  <li>Update global maximum → record best seen</li>
+  <li>If currentSum &lt; 0 → reset</li>
+</ul>
+
+<div class="note">
+Resetting is not magic.
+It is a logical rejection of harmful history.
+</div>
+
+<h3>How to Start Writing the Solution</h3>
+
+<p>
+Always begin with:
+</p>
+
+<ul>
+  <li>“What is the best subarray ending at index i?”</li>
+</ul>
+
+<p>
+Kadane is DP disguised as greed.
+</p>
+
+<hr>
+
+<h2>23. Subarray Sum Equals K</h2>
+
+<h3>Why Kadane Fails Here</h3>
+
+<p>
+We are no longer maximizing.
+</p>
+
+<p>
+We are counting or detecting exact sums.
+</p>
+
+<p>
+Greedy breaks.
+Memory is needed.
+</p>
+
+<h3>The Prefix Sum Revelation</h3>
+
+<p>
+Define:
+</p>
+
+<div class="note">
+prefixSum[i] = sum of elements from 0 to i
+</div>
+
+<p>
+Now observe:
+</p>
+
+<div class="note">
+Sum(i → j) = prefixSum[j] − prefixSum[i − 1]
+</div>
+
+<p>
+We want:
+</p>
+
+<code>prefixSum[j] − prefixSum[i − 1] = K</code>
+
+<p>
+Rearrange:
+</p>
+
+<code>prefixSum[i − 1] = prefixSum[j] − K</code>
+
+<h3>The Mental Model</h3>
+
+<ul>
+  <li>As we move forward, we ask:</li>
+  <li>“Have I seen a prefix that makes this work?”</li>
+</ul>
+
+<h3>Why Each Line Exists</h3>
+
+<ul>
+  <li>HashMap → memory of past prefix sums</li>
+  <li>Update prefixSum → cumulative state</li>
+  <li>Check (prefixSum − K) → matching past</li>
+  <li>Update count → record solution</li>
+</ul>
+
+<div class="note">
+This is algebra + memory, not brute force.
+</div>
+
+<h3>How to Explain This in Interviews</h3>
+
+<p>
+Say:
+</p>
+
+<ul>
+  <li>“I convert subarray sums into prefix differences”</li>
+</ul>
+
+<p>
+That signals mastery.
+</p>
+
+<hr>
+
+<h2>24. Maximum / Minimum Subarray Variants</h2>
+
+<h3>Why This Is a Family, Not One Problem</h3>
+
+<p>
+Change the goal slightly:
+</p>
+
+<ul>
+  <li>Minimum sum</li>
+  <li>Maximum product</li>
+  <li>Length constraints</li>
+</ul>
+
+<p>
+The pattern remains.
+</p>
+
+<h3>Key Invariant</h3>
+
+<div class="note">
+At each index, track the best subarray ending here.
+</div>
+
+<p>
+That invariant generalizes Kadane.
+</p>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li>Track local best → dynamic decision</li>
+  <li>Track global best → final answer</li>
+</ul>
+
+<p>
+If product is involved, track:
+</p>
+
+<ul>
+  <li>Maximum ending here</li>
+  <li>Minimum ending here</li>
+</ul>
+
+<p>
+Because negatives flip signs.
+</p>
+
+<hr>
+
+<h2>25. Range Query Processing</h2>
+
+<h3>The Brute Force Trap</h3>
+
+<p>
+Queries ask:
+</p>
+
+<ul>
+  <li>Sum from L to R</li>
+  <li>Min from L to R</li>
+</ul>
+
+<p>
+Doing this per query is too slow.
+</p>
+
+<h3>The Prefix Sum Solution</h3>
+
+<p>
+Precompute once.
+Answer forever.
+</p>
+
+<div class="note">
+Range queries are answered, not recomputed.
+</div>
+
+<h3>Why Each Line Exists</h3>
+
+<ul>
+  <li>Build prefix array → preprocessing</li>
+  <li>Answer query in O(1)</li>
+</ul>
+
+<p>
+This is a space–time tradeoff.
+</p>
+
+<h3>When This Pattern Appears</h3>
+
+<ul>
+  <li>Multiple sum queries</li>
+  <li>Difference array updates</li>
+  <li>Offline processing</li>
+</ul>
+
+<hr>
+
+<h2>Universal Subarray Thinking Framework</h2>
+
+<ol>
+  <li>Is the subarray continuous? (Yes → these patterns)</li>
+  <li>Is the goal optimization or exact matching?</li>
+  <li>Can I maintain a running state?</li>
+  <li>Do I need memory of past states?</li>
+</ol>
+
+<div class="note">
+Subarrays are not scary.
+They are structured.
+</div>
+
+<hr>
+
+<h2>Final Insight</h2>
+
+<p>
+Every subarray problem is secretly one of:
+</p>
+
+<ul>
+  <li>Greedy accumulation (Kadane)</li>
+  <li>Prefix algebra + hashing</li>
+  <li>Range preprocessing</li>
+</ul>
+
+<p>
+Once you identify which,
+the solution writes itself.
+</p>
+
+</body>
+</html>

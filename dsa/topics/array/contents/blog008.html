@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Patterns – Greedy & Optimization</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      margin: 40px;
+      background: #fcfcfc;
+      color: #1a1a1a;
+      line-height: 1.8;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 70px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 35px;
+    }
+    p {
+      margin: 14px 0;
+    }
+    ul, ol {
+      margin-left: 25px;
+    }
+    li {
+      margin: 10px 0;
+    }
+    .note {
+      background: #f2f2f2;
+      padding: 18px;
+      border-left: 5px solid #444;
+      margin: 30px 0;
+      font-style: italic;
+    }
+    code {
+      background: #eee;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Greedy & Optimization Patterns on Arrays</h1>
+
+<p>
+Greedy algorithms feel dangerous because they make decisions you cannot undo.
+</p>
+
+<p>
+This chapter teaches you:
+</p>
+
+<ul>
+  <li>When greedy is logically valid</li>
+  <li>Why “local best” sometimes implies “global best”</li>
+  <li>How to prove greedy correctness in interviews</li>
+</ul>
+
+<hr>
+
+<h2>What Does “Greedy” Actually Mean?</h2>
+
+<p>
+Greedy does <strong>not</strong> mean:
+</p>
+
+<ul>
+  <li>Fast</li>
+  <li>Approximate</li>
+  <li>Lucky</li>
+</ul>
+
+<p>
+Greedy means:
+</p>
+
+<div class="note">
+At every step, make the best possible local decision that can never harm an optimal solution.
+</div>
+
+<p>
+That last part is the key.
+</p>
+
+<hr>
+
+<h2>26. Greedy Choice on Arrays</h2>
+
+<h3>The Core Question You Must Ask</h3>
+
+<div class="note">
+If I make this choice now, can an optimal solution still exist?
+</div>
+
+<p>
+If the answer is yes for all steps, greedy is safe.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+Think of greedy as:
+</p>
+
+<ul>
+  <li>Pruning bad futures early</li>
+  <li>Reducing the problem size aggressively</li>
+</ul>
+
+<p>
+You are not searching all possibilities.
+You are ruling out impossible ones.
+</p>
+
+<h3>Why Each Line of a Greedy Solution Exists</h3>
+
+<ul>
+  <li>Sort array → impose structure</li>
+  <li>Iterate linearly → process decisions in order</li>
+  <li>Choose locally optimal element → irreversible choice</li>
+  <li>Update state → reflect consequence</li>
+</ul>
+
+<div class="note">
+Sorting is often the proof step in disguise.
+</div>
+
+<h3>Why Sorting Appears So Often</h3>
+
+<p>
+Sorting converts chaos into order.
+</p>
+
+<p>
+Once sorted:
+</p>
+
+<ul>
+  <li>Choices become comparable</li>
+  <li>Extremes dominate outcomes</li>
+</ul>
+
+<p>
+Examples:
+</p>
+
+<ul>
+  <li>Minimum jumps</li>
+  <li>Activity selection</li>
+  <li>Interval scheduling</li>
+</ul>
+
+<h3>How to Start Writing a Greedy Solution</h3>
+
+<p>
+Always start with:
+</p>
+
+<ul>
+  <li>“What must an optimal solution do first?”</li>
+</ul>
+
+<p>
+If the first choice is forced, greedy is implied.
+</p>
+
+<hr>
+
+<h2>27. Rearrangement Pattern</h2>
+
+<h3>What Rearrangement Problems Are Really About</h3>
+
+<p>
+Rearrangement problems ask:
+</p>
+
+<div class="note">
+How should I permute elements to optimize a goal?
+</div>
+
+<p>
+The original order is irrelevant.
+Only placement matters.
+</p>
+
+<h3>The Key Insight</h3>
+
+<p>
+Extreme values dominate.
+</p>
+
+<p>
+Large values should often:
+</p>
+
+<ul>
+  <li>Go where they matter most</li>
+  <li>Avoid canceling each other</li>
+</ul>
+
+<h3>The Mental Model</h3>
+
+<p>
+Think of rearrangement as:
+</p>
+
+<ul>
+  <li>Pairing strengths with weaknesses</li>
+  <li>Separating conflicting elements</li>
+</ul>
+
+<h3>Why Each Line Exists</h3>
+
+<ul>
+  <li>Sort array → rank elements</li>
+  <li>Place smallest/largest strategically</li>
+  <li>Track result → objective function</li>
+</ul>
+
+<div class="note">
+Rearrangement is greedy with spatial awareness.
+</div>
+
+<h3>Classic Rearrangement Problems</h3>
+
+<ul>
+  <li>Maximize sum of absolute differences</li>
+  <li>Rearrange to avoid adjacent duplicates</li>
+  <li>Minimize maximum adjacent difference</li>
+</ul>
+
+<hr>
+
+<h2>How to Prove Greedy Correctness</h2>
+
+<p>
+In interviews, never say:
+</p>
+
+<ul>
+  <li>“Greedy works here”</li>
+</ul>
+
+<p>
+Say:
+</p>
+
+<ul>
+  <li>“Any optimal solution can be transformed to follow my greedy choice without worsening the result”</li>
+</ul>
+
+<p>
+That is the exchange argument.
+</p>
+
+<hr>
+
+<h2>Greedy vs Dynamic Programming</h2>
+
+<p>
+Greedy:
+</p>
+<ul>
+  <li>One path</li>
+  <li>No backtracking</li>
+  <li>Fast</li>
+</ul>
+
+<p>
+DP:
+</p>
+<ul>
+  <li>Many paths</li>
+  <li>State exploration</li>
+  <li>Guaranteed</li>
+</ul>
+
+<div class="note">
+If greedy works, DP is overkill.
+</div>
+
+<hr>
+
+<h2>Universal Greedy Design Checklist</h2>
+
+<ol>
+  <li>Can I sort to impose order?</li>
+  <li>Is the first decision forced?</li>
+  <li>Can I prove local choice is safe?</li>
+  <li>Does the remaining problem look similar?</li>
+</ol>
+
+<hr>
+
+<h2>Final Insight</h2>
+
+<p>
+Greedy is not guessing.
+</p>
+
+<p>
+It is:
+</p>
+
+<div class="note">
+Logical inevitability disguised as confidence.
+</div>
+
+<p>
+Once you see that,
+greedy problems become obvious.
+</p>
+
+</body>
+</html>

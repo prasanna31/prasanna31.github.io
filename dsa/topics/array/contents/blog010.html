@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Patterns – Monotonic Array Technique</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      margin: 40px;
+      background: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.9;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 70px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 35px;
+    }
+    p {
+      margin: 14px 0;
+    }
+    ul, ol {
+      margin-left: 25px;
+    }
+    li {
+      margin: 10px 0;
+    }
+    .note {
+      background: #f3f3f3;
+      padding: 20px;
+      border-left: 5px solid #444;
+      margin: 35px 0;
+      font-style: italic;
+    }
+    code {
+      background: #eee;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Monotonic Array Technique</h1>
+
+<p>
+This technique is what separates
+“good array solvers” from “elite problem solvers”.
+</p>
+
+<p>
+It appears whenever a problem asks:
+</p>
+
+<div class="note">
+“For each element, find the next / previous element that is bigger or smaller.”
+</div>
+
+<p>
+If you try to solve this naively, you get O(n²).
+Monotonic techniques reduce it to O(n).
+</p>
+
+<hr>
+
+<h2>Why Monotonic Techniques Exist</h2>
+
+<p>
+Array problems often hide this structure:
+</p>
+
+<ul>
+  <li>Every element wants to know about its neighbors</li>
+  <li>But only the “important” neighbors matter</li>
+</ul>
+
+<p>
+The monotonic technique keeps only useful information.
+</p>
+
+<hr>
+
+<h2>What Does “Monotonic” Mean?</h2>
+
+<p>
+A structure is monotonic if:
+</p>
+
+<ul>
+  <li>It is always increasing, or</li>
+  <li>Always decreasing</li>
+</ul>
+
+<p>
+Once this property is violated,
+elements are removed.
+</p>
+
+<div class="note">
+You are enforcing order dynamically.
+</div>
+
+<hr>
+
+<h2>The Core Insight</h2>
+
+<p>
+If an element is blocked by a better candidate,
+it will never be useful again.
+</p>
+
+<p>
+Therefore:
+</p>
+
+<div class="note">
+Remove it immediately.
+</div>
+
+<p>
+This single idea makes the entire technique work.
+</p>
+
+<hr>
+
+<h2>The Mental Model</h2>
+
+<p>
+Think of elements standing in a line.
+</p>
+
+<ul>
+  <li>Each new element walks in from the right</li>
+  <li>It knocks out weaker elements in front of it</li>
+</ul>
+
+<p>
+Only the strongest survivors remain.
+</p>
+
+<hr>
+
+<h2>Why Each Line Exists (Push & Pop Logic)</h2>
+
+<ul>
+  <li>Initialize empty structure → no assumptions</li>
+  <li>Iterate array once → linear pass</li>
+  <li>While monotonic property breaks → pop</li>
+  <li>Push current element → candidate for future</li>
+</ul>
+
+<div class="note">
+Each element is pushed once and popped once.
+That is why it is O(n).
+</div>
+
+<hr>
+
+<h2>Monotonic Increasing vs Decreasing</h2>
+
+<p>
+Choose increasing if you want:
+</p>
+
+<ul>
+  <li>Next smaller element</li>
+  <li>Previous smaller element</li>
+</ul>
+
+<p>
+Choose decreasing if you want:
+</p>
+
+<ul>
+  <li>Next greater element</li>
+  <li>Previous greater element</li>
+</ul>
+
+<div class="note">
+Direction depends on the question, not the array.
+</div>
+
+<hr>
+
+<h2>How to Start Writing a Monotonic Solution</h2>
+
+<p>
+Always begin with this question:
+</p>
+
+<div class="note">
+For each index i, what am I trying to find?
+</div>
+
+<p>
+Then decide:
+</p>
+
+<ul>
+  <li>Left to right or right to left?</li>
+  <li>Increasing or decreasing?</li>
+</ul>
+
+<p>
+The rest is mechanical.
+</p>
+
+<hr>
+
+<h2>Classic Problems Solved by This Pattern</h2>
+
+<ul>
+  <li>Next Greater Element</li>
+  <li>Largest Rectangle in Histogram</li>
+  <li>Daily Temperatures</li>
+  <li>Stock Span Problem</li>
+</ul>
+
+<hr>
+
+<h2>Why This Is Not Just a Stack Trick</h2>
+
+<p>
+Many people memorize this as:
+</p>
+
+<ul>
+  <li>“Use a stack”</li>
+</ul>
+
+<p>
+That is wrong.
+</p>
+
+<p>
+The stack is an implementation detail.
+</p>
+
+<div class="note">
+The idea is dominance elimination.
+</div>
+
+<hr>
+
+<h2>Common Mistakes</h2>
+
+<ul>
+  <li>Choosing wrong direction</li>
+  <li>Using wrong comparison (&lt; vs ≤)</li>
+  <li>Forgetting index vs value distinction</li>
+</ul>
+
+<p>
+These are logic mistakes, not syntax mistakes.
+</p>
+
+<hr>
+
+<h2>Universal Monotonic Checklist</h2>
+
+<ol>
+  <li>Am I comparing neighbors?</li>
+  <li>Is brute force O(n²)?</li>
+  <li>Can weaker candidates be eliminated early?</li>
+  <li>Do I need next/previous greater/smaller?</li>
+</ol>
+
+<hr>
+
+<h2>Final Insight</h2>
+
+<p>
+Monotonic techniques are not complicated.
+</p>
+
+<p>
+They are:
+</p>
+
+<div class="note">
+A disciplined way of deleting useless information.
+</div>
+
+<p>
+Once you understand that,
+you will see this pattern everywhere.
+</p>
+
+</body>
+</html>

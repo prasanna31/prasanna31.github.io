@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Patterns – Two Pointer Techniques</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #1a1a1a;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #111;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 60px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 35px;
+    }
+    p {
+      margin: 14px 0;
+    }
+    ul, ol {
+      margin-left: 25px;
+    }
+    li {
+      margin: 10px 0;
+    }
+    .note {
+      background: #f1f1f1;
+      padding: 15px;
+      border-left: 4px solid #555;
+      margin: 25px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Two Pointer Techniques in Arrays</h1>
+
+<p>
+Two pointer techniques are not tricks.
+They are a <strong>way of reasoning about order, constraints, and convergence</strong>.
+If traversal is about “visiting elements”, two pointers are about
+<strong>controlling how much of the array matters at a given moment</strong>.
+</p>
+
+<p>
+If you truly understand this chapter, you will:
+</p>
+<ul>
+  <li>Stop brute-forcing O(n²) loops</li>
+  <li>Know exactly where to place pointers</li>
+  <li>Explain pointer movement logically in interviews</li>
+  <li>Derive new two-pointer solutions on the spot</li>
+</ul>
+
+<hr>
+
+<h2>What Is the Core Idea Behind Two Pointers?</h2>
+
+<p>
+The key insight is simple but deep:
+</p>
+
+<div class="note">
+Instead of one index scanning the array,
+use <strong>two indices that move with purpose</strong>.
+</div>
+
+<p>
+Two pointers work because arrays have:
+</p>
+<ul>
+  <li>Order</li>
+  <li>Comparability</li>
+  <li>Continuity</li>
+</ul>
+
+<p>
+Two pointers are used when:
+</p>
+<ul>
+  <li>You want to shrink or expand a region</li>
+  <li>You want to compare elements across distance</li>
+  <li>You want to avoid revisiting combinations</li>
+</ul>
+
+<p>
+At a high level, two pointers always answer this question:
+</p>
+
+<div class="note">
+“How does the answer change when I move one boundary?”
+</div>
+
+<hr>
+
+<h2>5. Two Pointers (Opposite Ends)</h2>
+
+<h3>When Does This Pattern Apply?</h3>
+
+<p>
+This pattern is used when:
+</p>
+<ul>
+  <li>The array is sorted, or can be sorted</li>
+  <li>You are searching for a pair or condition</li>
+  <li>Movement should reduce the search space</li>
+</ul>
+
+<p>
+Classic signals in problem statements:
+</p>
+<ul>
+  <li>“find two elements such that…”</li>
+  <li>“pair with sum / difference / condition”</li>
+  <li>“minimum / maximum pair”</li>
+</ul>
+
+<h3>The Mental Model</h3>
+
+<p>
+Think of the array as a number line.
+</p>
+
+<ul>
+  <li>Left pointer = smallest candidate</li>
+  <li>Right pointer = largest candidate</li>
+</ul>
+
+<p>
+Each comparison answers:
+</p>
+
+<div class="note">
+“Is my current range too large or too small?”
+</div>
+
+<h3>Why Pointer Movement Makes Sense</h3>
+
+<p>
+Suppose the array is sorted.
+</p>
+
+<ul>
+  <li>If the sum is too large → move right pointer left</li>
+  <li>If the sum is too small → move left pointer right</li>
+</ul>
+
+<p>
+This is not magic.
+It is eliminating impossible regions.
+</p>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li>Initialize left = 0 → smallest value</li>
+  <li>Initialize right = n-1 → largest value</li>
+  <li>Loop while left &lt; right → valid pair space</li>
+  <li>Move exactly one pointer → monotonic reduction</li>
+</ul>
+
+<p>
+You never move both blindly.
+Each move is justified.
+</p>
+
+<hr>
+
+<h2>6. Two Pointers (Same Direction)</h2>
+
+<h3>What Problem Does This Solve?</h3>
+
+<p>
+This pattern is used when:
+</p>
+<ul>
+  <li>You want to process a subarray or window</li>
+  <li>You want to skip unnecessary elements</li>
+  <li>You want linear-time filtering or grouping</li>
+</ul>
+
+<p>
+Unlike opposite ends, both pointers move forward.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+Imagine:
+</p>
+<ul>
+  <li>One pointer reads</li>
+  <li>One pointer writes</li>
+</ul>
+
+<p>
+Or:
+</p>
+<ul>
+  <li>One pointer expands</li>
+  <li>One pointer contracts</li>
+</ul>
+
+<div class="note">
+Same-direction pointers manage a dynamic region.
+</div>
+
+<h3>Why This Beats Nested Loops</h3>
+
+<p>
+Every element is visited a constant number of times.
+</p>
+
+<p>
+You are not re-checking old elements.
+You are progressing.
+</p>
+
+<h3>Why Each Line Exists</h3>
+
+<ul>
+  <li>Slow pointer marks stable region</li>
+  <li>Fast pointer explores new elements</li>
+  <li>Assignments overwrite unwanted values</li>
+</ul>
+
+<p>
+This pattern is about <strong>in-place intelligence</strong>.
+</p>
+
+<hr>
+
+<h2>7. Fast–Slow Pointer</h2>
+
+<h3>What Is the Intuition?</h3>
+
+<p>
+Fast–slow pointers are about:
+</p>
+
+<div class="note">
+Detecting structure by observing relative speed.
+</div>
+
+<p>
+This pattern appears when:
+</p>
+<ul>
+  <li>Elements repeat</li>
+  <li>There is a cycle or compression</li>
+  <li>You want to detect anomalies</li>
+</ul>
+
+<h3>Why Speed Difference Works</h3>
+
+<p>
+If something repeats, a faster pointer will catch up.
+</p>
+
+<p>
+This is not limited to linked lists.
+It applies to arrays with mapping or jumps.
+</p>
+
+<h3>How to Think When Writing It</h3>
+
+<ul>
+  <li>Define movement rules</li>
+  <li>Define collision condition</li>
+  <li>Define stopping condition</li>
+</ul>
+
+<p>
+Once defined, code is mechanical.
+</p>
+
+<hr>
+
+<h2>8. Three Pointers</h2>
+
+<h3>Why Two Pointers Are Not Enough</h3>
+
+<p>
+Some problems involve:
+</p>
+<ul>
+  <li>Partitioning into three regions</li>
+  <li>Maintaining low / mid / high states</li>
+  <li>Multi-constraint optimization</li>
+</ul>
+
+<h3>The Mental Model</h3>
+
+<p>
+Think in zones:
+</p>
+
+<ul>
+  <li>Left zone → processed</li>
+  <li>Middle zone → unknown</li>
+  <li>Right zone → processed</li>
+</ul>
+
+<p>
+Each pointer represents a boundary.
+</p>
+
+<h3>Why Pointer Updates Are Carefully Chosen</h3>
+
+<p>
+Each swap or move increases certainty.
+</p>
+
+<p>
+You never move blindly.
+You move because a region is resolved.
+</p>
+
+<hr>
+
+<h2>How to Start Any Two Pointer Solution (Universal Recipe)</h2>
+
+<ol>
+  <li>Decide what the pointers represent</li>
+  <li>Define invariant regions</li>
+  <li>Decide movement rules</li>
+  <li>Prove progress</li>
+</ol>
+
+<div class="note">
+If you can explain pointer movement,
+you understand the solution.
+</div>
+
+<hr>
+
+<h2>How to Explain in Interviews</h2>
+
+<p>
+Never say:
+</p>
+<ul>
+  <li>“This is a standard two-pointer problem”</li>
+</ul>
+
+<p>
+Always say:
+</p>
+<ul>
+  <li>“I maintain two boundaries that shrink the search space”</li>
+  <li>“Each movement eliminates impossible cases”</li>
+</ul>
+
+<p>
+That is expert-level communication.
+</p>
+
+<hr>
+
+<h2>Final Insight</h2>
+
+<p>
+Two pointers are not about code.
+They are about <strong>control</strong>.
+</p>
+
+<p>
+You control:
+</p>
+<ul>
+  <li>What matters</li>
+  <li>What no longer matters</li>
+  <li>When to stop</li>
+</ul>
+
+<div class="note">
+Master this, and O(n²) will start looking illegal.
+</div>
+
+</body>
+</html>

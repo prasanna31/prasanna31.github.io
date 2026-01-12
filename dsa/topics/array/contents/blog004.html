@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Patterns – Prefix & Suffix Techniques</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #1a1a1a;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #111;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 60px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 35px;
+    }
+    p {
+      margin: 14px 0;
+    }
+    ul, ol {
+      margin-left: 25px;
+    }
+    li {
+      margin: 10px 0;
+    }
+    .note {
+      background: #f1f1f1;
+      padding: 15px;
+      border-left: 4px solid #555;
+      margin: 25px 0;
+    }
+    code {
+      background: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Prefix & Suffix Techniques in Arrays</h1>
+
+<p>
+Prefix and suffix techniques are where you stop thinking element-by-element
+and start thinking in <strong>ranges</strong>.
+</p>
+
+<p>
+Most array problems feel hard because they ask questions like:
+</p>
+
+<ul>
+  <li>“What is the sum from i to j?”</li>
+  <li>“What happens if this index is removed?”</li>
+  <li>“How do updates affect ranges?”</li>
+</ul>
+
+<p>
+If you answer these naively, you repeat work.
+Prefix and suffix techniques exist to eliminate repetition.
+</p>
+
+<p>
+After this chapter, you will:
+</p>
+<ul>
+  <li>See range queries as trivial</li>
+  <li>Know exactly where to start writing code</li>
+  <li>Understand why every prefix line exists</li>
+  <li>Explain your solution cleanly in interviews</li>
+</ul>
+
+<hr>
+
+<h2>The Core Idea Behind Prefix & Suffix</h2>
+
+<p>
+The core idea is simple:
+</p>
+
+<div class="note">
+Precompute information so that later queries are cheap.
+</div>
+
+<p>
+Instead of recomputing the same thing again and again,
+you compute it once and reuse it.
+</p>
+
+<p>
+Prefix means:
+</p>
+<ul>
+  <li>Information from the start up to index i</li>
+</ul>
+
+<p>
+Suffix means:
+</p>
+<ul>
+  <li>Information from index i to the end</li>
+</ul>
+
+<p>
+Every pattern in this chapter answers:
+</p>
+
+<div class="note">
+“How can I answer a range question in O(1) after preprocessing?”
+</div>
+
+<hr>
+
+<h2>12. Prefix Sum</h2>
+
+<h3>Why Prefix Sum Exists</h3>
+
+<p>
+Consider the question:
+</p>
+
+<div class="note">
+“What is the sum of elements from index i to j?”
+</div>
+
+<p>
+Brute force:
+</p>
+<ul>
+  <li>Loop from i to j</li>
+  <li>Time = O(n) per query</li>
+</ul>
+
+<p>
+If there are many queries, this is unacceptable.
+</p>
+
+<h3>The Key Insight</h3>
+
+<p>
+If you already know:
+</p>
+
+<ul>
+  <li>Sum from 0 to j</li>
+  <li>Sum from 0 to i-1</li>
+</ul>
+
+<p>
+Then:
+</p>
+
+<div class="note">
+Sum(i, j) = prefix[j] − prefix[i − 1]
+</div>
+
+<p>
+That single equation is the entire pattern.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+Think of prefix sum as:
+</p>
+
+<ul>
+  <li>Accumulated history</li>
+  <li>Bank balance over time</li>
+</ul>
+
+<p>
+You don’t recompute history.
+You subtract snapshots.
+</p>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li><code>prefix[0] = arr[0]</code> → base case</li>
+  <li><code>prefix[i] = prefix[i-1] + arr[i]</code> → accumulation</li>
+</ul>
+
+<p>
+Nothing else is needed.
+The array now encodes all range sums.
+</p>
+
+<h3>How to Start Writing a Prefix Sum Solution</h3>
+
+<p>
+When you see:
+</p>
+<ul>
+  <li>Multiple range sum queries</li>
+  <li>Subarray sum equals K</li>
+  <li>Balancing left and right sums</li>
+</ul>
+
+<p>
+Immediately think:
+</p>
+
+<div class="note">
+“Can prefix sums turn repeated work into subtraction?”
+</div>
+
+<hr>
+
+<h2>13. Suffix Sum</h2>
+
+<h3>Why Prefix Alone Is Not Enough</h3>
+
+<p>
+Some problems depend on:
+</p>
+<ul>
+  <li>Elements to the right</li>
+  <li>Future contributions</li>
+</ul>
+
+<p>
+Prefix looks backward.
+Suffix looks forward.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+Suffix sum is:
+</p>
+
+<ul>
+  <li>Total remaining weight</li>
+  <li>Future cost</li>
+</ul>
+
+<p>
+Think of suffix as:
+</p>
+
+<div class="note">
+“What happens after this point?”
+</div>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li><code>suffix[n-1] = arr[n-1]</code> → base case</li>
+  <li><code>suffix[i] = suffix[i+1] + arr[i]</code> → backward accumulation</li>
+</ul>
+
+<p>
+Reverse traversal is not accidental.
+It matches the dependency direction.
+</p>
+
+<h3>Typical Uses</h3>
+
+<ul>
+  <li>Equilibrium index problems</li>
+  <li>Removing one element and checking totals</li>
+  <li>Right-side dominance problems</li>
+</ul>
+
+<hr>
+
+<h2>14. Prefix Product</h2>
+
+<h3>Why Sum Logic Does Not Always Work</h3>
+
+<p>
+Some problems ask for:
+</p>
+
+<ul>
+  <li>Product of all elements except self</li>
+  <li>Multiplicative ranges</li>
+</ul>
+
+<p>
+Division may not be allowed.
+Zeros break division.
+</p>
+
+<p>
+Prefix product solves this cleanly.
+</p>
+
+<h3>The Key Insight</h3>
+
+<p>
+For index i:
+</p>
+
+<div class="note">
+Result[i] = (product of elements before i) × (product of elements after i)
+</div>
+
+<p>
+That’s prefix × suffix.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+Split influence:
+</p>
+
+<ul>
+  <li>Left contribution</li>
+  <li>Right contribution</li>
+</ul>
+
+<p>
+Each index excludes itself naturally.
+</p>
+
+<h3>Why Each Line Exists</h3>
+
+<ul>
+  <li>Prefix product builds left influence</li>
+  <li>Suffix product builds right influence</li>
+  <li>Final loop combines them</li>
+</ul>
+
+<p>
+The pattern is symmetry.
+</p>
+
+<hr>
+
+<h2>15. Difference Array</h2>
+
+<h3>Why Prefix Is Not Enough for Updates</h3>
+
+<p>
+Prefix sums handle queries well.
+But what about updates?
+</p>
+
+<p>
+Problem:
+</p>
+
+<div class="note">
+“Apply value X to range [l, r] multiple times.”
+</div>
+
+<p>
+Updating every element is slow.
+</p>
+
+<h3>The Key Insight</h3>
+
+<p>
+Instead of updating values, update boundaries.
+</p>
+
+<div class="note">
+Increment at l, decrement at r+1.
+</div>
+
+<p>
+Prefix sum later reconstructs the array.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+Difference array represents:
+</p>
+
+<ul>
+  <li>Where influence starts</li>
+  <li>Where influence ends</li>
+</ul>
+
+<p>
+The prefix sum applies influence cumulatively.
+</p>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li><code>diff[l] += x</code> → start influence</li>
+  <li><code>diff[r+1] -= x</code> → stop influence</li>
+  <li>Prefix sum → materialize array</li>
+</ul>
+
+<p>
+This pattern is pure deferred computation.
+</p>
+
+<hr>
+
+<h2>How to Design Prefix / Suffix Solutions (Universal Recipe)</h2>
+
+<ol>
+  <li>Identify repeated range computation</li>
+  <li>Decide direction of dependency</li>
+  <li>Build prefix or suffix accordingly</li>
+  <li>Answer queries in O(1)</li>
+</ol>
+
+<div class="note">
+If subtraction or combination replaces loops,
+you’re using prefix correctly.
+</div>
+
+<hr>
+
+<h2>How to Explain in Interviews</h2>
+
+<p>
+Never say:
+</p>
+<ul>
+  <li>“This is a prefix sum trick”</li>
+</ul>
+
+<p>
+Always say:
+</p>
+<ul>
+  <li>“I precompute cumulative information to answer range queries in O(1)”</li>
+</ul>
+
+<p>
+That shows reasoning.
+</p>
+
+<hr>
+
+<h2>Final Insight</h2>
+
+<p>
+Prefix and suffix techniques teach you one thing:
+</p>
+
+<div class="note">
+Time is saved by remembering the past and predicting the future.
+</div>
+
+<p>
+Once you internalize this,
+range problems stop being problems.
+</p>
+
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Patterns – Hashing & Frequency</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #1a1a1a;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #111;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 60px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 35px;
+    }
+    p {
+      margin: 14px 0;
+    }
+    ul, ol {
+      margin-left: 25px;
+    }
+    li {
+      margin: 10px 0;
+    }
+    .note {
+      background: #f1f1f1;
+      padding: 15px;
+      border-left: 4px solid #555;
+      margin: 25px 0;
+    }
+    code {
+      background: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Hashing & Frequency Patterns in Arrays</h1>
+
+<p>
+Hashing-based patterns mark the moment when you stop asking:
+</p>
+
+<div class="note">
+“Can I compute this?”
+</div>
+
+<p>
+and start asking:
+</p>
+
+<div class="note">
+“How fast can I access what I already know?”
+</div>
+
+<p>
+This chapter teaches you how to trade space for time intelligently.
+</p>
+
+<p>
+After this chapter, you will:
+</p>
+<ul>
+  <li>Instantly recognize frequency-based problems</li>
+  <li>Convert O(n²) searches into O(n)</li>
+  <li>Explain hash-based solutions with clarity</li>
+  <li>Design your own hash invariants</li>
+</ul>
+
+<hr>
+
+<h2>What Is Hashing Really Doing?</h2>
+
+<p>
+Hashing is not magic.
+</p>
+
+<p>
+It answers one fundamental question:
+</p>
+
+<div class="note">
+“How quickly can I check whether something exists?”
+</div>
+
+<p>
+An array answers this in O(n).
+A hash structure answers it in O(1) average time.
+</p>
+
+<p>
+That single improvement reshapes the entire solution space.
+</p>
+
+<hr>
+
+<h2>19. Frequency Counting</h2>
+
+<h3>Why Counting Is a Pattern</h3>
+
+<p>
+Many problems do not care about positions.
+They care about:
+</p>
+
+<ul>
+  <li>How many times something appears</li>
+  <li>Relative counts</li>
+  <li>Balance between values</li>
+</ul>
+
+<p>
+If order is irrelevant, counting is optimal.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+Think of frequency counting as:
+</p>
+
+<div class="note">
+A histogram of reality.
+</div>
+
+<p>
+You compress the array into a summary.
+</p>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li>Create map / array → memory for counts</li>
+  <li>Iterate array → observe reality</li>
+  <li>Increment counts → record evidence</li>
+</ul>
+
+<p>
+After counting, the original array often becomes irrelevant.
+</p>
+
+<h3>When to Use This Pattern</h3>
+
+<ul>
+  <li>Majority element</li>
+  <li>Anagrams</li>
+  <li>Equal frequency constraints</li>
+</ul>
+
+<p>
+If the problem talks about “how many times”, think frequency first.
+</p>
+
+<hr>
+
+<h2>20. Hash Set Lookup</h2>
+
+<h3>Why Searching Is Often the Bottleneck</h3>
+
+<p>
+Brute force searches compare everything with everything.
+</p>
+
+<p>
+That is wasteful.
+</p>
+
+<h3>The Key Insight</h3>
+
+<div class="note">
+Store what you’ve seen, then check instantly.
+</div>
+
+<p>
+This pattern flips search direction:
+</p>
+
+<ul>
+  <li>Instead of looking ahead, remember the past</li>
+</ul>
+
+<h3>The Mental Model</h3>
+
+<p>
+Think of a hash set as:
+</p>
+
+<ul>
+  <li>A memory of visited states</li>
+  <li>A fast membership oracle</li>
+</ul>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li>Initialize empty set → no assumptions</li>
+  <li>Iterate elements → sequential exploration</li>
+  <li>Check set → instant validation</li>
+  <li>Insert into set → expand knowledge</li>
+</ul>
+
+<p>
+Each line has one purpose: reduce uncertainty.
+</p>
+
+<h3>Classic Use Cases</h3>
+
+<ul>
+  <li>Two-sum</li>
+  <li>Longest consecutive sequence</li>
+  <li>Detect duplicates</li>
+</ul>
+
+<hr>
+
+<h2>21. Hash Map Aggregation</h2>
+
+<h3>Why Simple Counting Is Sometimes Not Enough</h3>
+
+<p>
+Some problems require:
+</p>
+
+<ul>
+  <li>Grouping by keys</li>
+  <li>Aggregating values</li>
+  <li>Tracking complex state</li>
+</ul>
+
+<p>
+Here, the hash map stores structured information.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+Think of a hash map as:
+</p>
+
+<div class="note">
+Key → summary of everything seen so far.
+</div>
+
+<p>
+Each update refines the summary.
+</p>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li>Initialize map → empty knowledge</li>
+  <li>Extract key → grouping logic</li>
+  <li>Update value → aggregation logic</li>
+</ul>
+
+<p>
+The value can be:
+</p>
+
+<ul>
+  <li>Count</li>
+  <li>Sum</li>
+  <li>List</li>
+  <li>Custom object</li>
+</ul>
+
+<p>
+The pattern is extensible.
+</p>
+
+<h3>Where This Pattern Dominates</h3>
+
+<ul>
+  <li>Group anagrams</li>
+  <li>Prefix sum with hashmap</li>
+  <li>Subarray sum equals K</li>
+</ul>
+
+<hr>
+
+<h2>How to Design Hash-Based Solutions (Universal Recipe)</h2>
+
+<ol>
+  <li>Identify repeated lookups or comparisons</li>
+  <li>Choose set vs map</li>
+  <li>Define key and value meaning</li>
+  <li>Maintain invariants during iteration</li>
+</ol>
+
+<div class="note">
+If a problem feels quadratic,
+hashing is often the missing idea.
+</div>
+
+<hr>
+
+<h2>How to Explain Hashing in Interviews</h2>
+
+<p>
+Never say:
+</p>
+<ul>
+  <li>“I used a hashmap for fast lookup”</li>
+</ul>
+
+<p>
+Always say:
+</p>
+<ul>
+  <li>“I store previously seen information to avoid redundant computation”</li>
+</ul>
+
+<p>
+That communicates intent.
+</p>
+
+<hr>
+
+<h2>Final Insight</h2>
+
+<p>
+Hashing is not about data structures.
+</p>
+
+<p>
+It is about:
+</p>
+
+<div class="note">
+Remembering just enough to move forward faster.
+</div>
+
+<p>
+Master this, and brute force disappears.
+</p>
+
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Patterns – Sliding Window</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #1a1a1a;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #111;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 60px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 35px;
+    }
+    p {
+      margin: 14px 0;
+    }
+    ul, ol {
+      margin-left: 25px;
+    }
+    li {
+      margin: 10px 0;
+    }
+    .note {
+      background: #f1f1f1;
+      padding: 15px;
+      border-left: 4px solid #555;
+      margin: 25px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Sliding Window Technique in Arrays</h1>
+
+<p>
+Sliding Window is one of the most misunderstood DSA patterns.
+People memorize templates, forget invariants, and then panic
+when the question looks slightly different.
+</p>
+
+<p>
+This chapter fixes that.
+</p>
+
+<p>
+By the end, you will understand:
+</p>
+<ul>
+  <li>Why sliding window exists at all</li>
+  <li>How it emerges naturally from brute force</li>
+  <li>How to design the window before writing code</li>
+  <li>Why each line of a sliding window solution is necessary</li>
+  <li>How to explain sliding window clearly in interviews</li>
+</ul>
+
+<hr>
+
+<h2>What Problem Is Sliding Window Solving?</h2>
+
+<p>
+Consider this brute-force question:
+</p>
+
+<div class="note">
+“Check all subarrays and compute something.”
+</div>
+
+<p>
+Brute force approach:
+</p>
+<ul>
+  <li>Fix a start index</li>
+  <li>Extend the end index</li>
+  <li>Recompute information every time</li>
+</ul>
+
+<p>
+This is O(n²) or worse.
+</p>
+
+<p>
+Sliding Window exists to answer this question:
+</p>
+
+<div class="note">
+“What if consecutive subarrays share most of their data?”
+</div>
+
+<p>
+If information overlaps, recomputation is wasteful.
+Sliding window removes waste.
+</p>
+
+<hr>
+
+<h2>The Core Mental Model</h2>
+
+<p>
+A sliding window is:
+</p>
+
+<div class="note">
+A contiguous segment of the array that moves forward,
+maintaining some information incrementally.
+</div>
+
+<p>
+Key idea:
+</p>
+
+<ul>
+  <li>Add one element when the window expands</li>
+  <li>Remove one element when the window shrinks</li>
+</ul>
+
+<p>
+Nothing magical happens.
+You are just maintaining state efficiently.
+</p>
+
+<hr>
+
+<h2>How to Decide If Sliding Window Applies</h2>
+
+<p>
+Look for these signals in problem statements:
+</p>
+
+<ul>
+  <li>Subarray / substring</li>
+  <li>Contiguous segment</li>
+  <li>At most / at least / exactly K</li>
+  <li>Longest / shortest / maximum / minimum window</li>
+</ul>
+
+<p>
+If the problem asks about <strong>contiguous regions</strong>
+and <strong>aggregated properties</strong>,
+sliding window should ring a bell.
+</p>
+
+<hr>
+
+<h2>9. Fixed Size Sliding Window</h2>
+
+<h3>When the Window Size Is Known</h3>
+
+<p>
+This is the simplest form.
+</p>
+
+<p>
+You know:
+</p>
+<ul>
+  <li>The window length K</li>
+  <li>You must check all subarrays of size K</li>
+</ul>
+
+<p>
+Brute force recomputes everything.
+Sliding window reuses information.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+Imagine a window of size K physically sliding:
+</p>
+
+<ul>
+  <li>One element enters</li>
+  <li>One element exits</li>
+</ul>
+
+<p>
+The window content mostly stays the same.
+</p>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li>Initialize window sum/state → first K elements</li>
+  <li>Loop from index K to n-1</li>
+  <li>Add arr[i] → new element enters</li>
+  <li>Subtract arr[i-K] → old element leaves</li>
+</ul>
+
+<p>
+That’s it.
+No nested loops.
+No recomputation.
+</p>
+
+<h3>How to Explain This in an Interview</h3>
+
+<p>
+Say:
+</p>
+
+<div class="note">
+“Since consecutive windows differ by only one element,
+I update the state in O(1) time per move.”
+</div>
+
+<hr>
+
+<h2>10. Variable Size Sliding Window</h2>
+
+<h3>Why Fixed Size Is Not Enough</h3>
+
+<p>
+Many problems do not specify window size.
+</p>
+
+<p>
+Instead, they specify:
+</p>
+
+<ul>
+  <li>A condition (sum ≤ K)</li>
+  <li>A constraint (at most X distinct)</li>
+  <li>A validity rule</li>
+</ul>
+
+<p>
+Here, the window size must adapt.
+</p>
+
+<h3>The Key Insight</h3>
+
+<p>
+This pattern works only when:
+</p>
+
+<div class="note">
+The condition becomes invalid monotonically
+when the window grows.
+</div>
+
+<p>
+That monotonicity allows controlled shrinking.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+You maintain:
+</p>
+
+<ul>
+  <li>Left pointer → window start</li>
+  <li>Right pointer → window end</li>
+</ul>
+
+<p>
+The right pointer expands.
+The left pointer repairs.
+</p>
+
+<h3>Why Each Line Exists</h3>
+
+<ul>
+  <li>Expand right → explore possibilities</li>
+  <li>Update state → include new element</li>
+  <li>While invalid → shrink from left</li>
+  <li>Update answer → window is valid</li>
+</ul>
+
+<p>
+The <code>while</code> loop is not optional.
+It enforces correctness.
+</p>
+
+<h3>Common Beginner Mistake</h3>
+
+<p>
+Using <code>if</code> instead of <code>while</code>.
+</p>
+
+<p>
+Why it fails:
+</p>
+
+<div class="note">
+One shrink may not restore validity.
+</div>
+
+<hr>
+
+<h2>11. Sliding Window with Frequency Map</h2>
+
+<h3>When Counting Matters</h3>
+
+<p>
+Some windows require more than sums.
+</p>
+
+<p>
+Examples:
+</p>
+<ul>
+  <li>Distinct characters</li>
+  <li>Character frequency equality</li>
+  <li>Anagram detection</li>
+</ul>
+
+<p>
+Here, we maintain a frequency map.
+</p>
+
+<h3>The Mental Model</h3>
+
+<p>
+The window represents a multiset.
+</p>
+
+<ul>
+  <li>Add element → increment count</li>
+  <li>Remove element → decrement count</li>
+</ul>
+
+<p>
+The map reflects window content exactly.
+</p>
+
+<h3>Why This Still Works in O(n)</h3>
+
+<p>
+Each element:
+</p>
+<ul>
+  <li>Enters window once</li>
+  <li>Leaves window once</li>
+</ul>
+
+<p>
+Map operations are O(1) on average.
+</p>
+
+<h3>Why Each Line Is Written</h3>
+
+<ul>
+  <li>Initialize empty map</li>
+  <li>Expand window → update count</li>
+  <li>Check validity using map</li>
+  <li>Shrink window → clean map</li>
+</ul>
+
+<p>
+Every update has meaning.
+Nothing is arbitrary.
+</p>
+
+<hr>
+
+<h2>How to Design a Sliding Window Solution (Universal Recipe)</h2>
+
+<ol>
+  <li>Define what the window represents</li>
+  <li>Define what makes it valid</li>
+  <li>Choose fixed or variable size</li>
+  <li>Decide what to store as state</li>
+  <li>Define expand and shrink rules</li>
+</ol>
+
+<div class="note">
+If you cannot state the invariant,
+you do not understand the solution yet.
+</div>
+
+<hr>
+
+<h2>How to Explain Sliding Window in Interviews</h2>
+
+<p>
+Never say:
+</p>
+<ul>
+  <li>“This is a sliding window problem”</li>
+</ul>
+
+<p>
+Always say:
+</p>
+<ul>
+  <li>“I maintain a valid window that satisfies the constraint”</li>
+  <li>“I expand to explore and shrink to restore validity”</li>
+</ul>
+
+<p>
+This shows reasoning, not memorization.
+</p>
+
+<hr>
+
+<h2>Final Insight</h2>
+
+<p>
+Sliding Window is not about pointers.
+</p>
+
+<p>
+It is about:
+</p>
+<ul>
+  <li>Overlapping computation</li>
+  <li>Maintaining invariants</li>
+  <li>Eliminating redundancy</li>
+</ul>
+
+<div class="note">
+If brute force feels repetitive,
+sliding window is waiting to be discovered.
+</div>
+
+</body>
+</html>

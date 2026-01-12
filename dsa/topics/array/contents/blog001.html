@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Patterns – Basic Traversal & Simulation</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #1a1a1a;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #111;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 60px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 35px;
+    }
+    p {
+      margin: 14px 0;
+    }
+    ul {
+      margin-left: 25px;
+    }
+    li {
+      margin: 10px 0;
+    }
+    .note {
+      background: #f1f1f1;
+      padding: 15px;
+      border-left: 4px solid #555;
+      margin: 25px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Basic Traversal & Simulation in Arrays</h1>
+
+<p>
+If you understand this chapter deeply, you will be able to solve
+<strong>60–70% of array problems</strong> without learning any advanced trick.
+Everything else (two pointers, sliding window, prefix sums) is built
+on top of what you learn here.
+</p>
+
+<p>
+This chapter answers questions like:
+</p>
+<ul>
+  <li>How do I start writing a solution when I see an array problem?</li>
+  <li>Why is a loop written this way and not some other way?</li>
+  <li>How do I simulate the problem statement instead of guessing tricks?</li>
+  <li>How do I explain my solution clearly to an interviewer?</li>
+</ul>
+
+<hr>
+
+<h2>What Does “Traversal” Really Mean?</h2>
+
+<p>
+Traversal simply means: <strong>visiting elements of the array in some order</strong>.
+Nothing more. Nothing less.
+</p>
+
+<p>
+An array is a sequence of values stored in contiguous memory.
+Traversal is how we extract meaning from that sequence.
+</p>
+
+<p>
+Before learning any pattern, internalize this:
+</p>
+
+<div class="note">
+<strong>An array problem is solved by deciding:</strong><br>
+1. Which elements must be visited?<br>
+2. In what order must they be visited?<br>
+3. What information must be remembered while visiting?
+</div>
+
+<p>
+All four patterns in this chapter differ only in their answers to these three questions.
+</p>
+
+<hr>
+
+<h2>1. Linear Scan</h2>
+
+<h3>What Is a Linear Scan?</h3>
+
+<p>
+A linear scan means:
+</p>
+
+<ul>
+  <li>Start at the first element</li>
+  <li>Move one step at a time</li>
+  <li>End at the last element</li>
+</ul>
+
+<p>
+This is the <strong>default thinking mode</strong> for arrays.
+If you do not know what to do — start with a linear scan.
+</p>
+
+<h3>Why Linear Scan Is So Powerful</h3>
+
+<p>
+Because arrays are ordered.
+A linear scan respects that order.
+</p>
+
+<p>
+Problems like:
+</p>
+
+<ul>
+  <li>Find maximum / minimum</li>
+  <li>Count occurrences</li>
+  <li>Check if array is sorted</li>
+  <li>Detect transitions (increase → decrease)</li>
+  <li>Build a new array based on conditions</li>
+</ul>
+
+<p>
+All of these are nothing but linear scans with different memory.
+</p>
+
+<h3>How to Start Writing a Linear Scan Solution</h3>
+
+<p>
+When you read a problem, ask:
+</p>
+
+<ul>
+  <li>Do I need to look at every element at least once?</li>
+</ul>
+
+<p>
+If the answer is yes, a linear scan is unavoidable.
+</p>
+
+<p>
+Your skeleton always starts as:
+</p>
+
+<div class="note">
+Initialize variables → loop through array → update variables
+</div>
+
+<h3>Why Each Line Exists</h3>
+
+<p>
+Consider this thought process:
+</p>
+
+<ul>
+  <li>You initialize because memory must start somewhere</li>
+  <li>You loop because information is distributed across elements</li>
+  <li>You update because meaning emerges cumulatively</li>
+</ul>
+
+<p>
+The loop index represents <strong>time</strong>.
+Each iteration is a snapshot of the array at that time.
+</p>
+
+<h3>Common Mental Mistake</h3>
+
+<p>
+Beginners search for tricks.
+Experts ask:
+</p>
+
+<div class="note">
+“What information do I need after seeing elements 0..i?”
+</div>
+
+<p>
+That question alone solves most linear scan problems.
+</p>
+
+<hr>
+
+<h2>2. Reverse Traversal</h2>
+
+<h3>Why Traverse Backwards?</h3>
+
+<p>
+Sometimes future elements influence current decisions.
+</p>
+
+<p>
+Examples:
+</p>
+
+<ul>
+  <li>Replace each element with greatest element to its right</li>
+  <li>Check suffix conditions</li>
+  <li>Right-side dependency problems</li>
+</ul>
+
+<p>
+If the problem statement mentions:
+</p>
+
+<ul>
+  <li>“to the right of”</li>
+  <li>“after this index”</li>
+  <li>“future elements”</li>
+</ul>
+
+<p>
+Your instinct should be reverse traversal.
+</p>
+
+<h3>How to Decide Direction</h3>
+
+<p>
+Ask this critical question:
+</p>
+
+<div class="note">
+“When computing answer for index i, do I need information from i+1 to n−1?”
+</div>
+
+<p>
+If yes — go backwards.
+</p>
+
+<h3>How Reverse Traversal Changes Thinking</h3>
+
+<p>
+You are no longer accumulating from the past.
+You are accumulating from the future.
+</p>
+
+<p>
+This changes:
+</p>
+
+<ul>
+  <li>Initialization values</li>
+  <li>Boundary conditions</li>
+  <li>Explanation style</li>
+</ul>
+
+<h3>Why Each Line Is Written</h3>
+
+<p>
+Reverse traversal still follows:
+</p>
+
+<ul>
+  <li>Initialize memory (often with last element)</li>
+  <li>Traverse index from n−1 down to 0</li>
+  <li>Update memory based on future knowledge</li>
+</ul>
+
+<p>
+Once you see reverse traversal as “future knowledge accumulation”,
+it stops being confusing.
+</p>
+
+<hr>
+
+<h2>3. Multiple Pass Traversal</h2>
+
+<h3>Why One Pass Is Sometimes Not Enough</h3>
+
+<p>
+A single pass can only carry limited information.
+</p>
+
+<p>
+Some problems require:
+</p>
+
+<ul>
+  <li>Global statistics first</li>
+  <li>Local decisions later</li>
+</ul>
+
+<p>
+Example ideas:
+</p>
+
+<ul>
+  <li>Compute total sum, then compute prefix contributions</li>
+  <li>Mark valid positions, then count segments</li>
+</ul>
+
+<h3>How to Recognize This Pattern</h3>
+
+<p>
+If you feel:
+</p>
+
+<div class="note">
+“I need some global info before I can decide locally”
+</div>
+
+<p>
+Then multiple passes are justified.
+</p>
+
+<h3>Why This Is Not Inefficient</h3>
+
+<p>
+Two passes over an array is still O(n).
+</p>
+
+<p>
+Optimization is about complexity class, not line count.
+</p>
+
+<h3>Mental Model</h3>
+
+<p>
+Think of multiple passes as:
+</p>
+
+<ul>
+  <li>First pass: collect facts</li>
+  <li>Second pass: apply decisions</li>
+</ul>
+
+<p>
+Trying to force everything into one pass often makes code unreadable and buggy.
+</p>
+
+<hr>
+
+<h2>4. Simulation Pattern</h2>
+
+<h3>What Is Simulation?</h3>
+
+<p>
+Simulation means:
+</p>
+
+<div class="note">
+“Execute the problem statement step by step using code.”
+</div>
+
+<p>
+You are not solving.
+You are <strong>acting</strong>.
+</p>
+
+<h3>When Simulation Is the Correct Approach</h3>
+
+<p>
+Look for:
+</p>
+
+<ul>
+  <li>Explicit rules</li>
+  <li>State changes</li>
+  <li>Step-by-step description</li>
+</ul>
+
+<p>
+Examples:
+</p>
+
+<ul>
+  <li>Game moves</li>
+  <li>Daily changes</li>
+  <li>Processes evolving over time</li>
+</ul>
+
+<h3>How to Start Writing a Simulation Solution</h3>
+
+<p>
+Before code, do this:
+</p>
+
+<ul>
+  <li>Write down the state variables</li>
+  <li>Define what changes per step</li>
+  <li>Define termination condition</li>
+</ul>
+
+<p>
+Then translate directly to code.
+</p>
+
+<h3>Why This Pattern Is Often Underestimated</h3>
+
+<p>
+Many problems appear complex but are pure simulation.
+</p>
+
+<p>
+People overthink.
+Experts simulate.
+</p>
+
+<hr>
+
+<h2>Unified Problem-Solving Framework</h2>
+
+<p>
+For any array problem, ask in order:
+</p>
+
+<ol>
+  <li>What must be visited?</li>
+  <li>In what order?</li>
+  <li>What must I remember?</li>
+</ol>
+
+<p>
+If you can answer these, code writes itself.
+</p>
+
+<div class="note">
+Master traversal, and arrays stop being scary.
+They become predictable.
+</div>
+
+<p>
+This chapter is the foundation.
+Every advanced pattern builds on this mental discipline.
+</p>
+
+</body>
+</html>

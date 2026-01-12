@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Patterns – Bit & Math Techniques</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      margin: 40px;
+      background: #fdfdfd;
+      color: #1a1a1a;
+      line-height: 1.85;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 70px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 35px;
+    }
+    p {
+      margin: 14px 0;
+    }
+    ul, ol {
+      margin-left: 25px;
+    }
+    li {
+      margin: 10px 0;
+    }
+    .note {
+      background: #f2f2f2;
+      padding: 18px;
+      border-left: 5px solid #444;
+      margin: 30px 0;
+      font-style: italic;
+    }
+    code {
+      background: #eee;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Bit & Math Patterns on Arrays</h1>
+
+<p>
+This chapter teaches you how to solve problems
+without scanning, sorting, or hashing.
+</p>
+
+<p>
+Instead, you will use:
+</p>
+
+<ul>
+  <li>Algebraic cancellation</li>
+  <li>Bit-level symmetry</li>
+  <li>Mathematical invariants</li>
+</ul>
+
+<div class="note">
+If hashing is about memory,
+bit & math patterns are about structure.
+</div>
+
+<hr>
+
+<h2>Why Bit & Math Patterns Exist</h2>
+
+<p>
+Some problems:
+</p>
+
+<ul>
+  <li>Have huge input sizes</li>
+  <li>Disallow extra memory</li>
+  <li>Hide the answer in parity or symmetry</li>
+</ul>
+
+<p>
+Brute force fails.
+</p>
+
+<p>
+Only invariants survive.
+</p>
+
+<hr>
+
+<h2>28. Bitwise Accumulation</h2>
+
+<h3>The Core Idea</h3>
+
+<p>
+Bitwise accumulation relies on:
+</p>
+
+<div class="note">
+Operations where repeating something cancels it out.
+</div>
+
+<p>
+The most important operator is:
+</p>
+
+<ul>
+  <li><strong>XOR (⊕)</strong></li>
+</ul>
+
+<hr>
+
+<h3>Why XOR Is Special</h3>
+
+<p>
+XOR has three magical properties:
+</p>
+
+<ul>
+  <li><code>a ⊕ a = 0</code></li>
+  <li><code>a ⊕ 0 = a</code></li>
+  <li>Commutative and associative</li>
+</ul>
+
+<p>
+This means:
+</p>
+
+<div class="note">
+If everything appears twice except one element,
+XOR will isolate it.
+</div>
+
+<hr>
+
+<h3>The Mental Model</h3>
+
+<p>
+Think of XOR as:
+</p>
+
+<ul>
+  <li>Parity tracking</li>
+  <li>Bitwise cancellation</li>
+</ul>
+
+<p>
+Each bit keeps count modulo 2.
+</p>
+
+<hr>
+
+<h3>Why Each Line Exists</h3>
+
+<ul>
+  <li>Initialize accumulator = 0 → identity element</li>
+  <li>XOR every array element → accumulate parity</li>
+  <li>Final value → survivor</li>
+</ul>
+
+<div class="note">
+No conditionals. No memory. Just inevitability.
+</div>
+
+<hr>
+
+<h3>When to Think “Bitwise”</h3>
+
+<ul>
+  <li>Every element appears twice except one</li>
+  <li>Elements appear k times except one</li>
+  <li>Odd vs even occurrence problems</li>
+</ul>
+
+<p>
+If the problem says:
+</p>
+
+<div class="note">
+“Exactly one element is different”
+</div>
+
+<p>
+Think XOR immediately.
+</p>
+
+<hr>
+
+<h3>Generalizing Beyond XOR</h3>
+
+<p>
+For “every element appears 3 times except one”:
+</p>
+
+<ul>
+  <li>Count bits position-wise</li>
+  <li>Take modulo 3</li>
+</ul>
+
+<p>
+This is still accumulation —
+just at the bit level.
+</p>
+
+<hr>
+
+<h2>29. Mathematical Invariants</h2>
+
+<h3>What Is an Invariant?</h3>
+
+<p>
+An invariant is:
+</p>
+
+<div class="note">
+A quantity that does not change,
+no matter how operations are applied.
+</div>
+
+<p>
+If something stays constant,
+you can reason backwards.
+</p>
+
+<hr>
+
+<h3>The Mental Model</h3>
+
+<p>
+Think of invariants as:
+</p>
+
+<ul>
+  <li>Conservation laws</li>
+  <li>Hidden balances</li>
+</ul>
+
+<p>
+Like energy in physics —
+it transforms but does not disappear.
+</p>
+
+<hr>
+
+<h3>Common Invariants in Array Problems</h3>
+
+<ul>
+  <li>Sum of elements</li>
+  <li>Sum of squares</li>
+  <li>Parity (odd/even)</li>
+  <li>XOR of all elements</li>
+</ul>
+
+<p>
+Problems often give you:
+</p>
+
+<ul>
+  <li>n numbers from 1 to n</li>
+  <li>One missing, one repeated</li>
+</ul>
+
+<p>
+That is an invariant problem.
+</p>
+
+<hr>
+
+<h3>Why Each Line Exists in Invariant-Based Solutions</h3>
+
+<ul>
+  <li>Compute expected invariant → theoretical value</li>
+  <li>Compute actual invariant → observed value</li>
+  <li>Compare → extract anomaly</li>
+</ul>
+
+<div class="note">
+You are not searching.
+You are detecting imbalance.
+</div>
+
+<hr>
+
+<h3>How to Start Writing an Invariant Solution</h3>
+
+<p>
+Ask:
+</p>
+
+<ol>
+  <li>What quantity should be preserved?</li>
+  <li>What does the problem disturb?</li>
+  <li>Can I measure that disturbance?</li>
+</ol>
+
+<p>
+Once identified, the code is trivial.
+</p>
+
+<hr>
+
+<h3>Classic Invariant Problems</h3>
+
+<ul>
+  <li>Missing number</li>
+  <li>Duplicate number</li>
+  <li>Array after operations</li>
+  <li>Reachability puzzles</li>
+</ul>
+
+<hr>
+
+<h2>Bit vs Math vs Hashing</h2>
+
+<p>
+Hashing:
+</p>
+<ul>
+  <li>Stores history</li>
+  <li>Uses memory</li>
+</ul>
+
+<p>
+Bit & Math:
+</p>
+<ul>
+  <li>Exploits structure</li>
+  <li>Uses logic</li>
+</ul>
+
+<div class="note">
+If memory is banned,
+invariants are your only weapon.
+</div>
+
+<hr>
+
+<h2>Universal Bit & Math Checklist</h2>
+
+<ol>
+  <li>Are elements repeated in a fixed pattern?</li>
+  <li>Is order irrelevant?</li>
+  <li>Is something “almost balanced”?</li>
+  <li>Can cancellation happen?</li>
+</ol>
+
+<hr>
+
+<h2>Final Insight</h2>
+
+<p>
+Bitwise and mathematical array problems are not hard.
+</p>
+
+<p>
+They are:
+</p>
+
+<div class="note">
+Problems where the brute-force mindset is wrong.
+</div>
+
+<p>
+Once you stop iterating
+and start reasoning,
+the answer becomes inevitable.
+</p>
+
+</body>
+</html>
