@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linked List Pattern 2 — Reverse Traversal Simulation</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 40px;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #1a237e;
+    }
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h3 {
+      margin-top: 25px;
+      color: #283593;
+    }
+    p {
+      max-width: 950px;
+    }
+    ul {
+      margin-left: 25px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .concept {
+      background: #ffffff;
+      padding: 20px;
+      margin: 25px 0;
+      border-left: 6px solid #3949ab;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .invariant {
+      background: #f3f4ff;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #5c6bc0;
+      font-style: italic;
+    }
+    .warning {
+      background: #fff3e0;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 6px solid #fb8c00;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Linked List Pattern 2: Reverse Traversal Simulation</h1>
+
+<p>
+Reverse Traversal Simulation is the second foundational linked list pattern.
+It teaches you how to reason when the data structure does <b>not</b> support
+the operation you want.
+</p>
+
+<!-- ================= THE FUNDAMENTAL LIMITATION ================= -->
+
+<h2>The Fundamental Limitation</h2>
+
+<div class="warning">
+  <p>
+    A singly linked list <b>cannot be traversed backward</b>.
+  </p>
+</div>
+
+<p>
+Each node contains only a reference to the next node.
+There is no pointer to the previous node.
+This is a structural law, not a coding limitation.
+</p>
+
+<p>
+Therefore, the real problem is not:
+</p>
+
+<ul>
+  <li>“How do I move backward?”</li>
+</ul>
+
+<p>
+The real problem is:
+</p>
+
+<ul>
+  <li><b>“How do I simulate backward processing?”</b></li>
+</ul>
+
+---
+
+<h2>The Core Idea</h2>
+
+<div class="concept">
+  <p>
+    Reverse traversal is not real traversal.
+    It is <b>delayed processing</b>.
+  </p>
+</div>
+
+<p>
+You move forward through the list as usual,
+but you postpone doing the work until later.
+</p>
+
+---
+
+<h2>Mental Model</h2>
+
+<p>
+Imagine walking into a one-way tunnel.
+You want to observe everything while walking back,
+but you are not allowed to turn around.
+</p>
+
+<ul>
+  <li>You walk forward until the end</li>
+  <li>You remember what you saw</li>
+  <li>You process it while exiting</li>
+</ul>
+
+<p>
+That “remembering” happens using:
+</p>
+
+<ul>
+  <li>An explicit stack</li>
+  <li>Or the implicit call stack (recursion)</li>
+</ul>
+
+---
+
+<h2>Where Do You Start?</h2>
+
+<div class="concept">
+  <p>
+    The first thought must be:
+  </p>
+  <p>
+    “Backward traversal is impossible directly.
+    I must store information or delay processing.”
+  </p>
+</div>
+
+<p>
+This immediately narrows the solution space to:
+</p>
+
+<ul>
+  <li>Stack-based simulation</li>
+  <li>Recursive backtracking</li>
+</ul>
+
+---
+
+<!-- ================= STACK ================= -->
+
+<h2>Stack-Based Reverse Traversal</h2>
+
+<h3>Why a Stack Works</h3>
+
+<p>
+A stack follows <b>Last-In-First-Out (LIFO)</b>.
+If nodes are pushed while moving forward,
+they will be popped in reverse order.
+</p>
+
+<div class="concept">
+  <p>
+    Forward order: 1 → 2 → 3 → 4  
+    Stack pop order: 4 → 3 → 2 → 1
+  </p>
+</div>
+
+<h3>Why Each Step Exists</h3>
+
+<ul>
+  <li>Traverse forward because it is the only allowed direction</li>
+  <li>Push nodes to remember order</li>
+  <li>Pop nodes to simulate backward traversal</li>
+</ul>
+
+<div class="invariant">
+  <p>
+    After visiting k nodes, the stack contains those k nodes
+    in forward order.
+  </p>
+</div>
+
+---
+
+<!-- ================= RECURSION ================= -->
+
+<h2>Recursive Backtracking</h2>
+
+<h3>Why Recursion Works</h3>
+
+<p>
+Recursion uses the call stack implicitly.
+Each recursive call pauses execution and stores state.
+</p>
+
+<p>
+When recursion returns, execution resumes in reverse order.
+</p>
+
+<div class="concept">
+  <p>
+    Forward calls go down the list.  
+    Backward returns process nodes in reverse.
+  </p>
+</div>
+
+<h3>Why Processing Happens After the Recursive Call</h3>
+
+<p>
+This is the most important rule:
+</p>
+
+<ul>
+  <li>Processing <b>before</b> recursion → forward order</li>
+  <li>Processing <b>after</b> recursion → reverse order</li>
+</ul>
+
+<div class="invariant">
+  <p>
+    When a recursive call returns, all nodes after the current
+    node have already been processed.
+  </p>
+</div>
+
+---
+
+<!-- ================= REVERSE PRINT ================= -->
+
+<h2>Reverse Printing — The Purest Use Case</h2>
+
+<p>
+Reverse printing is the simplest problem that forces this pattern.
+</p>
+
+<ul>
+  <li>The list must remain unchanged</li>
+  <li>No backward pointers exist</li>
+  <li>Only delayed processing works</li>
+</ul>
+
+<p>
+If you understand reverse printing,
+you understand reverse traversal simulation.
+</p>
+
+---
+
+<!-- ================= HOW TO EXPLAIN ================= -->
+
+<h2>How to Start Explaining in an Interview</h2>
+
+<div class="concept">
+  <p>
+    “Since a singly linked list does not support backward traversal,
+    I simulate reverse traversal by delaying processing.
+    I first move forward through the list and store nodes implicitly
+    using recursion or explicitly using a stack.
+    Then I process them in reverse order.”
+  </p>
+</div>
+
+<p>
+This explanation shows:
+</p>
+
+<ul>
+  <li>Structural understanding</li>
+  <li>Correct abstraction</li>
+  <li>Algorithmic maturity</li>
+</ul>
+
+---
+
+<!-- ================= WHEN TO USE ================= -->
+
+<h2>When to Use This Pattern</h2>
+
+<ul>
+  <li>Reverse printing</li>
+  <li>Palindrome checks (recursive)</li>
+  <li>Post-order–like list operations</li>
+  <li>Problems requiring backward access without modification</li>
+</ul>
+
+---
+
+<h2>One-Line Summary</h2>
+
+<div class="invariant">
+  <p>
+    Reverse Traversal Simulation = Forward movement + delayed processing.
+  </p>
+</div>
+
+<p>
+This pattern teaches you how to work with a data structure
+by respecting its limitations instead of fighting them.
+</p>
+
+</body>
+</html>
